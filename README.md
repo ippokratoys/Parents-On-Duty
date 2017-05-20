@@ -2,4 +2,8 @@
 Project for Texnologies Logismikou
 
 
-Status : Not started
+Status : Show Home Page/ No Functional
+
+Run: Go to parentsReal folder via terminal, enter:
+	- ./gradlew tasks
+	- ./gradle bootRun
