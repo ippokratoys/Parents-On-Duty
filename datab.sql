@@ -64,7 +64,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Customer` (
   `Login_email` VARCHAR(45) NOT NULL,
-  `Points` VARCHAR(45) NULL,
+  `Points` INT NULL,
   `Wallet` INT NULL,
   PRIMARY KEY (`Login_email`),
   CONSTRAINT `fk_table1_Login1`
