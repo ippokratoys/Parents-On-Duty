@@ -64,7 +64,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Customer` (
   `Login_email` VARCHAR(45) NOT NULL,
-  `Points` VARCHAR(45) NULL,
+  `Points` INT NULL,
   `Wallet` INT NULL,
   PRIMARY KEY (`Login_email`),
   CONSTRAINT `fk_table1_Login1`
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Location` (
     FOREIGN KEY (`LocationOwner_Login_email`)
     REFERENCES `mydb`.`LocationOwner` (`Login_email`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`EventsGroup` (
     FOREIGN KEY (`Organiser_Login_email`)
     REFERENCES `mydb`.`Organiser` (`Login_email`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -130,17 +130,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Events` (
     FOREIGN KEY (`Location_ID`)
     REFERENCES `mydb`.`Location` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Events_Organiser1`
     FOREIGN KEY (`Organiser_Login_email`)
     REFERENCES `mydb`.`Organiser` (`Login_email`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Events_EventsGroup1`
     FOREIGN KEY (`EventsGroup_idEventsGroup`)
     REFERENCES `mydb`.`EventsGroup` (`idEventsGroup`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
