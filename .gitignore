@@ -1,2 +1,5 @@
 build/
 bin/
+.metadata/
+.recommenders
+RemoteSystemsTempFiles/
