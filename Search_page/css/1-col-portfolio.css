@@ -1,5 +1,5 @@
 /*!
- * Start Bootstrap - Shop Item (http://startbootstrap.com/)
+ * Start Bootstrap - 1 Col Portfolio (http://startbootstrap.com/)
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
@@ -8,34 +8,9 @@ body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
-
-.thumbnail img {
-    width: 100%;
-}
-
-.ratings {
-    padding-right: 10px;
-    padding-left: 10px;
-    color: dodgerblue;
-}
-
-.thumbnail {
-    padding: 0;
-}
-
-.thumbnail .caption-full {
-    padding: 9px;
-    color: #333;
-}
-
 footer {
     margin: 50px 0;
 }
-
-.searchbar{
-    margin-top: 8px;
-}
-
 
 hr {
     display: block;
@@ -47,15 +22,23 @@ hr {
     border-width: 1px;
 }
 
+.searchbar{
+    margin-top: 8px;
+}
+
 .navbar-default {
     background-color:dodgerblue;
     border-color: black;
 }
 
 .navbar-default .navbar-header .navbar-brand{
-    color:white;
+    color:black;
 }
 
 .onnav{
     color:black;
+}
+.ratings {
+    padding-right: 10px;
+    color: dodgerblue;
 }
