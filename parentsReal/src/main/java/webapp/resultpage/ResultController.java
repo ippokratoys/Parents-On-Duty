@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller()
 public class ResultController {
 
-	@RequestMapping(value="/results",method=RequestMethod.GET)
+	@RequestMapping(value="/results",method=RequestMethod.POST)
 	public String getResults(){
 		return "results";
 	}
