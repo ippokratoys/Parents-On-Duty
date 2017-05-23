@@ -1,190 +1,180 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
 
-<!DOCTYPE html
-   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<head>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>
-      Parents On Duty
-    </title>
-    <!-- Yparxei h epilogh gia ta css pou kanoume link mesw istoselidas na ta
-      syndeoume topika -->
-    <!--  Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <!--  DatePicker -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="all" href="bootstrap-daterangepicker-master/daterangepicker.css" />
-    <style type="text/css" xml:space="preserve">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Parents On Duty</title>
+
+
+	<!--Yparxei h epilogh gia ta css pou kanoume link mesw istoselidas na ta syndeoume topika-->
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+	<!--DatePicker-->
+      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+      <link rel="stylesheet" type="text/css" media="all" href="bootstrap-daterangepicker-master/daterangepicker.css" />
+      <style type="text/css">
       .demo { position: relative; }
       .demo i {
         position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer;
       }
       </style>
-    <!--  Custom CSS -->
-    <link href="css/full-width-pics.css" rel="stylesheet" />
-    <!--  HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
-      queries -->
-    <!--  WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--  [if lt IE 9]> <script
-      src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script
-      src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif] -->
-  </head>
-  <body>
-    <!--  Navigation -->
-    <div class="container">
-      <!--  Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle"> <span class="sr-only">Toggle
-        navigation</span> <span class="icon-bar"></span> <span
-        class="icon-bar"></span> <span class="icon-bar"></span>
-        </button> <a style="color:white" class="navbar-brand" href="#">
-        </a>
-        <div style="font-family:Comic Sans MS,cursive,sans-serif">
-          <div style="color:white">
-            Parents On Duty
-          </div>
-        </div>
-        <img src="./css/Logo.png" alt="Smiley face" height="45" width="45" />
-      </div>
-      <!--  Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-                <a style="color: white" href="#"><span
-                class="glyphicon glyphicon-user"></span> Sign Up</a>
-              </li>
-              <li>
-                <a style="color: white" href="#"><span
-                class="glyphicon glyphicon-log-in"></span> Login</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <!--  /.navbar-collapse -->
-    </div>
-    <!--  /.container -->
-    <!--  Full Width Image Header with Logo -->
-    <!--  Image backgrounds are set within the full-width-pics.css file. -->
-    <!--  Fotografia twn paidiwn -->
-    <!--  Content Section -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p class="section-paragraph"></p>
-          <div class="container">
-            <!--  Search Bar html code -->
-            <div class="col-md-12" id="Search_Section">
-              <div class="text-center" id="content-home">
-                <div class="tab-content">
-                  <div class="tab-pane active" id="AllSearchForms">
-                    <form method="post" id="AboutSearches" action="">
-                      <div class="form-group has-feedback col-md-12">
-                        <label for="Address_Search">Διεύθυνση Αναζήτησης</label>
-                        <input type="hidden" id="hidden1" name="by" value="" />
-                        <input type="hidden" id="hidden2" name="id" value="" />
-                        <input type="text" class="form-control"
-                        id="Address_Search" value="" /> <i
-                        class="fa fa-building-o form-control-feedback"></i>
-                        <span id="helpQuery" class="help-block hidden">Debes
-                        seleccionar algun Hotel o Destino</span>
-                      </div>
-                      <div class="row">
-                        <div class="form-group has-feedback col-md-12">
-                          <label for="Date_Search">Επιλογή ημερομηνίας
-                          διοργάνωσης</label> <input type="text"
-                          id="config-demo" class="form-control" value="" />
-                        </div>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="Price_Search">Εύρος τιμών</label>
-                        <select name="hab" id="Prices" class="form-control">
-                        <option value="1">
-                          1-5
-                        </option>
-                        <option value="2">
-                          5-10
-                        </option>
-                        <option value="3">
-                          10-15
-                        </option>
-                        <option value="4">
-                          15-20
-                        </option>
-                        <option value="5">
-                          20-25
-                        </option></select>
-                        <!--  <input type="number" class="form-control"
-                          id="rooms" name="hab" min="1" max="10" value="1"> -->
-                      </div>
-                      <div id="Age_Tags">
-                        <div class="hab-group">
-                          <div class="form-group col-md-3">
-                            <label for="adt">Ηλικία</label> <input
-                            class="form-control" name="adt" value="2" />
-                          </div>
-                          <div class="form-group col-md-3">
-                            <label for="query_tags">Extra Tags</label>
-                            <input type="hidden" id="hidden1_" name="by"
-                            value="" /> <input type="hidden" id="hidden2_"
-                            name="id" value="" /> <input type="text"
-                            class="form-control" id="query_tags" value="" /> <i
-                            class="fa fa-building-o form-control-feedback"></i>
-                            <span id="helpQuery_" class="help-block hidden">Σε
-                            τι βοηθάει αυτό;</span>
-                          </div>
-                          <div class="age-chd"></div>
-                        </div>
-                      </div>
-                      <div class="form-group col-md-12">
-                        <button type="submit"
-                        class="btn btn-info btn-lg btn-block"><i
-                        class="fa fa-search"></i>Αναζήτηση</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
+    <!-- Custom CSS -->
+    <link href="css/full-width-pics.css" rel="stylesheet"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+				<a style="color:white" class="navbar-brand" href="#">
+					<div style="font-family:Comic Sans MS,cursive,sans-serif">
+						<div style="color:white">Parents On Duty</div>
+					</div>
+				</a>
+				<img src="./css/Logo.png" alt="Smiley face"  height="45" width="45" href="#"/>
             </div>
-          </div>
-          <!--  End of search bar html code -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a style="color: white" href="#" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a style="color: white" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-      </div>
-    </div>
-    <!--  Fixed Height Image Aside -->
-    <!--  Image backgrounds are set within the full-width-pics.css file. -->
-    <!--  aside class="image-bg-fixed-height"></aside -->
-    <!--  Footer -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>
-            And do not forget team...
-          </p>
-          <h1 class="section-heading">
-            Parents on duty never give up!
-          </h1>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Full Width Image Header with Logo -->
+    <!-- Image backgrounds are set within the full-width-pics.css file. -->
+    <header class="image-bg-fixed-height">
+		<!--Fotografia twn paidiwn-->
+    </header>
+
+    <!-- Content Section -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="section-paragraph"><div class="container">
+	<!--Search Bar html code-->
+	<div class="col-md-12" id="Search_Section">
+
+					<div class="text-center" id="content-home">
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="AllSearchForms">
+
+								<form method="GET" id="AboutSearches" action="/results">
+                                    <div class="form-group has-feedback col-md-12">
+										<label for="Address_Search">Διεύθυνση Αναζήτησης</label>
+										<input type="hidden" id="hidden1" name="by" value=""/>
+										<input type="hidden" id="hidden2" name="id" value=""/>
+										<input type="text" class="form-control" id="Address_Search" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
+										<i class="fa fa-building-o form-control-feedback"></i>
+										<span id="helpQuery" class="help-block hidden">Debes seleccionar algun Hotel o Destino</span>
+									</div>
+									<div class="row">
+                                        <div class="form-group has-feedback col-md-12">
+  										  <label for="Date_Search">Επιλογή ημερομηνίας διοργάνωσης</label>
+  										  <input type="text" id="config-demo" class="form-control" value=""/>
+  									    </div>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="Price_Search">Εύρος τιμών</label>
+										<select name="hab" id="Prices"  class="form-control">
+											<option value="1">1-5</option>
+											<option value="2">5-10</option>
+											<option value="3">10-15</option>
+											<option value="4">15-20</option>
+											<option value="5">20-25</option>
+										</select>
+										<!--<input type="number" class="form-control" id="rooms" name="hab" min="1" max="10" value="1">-->
+									</div>
+									<div id="Age_Tags">
+										<div class="hab-group">
+											<div class="form-group col-md-3">
+												<label for="adt">Ηλικία</label>
+												<input type="number" id="Age" class="form-control" name="adt" min="1" max="15" value="2"/>
+											</div>
+											<div class="form-group col-md-3">
+												<label for="query_tags">Extra Tags</label>
+												<input type="text" class="form-control" id="Extra_Tags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
+												<i class="fa fa-building-o form-control-feedback"></i>
+												<!-- <span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span> -->
+											</div>
+											<div class="age-chd"></div>
+										</div>
+									</div>
+                                    <div class="form-group col-md-12">
+										<button type="submit" class="btn btn-info btn-lg btn-block"><i class="fa fa-search" aria-hidden="true"></i>Αναζήτηση</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+	</div>
+</div></p>
+<!--End of search bar html code-->
+                </div>
+            </div>
         </div>
-      </div>
-      <!--  /.row -->
-    </div>
-    <!--  /.container -->
-    <!--  DatePicker --><script type="text/javascript"
-    src="bootstrap-daterangepicker-master\example\amd/require.js"
-    xml:space="preserve"></script>
-     <!--  jQuery --> <script src="js/jquery.js" type="text/javascript"
-    xml:space="preserve"></script>
-     <!--  Bootstrap Core JavaScript --> <script src="js/bootstrap.min.js"
-    type="text/javascript" xml:space="preserve"></script>
-  </body>
+    </section>
+
+    <!-- Fixed Height Image Aside -->
+    <!-- Image backgrounds are set within the full-width-pics.css file. -->
+    <!--aside class="image-bg-fixed-height"></aside-->
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>And do not forget team...</p>
+					<h1 class="section-heading">Parents on duty never give up!</h1>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </footer>
+
+	<!--DatePicker-->
+
+	<script type="text/javascript" src="bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
+
+   <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
 </html>
