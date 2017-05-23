@@ -11,7 +11,7 @@
 
     <title>Parents On Duty</title>
 
-
+	
 	<!--Yparxei h epilogh gia ta css pou kanoume link mesw istoselidas na ta syndeoume topika-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -84,28 +84,27 @@
                     <p class="section-paragraph"><div class="container">
 	<!--Search Bar html code-->
 	<div class="col-md-12" id="Search_Section">
-
 					<div class="text-center" id="content-home">
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="AllSearchForms">
-								<form method="post" id="AboutSearches">
+								<form action="" method="get" id="AboutSearches"><!--Action could be redirecting to a different html,a handler file or a server file?-->
 									<div class="form-group has-feedback col-md-12">
 										<label for="Address_Search">Διεύθυνση Αναζήτησης</label>
-										<input type="hidden" id="hidden1" name="by" value="">
-										<input type="hidden" id="hidden2" name="id" value="">
-										<input type="text" class="form-control" id="Address_Search" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value="">
+										<!--input type="hidden" id="hidden1" name="by" value=""-->
+										<!--input type="hidden" id="hidden2" name="id" value=""-->
+										<input type="text" class="form-control" id="Address_Search" name="Address" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value="">
 										<i class="fa fa-building-o form-control-feedback"></i>
 										<span id="helpQuery" class="help-block hidden">Debes seleccionar algun Hotel o Destino</span>
 									</div>
 									<div class="row">
 									  <div class="form-group has-feedback col-md-12">
 										<label for="Date_Search">Επιλογή ημερομηνίας διοργάνωσης</label>
-										<input type="text" id="config-demo" class="form-control" value="">
+										<input type="text" id="config-demo" name="Dates" class="form-control" value="">
 									  </div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="Price_Search">Εύρος τιμών</label>
-										<select name="hab" id="Prices"  class="form-control">
+										<select name="Price" id="Prices"  class="form-control">
 											<option value="1">1-5</option>
 											<option value="2">5-10</option>
 											<option value="3">10-15</option>
@@ -122,23 +121,22 @@
 											</div>
 											<div class="form-group col-md-3">
 												<label for="query_tags">Extra Tags</label>
-												<input type="hidden" id="hidden1" name="by" value="">
-												<input type="hidden" id="hidden2" name="id" value="">
-												<input type="text" class="form-control" id="query_tags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value="">
+												<!--input type="hidden" id="hidden1" name="by" value=""-->
+												<!--input type="hidden" id="hidden2" name="id" value=""-->
+												<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value="">
 												<i class="fa fa-building-o form-control-feedback"></i>
-												<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
+												<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>												
 											</div>
 											<div class="age-chd"></div>
 										</div>
 									</div>
 									<div class="form-group col-md-12">
-										<button type="submit" class="btn btn-info btn-lg btn-block"><i class="fa fa-search" aria-hidden="true"></i>Αναζήτηση</button>
+										<button type="submit" class="btn btn-info btn-lg btn-block" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
-
 	</div>
 </div></p>
 <!--End of search bar html code-->
@@ -167,9 +165,9 @@
     </footer>
 
 	<!--DatePicker-->
-
+	
 	<script type="text/javascript" src="bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
-
+   
    <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
