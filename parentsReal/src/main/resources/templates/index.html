@@ -54,14 +54,14 @@
 						<div style="color:white">Parents On Duty</div>
 					</div>
 				</a>
-				<img src="./css/Logo.png" alt="Smiley face"  height="45" width="45" href="#"/>
+				<img src="./css/Logo.png" alt="Smiley face"  height="45" width="45" href=""/>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a style="color: white" href="#" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a style="color: white" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a style="color: white" href="/SignUp" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a style="color: white" href="/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </ul>
             </div>
@@ -84,29 +84,27 @@
                     <p class="section-paragraph"><div class="container">
 	<!--Search Bar html code-->
 	<div class="col-md-12" id="Search_Section">
-
 					<div class="text-center" id="content-home">
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="AllSearchForms">
-
-								<form method="GET" id="AboutSearches" action="/results">
-                                    <div class="form-group has-feedback col-md-12">
+								<form action="/results" method="get" id="AboutSearches"><!--Action could be redirecting to a different html,a handler file or a server file?-->
+									<div class="form-group has-feedback col-md-12">
 										<label for="Address_Search">Διεύθυνση Αναζήτησης</label>
-										<input type="hidden" id="hidden1" name="by" value=""/>
-										<input type="hidden" id="hidden2" name="id" value=""/>
-										<input type="text" class="form-control" id="Address_Search" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
+										<!--input type="hidden" id="hidden1" name="by" value=""-->
+										<!--input type="hidden" id="hidden2" name="id" value=""-->
+										<input type="text" class="form-control" id="Address_Search" name="Address" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
 										<i class="fa fa-building-o form-control-feedback"></i>
 										<span id="helpQuery" class="help-block hidden">Debes seleccionar algun Hotel o Destino</span>
 									</div>
 									<div class="row">
-                                        <div class="form-group has-feedback col-md-12">
-  										  <label for="Date_Search">Επιλογή ημερομηνίας διοργάνωσης</label>
-  										  <input type="text" id="config-demo" class="form-control" value=""/>
-  									    </div>
+									  <div class="form-group has-feedback col-md-12">
+										<label for="Date_Search">Επιλογή ημερομηνίας διοργάνωσης</label>
+										<input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
+									  </div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="Price_Search">Εύρος τιμών</label>
-										<select name="hab" id="Prices"  class="form-control">
+										<select name="Price" id="Prices"  class="form-control">
 											<option value="1">1-5</option>
 											<option value="2">5-10</option>
 											<option value="3">10-15</option>
@@ -118,26 +116,25 @@
 									<div id="Age_Tags">
 										<div class="hab-group">
 											<div class="form-group col-md-3">
-												<label for="adt">Ηλικία</label>
-												<input type="number" id="Age" class="form-control" name="adt" min="1" max="15" value="2"/>
+												<label for="Age">Ηλικία</label>
+												<input type="number" class="form-control" name="Age" min="1" max="15" value="2"/>
 											</div>
 											<div class="form-group col-md-3">
 												<label for="query_tags">Extra Tags</label>
-												<input type="text" class="form-control" id="Extra_Tags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
+												<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
 												<i class="fa fa-building-o form-control-feedback"></i>
-												<!-- <span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span> -->
+												<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
 											</div>
 											<div class="age-chd"></div>
 										</div>
 									</div>
-                                    <div class="form-group col-md-12">
-										<button type="submit" class="btn btn-info btn-lg btn-block"><i class="fa fa-search" aria-hidden="true"></i>Αναζήτηση</button>
+									<div class="form-group col-md-12">
+										<button type="submit" class="btn btn-info btn-lg btn-block" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
-
 	</div>
 </div></p>
 <!--End of search bar html code-->
