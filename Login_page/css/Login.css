@@ -22,9 +22,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b9d2e0', end
         margin-bottom: 2px;
     }
 
-hr{
-    width:100%;
-}
+hr { 
+	width:100%;
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+} 
     
 .welcome{
     font-family: "myriad-pro",sans-serif;
