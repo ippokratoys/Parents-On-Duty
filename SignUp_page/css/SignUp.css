@@ -114,7 +114,8 @@ hr{
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-
+.form-signin #inputUserName,
+.form-signin #inputRePassword,
 .form-signin #inputEmail,
 .form-signin #inputPassword {
     direction: ltr;
