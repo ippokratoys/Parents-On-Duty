@@ -1,7 +1,6 @@
 package webapp;
 
 import webapp.database.*;
-import webapp.database.initializer.Insertions;
 import webapp.database.repositories.LoginRepository;
 
 import java.util.Arrays;
