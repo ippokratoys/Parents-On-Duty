@@ -31,14 +31,14 @@ public class ResultController {
    		@RequestParam(name="ExtraTags") String extraTags,
    		Model model)
     {
-    	System.out.println("The Form elements:");
+    	/*System.out.println("The Form elements:");
     	System.out.println(allRequestParams.toString());
     	System.out.println("Address:"+address);
     	System.out.println("Date:"+date);
     	System.out.println(price);
     	System.out.println(age);
     	System.out.println("Extra Tags:"+extraTags);
-    	
+    	*/
     	List<Eventsgroup> results=eventsgroupHandler.findByName(address);
 
     	System.out.println(results.get(0).getEvents().get(0).getEventsfeedbacks());

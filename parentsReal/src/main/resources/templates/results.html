@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>1 Col Portfolio - Start Bootstrap Template</title>
+    <title>Search Results</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
@@ -92,7 +92,7 @@
 		                <div class="row">
 		                    <div class="col-sm-6">
 		                    	<a th:href="'/event?id='+${oneEvent.idEvents}">
-			                        <img  class="img-responsive" src="http://placehold.it/700x300" alt=""/>
+			                        <img  class="img-responsive" src="images.png" alt=""/>
 		                        </a>
 		                    </div>
 		                    <div class="col-sm-6">
@@ -101,7 +101,7 @@
 		                        <h4 th:text=" 'Date : ' + ${oneEvent.day}">Date:</h4>
 		                        <br/>
 		                    </div>
-		                    <p>Descirption</p>
+		                    <p>Description</p>
 		                    <div class="ratings">
 		                        <p th:text="${oneEvent.eventsfeedbacks.size()}" class="pull-right">3 Reviews</p>
 		                        <p>

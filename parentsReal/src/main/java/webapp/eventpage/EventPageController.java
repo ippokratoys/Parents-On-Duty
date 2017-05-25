@@ -25,7 +25,7 @@ public class EventPageController {
     	Model model){
 			Event curEvent = eventHandler.findOne(eventId);
 			model.addAttribute("theEvent",curEvent);
-			return "event";
+			return "Event_page";
 		}
 
 }
