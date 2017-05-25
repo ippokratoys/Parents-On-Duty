@@ -21,6 +21,8 @@ public class Event implements Serializable {
 
 	private String time;
 
+	private double price;
+
 	//bi-directional many-to-one association to Eventsgroup
 	@ManyToOne
 	private Eventsgroup eventsgroup;
@@ -131,6 +133,14 @@ public class Event implements Serializable {
 		eventsfeedback.setEvent(null);
 
 		return eventsfeedback;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 }

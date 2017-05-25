@@ -20,6 +20,7 @@ public class Eventsgroup implements Serializable {
 
 	private String type;
 
+	private String description;
 	//bi-directional many-to-one association to Event
 	@OneToMany(mappedBy="eventsgroup")
 	private List<Event> events;
@@ -83,6 +84,14 @@ public class Eventsgroup implements Serializable {
 
 	public void setOrganiser(Organiser organiser) {
 		this.organiser = organiser;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

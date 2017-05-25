@@ -84,61 +84,44 @@
         <!-- /.row -->
 
         <!-- Project One -->
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <img class="img-responsive" src="http://placehold.it/700x300" alt=""/>
-                    </div>
-                    <div class="col-sm-6">
-                        <h4>Price:</h4>
-                        <h4>Address:</h4>
-                        <h4>Date:</h4>
-                        <br/>
-                    </div>
-                    <p>Descirption</p>
-                    <div class="ratings">
-                        <p class="pull-right">3 Reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 Stars
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <img class="img-responsive" src="http://placehold.it/700x300" alt=""/>
-                    </div>
-                    <div class="col-sm-6">
-                        <h4>Price:</h4>
-                        <h4>Address:</h4>
-                        <h4>Date:</h4>
-                        <br/>
-                    </div>
-                    <p>Descirption</p>
-                    <div class="ratings">
-                        <p class="pull-right">3 Reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 Stars
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                    <div id="map" style="width:550px;height:500px;background:yellow"></div>
-                    
-                    <!-- <script th:src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&callback=myMap"></script> -->
-            </div>
-        </div>
+		        <div class="row">
+		        
+		        <th:block th:if="${allEventsGroup.size() != 0}" th:each="oneEventGroup : ${allEventsGroup}" >
+		        	<th:block th:if="${oneEventGroup.events.size() != 0}" th:each="oneEvent : ${oneEventGroup.events}">
+		            <div class="col-sm-6">
+		                <div class="row">
+		                    <div class="col-sm-6">
+		                    	<a th:href="'/event?id='+${oneEvent.idEvents}">
+			                        <img  class="img-responsive" src="http://placehold.it/700x300" alt=""/>
+		                        </a>
+		                    </div>
+		                    <div class="col-sm-6">
+		                        <h4 th:text=" 'Price : ' + ${oneEvent.price} + '€'">Price : </h4>
+		                        <h4 th:text="${oneEvent.location.address}">Address:</h4>
+		                        <h4 th:text=" 'Date : ' + ${oneEvent.day}">Date:</h4>
+		                        <br/>
+		                    </div>
+		                    <p>Descirption</p>
+		                    <div class="ratings">
+		                        <p th:text="${oneEvent.eventsfeedbacks.size()}" class="pull-right">3 Reviews</p>
+		                        <p>
+		                            <span class="glyphicon glyphicon-star"></span>
+		                            <span class="glyphicon glyphicon-star"></span>
+		                            <span class="glyphicon glyphicon-star"></span>
+		                            <span class="glyphicon glyphicon-star"></span>
+		                            <span class="glyphicon glyphicon-star-empty"></span>
+		                            4.0 Stars
+		                        </p>
+		                    </div>
+		                </div>
+		            </div>
+		            </th:block>
+                </th:block>
+	            <div class="col-sm-6">
+	                    <div id="map" style="width:550px;height:500px;background:yellow"></div>
+<!--	                     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&callback=myMap"></script> -->
+	            </div>
+	        </div>
         <!-- Pagination -->
         <div class="row text-center">
             <div class="col-lg-12">
