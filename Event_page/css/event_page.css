@@ -5,7 +5,7 @@
  */
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    padding-top:5% ; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 
@@ -14,8 +14,8 @@ body {
 }
 
 .ratings {
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 5%;
+    padding-left: 5%s;
     color: dodgerblue;
 }
 
@@ -24,18 +24,13 @@ body {
 }
 
 .thumbnail .caption-full {
-    padding: 9px;
+    padding: 5%;
     color: #333;
 }
 
 footer {
-    margin: 50px 0;
+    margin: 0 auto;
 }
-
-.searchbar{
-    margin-top: 8px;
-}
-
 
 hr {
     display: block;
@@ -45,17 +40,4 @@ hr {
     margin-right: auto;
     border-style: inset;
     border-width: 1px;
-}
-
-.navbar-default {
-    background-color:dodgerblue;
-    border-color: black;
-}
-
-.navbar-default .navbar-header .navbar-brand{
-    color:white;
-}
-
-.onnav{
-    color:black;
 }

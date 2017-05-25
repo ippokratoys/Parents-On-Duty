@@ -1,0 +1,67 @@
+body {
+    padding-top: 5%; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+footer {
+    margin: 0 auto;
+}
+
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+
+.navbar-default {
+	height:9%;
+	witdth:0 auto;
+    background-color:dodgerblue;
+    border-color: black;
+}
+
+.navbar-default .navbar-header .navbar-brand{
+    color:black;
+}
+
+.title_spec{
+	margin-top:1em;
+	color:white;
+	
+}
+
+.search_button{
+	margin-top:1em;
+	width:10%;
+}
+
+.logsign{
+	margin-top:1em;
+	margin-right:auto;
+}
+.address_search{
+	width:15%;
+	margin-left:11em;
+}
+
+
+
+.onnav{
+    color:black;
+}
+
+.date_search{
+	width:15%;
+}
+.price_search{
+	width:5%
+}
+
+.extra_search{
+	width:10%;
+}
+
