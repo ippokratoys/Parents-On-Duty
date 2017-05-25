@@ -13,7 +13,15 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
-
+	<!--Datepicker-->
+	     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+      <link rel="stylesheet" type="text/css" media="all" href="bootstrap-daterangepicker-master/daterangepicker.css" />
+      <style type="text/css">
+      .demo { position: relative; }
+      .demo i {
+        position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer;
+      }
+      </style>
     <!-- Custom CSS -->
     <link href="css/1-col-portfolio.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/map.js"></script>
@@ -30,45 +38,60 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a style="color:white" class="navbar-brand" href="#">
+                        <a style="color:white" class="navbar-brand" href="#">
                     <div style="font-family:Comic Sans MS,cursive,sans-serif">
                         <div style="color:white">Parents On Duty</div>
                     </div>
                 </a>
-                <img src="./css/Logo.png" alt="Smiley face"  height="45" width="45" href="#"/>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <div class="input-group searchbar">
-                        <input type="text" class="form-control" placeholder="Search"/>
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
+
+        <!-- Search Bar -->
+										<div class="hab-group">
+											<form action="/results" method="get" id="AboutSearches">
+												<div class="form-group col-md-3" style="width:20%">
+													<label for="Address_Search"><div style="color:white">Διεύθυνση Αναζήτησης</div></label>
+													<input type="text" class="form-control" id="Address_Search" name="Address" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
+													<i class="fa fa-building-o form-control-feedback"></i>
+													<span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
+												</div>
+									
+												<div class="form-group col-md-3" style="width:15%">
+													<label for="Date_Search"><div style="color:white">Hμερομηνία</div></label>
+													<input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
+												</div>
+
+												<div class="form-group col-md-3" style="width:7%">
+													<label for="Price_Search"><div style="color:white">Τιμή</div></label>
+													<select name="Price" id="Prices"  class="form-control">
+														<option value="1">1-5</option>
+														<option value="2">5-10</option>
+														<option value="3">10-15</option>
+														<option value="4">15-20</option>
+														<option value="5">20-25</option>
+													</select>
+													<!--<input type="number" class="form-control" id="rooms" name="hab" min="1" max="10" value="1">-->
+												</div>
+												
+												<div class="form-group col-md-3" style="width:5%">
+													<label for="Age"><div style="color:white">Ηλικία</div></label>
+													<input type="number" class="form-control" name="Age" min="1" max="15" value="2"/>
+												</div>
+												
+												<div class="form-group col-md-3" style="width:10%">
+													<label for="query_tags"><div style="color:white">Extra Tags</div></label>
+													<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
+													<i class="fa fa-building-o form-control-feedback"></i>
+													<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
+												</div>
+												
+												<div class="form-group col-md-3" style="width:400px">
+													<button type="submit" class="btn btn-info btn-lg btn-block" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
+												</div>
+											</form>
+										</div>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a style="color: white" href="#" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                         <li><a style="color: white" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
-                </ul>
-
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
     </nav>
 
 <!-- Page Content -->
@@ -182,6 +205,9 @@
 
     </div>
     <!-- /.container -->
+	<!--DatePicker-->
+
+	<script type="text/javascript" src="bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
