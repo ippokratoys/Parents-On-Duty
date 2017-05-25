@@ -28,6 +28,7 @@ public class ResultController {
     	System.out.println(price);
     	System.out.println(age);
     	System.out.println("Extra Tags:"+extraTags);
+    	
     	return "results";
     }
 
