@@ -85,7 +85,7 @@
 
         <!-- Project One -->
 		        <div class="row">
-		        
+
 		        <th:block th:if="${allEventsGroup.size() != 0}" th:each="oneEventGroup : ${allEventsGroup}" >
 		        	<th:block th:if="${oneEventGroup.events.size() != 0}" th:each="oneEvent : ${oneEventGroup.events}">
 		            <div class="col-sm-6">
@@ -103,7 +103,7 @@
 		                    </div>
 		                    <p th:inline="text"> [[${oneEvent.eventsgroup.description}]]</p>
 		                    <div class="ratings">
-		                        <p th:text="${oneEvent.eventsfeedbacks.size()}" class="pull-right">3 Reviews</p>
+		                        <p th:text="${oneEvent.eventsfeedbacks.size()} + ' Review'" class="pull-right">3 Reviews</p>
 		                        <p>
 		                            <span class="glyphicon glyphicon-star"></span>
 		                            <span class="glyphicon glyphicon-star"></span>
@@ -115,8 +115,10 @@
 		                    </div>
 		                </div>
 		            </div>
-		            </th:block>
-                </th:block>
+              </th:block>
+              <p class="col-sm-6" th:if="${oneEventGroup.events.size() == 0}">Event not found </p>
+            </th:block>
+            <p class="col-sm-6" th:if="${allEventsGroup.size() == 0}">Event not found </p>
 	            <div class="col-sm-6">
 	                    <div id="map" style="width:550px;height:500px;background:yellow"></div>
 	                     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;callback=myMap"></script>
