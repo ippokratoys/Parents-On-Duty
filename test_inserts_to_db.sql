@@ -1,4 +1,4 @@
-use test3;
+use mydb;
 
 INSERT INTO login (email, pwd)
 values('makisdelaportas@gmail.com', 'makarosThek1llAh');

@@ -41,7 +41,7 @@ public class ResultController {
     	*/
     	List<Eventsgroup> results=eventsgroupHandler.findByName(address);
 
-    	System.out.println(results.get(0).getEvents().get(0).getEventsfeedbacks());
+    	//System.out.println(results.get(0).getEvents().get(0).getEventsfeedbacks());
 
     	model.addAttribute("allEventsGroup",results);
     	return "results";

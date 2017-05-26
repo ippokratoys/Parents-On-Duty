@@ -101,7 +101,7 @@
 		                        <h4 th:text=" 'Date : ' + ${oneEvent.day}">Date:</h4>
 		                        <br/>
 		                    </div>
-		                    <p>Description</p>
+		                    <p th:inline="text"> [[${oneEvent.eventsgroup.description}]]</p>
 		                    <div class="ratings">
 		                        <p th:text="${oneEvent.eventsfeedbacks.size()}" class="pull-right">3 Reviews</p>
 		                        <p>
