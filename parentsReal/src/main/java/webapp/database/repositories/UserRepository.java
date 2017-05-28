@@ -10,5 +10,5 @@ import webapp.database.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
-
+	
 }
