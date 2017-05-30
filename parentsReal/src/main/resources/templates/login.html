@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html 
+	lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>LogIn</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="css/Login.css" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <div class="container">
+    <h1 class="welcome text-center">Καλώς Ήρθατε Στο<br/>Parents On Duty</h1>
+        <div class="card card-container">
+        <h2 class='login_title text-center'><b>Σύνδεση</b></h2>
+        <h3 th:if="${param.error}" class="error_login" th:text="'Λάθος στοιχεία, δοκιμάστε ξανά'"> </h3>
+        <h3 th:if="${param.logout}" class="alert alert-success" th:text="'Αποσύνδεση επιτυχής, Τα ξανα λεμε '"> </h3>
+        <hr/>
+			
+            <form th:action="@{/login}" class="form-signin" method="post">
+                <span id="reauth-email" class="reauth-email"></span>
+                <p class="input_title">Email</p>
+                <input type="text" id="inputEmail" class="login_box" placeholder="user01@ParentOnDuty.com" name="username" th:required="required" required="true" autofocus="true" />
+                <p class="input_title">Κωδικός</p>
+                <input type="password" id="inputPassword" class="login_box" placeholder="******" name="password" th:required="required" required="true"/>
+                <div id="remember" class="checkbox">
+                    <label>
+                        
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary" type="submit">Σύνδεση</button>
+                <a href="/register">Δεν έχετε λογαριασμό;</a>
+                <hr/>
+                <a href="/forget" class="text-right">Ξεχάσατε Τον Κωδικό;</a>
+            </form><!-- /form -->
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+</body>
+
+</html>

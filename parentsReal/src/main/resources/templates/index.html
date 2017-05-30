@@ -59,10 +59,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a style="color: white" href="/SignUp" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a style="color: white" href="/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    </ul>
+					<div th:if="${#httpServletRequest.remoteUser}">
+                        <li>
+                        	        <form th:action="@{/logout}" method="post">
+							            <input type="submit" value="Αποσύνδεση"/>
+							        </form>
+							 <span th:text="${#httpServletRequest.remoteUser}"></span>
+							 
+                        </li>
+                     </div>
+					<div th:unless="${#httpServletRequest.remoteUser}">
+	                    <li><a style="color: white" href="/register" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+	                    <li><a style="color: white" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </div>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

@@ -9,23 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import webapp.database.Event;
 import webapp.database.repositories.EventRepository;
-import webapp.database.repositories.EventsgroupRepository;
 
 @Controller
-public class EventPageController {
+public class EventBookControler {
+
 	@Autowired
 	private EventRepository eventHandler;
 
-	@Autowired
-	private EventsgroupRepository eventsgroupHandler;
-
-	@RequestMapping(value="/event",method= RequestMethod.GET)
+	@RequestMapping(value="/event/book",method= RequestMethod.GET)
     public String showPage(
     	@RequestParam(name="id",required=true)int eventId,
     	Model model){
-		
-		Event curEvent = eventHandler.findOne(eventId);
-		model.addAttribute("theEvent",curEvent);
-		return "event";
-	}
+			
+			Event curEvent = eventHandler.findOne(eventId);
+			model.addAttribute("theEvent",curEvent);
+			return "event_book";
+		}
 }

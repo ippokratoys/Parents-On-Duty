@@ -11,17 +11,23 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.Ordered;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @EnableJpaRepositories(basePackages="webapp.database.*")
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer{
+@EnableWebSecurity
+public class Application extends WebMvcConfigurerAdapter{
 	@Autowired
 	private static LoginRepository loginRepository;
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
-        return application.sources(Application.class);
-    }
+	
+
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
 
@@ -41,5 +47,18 @@ public class Application extends SpringBootServletInitializer{
 
 		
     }
+    
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/login").setViewName("login");
+//        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    }
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/login").setViewName("login");
+//        
+////        registry.addViewController("/hello").setViewName("helloworld");
+////        registry.addRedirectViewController("/home", "/hello");
+////        registry.addStatusController("/detail", HttpStatus.BAD_REQUEST);        
+//    }   
 
 }
