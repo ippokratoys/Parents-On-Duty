@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head-top-bar">
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Results</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <!--Datepicker-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" media="all" href="bootstrap-daterangepicker-master/daterangepicker.css" />
+    <style type="text/css">
+        .demo { position: relative; }
+        .demo i {
+            position: absolute; bottom: 10%; right: 20%; top: auto; cursor: pointer;
+        }
+    </style>
+    <!-- Custom CSS -->
+    <link href="css/bar.css" rel="stylesheet"/>
+    <script type="text/javascript" src="js/map.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav th:fragment="nav-bar-only-login" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <a style="color:white" class="navbar-brand" href="#">
+        <div style="font-family:Comic Sans MS,cursive,sans-serif">
+            <div class="title_spec"><b>Parents On Duty</b></div>
+        </div>
+    </a>
+
+    <!-- Search Bar -->
+    <ul th:unless="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
+        <li><a style="color: white" href="/register" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a style="color: white" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+    <ul th:if="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
+        <li>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Αποσύνδεση"/>
+            </form>
+        </li>
+        <li><a style="color: white" href="/user"><span class="glyphicon glyphicon-log-in"></span> <span th:text="${#httpServletRequest.remoteUser}"> </span></a></li>
+    </ul>
+</nav>
+
+<th:block th:fragment="scripts-top-bar">
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</th:block>
+</body>
+
+</html>
+
