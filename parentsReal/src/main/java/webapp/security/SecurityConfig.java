@@ -39,7 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(HttpSecurity httpSecurity) throws Exception{
 		httpSecurity.authorizeRequests()
-				.antMatchers("/results").hasRole("ORGANIZER")
+				.antMatchers("/event/book").hasRole("PARENT")
+				.antMatchers("/user").hasAnyRole("PARENT ORGANISER")
+				.antMatchers("user/organiser*/*").hasRole("ORGANISER")
+				.antMatchers("user/customer*/*").hasRole("PARENT")
 			.and()
 				.formLogin().loginPage("/login").permitAll()
 			.and()
