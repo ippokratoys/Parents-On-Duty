@@ -18,8 +18,8 @@ hr {
 
 
 .navbar-default {
-	height:0 auto;
-	width:0 auto;
+    height:0 auto;
+    width:0 auto;
     background-color:dodgerblue;
     border-color: black;
 }
@@ -29,20 +29,20 @@ hr {
 }
 
 .title_spec{
-	color:white;
+    color:white;
 }
 
 .search_button{
-	margin-top:0.5em;
-	width:auto;
+    margin-top:0.5em;
+    width:auto;
 }
 
 .logsign{
-	margin-top:auto;
-	margin-right:auto;
+    margin-top:auto;
+    margin-right:auto;
 }
 .address_search{
-	width:auto;
+    width:auto;
 }
 
 
@@ -52,13 +52,20 @@ hr {
 }
 
 .date_search{
-	width:auto;
+    width:auto;
 }
 .price_search{
-	width:auto;
+    width:auto;
 }
 
 .extra_search{
-	width:auto;
+    width:auto;
 }
 
+/*.navbar-toggle{*/
+    /*display: block;*/
+/*}*/
+
+/*.navbar-collapse.collapse{*/
+    /*display: none !important;*/
+/*}*/

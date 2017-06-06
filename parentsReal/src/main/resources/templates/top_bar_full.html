@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:fragment="head-top-bar" th:remove="tag">
 
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-
-    <title>Results</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
@@ -23,7 +21,7 @@
       }
       </style>
     <!-- Custom CSS -->
-    <link href="css/bar.css" rel="stylesheet"/>
+    <link href="css/full-bar.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/map.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,7 +35,7 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <nav th:fragment="nav-bar-full" class="navbar navbar-default navbar-fixed-top" role="navigation">
            <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -88,11 +86,19 @@
 						<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
 					</div>
         		</form-inline>
-                    <ul class="nav navbar-nav navbar-right logsign">
-                        <li><a style="color: white" href="#" ><span class="glyphicon glyphicon-user"></span> Εγγραφή</a></li>
-                        <li><a style="color: white" href="#"><span class="glyphicon glyphicon-log-in"></span> Σύνδεση</a></li>
+                    <ul th:unless="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
+                        <li><a style="color: white" href="/register" ><span class="glyphicon glyphicon-user"></span> Εγγραφή</a></li>
+                        <li><a style="color: white" href="/login"><span class="glyphicon glyphicon-log-in"></span> Σύνδεση</a></li>
                     </ul>
-           </div>
+                    <ul th:if="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
+                        <li>
+                            <form th:action="@{/logout}" method="post">
+                                <input type="submit" value="Αποσύνδεση"/>
+                            </form>
+                        </li>
+                        <li><a style="color: white" href="/user"><span class="glyphicon glyphicon-log-in"></span> <span th:text="${#httpServletRequest.remoteUser}"> </span></a></li>
+                    </ul>
+         </div>
     </nav>
 
 	<!--DatePicker-->

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
+
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -33,15 +33,16 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
 
 </head>
 
 <body>
 
     <!-- Navigation -->
-	<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">
-
-	</nav>
+	<div>
+		<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
+	</div>
 
     <!-- Full Width Image Header with Logo -->
     <!-- Image backgrounds are set within the full-width-pics.css file. -->
@@ -54,62 +55,64 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="section-paragraph"><div class="container">
-	<!--Search Bar html code-->
-		<div class="col-md-12" id="Search_Section">
-						<div class="text-center" id="content-home">
-							<div class="tab-content">
-								<div role="tabpanel" class="tab-pane active" id="AllSearchForms">
-									<form action="/results" method="get" id="AboutSearches">
-										<div class="form-group has-feedback col-md-12">
-											<label for="Address_Search">Όνομα Εκδήλωσης</label>
-											<!--input type="hidden" id="hidden1" name="by" value=""-->
-											<!--input type="hidden" id="hidden2" name="id" value=""-->
-											<input type="text" class="form-control" id="Address_Search" name="Address" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
-											<i class="fa fa-building-o form-control-feedback"></i>
-											<span id="helpQuery" class="help-block hidden">Debes seleccionar algun Hotel o Destino</span>
-										</div>
-										<div class="row">
-										  <div class="form-group has-feedback col-md-12">
-											<label for="Date_Search">Επιλογή ημερομηνίας διοργάνωσης</label>
-											<input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
-										  </div>
-										</div>
-										<div class="form-group col-md-6">
-											<label for="Price_Search">Εύρος τιμών</label>
-											<select name="Price" id="Prices"  class="form-control">
-												<option value="1">1-5</option>
-												<option value="2">5-10</option>
-												<option value="3">10-15</option>
-												<option value="4">15-20</option>
-												<option value="5">20-25</option>
-											</select>
-											<!--<input type="number" class="form-control" id="rooms" name="hab" min="1" max="10" value="1">-->
-										</div>
-										<div id="Age_Tags">
-											<div class="hab-group">
-												<div class="form-group col-md-3">
-													<label for="Age">Ηλικία</label>
-													<input type="number" class="form-control" name="Age" min="1" max="15" value="2"/>
-												</div>
-												<div class="form-group col-md-3">
-													<label for="query_tags">Extra Tags</label>
-													<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
+                    <p class="section-paragraph">
+						<div class="container">
+							<!--Search Bar html code-->
+							<div class="col-md-12" id="Search_Section">
+								<div class="text-center" id="content-home">
+									<div class="tab-content">
+										<div role="tabpanel" class="tab-pane active" id="AllSearchForms">
+											<form action="/results" method="get" id="AboutSearches">
+												<div class="form-group has-feedback col-md-12">
+													<label for="Address_Search">Όνομα Εκδήλωσης</label>
+													<!--input type="hidden" id="hidden1" name="by" value=""-->
+													<!--input type="hidden" id="hidden2" name="id" value=""-->
+													<input type="text" class="form-control" id="Address_Search" name="Address" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
 													<i class="fa fa-building-o form-control-feedback"></i>
-													<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
+													<span id="helpQuery" class="help-block hidden">Debes seleccionar algun Hotel o Destino</span>
 												</div>
-												<div class="age-chd"></div>
-											</div>
+												<div class="row">
+												  <div class="form-group has-feedback col-md-12">
+													<label for="Date_Search">Επιλογή ημερομηνίας διοργάνωσης</label>
+													<input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
+												  </div>
+												</div>
+												<div class="form-group col-md-6">
+													<label for="Price_Search">Εύρος τιμών</label>
+													<select name="Price" id="Prices"  class="form-control">
+														<option value="1">1-5</option>
+														<option value="2">5-10</option>
+														<option value="3">10-15</option>
+														<option value="4">15-20</option>
+														<option value="5">20-25</option>
+													</select>
+													<!--<input type="number" class="form-control" id="rooms" name="hab" min="1" max="10" value="1">-->
+												</div>
+												<div id="Age_Tags">
+													<div class="hab-group">
+														<div class="form-group col-md-3">
+															<label for="Age">Ηλικία</label>
+															<input type="number" class="form-control" name="Age" min="1" max="15" value="2"/>
+														</div>
+														<div class="form-group col-md-3">
+															<label for="query_tags">Extra Tags</label>
+															<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
+															<i class="fa fa-building-o form-control-feedback"></i>
+															<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
+														</div>
+														<div class="age-chd"></div>
+													</div>
+												</div>
+												<div class="form-group col-md-12">
+													<button type="submit" class="btn btn-info btn-lg btn-block" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
+												</div>
+											</form>
 										</div>
-										<div class="form-group col-md-12">
-											<button type="submit" class="btn btn-info btn-lg btn-block" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
-										</div>
-									</form>
+									</div>
 								</div>
 							</div>
 						</div>
-		</div>
-</div></p>
+					</p>
 <!--End of search bar html code-->
                 </div>
             </div>
@@ -135,15 +138,15 @@
         <!-- /.container -->
     </footer>
 
-		<div th:replace="top_bar_only_login :: 'scripts-top-bar' "></div>
-		<!--DatePicker-->
-		<script type="text/javascript" src="bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
+			<!--DatePicker-->
+			<script type="text/javascript" src="bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
 
-		<!-- jQuery -->
-		<script src="js/jquery.js"></script>
+			<!-- jQuery -->
+			<script src="js/jquery.js"></script>
 
-		<!-- Bootstrap Core JavaScript -->
-		<script src="js/bootstrap.min.js"></script>
+			<!-- Bootstrap Core JavaScript -->
+			<script src="js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

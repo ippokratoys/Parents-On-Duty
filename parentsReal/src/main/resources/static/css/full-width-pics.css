@@ -4,9 +4,9 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
-body {
-    margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-}
+/*body {*/
+    /*margin-top: 5%; !* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. *!*/
+/*}*/
 
 .image-bg-fluid-height,
 .image-bg-fixed-height {
@@ -64,16 +64,16 @@ footer {
 }
 
 
-.navbar-default {
-  background-color: dodgerblue;
-  border-color: black;
-}
+/*.navbar-default {*/
+  /*background-color: dodgerblue;*/
+  /*border-color: black;*/
+/*}*/
 
-.navbar-brand {
-  float: left;
-  height: 50px;
-  padding: 15px 15px;
-  font-size: 18px;
-  line-height: 20px;
-  color: white;
-}
+/*.navbar-brand {*/
+  /*float: left;*/
+  /*height: 50px;*/
+  /*padding: 15px 15px;*/
+  /*font-size: 18px;*/
+  /*line-height: 20px;*/
+  /*color: white;*/
+/*}*/
