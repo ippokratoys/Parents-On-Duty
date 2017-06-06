@@ -4,3 +4,7 @@ bin/
 .recommenders
 RemoteSystemsTempFiles/
 .gradle/
+out/
+*.iml
+*.ipr
+*.iws
