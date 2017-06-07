@@ -29,9 +29,13 @@
      	$("#includedContent").load("bar/bar.html");
       });
     </script>
+    <div th:replace="top_bar_full :: head-top-bar"></div>
 </head>
 
 <body >
+
+    <!-- Navigation -->
+    <nav th:replace="top_bar_full :: 'nav-bar-full' "></nav>
 
    <div id="includedContent"></div>
     <!-- Page Content -->
@@ -123,7 +127,7 @@
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;callback=myMap"></script>
             </div>
             <div class="col-sm-3">
-                <a class="btn btn-primary" href="#" role="button">Book Now!</a>
+                <a class="btn btn-primary" th:href="@{ /event/book?id={id}(id=${theEvent.idEvents}) }" role="button">Book Now!</a>
                 <div class="information">
                  <!--    <h5><b>Telephone: 2109245444</b></h5> -->
                     <h5 th:inline="text"><b>E-mail: [[${theEvent.organiser.login_email}]]</b></h5>
@@ -135,6 +139,11 @@
 
     </div>
 
+
+    <script type="text/javascript" src="bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>

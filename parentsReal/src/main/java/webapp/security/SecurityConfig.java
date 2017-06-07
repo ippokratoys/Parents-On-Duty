@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		auth.jdbcAuthentication()
 			.usersByUsernameQuery(this.USER_NAME_QUERY)
-			.authoritiesByUsernameQuery(USER_ROLE_QUERY)
+			.authoritiesByUsernameQuery(this.USER_ROLE_QUERY)
 			.dataSource(dataSource);
 //			.passwordEncoder(bCryptPasswordEncoder);
 	}
@@ -39,10 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(HttpSecurity httpSecurity) throws Exception{
 		httpSecurity.authorizeRequests()
-				.antMatchers("/event/book").hasRole("PARENT")
-				.antMatchers("/user").hasAnyRole("PARENT ORGANISER")
+				.antMatchers("/event/book").hasAuthority("PARENT")
+				.antMatchers("/user").hasAuthority("PARENT")
 				.antMatchers("user/organiser*/*").hasRole("ORGANISER")
 				.antMatchers("user/customer*/*").hasRole("PARENT")
+				.antMatchers("**").permitAll()
 			.and()
 				.formLogin().loginPage("/login").permitAll()
 			.and()

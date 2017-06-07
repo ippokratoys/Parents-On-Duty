@@ -25,11 +25,14 @@ public class EventBookControler {
 	private EventRepository eventHandler;
 	@Autowired
 	private CustomerRepository customerHander;
+
 	@RequestMapping(value="/event/book",method= RequestMethod.GET)
+
     public String showPage(
 		@AuthenticationPrincipal final UserDetails userDetails,//we add this so we know if is logged to show correct bar
 		@RequestParam(name="id",required=true)int eventId,
 		Model model){
+			System.out.println("new custome nigga");
 			Event curEvent = eventHandler.findOne(eventId);
 			//We know he is login because of spring security
 			//if no event found throw 404
