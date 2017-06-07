@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Εγγραφή</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="css/host_register.css" rel="stylesheet"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+ 	<link rel="stylesheet" href="/resources/demos/style.css"/>
+  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<script>
+  		$( function() {
+    	$( "#datepicker" ).datepicker();
+  		} );
+  	</script>
+</head>
+
+<body >
+	<div class="row">
+		<div class="col-sm-2" >
+	   <button  onclick="location.href='/'" type="button" class="btn btn-primary">Αρχική Σελίδα</button>
+		</div>
+	</div>
+    <div class="container">
+    <h1 class="welcome text-center">Καινούργιος Οικοδεσπότης</h1>
+        <div class="card card-container">
+        <h2 class='login_title text-center'><b>Εγγραφή</b></h2>
+        <hr/>
+
+            <form action="/Profile" class="form-signin" method="get">
+                <span id="reauth-email" class="reauth-email"></span>
+                <p class="input_title">Όνομα</p>
+                <input type="text" id="inputName" class="login_box" placeholder="Απόστολος" name="Name" required="True" autofocus="True"/>
+                <p class="input_title">Επώνυμο</p>
+                <input type="text" id="inputSurname" class="login_box" placeholder="Πλακ" name="Surname" required="True" autofocus="True"/>
+                <p class="input_title">Αριθμός Ταυτότητας</p>
+                <input type="text" id="inputID" class="login_box" placeholder="AI4206666" name="ID" required="True" autofocus="True"/>
+                <div class="form-group"> <!-- Date input -->
+        			<label class="control-label" for="date">Ημερομηνία Γεννησης</label>
+        			<input class="form-control" id="datepicker" name="date" placeholder="MM/DD/YYY" type="text"/>
+      			</div>
+                <div id="remember" class="checkbox">
+                    <label>
+                        
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary" type="submit">Εγγραφή</button>
+				<a href="/login" class="text-right">Έχετε ήδη Λογαριασμό;</a>
+				<hr/>
+				<a href="/register" class="text-right">Δεν είστε Οικοδεσπότης;</a>
+            </form><!-- /form -->
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+</body>
+
+</html>
