@@ -50,7 +50,7 @@ public class Application extends WebMvcConfigurerAdapter{
     
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/user/wallet").setViewName("profile/parent/wallet");
+//        registry.addViewController("/user/wallet").setViewName("profile/parent/wallet");
 //        registry.addViewController("/user/wallet").setViewName("profile/parent/wallet");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
