@@ -40,9 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configure(HttpSecurity httpSecurity) throws Exception{
 		httpSecurity.authorizeRequests()
 				.antMatchers("/event/book").hasAuthority("PARENT")
-				.antMatchers("/user").hasAuthority("PARENT")
-				.antMatchers("user/organiser*/*").hasRole("ORGANISER")
-				.antMatchers("user/customer*/*").hasRole("PARENT")
+				.antMatchers("/customer**").hasAuthority("ORGANISER")
+				.antMatchers("/user/**").hasAuthority("PARENT")
 				.antMatchers("**").permitAll()
 			.and()
 				.formLogin().loginPage("/login").permitAll()

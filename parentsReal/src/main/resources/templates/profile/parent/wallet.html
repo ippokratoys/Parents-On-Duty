@@ -26,32 +26,34 @@
 
 </head>
 
+
+<!---->
 <body>
 	<div class="row">
 		<div class="col-sm-2" >
-	   <button  onclick="location.href='/'" type="button" class="btn btn-primary">Αρχική Σελίδα</button>
+			<button  onclick="location.href='/'" type="button" class="btn btn-primary">Αρχική Σελίδα</button>
 		</div>
 	</div>
-    <div class="container">
-    <h1 class="welcome text-center">Πορτοφολί<br/></h1>
-        <div class="card card-container">
-        <h2 class='login_title text-center'><b>Διαχείρηση Πορτοφολιού</b></h2>
-            <form th:action="@{/wallet}" class="form-signin" method="post">
-                <span id="reauth-email" class="reauth-email"></span>
-               	<hr/>
-       			<br/>
+	<div class="container">
+	<h1 class="welcome text-center">Πορτοφολί<br/></h1>
+		<div class="card card-container">
+		<h2 class='login_title text-center'><b>Διαχείρηση Πορτοφολιού</b></h2>
+			<form th:action="@{/wallet}" class="form-signin" method="post">
+				<span id="reauth-email" class="reauth-email"></span>
+				<hr/>
+				<br/>
 				<!---->
-       			<h4 th:text="'Κασερι : '">Ισορροπία  Λογαριασμού: </h4>
-       			<br/>
-        		<h4>Μέθοδοι Πληρωμής:</h4>
-        		<br/>
-        		<hr/>
-        		<br/>
-        		<button class="btn btn-lg btn-primary" type="submit">Πρόσθεσε Μέθοδο Πληρωμής</button>
-        	 	<button class="btn btn-lg btn-primary" type="submit">Πρόσθεσε Πόντους</button>
-            </form><!-- /form -->
-        </div><!-- /card-container -->
-    </div><!-- /container -->
+				<h4 th:text="'Κασερι : ' + ${curUser.points}">Ισορροπία  Λογαριασμού: </h4>
+				<br/>
+				<h4 th:text="'Wallet : ' + ${curUser.wallet}">Μέθοδοι Πληρωμής:</h4>
+				<br/>
+				<hr/>
+				<br/>
+				<button class="btn btn-lg btn-primary" type="submit">Πρόσθεσε Μέθοδο Πληρωμής</button>
+				<button class="btn btn-lg btn-primary" type="submit">Πρόσθεσε Πόντους</button>
+			</form><!-- /form -->
+		</div><!-- /card-container -->
+	</div><!-- /container -->
 </body>
 
 </html>
