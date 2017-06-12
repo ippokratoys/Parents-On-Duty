@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 
 import webapp.database.*;
 
+import java.util.List;
+
 @Repository
 public interface LocationownerRepository extends CrudRepository<Locationowner, String>{
 

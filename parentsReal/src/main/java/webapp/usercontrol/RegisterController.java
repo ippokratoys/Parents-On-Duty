@@ -14,7 +14,6 @@ import webapp.database.Organiser;
 import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.LoginRepository;
 import webapp.database.repositories.OrganiserRepository;
-import webapp.database.repositories.UserRepository;
 
 import java.util.Map;
 

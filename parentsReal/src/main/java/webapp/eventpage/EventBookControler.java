@@ -1,7 +1,6 @@
 package webapp.eventpage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -12,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import webapp.database.Customer;
 import webapp.database.Event;
-import webapp.database.Login;
 import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.EventRepository;
-import webapp.database.repositories.LoginRepository;
-import webapp.database.repositories.UserRepository;
 
 @Controller
 public class EventBookControler {

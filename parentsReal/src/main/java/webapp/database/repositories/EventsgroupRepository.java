@@ -11,5 +11,5 @@ import webapp.database.*;
 public interface EventsgroupRepository extends CrudRepository<Eventsgroup, Integer>{
 
 	List<Eventsgroup> findByName(String param);
-	
+	List<Eventsgroup> findByNameContaining(String param);
 }
