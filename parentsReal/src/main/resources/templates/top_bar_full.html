@@ -35,9 +35,9 @@
 <body>
 
     <!-- Navigation -->
-    <nav th:fragment="nav-bar-full" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <nav th:fragment="nav-bar-full" class="navbar navbar-default navbar-fixed-top navbar-static-top" role="navigation">
            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -50,55 +50,59 @@
 				</a>
             </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        		<form-inline action="/results" method="get" id="AboutSearches">
-        			<div class="col-sm-2 address_search">
-        				<label for="Address_Search"><div style="color:white">Διεύθυνση Αναζήτησης</div></label>
-						<input type="text" class="form-control" id="Address_Search" name="Address" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
-						<i class="fa fa-building-o form-control-feedback"></i>
-						<span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
-        			</div>
-        			<div class="col-sm-2 date_search">
-        				<label for="config-demo"><div style="color:white">Hμερομηνία</div></label>
-						<input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
-        			</div>
-        			<div class="col-sm-1 price_search">
-        				<label for="Prices">
-        				<div style="color:white">Τιμή</div></label>
-						<select name="Price" id="Prices"  class="form-control">
-						<option value="1">1-5</option>
-						<option value="2">5-10</option>
-						<option value="3">10-15</option>
-						<option value="4">15-20</option>
-						<option value="5">20-25</option>
-						</select>
-        			</div>
-        			<div class="col-sm-1 price_search">
-						<label for="Age"><div style="color:white">Ηλικία</div></label>
-						<input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2"/>
-        			</div>
-        			<div class="col-sm-2 extra_search">
-        				<label for="query_tags"><div style="color:white">Extra Tags</div></label>
-						<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
-						<i class="fa fa-building-o form-control-feedback"></i>
-						<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
-        			</div>
-        			<div class="col-sm-1">
+	        <div th:unless="${#httpServletRequest.remoteUser}" class="navbar-right logsign">
+	     		<div><a style="color: white" href="/register" ><span class="glyphicon glyphicon-user"></span> Εγγραφή</a></div>
+	           	<div><a style="color: white" href="/login"><span class="glyphicon glyphicon-log-in"></span> Σύνδεση</a></div>
+	       	</div>
+	     	<div th:if="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
+		        <div>
+		        	<form th:action="@{/logout}" method="post">
+		           		<input type="submit" value="Αποσύνδεση"/>
+		           		<a style="color: white" href="/user"><span class="glyphicon glyphicon-log-in"></span> <span th:text="${#httpServletRequest.remoteUser}">
+		           	</form>
+		           	 </span></a>
+		        </div>
+	       	</div>
+	        <div class="dropdown mydrop navbar-right logsign">
+	        	<button class="btn btn-lg btn-success dropdown-toggle" type="button" id="searches" data-toggle="dropdown">Αναζήτηση
+	    		<span class="caret"></span></button>
+	    		<div class="dropdown-menu " role="menu" aria-labelledby="searches">
+	    			<form  action="/results" method="get" id="AboutSearches">
+	    				<div class="form-group">
+	        				<label for="Address_Search">Διεύθυνση Αναζήτησης</label>
+							<input type="text" class="form-control" id="Address_Search" name="Address" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
+							<i class="fa fa-building-o form-control-feedback"></i>
+							<span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
+	        			</div>
+	                	<div class="form-group">
+	                    <label for="Prices">Τιμή</label>
+							<select name="Price" id="Prices"  class="form-control">
+							<option value="1">1-5</option>
+							<option value="2">5-10</option>
+							<option value="3">10-15</option>
+							<option value="4">15-20</option>
+							<option value="5">20-25</option>
+							</select>
+	               		</div>
+	                    <div class="form-group">
+	                   		<label for="config-demo">Hμερομηνία</label>
+							<input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
+						</div>
+						<div class="form-group">
+	                   		<label for="Age">Ηλικία</label>
+							<input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2"/>
+						</div>
+						<div class="form-group">
+	                   		<label for="query_tags">Extra Tags</label>
+							<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
+							<i class="fa fa-building-o form-control-feedback"></i>
+							<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
+						</div>
 						<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
-					</div>
-        		</form-inline>
-                    <ul th:unless="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
-                        <li><a style="color: white" href="/register" ><span class="glyphicon glyphicon-user"></span> Εγγραφή</a></li>
-                        <li><a style="color: white" href="/login"><span class="glyphicon glyphicon-log-in"></span> Σύνδεση</a></li>
-                    </ul>
-                    <ul th:if="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
-                        <li>
-                            <form th:action="@{/logout}" method="post">
-                                <input type="submit" value="Αποσύνδεση"/>
-                            </form>
-                        </li>
-                        <li><a style="color: white" href="/user"><span class="glyphicon glyphicon-log-in"></span> <span th:text="${#httpServletRequest.remoteUser}"> </span></a></li>
-                    </ul>
-         </div>
+	            	</form>
+	    		</div>
+	        </div>
+		</div>
     </nav>
 
 	<!--DatePicker-->
