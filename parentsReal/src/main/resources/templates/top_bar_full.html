@@ -58,9 +58,8 @@
 		        <div>
 		        	<form th:action="@{/logout}" method="post">
 		           		<input type="submit" value="Αποσύνδεση"/>
-		           		<a style="color: white" href="/user"><span class="glyphicon glyphicon-log-in"></span> <span th:text="${#httpServletRequest.remoteUser}">
-		           	</form>
-		           	 </span></a>
+		           		<a style="color: white" href="/user"><span class="glyphicon glyphicon-log-in"></span> <span th:text="${#httpServletRequest.remoteUser}"></span></a>
+					</form>
 		        </div>
 	       	</div>
 	        <div class="dropdown mydrop navbar-right logsign">
