@@ -62,6 +62,7 @@ public class CsvInserts {
                 log.setEmail(arr_in[0].trim());
                 log.setPwd(arr_in[1].trim());
                 log.setRole(arr_in[2].trim());
+                log.setActive(true);
                 if(log.getRole().equals("PARENT")){
                     Customer newCustomer=new Customer();
                     newCustomer.setLogin_email(log.getEmail());
@@ -121,6 +122,7 @@ public class CsvInserts {
                 log.setEmail(arr_in[0]);
                 log.setPwd("123456");
                 log.setRole("ORGANISER");
+                log.setActive(true);
 
                 Organiser newOrganiser=new Organiser();
                 newOrganiser.setLogin_email(arr_in[0]);
@@ -181,7 +183,6 @@ public class CsvInserts {
                 newEvent.setLocation(locationRepository.findOne(Integer.parseInt(arr_in[5])));
                 newEvent.setOrganiser(organiserRepository.findOne(eventsgroupRepository.findOne( Integer.parseInt(arr_in[4]) ).getOrganiser().getLogin_email()));
                 eventRepository.save(newEvent);
-
             }
         }
         catch (FileNotFoundException e) {

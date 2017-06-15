@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-	private final String USER_NAME_QUERY="select email,pwd,1    from login      where email=?";
+	private final String USER_NAME_QUERY="select email,pwd,active    from login      where email=?";
 	private final String USER_ROLE_QUERY="select infos.email,infos.role "+"from login infos "+" where infos.email = ?";
 
 	@Autowired

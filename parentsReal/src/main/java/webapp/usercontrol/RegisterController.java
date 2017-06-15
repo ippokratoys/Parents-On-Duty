@@ -78,6 +78,7 @@ public class RegisterController {
 		newLogin=new Login();
 		newLogin.setEmail(allParams.get("Email"));
 		newLogin.setRole("PARENT");
+		newLogin.setActive(false);
 		newLogin.setPwd(hashPassword(allParams.get("Pwd")));
 		if(true){
 			//if it's a parrent
@@ -85,8 +86,8 @@ public class RegisterController {
 			newCustomer.setLogin_email(newLogin.getEmail());
 			newCustomer.setPoints(1);
 			newCustomer.setWallet(2);
-			customerRepository.save(newCustomer);
 			loginRepository.save(newLogin);
+			customerRepository.save(newCustomer);
 		}else if(true){
 			Organiser organiser= new Organiser();
 			//if it's a organiser

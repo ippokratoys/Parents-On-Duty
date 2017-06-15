@@ -31,12 +31,6 @@ public class HomePage {
         	System.out.println(userDetails.getUsername());
         	System.out.println(userDetails.getAuthorities().toString());    		
     	}
-    	   	
-    	Login newUser = new Login();
-        newUser.setEmail("ntua@gmail.com");
-        newUser.setPwd("123");
-        newUser.setRole("ORGANISER");
-		loginRepository.save(newUser);
 
         return "index";
     }
