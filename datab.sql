@@ -19,24 +19,8 @@ USE `mydb` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Login` (
   `email` VARCHAR(45) NOT NULL,
-  `pwd` VARCHAR(45) NOT NULL,
+  `pwd_hash` VARCHAR(140) NOT NULL,
   PRIMARY KEY (`email`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`LocationOwner`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`LocationOwner` (
-  `Login_email` VARCHAR(45) NOT NULL,
-  `Name` VARCHAR(45) NOT NULL,
-  `Surname` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Login_email`),
-  CONSTRAINT `fk_LocationOwner_Login`
-    FOREIGN KEY (`Login_email`)
-    REFERENCES `mydb`.`Login` (`email`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -45,12 +29,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Organiser` (
   `Login_email` VARCHAR(45) NOT NULL,
-  `Police_id` VARCHAR(45) NOT NULL,
+  `Taxpayer Id` VARCHAR(45) NOT NULL,
   `Name` VARCHAR(45) NOT NULL,
   `Surname` VARCHAR(45) NOT NULL,
   `Birthdate` DATE NULL,
   PRIMARY KEY (`Login_email`),
-  UNIQUE INDEX `Police_id_UNIQUE` (`Police_id` ASC),
+  UNIQUE INDEX `Police_id_UNIQUE` (`Taxpayer Id` ASC),
   CONSTRAINT `fk_Organiser_Login1`
     FOREIGN KEY (`Login_email`)
     REFERENCES `mydb`.`Login` (`email`)
@@ -60,12 +44,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Customer`
+-- Table `mydb`.`Parent`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Customer` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Parent` (
   `Login_email` VARCHAR(45) NOT NULL,
   `Points` INT NULL,
-  `Wallet` INT NULL,
+  `LoyaltyCur` INT NULL,
   PRIMARY KEY (`Login_email`),
   CONSTRAINT `fk_table1_Login1`
     FOREIGN KEY (`Login_email`)
@@ -82,15 +66,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Location` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Address` VARCHAR(45) NOT NULL,
   `Postcode` VARCHAR(45) NOT NULL,
-  `Name` VARCHAR(45) NULL,
-  `LocationOwner_Login_email` VARCHAR(45) NOT NULL,
-  INDEX `fk_Location_LocationOwner1_idx` (`LocationOwner_Login_email` ASC),
-  PRIMARY KEY (`ID`),
-  CONSTRAINT `fk_Location_LocationOwner1`
-    FOREIGN KEY (`LocationOwner_Login_email`)
-    REFERENCES `mydb`.`LocationOwner` (`Login_email`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
+  `X` MEDIUMTEXT NOT NULL,
+  `Y` MEDIUMTEXT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Images` VARCHAR(128) NULL,
+  PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
 
@@ -102,6 +82,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`EventsGroup` (
   `Name` VARCHAR(45) NULL,
   `Type` VARCHAR(45) NULL,
   `Organiser_Login_email` VARCHAR(45) NOT NULL,
+  `Images` VARCHAR(128) NULL,
+  `EventsGroupcol` VARCHAR(45) NULL,
   PRIMARY KEY (`idEventsGroup`),
   INDEX `fk_EventsGroup_Organiser1_idx` (`Organiser_Login_email` ASC),
   CONSTRAINT `fk_EventsGroup_Organiser1`
@@ -117,7 +99,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Events` (
   `idEvents` INT NOT NULL AUTO_INCREMENT,
-  `Day` VARCHAR(45) NULL,
+  `Day` DATE NULL,
   `Time` VARCHAR(45) NULL,
   `Location_ID` INT NOT NULL,
   `Organiser_Login_email` VARCHAR(45) NOT NULL,
@@ -145,23 +127,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`EventsFeedback`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`EventsFeedback` (
-  `idEventsFeedback` INT NOT NULL AUTO_INCREMENT,
-  `Events_idEvents` INT NOT NULL,
-  `Content` VARCHAR(64) NOT NULL,
-  PRIMARY KEY (`idEventsFeedback`, `Events_idEvents`),
-  INDEX `fk_EventsFeedback_Events1_idx` (`Events_idEvents` ASC),
-  CONSTRAINT `fk_EventsFeedback_Events1`
-    FOREIGN KEY (`Events_idEvents`)
-    REFERENCES `mydb`.`Events` (`idEvents`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `mydb`.`Events_has_Customer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Events_has_Customer` (
@@ -177,9 +142,42 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Events_has_Customer` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Events_has_Customer_Customer1`
     FOREIGN KEY (`Customer_Login_email`)
-    REFERENCES `mydb`.`Customer` (`Login_email`)
+    REFERENCES `mydb`.`Parent` (`Login_email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Feedback`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Feedback` (
+  `Events_idEvents` INT NOT NULL,
+  `Parent_Login_email` VARCHAR(45) NOT NULL,
+  `Content` VARCHAR(128) NULL,
+  PRIMARY KEY (`Events_idEvents`, `Parent_Login_email`),
+  INDEX `fk_Events_has_Parent_Parent1_idx` (`Parent_Login_email` ASC),
+  INDEX `fk_Events_has_Parent_Events1_idx` (`Events_idEvents` ASC),
+  CONSTRAINT `fk_Events_has_Parent_Events1`
+    FOREIGN KEY (`Events_idEvents`)
+    REFERENCES `mydb`.`Events` (`idEvents`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Events_has_Parent_Parent1`
+    FOREIGN KEY (`Parent_Login_email`)
+    REFERENCES `mydb`.`Parent` (`Login_email`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Admins_Login`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Admins_Login` (
+  `email` VARCHAR(45) NOT NULL,
+  `pwd_hash` VARCHAR(140) NOT NULL,
+  PRIMARY KEY (`email`))
 ENGINE = InnoDB;
 
 
