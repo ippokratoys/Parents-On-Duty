@@ -23,6 +23,8 @@ public class Login implements Serializable {
 
 	private String pwd;
 
+	private Boolean active;
+
 	private String role;
 	//bi-directional one-to-one association to Customer
 	@OneToOne(mappedBy="login")
@@ -86,6 +88,13 @@ public class Login implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
 
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 }
