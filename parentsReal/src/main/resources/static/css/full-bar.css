@@ -24,6 +24,11 @@ hr {
     border-color: black;
 }
 
+.mydrop{
+	height: auto;
+	width: auto;
+}
+
 .navbar-default .navbar-header .navbar-brand{
     color:black;
 }
@@ -39,8 +44,11 @@ hr {
 
 .logsign{
     margin-top:auto;
-    margin-right:auto;
+    margin-right:1%;
 }
+
+.dropdown-menu{ padding:7% 14%; }
+
 .address_search{
     width:auto;
 }
