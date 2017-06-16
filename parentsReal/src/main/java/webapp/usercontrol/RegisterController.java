@@ -3,6 +3,7 @@ package webapp.usercontrol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,9 @@ import java.util.Map;
 
 @Controller
 public class RegisterController {
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@RequestMapping(value="/register",method= RequestMethod.GET)
     public String showPage(
@@ -99,14 +103,14 @@ public class RegisterController {
 		return "redirect:/login?success_register=True";
 	}
 
-	Boolean isPasswordOk(String password){
+	public Boolean isPasswordOk(String password){
 		if(password.length()>=3 && password.length()<=10){
 			return true;
 		}
 		return false;
 	}
 
-	String hashPassword(String password){
-		return password;
+	public String hashPassword(String password){
+		return passwordEncoder.encode(password);
 	}
 }

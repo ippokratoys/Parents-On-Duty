@@ -17,6 +17,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import webapp.database.repositories.OrganiserRepository;
 
 @EnableJpaRepositories(basePackages="webapp.database.*")
+@ComponentScan("webapp.database.initializer.*")
+@ComponentScan("webapp.*")
 @SpringBootApplication
 @EnableWebSecurity
 public class Application extends WebMvcConfigurerAdapter{

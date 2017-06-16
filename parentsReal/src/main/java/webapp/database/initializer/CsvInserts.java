@@ -3,14 +3,21 @@ package webapp.database.initializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.annotation.AccessType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import webapp.database.*;
 import webapp.database.repositories.*;
+import webapp.security.SecurityConfig;
+import webapp.usercontrol.RegisterController;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,7 +32,10 @@ import java.util.Date;
  * Created by thanasis on 10/6/2017.
  */
 
+@Service
 public class CsvInserts {
+//    @Autowired
+//    PasswordEncoder passwordEncoder;
 
 //    @Autowired
 //    private static LoginRepository loginRepository;
@@ -34,13 +44,13 @@ public class CsvInserts {
 //    @Autowired
 //    private static OrganiserRepository organiserRepository;
 
-
-    public static String loginCsvInsertions(LoginRepository loginRepository,CustomerRepository customerRepository,String csvFile){
+    public String loginCsvInsertions(LoginRepository loginRepository,CustomerRepository customerRepository,String csvFile){
 //        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("stp_back_end");
 //        EntityManager entitymanager = emfactory.createEntityManager();
 //        entitymanager.getTransaction( ).begin( );
 		/*here will insert to the login*/
 		/*read the csv*/
+		PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
 		System.out.println(customerRepository);
         System.out.println(loginRepository);
         BufferedReader br = null;
@@ -60,7 +70,7 @@ public class CsvInserts {
 				/*insert the info email,pwd*/
                 Login log = new Login();
                 log.setEmail(arr_in[0].trim());
-                log.setPwd(arr_in[1].trim());
+                log.setPwd(passwordEncoder.encode(arr_in[1].trim()));
                 log.setRole(arr_in[2].trim());
                 log.setActive(true);
                 if(log.getRole().equals("PARENT")){
@@ -100,9 +110,10 @@ public class CsvInserts {
         return "/";
     }
 
-    public static void organiserCsvInsertions(LoginRepository loginRepository,OrganiserRepository organiserRepository,String csvFile){
+    public void organiserCsvInsertions(LoginRepository loginRepository,OrganiserRepository organiserRepository,String csvFile){
 		/*here will insert to the login*/
 		/*read the csv*/
+        PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -120,7 +131,7 @@ public class CsvInserts {
 				/*insert the info email,pwd*/
                 Login log = new Login();
                 log.setEmail(arr_in[0]);
-                log.setPwd("123456");
+                log.setPwd(passwordEncoder.encode("123456"));
                 log.setRole("ORGANISER");
                 log.setActive(true);
 
@@ -153,7 +164,7 @@ public class CsvInserts {
         }
     }
 
-    public static void eventsCsvInsertions(EventRepository eventRepository,
+    public void eventsCsvInsertions(EventRepository eventRepository,
                                            String csvFile,
                                            OrganiserRepository organiserRepository,
                                            EventsgroupRepository eventsgroupRepository,
@@ -204,7 +215,7 @@ public class CsvInserts {
 
     }
 
-    public static void eventsgroupCsvInsertions(EventsgroupRepository eventsgroupRepository, String csvFile,
+    public void eventsgroupCsvInsertions(EventsgroupRepository eventsgroupRepository, String csvFile,
                                                 OrganiserRepository organiserRepository
                                                 ){
             BufferedReader br = null;
@@ -252,7 +263,7 @@ public class CsvInserts {
 
     }
 
-    public static void locationCsvInsertions(LocationRepository locationRepository,
+    public void locationCsvInsertions(LocationRepository locationRepository,
                                            String csvFile,
                                            LocationownerRepository  locationownerRepository
     ){

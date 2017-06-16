@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,11 @@ import webapp.database.repositories.*;
 
 @Controller
 public class ResultController {
+
+//	@Autowired
+//	PasswordEncoder passwordEncoder;
+	@Autowired
+	CsvInserts myCsvHandler;
 
 	@Autowired
 	private EventRepository eventHandler;
@@ -63,40 +70,40 @@ public class ResultController {
 
     @RequestMapping("/init/login")
 	public String initLogin(){
-		CsvInserts.loginCsvInsertions(loginRepository,customerRepository,"../stp_back_end/parents.csv");
+		myCsvHandler.loginCsvInsertions(loginRepository,customerRepository,"../stp_back_end/parents.csv");
 		return "redirect:/";
 	}
 
 	@RequestMapping("/init/organiser")
 	public String initOrganiser(){
-		CsvInserts.organiserCsvInsertions(loginRepository,organiserRepository,"../stp_back_end/organiser.csv");
+		myCsvHandler.organiserCsvInsertions(loginRepository,organiserRepository,"../stp_back_end/organiser.csv");
 		return "redirect:/";
 	}
 	@RequestMapping("/init/locations")
 	public String initLocations(){
-		CsvInserts.locationCsvInsertions(locationRepository,"../stp_back_end/locations10.csv",locationownerRepository);
+		myCsvHandler.locationCsvInsertions(locationRepository,"../stp_back_end/locations10.csv",locationownerRepository);
 		return "redirect:/";
 	}
 
 	@RequestMapping("/init/eventsgroup")
 	public String initEventsgroup(){
-		CsvInserts.eventsgroupCsvInsertions(eventsgroupHandler,"../stp_back_end/events_group.csv",organiserRepository);
+		myCsvHandler.eventsgroupCsvInsertions(eventsgroupHandler,"../stp_back_end/events_group.csv",organiserRepository);
 		return "redirect:/";
 	}
 
 	@RequestMapping("/init/events")
 	public String initEvents(){
-		CsvInserts.eventsCsvInsertions(eventHandler,"../stp_back_end/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
+		myCsvHandler.eventsCsvInsertions(eventHandler,"../stp_back_end/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
 		return "redirect:/";
 	}
 
 	@RequestMapping("init/all")
 	public String initAll(){
-		CsvInserts.loginCsvInsertions(loginRepository,customerRepository,"../stp_back_end/parents.csv");
-		CsvInserts.organiserCsvInsertions(loginRepository,organiserRepository,"../stp_back_end/organiser.csv");
-		CsvInserts.locationCsvInsertions(locationRepository,"../stp_back_end/locations10.csv",locationownerRepository);
-		CsvInserts.eventsgroupCsvInsertions(eventsgroupHandler,"../stp_back_end/events_group.csv",organiserRepository);
-		CsvInserts.eventsCsvInsertions(eventHandler,"../stp_back_end/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
+		myCsvHandler.loginCsvInsertions(loginRepository,customerRepository,"../stp_back_end/parents.csv");
+		myCsvHandler.organiserCsvInsertions(loginRepository,organiserRepository,"../stp_back_end/organiser.csv");
+		myCsvHandler.locationCsvInsertions(locationRepository,"../stp_back_end/locations10.csv",locationownerRepository);
+		myCsvHandler.eventsgroupCsvInsertions(eventsgroupHandler,"../stp_back_end/events_group.csv",organiserRepository);
+		myCsvHandler.eventsCsvInsertions(eventHandler,"../stp_back_end/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
 		return "redirect:/";
 	}
 }
