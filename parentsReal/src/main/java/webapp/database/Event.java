@@ -1,4 +1,6 @@
 package webapp.database;
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import java.io.Serializable;
 import javax.persistence.*;
 

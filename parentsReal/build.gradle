@@ -35,6 +35,9 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'mysql:mysql-connector-java'
 
+    compile 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+    runtime 'net.java.dev.jna:jna'
+
     // end::jetty[]
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")

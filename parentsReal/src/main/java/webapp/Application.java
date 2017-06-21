@@ -1,6 +1,7 @@
 package webapp;
 
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.LoginRepository;
 
@@ -18,17 +19,11 @@ import webapp.database.repositories.OrganiserRepository;
 
 @EnableJpaRepositories(basePackages="webapp.database.*")
 @ComponentScan("webapp.database.initializer.*")
+@EnableElasticsearchRepositories("webapp.database.elasticsearch.")
 @ComponentScan("webapp.*")
 @SpringBootApplication
 @EnableWebSecurity
 public class Application extends WebMvcConfigurerAdapter{
-	@Autowired
-	private static LoginRepository loginRepository;
-    @Autowired
-    private static CustomerRepository customerRepository;
-    @Autowired
-    private static OrganiserRepository organiserRepository;
-
 
     public static void main(String[] args) {
 

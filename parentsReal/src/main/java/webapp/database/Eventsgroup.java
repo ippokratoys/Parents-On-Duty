@@ -1,4 +1,6 @@
 package webapp.database;
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
@@ -8,12 +10,16 @@ import java.util.List;
  * The persistent class for the eventsgroup database table.
  * 
  */
+@Document(indexName = "events_index" , type = "eventsgroup")
 @Entity
 @NamedQuery(name="Eventsgroup.findAll", query="SELECT e FROM Eventsgroup e")
 public class Eventsgroup implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+
 	@Id
+//this annotation is for the elastic search key used in repositories
+	@org.springframework.data.annotation.Id
 	private int idEventsGroup;
 
 	private String name;
@@ -30,6 +36,15 @@ public class Eventsgroup implements Serializable {
 	private Organiser organiser;
 
 	public Eventsgroup() {
+	}
+
+	public Eventsgroup(int idEventsGroup, String name, String type, String description, List<Event> events, Organiser organiser) {
+		this.idEventsGroup = idEventsGroup;
+		this.name = name;
+		this.type = type;
+		this.description = description;
+		this.events = events;
+		this.organiser = organiser;
 	}
 
 	public int getIdEventsGroup() {
@@ -94,4 +109,8 @@ public class Eventsgroup implements Serializable {
 		this.description = description;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }
