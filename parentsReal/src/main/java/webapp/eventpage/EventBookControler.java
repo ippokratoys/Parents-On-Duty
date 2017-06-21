@@ -14,6 +14,8 @@ import webapp.database.Event;
 import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.EventRepository;
 
+import java.util.Map;
+
 @Controller
 public class EventBookControler {
 
@@ -23,7 +25,6 @@ public class EventBookControler {
 	private CustomerRepository customerHander;
 
 	@RequestMapping(value="/event/book",method= RequestMethod.GET)
-
     public String showPage(
 		@AuthenticationPrincipal final UserDetails userDetails,//we add this so we know if is logged to show correct bar
 		@RequestParam(name="id",required=true)int eventId,
@@ -40,12 +41,46 @@ public class EventBookControler {
 			if(curUser.getPoints()<curEvent.getPrice()){
 				//not enough money to book at this event
 				//maybe redirect to profile page
-				return "event?id="+curEvent.getIdEvents()+"?error=Not_enough_points";
+				return "redirect:/user/wallet?error=Not_enough_points";
 			}
 
-
-			model.addAttribute("theEvent",curEvent);
+			int availableSits=0;
+			availableSits=curEvent.getSpots() - curEvent.getCustomers().size();
+			model.addAttribute("availableSits",availableSits);
+			model.addAttribute("curEvent",curEvent);
 			model.addAttribute("customer",curUser);
-			return "event_book";
+			return "booknow";
 		}
+
+	@RequestMapping(value="/event/book/confirm",method=RequestMethod.POST)
+	public String bookHandler(
+			@AuthenticationPrincipal final UserDetails userDetails,//we add this so we know if is logged to show correct bar
+			@RequestParam() Map<String,String> allParams,
+			Model model){
+		System.out.println("new custome nigga");
+		int eventId=Integer.parseInt( allParams.get("eventId") );
+		Event curEvent = eventHandler.findOne(eventId);
+		//We know he is login because of spring security
+		//if no event found throw 404
+		if(curEvent==null){
+			return "error404";
+		}
+
+		Customer curUser=customerHander.findOne(userDetails.getUsername());
+		if(curUser.getPoints()<curEvent.getPrice()){
+			//not enough money to book at this event
+			//maybe redirect to profile page
+			return "event?id="+curEvent.getIdEvents()+"?error=Not_enough_points";
+		}
+
+
+		model.addAttribute("theEvent",curEvent);
+		model.addAttribute("customer",curUser);
+		curEvent.getCustomers().add(curUser);
+		curUser.setPoints(curUser.getPoints()-curEvent.getPrice());
+		eventHandler.save(curEvent);
+		customerHander.save(curUser);
+		return "redirect:/user/profile?error=book_done";
+	}
+
 }

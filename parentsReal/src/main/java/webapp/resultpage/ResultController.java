@@ -56,7 +56,6 @@ public class ResultController {
     	System.out.println(age);
     	System.out.println("Extra Tags:"+extraTags);
     	*/
-
     	List<Eventsgroup> results=eventsgroupHandler.findByName(address);
     	String allWords[]=address.split(" ");
 		for (String oneWord:allWords) {

@@ -17,6 +17,9 @@ public class Event implements Serializable {
 	@Id
 	private int idEvents;
 
+
+	private int spots;
+
 	private String day;
 
 	private String time;
@@ -134,7 +137,15 @@ public class Event implements Serializable {
 
 		return eventsfeedback;
 	}
-	
+
+	public int getSpots() {
+		return spots;
+	}
+
+	public void setSpots(int spots) {
+		this.spots = spots;
+	}
+
 	public double getPrice() {
 		return price;
 	}

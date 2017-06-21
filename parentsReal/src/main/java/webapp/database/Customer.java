@@ -18,9 +18,10 @@ public class Customer implements Serializable {
 	@Id
 	private String login_email;
 
-	private int points;
 
-	private int wallet;
+	private double points;
+
+	private double wallet;
 
 	//bi-directional one-to-one association to Login
 	@JoinColumn(name="Login_email", insertable=false, updatable=false)
@@ -42,21 +43,7 @@ public class Customer implements Serializable {
 		this.login_email = login_email;
 	}
 
-	public int getPoints() {
-		return this.points;
-	}
 
-	public void setPoints(int points) {
-		this.points = points;
-	}
-
-	public int getWallet() {
-		return this.wallet;
-	}
-
-	public void setWallet(int wallet) {
-		this.wallet = wallet;
-	}
 
 	public Login getLogin() {
 		return this.login;
@@ -72,6 +59,21 @@ public class Customer implements Serializable {
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
+	}
+	public double getPoints() {
+		return points;
+	}
+
+	public void setPoints(double points) {
+		this.points = points;
+	}
+
+	public double getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(double wallet) {
+		this.wallet = wallet;
 	}
 
 }

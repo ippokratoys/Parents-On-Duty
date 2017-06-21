@@ -82,14 +82,14 @@ public class RegisterController {
 		newLogin=new Login();
 		newLogin.setEmail(allParams.get("Email"));
 		newLogin.setRole("PARENT");
-		newLogin.setActive(false);
+		newLogin.setActive(true);
 		newLogin.setPwd(hashPassword(allParams.get("Pwd")));
 		if(true){
 			//if it's a parrent
 			Customer newCustomer = new Customer();
 			newCustomer.setLogin_email(newLogin.getEmail());
-			newCustomer.setPoints(1);
-			newCustomer.setWallet(2);
+			newCustomer.setPoints(5);
+			newCustomer.setWallet(0);
 			loginRepository.save(newLogin);
 			customerRepository.save(newCustomer);
 		}else if(true){

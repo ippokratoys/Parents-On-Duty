@@ -27,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by thanasis on 10/6/2017.
@@ -76,8 +77,8 @@ public class CsvInserts {
                 if(log.getRole().equals("PARENT")){
                     Customer newCustomer=new Customer();
                     newCustomer.setLogin_email(log.getEmail());
-                    newCustomer.setWallet( (int) Math.random() );
-                    newCustomer.setPoints( (int) Math.random() );
+                    newCustomer.setWallet( new Random().nextInt(500)+20 );
+                    newCustomer.setPoints( new Random().nextInt(500)+20 );
                     if(customerRepository==null){
                         System.out.println("It's null customer");
                         System.out.println(customerRepository);
@@ -186,6 +187,7 @@ public class CsvInserts {
 
 				/*here create the objects to insert in the db*/
                 Event newEvent=new Event();
+                newEvent.setSpots(new Random().nextInt()%50+10);
                 newEvent.setIdEvents(Integer.parseInt(arr_in[0]));
                 newEvent.setDay(arr_in[1]);
                 newEvent.setPrice( Double.parseDouble(arr_in[2]) );
