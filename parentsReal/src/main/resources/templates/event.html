@@ -111,16 +111,16 @@
 	            <div class="row">
 	            	<div class="thumbnail">
 	                    <div class="caption-full">
-	                        <h4 th:inline="text">Date: [[${theEvent.day}]] [[${theEvent.time}]]</h4>
-	                        <br/>
+	                    	<h2 th:text=" ${theEvent.eventsgroup.name}" > </h2>
+	                    	<h4 th:inline="text">Date: [[${theEvent.day}]] [[${theEvent.time}]]</h4>
+	                        <p th:inline="text">[[${theEvent.eventsgroup.description}]]</p>
+	                        <hr/>
 	                        <!--    <h5><b>Telephone: 2109245444</b></h5> -->
 	                        <div class="information">
 		                 		<h5 th:inline="text">E-mail: [[${theEvent.organiser.login_email}]]</h5>
 			                    <h5 th:inline="text">Address: [[${theEvent.location.address}]]</h5>
 			                    <h5 th:inline="text">Postcode: [[${theEvent.location.postcode}]]</h5>
 		                	</div>
-	                        <h4 th:text=" ${theEvent.eventsgroup.name}" > </h4>
-	                        <p th:inline="text">[[${theEvent.eventsgroup.description}]]</p>
 	                        <hr/>	                        
 							<a class="btn btn-primary pull-right" th:href="@{ /event/book?id={id}(id=${theEvent.idEvents}) }" role="button">Book Now!</a>
 							<h4 th:inline="text">Price: [[${theEvent.price}]]</h4>
