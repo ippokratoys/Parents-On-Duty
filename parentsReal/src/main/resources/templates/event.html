@@ -45,14 +45,14 @@
                 <hr/>
                 <div class="well">
                     <div class="ratings">
-                        <p class="pull-right">1 Review for this organizer</p>
+                        <p class="pull-right">1 Αξιολόγηση από organizer</p>
                         <p>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 Stars
+                            4.0 Αστέρια
                         </p>
                     </div>
 
@@ -112,18 +112,18 @@
 	            	<div class="thumbnail">
 	                    <div class="caption-full">
 	                    	<h2 th:text=" ${theEvent.eventsgroup.name}" > </h2>
-	                    	<h4 th:inline="text">Date: [[${theEvent.day}]] [[${theEvent.time}]]</h4>
+	                    	<h4 th:inline="text">Ημερομηνία: [[${theEvent.day}]] [[${theEvent.time}]]</h4>
 	                        <p th:inline="text">[[${theEvent.eventsgroup.description}]]</p>
 	                        <hr/>
 	                        <!--    <h5><b>Telephone: 2109245444</b></h5> -->
 	                        <div class="information">
 		                 		<h5 th:inline="text">E-mail: [[${theEvent.organiser.login_email}]]</h5>
-			                    <h5 th:inline="text">Address: [[${theEvent.location.address}]]</h5>
-			                    <h5 th:inline="text">Postcode: [[${theEvent.location.postcode}]]</h5>
+			                    <h5 th:inline="text">Διεύθυνση: [[${theEvent.location.address}]]</h5>
+			                    <h5 th:inline="text">Ταχυδρομικός Κώδικας: [[${theEvent.location.postcode}]]</h5>
 		                	</div>
 	                        <hr/>	                        
-							<a class="btn btn-primary pull-right" th:href="@{ /event/book?id={id}(id=${theEvent.idEvents}) }" role="button">Book Now!</a>
-							<h4 th:inline="text">Price: [[${theEvent.price}]]</h4>
+							<a class="btn btn-primary pull-right" th:href="@{ /event/book?id={id}(id=${theEvent.idEvents}) }" role="button">Κάνε Κράτηση!</a>
+							<h4 th:inline="text">Τιμή: [[${theEvent.price}]]</h4>
 	                    </div>
 	                </div>
 	            </div>

@@ -37,18 +37,18 @@
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Result Page
+                <h1 class="page-header">Αποτελέσματα Αναζήτησης
                 </h1>
             </div>
         </div>
         <!-- /.row -->
 
         <!-- Project One -->
-		        <div class="row">
-
+		 <div class="container">
+			<div class="col-xs-12 col-md-6 col-sm-12">
 		        <th:block th:if="${allEventsGroup.size() != 0}" th:each="oneEventGroup : ${allEventsGroup}" >
 		        	<th:block th:if="${oneEventGroup.events.size() != 0}" th:each="oneEvent : ${oneEventGroup.events}">
-		            <div class="col-sm-6">
+		            
                         <div class="row">
                             <p th:inline="text"> [[${oneEvent.eventsgroup.name}]]</p>
 		                    <div class="col-sm-6">
@@ -57,33 +57,35 @@
 		                        </a>
 		                    </div>
 		                    <div class="col-sm-6">
-		                        <h4 th:text=" 'Price : ' + ${oneEvent.price} + '€'">Price : </h4>
-		                        <h4 th:text="${oneEvent.location.address}">Address:</h4>
-		                        <h4 th:text=" 'Date : ' + ${oneEvent.day}">Date:</h4>
+		                        <h4 th:text=" 'Price : ' + ${oneEvent.price} + '€'">Τιμή : </h4>
+		                        <h4 th:text="${oneEvent.location.address}">Διεύθυνση:</h4>
+		                        <h4 th:text=" 'Date : ' + ${oneEvent.day}">Ημερομηνία:</h4>
 		                        <br/>
 		                    </div>
 		                    <div class="ratings">
-		                        <p th:text="${oneEvent.eventsfeedbacks.size()} + ' Review'" class="pull-right">3 Reviews</p>
+		                        <p th:text="${oneEvent.eventsfeedbacks.size()} + ' Review'" class="pull-right">3 Αξιολογήσεις</p>
 		                        <p>
 		                            <span class="glyphicon glyphicon-star"></span>
 		                            <span class="glyphicon glyphicon-star"></span>
 		                            <span class="glyphicon glyphicon-star"></span>
 		                            <span class="glyphicon glyphicon-star"></span>
 		                            <span class="glyphicon glyphicon-star-empty"></span>
-		                            4.0 Stars
+		                            4.0 Αστέρια
 		                        </p>
 		                    </div>
 		                </div>
-		            </div>
+		            
               </th:block>
-              <p class="col-sm-6" th:if="${oneEventGroup.events.size() == 0}">Event not found </p>
+              <h2 th:if="${oneEventGroup.events.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>
             </th:block>
-            <p class="col-sm-6" th:if="${allEventsGroup == null || allEventsGroup.size() == 0}">Event not found </p>
-	            <div class="col-sm-6">
+            
+            	<h2 th:if="${allEventsGroup == null || allEventsGroup.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>
+           	</div>
+	            <div class="col-xs-12 col-md-6 col-sm-12">
 	                    <div id="map" style="width:550px;height:500px;background:yellow"></div>
 	                     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;callback=myMap"></script>
 	            </div>
-	        </div>
+	    </div>
         <!-- Pagination -->
         <div class="row text-center">
             <div class="col-lg-12">
