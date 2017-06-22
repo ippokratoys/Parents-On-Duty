@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:style="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -67,46 +67,46 @@
 													<label for="Address_Search">Όνομα Εκδήλωσης</label>
 													<!--input type="hidden" id="hidden1" name="by" value=""-->
 													<!--input type="hidden" id="hidden2" name="id" value=""-->
-													<input type="text" class="form-control" id="Address_Search" name="Address" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
+													<input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
 													<i class="fa fa-building-o form-control-feedback"></i>
 													<span id="helpQuery" class="help-block hidden">123abc!@#</span>
+													<a onclick="myFunction()" id="mybutt" >Περισσότερα</a>
 												</div>
-												<a onclick="myFunction()" id="mybutt" >Λιγότερα</a>
-												<div id="AdvancedSearch">
-												<div class="row">
-												  <div class="form-group has-feedback col-md-12">
-													<label for="Date_Search">Επιλογή ημερομηνίας διοργάνωσης</label>
-													<input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
-												  </div>
-												</div>
-												
-												<div class="form-group col-md-6">
-													<label for="Price_Search">Εύρος τιμών</label>
-													<select name="Price" id="Prices"  class="form-control">
-														<option value="1">1-5</option>
-														<option value="2">5-10</option>
-														<option value="3">10-15</option>
-														<option value="4">15-20</option>
-														<option value="5">20-25</option>
-													</select>
-													<!--<input type="number" class="form-control" id="rooms" name="hab" min="1" max="10" value="1">-->
-												</div>
-												<div id="Age_Tags">
-													<div class="hab-group">
-														<div class="form-group col-md-3">
-															<label for="Age">Ηλικία</label>
-															<input type="number" class="form-control" name="Age" min="1" max="15" value="2"/>
+													<div id="AdvancedSearch" style="display : none;">
+														<div class="row">
+														  <div class="form-group has-feedback col-md-12">
+															<label for="config-demo">Επιλογή ημερομηνίας διοργάνωσης</label>
+															<input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
+														  </div>
 														</div>
-														<div class="form-group col-md-3">
-															<label for="query_tags">Extra Tags</label>
-															<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
-															<i class="fa fa-building-o form-control-feedback"></i>
-															<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
+
+														<div class="form-group col-md-6">
+															<label for="Prices">Εύρος τιμών</label>
+															<select name="Price" id="Prices"  class="form-control">
+																<option value="1">1-5</option>
+																<option value="2">5-10</option>
+																<option value="3">10-15</option>
+																<option value="4">15-20</option>
+																<option value="5">20-25</option>
+															</select>
+															<!--<input type="number" class="form-control" id="rooms" name="hab" min="1" max="10" value="1">-->
 														</div>
-														<div class="age-chd"></div>
+														<div id="Age_Tags">
+															<div class="hab-group">
+																<div class="form-group col-md-3">
+																	<label for="Age">Ηλικία</label>
+																	<input type="number" class="form-control" name="Age" min="1" max="15" value="2"/>
+																</div>
+																<div class="form-group col-md-3">
+																	<label for="query_tags">Extra Tags</label>
+																	<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
+																	<i class="fa fa-building-o form-control-feedback"></i>
+																	<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
+																</div>
+																<div class="age-chd"></div>
+															</div>
+														</div>
 													</div>
-												</div>
-												</div>
 												<div class="form-group col-md-12">
 													<button type="submit" class="btn btn-info btn-lg btn-block" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
 												</div>

@@ -25,6 +25,9 @@ public class ResultService {
     private ElasticsearchTemplate elasticsearchTemplate;
 
     List<Eventsgroup> getResults(String address){
+//        List<Eventsgroup> results=null;
+
+
         List<Eventsgroup> results=eventsgroupHandler.findByName(address);
         String allWords[]=address.split(" ");
         for (String oneWord:allWords) {

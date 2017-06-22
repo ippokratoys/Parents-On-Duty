@@ -69,13 +69,13 @@
 	    			<form  action="/results" method="get" id="AboutSearches">
 	    				<div class="form-group">
 	        				<label for="Address_Search">Διεύθυνση Αναζήτησης</label>
-							<input type="text" class="form-control" id="Address_Search" name="Address" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" value=""/>
+							<input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" th:value="${allParams.get('free_text')}"/>
 							<i class="fa fa-building-o form-control-feedback"></i>
 							<span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
 	        			</div>
 	                	<div class="form-group">
 	                    <label for="Prices">Τιμή</label>
-							<select name="Price" id="Prices"  class="form-control">
+							<select name="Price" id="Prices"  class="form-control" th:value="${allParams.get('Price')}">
 							<option value="1">1-5</option>
 							<option value="2">5-10</option>
 							<option value="3">10-15</option>
@@ -85,15 +85,15 @@
 	               		</div>
 	                    <div class="form-group">
 	                   		<label for="config-demo">Hμερομηνία</label>
-							<input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
+							<input type="text" id="config-demo" name="Dates" class="form-control" value="" th:value="${allParams.get('Dates')}"/>
 						</div>
 						<div class="form-group">
 	                   		<label for="Age">Ηλικία</label>
-							<input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2"/>
+							<input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2" th:value="${allParams.get('Age')}"/>
 						</div>
 						<div class="form-group">
 	                   		<label for="query_tags">Extra Tags</label>
-							<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value=""/>
+							<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value="" th:value="${allParams.get('ExtraTags')}"/>
 							<i class="fa fa-building-o form-control-feedback"></i>
 							<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
 						</div>

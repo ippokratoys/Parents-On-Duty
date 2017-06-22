@@ -43,13 +43,13 @@ public class ResultController {
 	@RequestMapping(value="/results",method= RequestMethod.GET)
     public String search(
    		@RequestParam Map<String,String> allRequestParams,
-    	@RequestParam(name="Address") String address,
+    	@RequestParam(name="free_text") String freeText,
    		@RequestParam(name="Dates") String date,
    		@RequestParam(name="Price") int price,
    		@RequestParam(name="Age") int age,
    		@RequestParam(name="ExtraTags") String extraTags,
-   		Model model)
-    {
+   		Model model
+	){
     	/*System.out.println("The Form elements:");
     	System.out.println(allRequestParams.toString());
     	System.out.println("Address:"+address);
@@ -59,10 +59,11 @@ public class ResultController {
     	System.out.println("Extra Tags:"+extraTags);
     	*/
 
-    	List<Eventsgroup> results=eventsgroupHandler.findByName(address);
-		results=resultService.getResults(address);
+    	List<Eventsgroup> results=eventsgroupHandler.findByName(freeText);
+		results=resultService.getResults(freeText);
     	//System.out.println(results.get(0).getEvents().get(0).getEventsfeedbacks());
 
+		model.addAttribute("allParams",allRequestParams);
 		model.addAttribute("allEventsGroup",results);
     	return "results";
     }
