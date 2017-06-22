@@ -1,6 +1,7 @@
 build/
 data/
 bin/
+.idea/
 .metadata/
 .recommenders
 RemoteSystemsTempFiles/
