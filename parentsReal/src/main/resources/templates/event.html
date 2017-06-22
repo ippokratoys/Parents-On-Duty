@@ -40,10 +40,7 @@
    <div id="includedContent"></div>
     <!-- Page Content -->
     <div class="container">
-
-        <div class="row">
-
-            <div class="col-sm-6">
+            <div class="col-xs-12 col-md-6 col-sm-12">
                 <img class="img-responsive" src="images.png" alt=""/>
                 <hr/>
                 <div class="well">
@@ -110,33 +107,33 @@
  -->
                 </div>
             </div>
-            <div class="col-sm-6">
-
-                <div class="thumbnail">
-
-                    <div class="caption-full">
-                        <h4 class="pull-right" th:text="${theEvent.price}">Price</h4>
-                        <h4 th:text=" ${theEvent.eventsgroup.name}" > </h4>
-                        <p th:inline="text">[[${theEvent.eventsgroup.description}]]</p>
-                        <hr/>
-                    </div>
-                </div>
+            <div class="col-xs-12 col-md-6 col-sm-12">
+	            <div class="row">
+	            	<div class="thumbnail">
+	                    <div class="caption-full">
+	                        <h4 th:inline="text">Date: [[${theEvent.date}]]</h4>
+	                        </br>
+	                        <!--    <h5><b>Telephone: 2109245444</b></h5> -->
+	                        <div class="information">
+		                 		<h5 th:inline="text">E-mail: [[${theEvent.organiser.login_email}]]</h5>
+			                    <h5 th:inline="text">Address: [[${theEvent.location.address}]]</h5>
+			                    <h5 th:inline="text">Postcode: [[${theEvent.location.postcode}]]</h5>
+		                	</div>
+	                        <h4 th:text=" ${theEvent.eventsgroup.name}" > </h4>
+	                        <p th:inline="text">[[${theEvent.eventsgroup.description}]]</p>
+	                        <hr/>	                        
+							<a class="btn btn-primary pull-right" th:href="@{ /event/book?id={id}(id=${theEvent.idEvents}) }" role="button">Book Now!</a>
+							<h4 th:inline="text">Price: [[${theEvent.price}]]</h4>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	            		<div class="iframe-container">
+	            			<div id="map" style="background:yellow"></div>
+	                	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;callback=myMap"></script>
+						</div>
+	            </div>
             </div>
-            <div class="col-sm-3">
-                <div id="map" style="width:260px;height:260px;background:yellow"></div>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;callback=myMap"></script>
-            </div>
-            <div class="col-sm-3">
-                <a class="btn btn-primary" th:href="@{ /event/book?id={id}(id=${theEvent.idEvents}) }" role="button">Book Now!</a>
-                <div class="information">
-                 <!--    <h5><b>Telephone: 2109245444</b></h5> -->
-                    <h5 th:inline="text"><b>E-mail: [[${theEvent.organiser.login_email}]]</b></h5>
-                    <h5 th:inline="text"><b>Address: [[${theEvent.location.address}]]</b></h5>
-                    <h5 th:inline="text"><b>Postcode: [[${theEvent.location.postcode}]]</b></h5>
-                </div>
-            </div>
-        </div>
-
     </div>
 
 
