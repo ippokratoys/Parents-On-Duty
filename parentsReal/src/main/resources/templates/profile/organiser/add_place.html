@@ -1,10 +1,103 @@
 <!DOCTYPE html>
 <html lang="en"	xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>New place</title>
-</head>
-<body>
+  <head>
+    <title>Προσθήκη Μέρους</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8"/>
 
-</body>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/host_profile.js"></script>
+    <script type="text/javascript" src="/js/autocomplete_search.js"></script>
+    <script type="text/javascript" src="/js/upload_image.js"></script>
+    <link href="/css/add_place.css" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/>
+
+  </head>
+
+ <body>
+ 
+		<div class="navbar navbar-default navbar-fixed-top">
+		    <div class="navbar-header">
+		    	<a style="color:white" class="navbar-brand" href="/">
+					<div style="font-family:Comic Sans MS,cursive,sans-serif">
+						<div class="title_spec" >Parents On Duty</div>
+					</div>
+				</a>
+		    </div>
+		</div><!--/.navbar -->
+
+		<div class="row-offcanvas row-offcanvas-left">
+		  <div id="sidebar" class="sidebar-offcanvas">
+		      <div class="col-md-12">
+		        <h3>Άλλες Επιλογές</h3>
+		        <ul class="nav nav-pills nav-stacked">
+		          <li><a href="/organiser/profile">Προφίλ</a></li>
+		          <li class="active"><a href="/organiser/add_place">Προσθήκη Μέρους</a></li>
+		          <li><a href="/organiser/add_event">Προσθήκη Εκδήλωσης</a></li>
+		          <li><a href="/organiser/wallet">Πορτοφόλι</a></li>
+		        </ul>
+		      </div>
+		  </div>
+		  <div id="main">
+		      <div class="col-md-12">
+		      	  <p class="visible-xs">
+		            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
+		          </p>
+		          <h2>Προσθήκη Μέρους</h2>
+		          <hr/>
+		          <div class="row">
+		           <div class="col-xs-12 col-md-4 col-sm-8">  
+		           		<h3>Συμπλήρωσε Όνομα Χώρου</h3>
+				          <div class="form-group">
+							<input type="text" class="form-control" id="Place_Name" name="Place" placeholder="Παιζοδρόμιο" aria-describedby="helpQuery" value=""/>
+		        		</div>
+		        	</div>
+	        	</div>
+		          <div class="row">
+		              <div class="col-md-12">
+		              		<h3>Συμπλήρωσε Διεύθυνση</h3>
+		              		<div class="well" id="locationField">
+								<input id="autocomplete" placeholder="Πχ Σιγγρού 15" onFocus="geolocate()" type="text"/>
+							</div>
+							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR7e_1Er6gEoMB_i69MOiljeHJepWdVKA&amp;libraries=places&amp;callback=initAutocomplete"
+         					async="async" defer="defer"></script>
+		              	</div>
+		          </div>
+		          <br/>
+		          <div class="row">
+		               <div class="col-xs-12 col-md-4 col-sm-8">  
+		               		<h3>Aνέβασε Φωτογραφία</h3>
+					        <!-- image-preview-filename input [CUT FROM HERE]-->
+					        <div class="input-group image-preview">
+					            <input type="text" class="form-control image-preview-filename" disabled="disabled"/> <!-- don't give a name === doesn't send on POST/GET -->
+					            <span class="input-group-btn">
+					                <!-- image-preview-clear button -->
+					                <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+					                    <span class="glyphicon glyphicon-remove"></span> Clear
+					                </button>
+					                <!-- image-preview-input -->
+					                <div class="btn btn-default image-preview-input">
+					                    
+					                    <span class="image-preview-input-title">Browse</span>
+					                    <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+					                </div>
+					            </span>
+					        </div><!-- /input-group image-preview [TO HERE]--> 
+					    </div>
+		          </div>
+		          <div class="row">
+					  <p id="demo"></p>
+		              <p id="demo2"></p>
+				  </div>
+		             
+		      </div>
+		  </div>
+		</div><!--/row-offcanvas -->
+		  
+		  
+	</body>
 </html>
+    
+    

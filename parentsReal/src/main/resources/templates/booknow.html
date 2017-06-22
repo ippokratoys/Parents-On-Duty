@@ -79,7 +79,7 @@
 				<p><br/><br/></p>
 				<form th:action=" '/event/book/confirm' " method="post" id="BookNow">
 					<label for="theseis">Αριθμός θέσεων</label>
-					<input type="number"  id="theseis" name="Age" min="1" th:max="${availableSits}" value="1"/>
+					<input type="number"  id="theseis" name="theseis" min="1" th:max="${availableSits}" value="1"/>
 					<input type="hidden" id="eventId" name="eventId" th:value="${curEvent.idEvents}" />
 					<div class="form-group col-md-12">
 						<button type="submit"  class="btn btn-info btn-lg btn-block" form="BookNow" value="Submit"><i class="fa fa-search" aria-hidden="true">Book Now!</i></button>

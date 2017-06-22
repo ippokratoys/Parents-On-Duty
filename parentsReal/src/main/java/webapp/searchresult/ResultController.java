@@ -1,13 +1,10 @@
-package webapp.resultpage;
+package webapp.searchresult;
 
 import java.util.Map;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +23,8 @@ public class ResultController {
 //	PasswordEncoder passwordEncoder;
 	@Autowired
 	CsvInserts myCsvHandler;
+	@Autowired
+	ResultService resultService;
 
 	@Autowired
 	private EventRepository eventHandler;
@@ -59,11 +58,9 @@ public class ResultController {
     	System.out.println(age);
     	System.out.println("Extra Tags:"+extraTags);
     	*/
+
     	List<Eventsgroup> results=eventsgroupHandler.findByName(address);
-    	String allWords[]=address.split(" ");
-		for (String oneWord:allWords) {
-			results.addAll(eventsgroupHandler.findByNameContaining(oneWord));
-		}
+		results=resultService.getResults(address);
     	//System.out.println(results.get(0).getEvents().get(0).getEventsfeedbacks());
 
 		model.addAttribute("allEventsGroup",results);

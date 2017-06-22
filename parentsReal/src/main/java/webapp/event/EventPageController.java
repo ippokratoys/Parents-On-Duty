@@ -1,4 +1,4 @@
-package webapp.eventpage;
+package webapp.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +20,14 @@ public class EventPageController {
 	private EventsgroupRepository eventsgroupHandler;
 
 	@RequestMapping(value="/event",method= RequestMethod.GET)
-    public String showPage(
-    	@RequestParam(name="id",required=true)int eventId,
-    	Model model){
-		
+    public String showPage(@RequestParam(name="id",required=true)int eventId,
+						   Model model
+	){
 		Event curEvent = eventHandler.findOne(eventId);
+		if(curEvent==null){
+			//if the event is not ok
+			return "redirect:/";
+		}
 		model.addAttribute("theEvent",curEvent);
 		return "event";
 	}

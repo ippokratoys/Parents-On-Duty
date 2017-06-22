@@ -1,10 +1,108 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>New Event</title>
-</head>
-<body>
+<html lang="en"	xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>New event</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/add_place.css" rel="stylesheet"/>
+    <!--DatePicker-->
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+ 	<link rel="stylesheet" href="/resources/demos/style.css"/>
+  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<script>
+  		$( function() {
+    	$( "#datepicker" ).datepicker();
+  		} );
+  	</script>
+  	 <script type="text/javascript" src="/js/Datepair.js"></script>
+  	  <script type="text/javascript" src="/js/jquery.datepair.js"></script>
+	<script>
+  	$('#durationExample').timepicker({
+  	    'minTime': '09:00am',
+  	    'maxTime': '11:30pm',
+  	    'showDuration': true
+  		});
+  	</script>
+  </head>
+	
+ <body>
+ 
+		<div class="navbar navbar-default navbar-fixed-top">
+		    <div class="navbar-header">
+		    	<a style="color:white" class="navbar-brand" href="/">
+					<div style="font-family:Comic Sans MS,cursive,sans-serif">
+						<div class="title_spec" >Parents On Duty</div>
+					</div>
+				</a>
+		    </div>
+		</div><!--/.navbar -->
+		
+		<div class="row-offcanvas row-offcanvas-left">
+		  <div id="sidebar" class="sidebar-offcanvas">
+		      <div class="col-md-12">
+		        <h3>Άλλες Επιλογές</h3>
+				  <ul class="nav nav-pills nav-stacked">
+					  <li><a href="/organiser/profile">Προφίλ</a></li>
+					  <li><a href="/organiser/add_place">Προσθήκη Μέρους</a></li>
+					  <li class="active"><a href="/organiser/add_event">Προσθήκη Εκδήλωσης</a></li>
+					  <li><a href="/organiser/wallet">Πορτοφόλι</a></li>
+				  </ul>
+		      </div>
+		  </div>
+		  <div id="main">
+		  
+		      <div class="col-md-12">
+		      	  <p class="visible-xs">
+		            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
+		          </p>
+		          <h2>Προσθήκη Εκδήλωσης</h2>
+		          <hr/>
+		          <div class="row">
+		           <div class="col-xs-12 col-md-4 col-sm-8">  
+		           		<h3>Συμπλήρωσε Όνομα Εκδήλωσης</h3>
+				          <div class="form-group">
+							<input type="text" class="form-control" id="Place_Name" name="Place" placeholder="Βραδία Ποδόσφαιρου " aria-describedby="helpQuery" value=""/>
+		        		</div>
+		        	</div>
+	        	</div>
+	        	<div class="row">
+		           <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">  
+		           		<h3>Συμπλήρωσε Ημερομηνία</h3>
 
-</body>
+		              	<input class="form-control" id="datepicker" name="date" placeholder="MM/DD/YYY" type="text"/>
+		        	</div>
+	        	</div>
+		          <div class="row">
+		          	<div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">  
+		           		<h3>Συμπλήρωσε Ώρα</h3>    
+		           		  
+		              	<input class="form-control" id="timepicker" name="time" placeholder="hh/mm/am-pm" type="text"/>	
+		        	</div>
+		          </div>
+		          <div class="row">
+		          	<div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback "> 
+		          		<h3>Διάλεξε Μέρος</h3>
+		           		<div id="selectionplace">
+		           			<select class="selectplace">
+								<th:block th:each="onePlace : ${organiserPlaces}" >
+									<option th:text="${onePlace.address}"></option>
+								</th:block>
+							  </select>
+		           		</div>
+		        	</div>
+		          </div>
+		  
+		          <br/>
+		             
+		      </div>
+		  </div>
+		</div><!--/row-offcanvas -->
+		  
+		  
+	</body>
 </html>
+    
+    

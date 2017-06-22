@@ -20,18 +20,8 @@ public class HomePage {
 
     @RequestMapping("/")
     public String getHomePage(
-    		Model model,
-        	@AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
-    	){
-    	model.addAttribute("Name", "Thanasis");
-    	if(userDetails==null){
-        	System.out.println("not Loged in");
-
-    	}else{
-        	System.out.println(userDetails.getUsername());
-        	System.out.println(userDetails.getAuthorities().toString());    		
-    	}
-
+    		Model model
+   	){
         return "index";
     }
 

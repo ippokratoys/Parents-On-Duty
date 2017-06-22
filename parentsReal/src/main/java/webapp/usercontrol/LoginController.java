@@ -14,20 +14,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
 	@RequestMapping(value="/login",method= RequestMethod.GET)
-    public String showPage(
-   		@RequestParam Map<String,String> allParams,
-       	@AuthenticationPrincipal final UserDetails userDetails,//we add this so we know if is logged to show correct bar
-//    	@RequestParam(name="id",required=true)int eventId,
-    	Model model
-    	){
-			System.out.println(allParams);
-			System.out.println(allParams.get("error"));
-			
-			if(userDetails!=null && allParams.get("logout")==null ){
-				System.out.println(userDetails);
-				return "redirect:/";
-			}
-			System.out.println("ook come login");
-			return "login";
+    public String showPage(@RequestParam Map<String,String> allParams,
+						   @AuthenticationPrincipal final UserDetails userDetails,//we add this so we know if is logged to show correct bar
+						   Model model
+//						   @RequestParam(name="id",required=true)int eventId,
+   	){
+		System.out.println(allParams);
+		System.out.println(allParams.get("error"));
+
+		if(userDetails!=null && allParams.get("logout")==null ){
+			System.out.println(userDetails);
+			return "redirect:/";
 		}
+		System.out.println("ook come login");
+		return "login";
+	}
+
+	@RequestMapping(value="/profile",method= RequestMethod.GET)
+	public String getProfilePage(Model model,
+								 @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
+	){
+		if(userDetails.getAuthorities().toString().contains("PARENT")){
+			return "profile/parent/profile";
+//			return "redirect:parent/profile";
+		}else if(userDetails.getAuthorities().toString().contains("ADMIN")){
+			return "profile/admin/profile";
+//			return "redirect:admin/profile";
+		}else{
+			return "profile/organiser/profile";
+//			return "redirect:organiser/profile";
+		}
+	}
+
+
+
 }
