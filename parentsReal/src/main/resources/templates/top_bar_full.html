@@ -69,31 +69,32 @@
 	    			<form  action="/results" method="get" id="AboutSearches">
 	    				<div class="form-group">
 	        				<label for="Address_Search">Διεύθυνση Αναζήτησης</label>
-							<input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" th:value="${allParams.get('free_text')}"/>
+							<input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Οδός,Περιοχή,Ταχυδρομικός κώδικας;" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
 							<i class="fa fa-building-o form-control-feedback"></i>
 							<span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
 	        			</div>
 	                	<div class="form-group">
 	                    <label for="Prices">Τιμή</label>
-							<select name="Price" id="Prices"  class="form-control" th:value="${allParams.get('Price')}">
-							<option value="1">1-5</option>
-							<option value="2">5-10</option>
-							<option value="3">10-15</option>
-							<option value="4">15-20</option>
-							<option value="5">20-25</option>
+							<select name="Price" id="Prices"  class="form-control" th:selected="${allParams!=null} ? ${allParams.get('Price')} : 1 ">
+								<option value="1"></option>
+								<option value="2">1-5</option>
+								<option value="3">5-10</option>
+								<option value="4">10-15</option>
+								<option value="5">15-20</option>
+								<option value="6">20-25</option>
 							</select>
 	               		</div>
 	                    <div class="form-group">
 	                   		<label for="config-demo">Hμερομηνία</label>
-							<input type="text" id="config-demo" name="Dates" class="form-control" value="" th:value="${allParams.get('Dates')}"/>
+							<input type="text" id="config-demo" name="Dates" class="form-control" value="" th:value="${allParams!=null} ? ${allParams.get('Dates')} : ''"/>
 						</div>
 						<div class="form-group">
 	                   		<label for="Age">Ηλικία</label>
-							<input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2" th:value="${allParams.get('Age')}"/>
+							<input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2" th:value="${allParams!=null} ? ${allParams.get('Age')} : '4'"/>
 						</div>
 						<div class="form-group">
 	                   		<label for="query_tags">Extra Tags</label>
-							<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value="" th:value="${allParams.get('ExtraTags')}"/>
+							<input type="text" class="form-control" id="query_tags" name="ExtraTags" placeholder="ώρα,είδος δραστηριότητας κλπ" aria-describedby="helpQuery" value="" th:value="${allParams!=null} ? ${allParams.get('ExtraTags')} : '' "/>
 							<i class="fa fa-building-o form-control-feedback"></i>
 							<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
 						</div>

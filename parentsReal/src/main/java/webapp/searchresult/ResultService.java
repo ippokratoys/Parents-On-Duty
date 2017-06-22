@@ -37,16 +37,6 @@ public class ResultService {
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
-<<<<<<< HEAD
-    List<Eventsgroup> getResults(String address){
-//        List<Eventsgroup> results=null;
-
-
-        List<Eventsgroup> results=eventsgroupHandler.findByName(address);
-        String allWords[]=address.split(" ");
-        for (String oneWord:allWords) {
-            results.addAll(eventsgroupHandler.findByNameContaining(oneWord));
-=======
     List<Eventsgroup> getResults(String searchterm){
 
 
@@ -59,7 +49,6 @@ public class ResultService {
         for (Eventsgroup aEventsgroup :
                 resultsIter) {
             ids.add(aEventsgroup.getIdEventsGroup());
->>>>>>> fb4a62e63668aa83ddd138d00e6b12f2142e83b8
         }
         results = (List<Eventsgroup>) eventsgroupHandler.findAll(ids);
 
