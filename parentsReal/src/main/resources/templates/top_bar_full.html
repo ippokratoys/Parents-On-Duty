@@ -55,12 +55,10 @@
 	           	<div><a style="color: white" href="/login"><span class="glyphicon glyphicon-log-in"></span> Σύνδεση</a></div>
 	       	</div>
 	     	<div th:if="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
-		        <div>
-		        	<form th:action="@{/logout}" method="post">
+		        	<form style="padding-top:4%;" th:action="@{/logout}" method="post">
 		           		<input type="submit" value="Αποσύνδεση"/>
-		           		<a style="color: white" href="/profile"><span class="glyphicon glyphicon-log-in"></span> <span th:text="${#httpServletRequest.remoteUser}"></span></a>
+		           		<a  style="color: white;  padding-top:4%;" href="/profile"><span class="glyphicon glyphicon-log-in"></span> <span th:text="${#httpServletRequest.remoteUser}"></span></a>
 					</form>
-		        </div>
 	       	</div>
 	        <div class="dropdown mydrop navbar-right logsign">
 	        	<button class="btn btn-lg btn-success dropdown-toggle" type="button" id="searches" data-toggle="dropdown">Μήπως Ψάχνεις Κάτι Άλλο;

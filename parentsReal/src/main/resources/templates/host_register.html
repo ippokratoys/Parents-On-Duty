@@ -43,10 +43,33 @@
     <h1 class="welcome text-center">Καινούργιος Οικοδεσπότης</h1>
         <div class="card card-container">
         <h2 class='login_title text-center'><b>Εγγραφή</b></h2>
-        <hr/>
-
-            <form action="/Profile" class="form-signin" method="get">
+         <div th:if="${error}">
+                <h3 th:if=" ${error}=='exists' " ><b>Υπάρχει ήδη λογαριασμός με αυτο το email</b></h3>
+                <h3 th:if=" ${error}=='pwd_not_good' " ><b>Πρέπει να εισάγεται πιο ασφαλή κωδικο</b></h3>
+                <h3 th:if=" ${error}=='empty' " ><b>Πρέπει να συπμληρώσεται ολα τα πεδία</b></h3>
+        </div>
+		<div class="row">
+            	<div class="btn-toolbar">
+					<div class="col-xs-5">
+						<input type="button" class="btn btn-info btn-lg custom1 " value="Χρήστης" onclick="location.href = '/register';"/>
+					</div>
+					<div class="col-xs-5">
+						<input type="button" class="btn btn-info  btn-lg custom2 active" value="Οικοδεσπότης" onclick="location.href = '/host_register';"/>
+					</div>
+				</div>
+		</div>
+		<hr/>
+            <form th:action="@{/host_register}" class="form-signin" method="post">
                 <span id="reauth-email" class="reauth-email"></span>
+                <p class="input_title">Email</p>
+                <input th:value="${oldFields?.get('Email')}" type="text" id="inputEmail" class="login_box" placeholder="user01@email.com" name="Email" required="True" autofocus="True"/>
+                <p class="input_title">Ψευδώνυμο</p>
+                <input th:value="${oldFields?.get('Username')}" type="text" id="inputUserName" class="login_box" placeholder="User1234" name="Username" required="True" autofocus="True"/>
+
+                <p class="input_title">Κωδικός</p>
+                <input type="password" id="inputPassword" class="login_box" placeholder="******" name="Pwd" required="True"/>
+                <p class="input_title">Επαλήθευση Κωδικού</p>
+                <input type="password" id="inputRePassword" class="login_box" placeholder="******" name="RePwd" required="True"/>
                 <p class="input_title">Όνομα</p>
                 <input type="text" id="inputName" class="login_box" placeholder="Απόστολος" name="Name" required="True" autofocus="True"/>
                 <p class="input_title">Επώνυμο</p>

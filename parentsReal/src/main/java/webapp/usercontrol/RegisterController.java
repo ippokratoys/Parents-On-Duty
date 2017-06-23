@@ -84,22 +84,15 @@ public class RegisterController {
 		newLogin.setRole("PARENT");
 		newLogin.setActive(true);
 		newLogin.setPwd(hashPassword(allParams.get("Pwd")));
-		if(true){
-			//if it's a parrent
-			Customer newCustomer = new Customer();
-			newCustomer.setLogin_email(newLogin.getEmail());
-			newCustomer.setPoints(5);
-			newCustomer.setWallet(0);
-			loginRepository.save(newLogin);
-			customerRepository.save(newCustomer);
-		}else if(true){
-			Organiser organiser= new Organiser();
-			//if it's a organiser
 
 
-//			customerRepository.save(newCustomer);
-//			loginRepository.save(newLogin);
-		}
+		Customer newCustomer = new Customer();
+		newCustomer.setLogin_email(newLogin.getEmail());
+		newCustomer.setPoints(5);
+		newCustomer.setWallet(0);
+		loginRepository.save(newLogin);
+		customerRepository.save(newCustomer);
+
 		return "redirect:/login?success_register=True";
 	}
 

@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom CSS -->
-    <link href="css/1-col-portfolio.css" rel="stylesheet"/>
+    <link href="/css/1-col-portfolio.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/map.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,33 +33,23 @@
 
 <!-- Page Content -->
     <div class="container">
-
-        <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Αποτελέσματα Αναζήτησης
-                </h1>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Project One -->
-		 <div class="container">
-			<div class="col-xs-12 col-md-6 col-sm-12">
+			<div class="col-xs-12 col-md-6 col-sm-12" id="left">
+				 <h1 class="page-header">Αποτελέσματα Αναζήτησης</h1>
 		        <th:block th:if="${allEventsGroup.size() != 0}" th:each="oneEventGroup : ${allEventsGroup}" >
-		        	<th:block th:if="${oneEventGroup.eventHasCustomers.size() != 0}" th:each="oneEvent : ${oneEventGroup.eventHasCustomers}">
-		            
+		        	<th:block th:if="${oneEventGroup.events.size() != 0}" th:each="oneEvent : ${oneEventGroup.events}">
+		            	<a  style="color: black !important;" th:href="'/event?id='+${oneEvent.idEvents}"><h2 th:text="${oneEvent.eventsgroup.name}"></h2></a>
                         <div class="row">
-                            <p th:inline="text"> [[${oneEvent.eventsgroup.name}]]</p>
+                            
+                            <hr/>
 		                    <div class="col-sm-6">
 		                    	<a th:href="'/event?id='+${oneEvent.idEvents}">
 			                        <img  class="img-responsive" src="images.png" alt=""/>
 		                        </a>
 		                    </div>
 		                    <div class="col-sm-6">
-		                        <h4 th:text=" 'Price : ' + ${oneEvent.price} + '€'">Τιμή : </h4>
-		                        <h4 th:text="${oneEvent.location.address}">Διεύθυνση:</h4>
-		                        <h4 th:text=" 'Date : ' + ${oneEvent.day}">Ημερομηνία:</h4>
+		                        <h4 th:text=" 'Τιμή : ' + ${oneEvent.price} + '€'"></h4>
+		                        <h4 th:text=" 'Διεύθυνση : ' + ${oneEvent.location.address}"></h4>
+		                        <h4 th:text=" 'Ημερομηνία : ' + ${oneEvent.day}"></h4>
 		                        <br/>
 		                    </div>
 		                    <div class="ratings">
@@ -81,53 +71,12 @@
             
             	<h2 th:if="${allEventsGroup == null || allEventsGroup.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>
            	</div>
-	            <div class="col-xs-12 col-md-6 col-sm-12">
-	                    <div id="map" style="width:550px;height:500px;background:yellow"></div>
-	                     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;callback=myMap"></script>
+	            <div class="col-xs-12 col-md-6 col-sm-12" id="right">
+	                    <div class="iframe-container">
+	            			<div id="map" style="background:yellow"></div>
+	                	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;callback=myMap"></script>
+						</div>
 	            </div>
-	    </div>
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <hr/>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
-
     </div>
     <!-- /.container -->
 

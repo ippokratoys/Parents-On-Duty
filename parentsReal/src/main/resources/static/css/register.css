@@ -14,6 +14,16 @@ btn-primary{
     white-space: normal;
 }
 
+.custom1 {
+    width: 120% !important;
+    margin: 11%;
+}
+
+.custom2 {
+    width: 135% !important;
+    margin: 11%;
+}
+
 .login_box{
     background:#f7f7f7;
     border:3px solid #F4F4F4;

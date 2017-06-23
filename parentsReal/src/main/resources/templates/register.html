@@ -22,7 +22,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body >
@@ -41,6 +40,16 @@
                 <h3 th:if=" ${error}=='pwd_not_good' " ><b>Πρέπει να εισάγεται πιο ασφαλή κωδικο</b></h3>
                 <h3 th:if=" ${error}=='empty' " ><b>Πρέπει να συπμληρώσεται ολα τα πεδία</b></h3>
             </div>
+            <div class="row">
+            	<div class="btn-toolbar">
+					<div class="col-xs-5">
+						<input type="button" class="btn btn-info btn-lg custom1 active" value="Χρήστης" onclick="location.href = '/register/user';"/>
+					</div>
+					<div class="col-xs-5">
+						<input type="button" class="btn btn-info  btn-lg custom2" value="Οικοδεσπότης" onclick="location.href = '/host_register';"/>
+					</div>
+				</div>
+			</div>
             <hr/>
             <form th:action="@{/register}" class="form-signin" method="post">
                 <span id="reauth-email" class="reauth-email"></span>
@@ -53,13 +62,6 @@
                 <input type="password" id="inputPassword" class="login_box" placeholder="******" name="Pwd" required="True"/>
                 <p class="input_title">Επαλήθευση Κωδικού</p>
                 <input type="password" id="inputRePassword" class="login_box" placeholder="******" name="RePwd" required="True"/>
-
-                <div class="radio">
-  					<label><input type="radio" name="userType" id="USER"/>Χρήστης</label>
-				</div>
-				<div class="radio">
-  					<label><input type="radio" name="userType" is="ORGANISER"/>Οικοδεσπότης</label>
-				</div>
                 <div id="remember" class="checkbox">
                     <label>
                         
