@@ -4,9 +4,6 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
-body {
-    padding-top: 5%; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-}
 
 footer {
     margin: 0 auto;
@@ -28,4 +25,57 @@ hr {
 .ratings {
     padding-right: 10px;
     color: dodgerblue;
+}
+
+body, html {
+  margin: 0;
+  overflow: hidden;
+  height:100%;
+}
+.iframe-container{
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
+}
+.iframe-container > *{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    height: 200%;
+    width: 100%;
+}
+
+@media (min-width: 768px){
+  #left {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    padding-top: 55px;
+    overflow-y: scroll; 
+  }
+  
+  #right {
+    padding-top: 55px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 40%;
+  }
+}
+
+#left {
+  height:100%;
+}
+
+#right {
+  height:100%;
 }
