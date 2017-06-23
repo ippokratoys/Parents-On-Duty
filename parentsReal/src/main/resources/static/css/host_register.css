@@ -26,10 +26,29 @@ btn-primary{
         margin-bottom: 2px;
     }
 
+.custom1 {
+    width: 120% !important;
+    margin: 11%;
+}
+
+.custom2 {
+    width: 135% !important;
+    margin: 11%;
+}
+
 hr{
     width:100%;
 }
-    
+   
+.form-signin #inputUserName,
+.form-signin #inputRePassword,
+.form-signin #inputEmail,
+.form-signin #inputPassword {
+    direction: ltr;
+    height: 44px;
+    font-size: 16px;
+}
+   
 .welcome{
     font-family: "myriad-pro",sans-serif;
     font-style: normal;

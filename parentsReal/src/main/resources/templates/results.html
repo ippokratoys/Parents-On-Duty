@@ -50,16 +50,17 @@
 		        	<th:block th:if="${oneEventGroup.events.size() != 0}" th:each="oneEvent : ${oneEventGroup.events}">
 		            
                         <div class="row">
-                            <p th:inline="text"> [[${oneEvent.eventsgroup.name}]]</p>
+                            <h2 th:text="${oneEvent.eventsgroup.name}"></h2>
+                            <hr/>
 		                    <div class="col-sm-6">
 		                    	<a th:href="'/event?id='+${oneEvent.idEvents}">
 			                        <img  class="img-responsive" src="images.png" alt=""/>
 		                        </a>
 		                    </div>
 		                    <div class="col-sm-6">
-		                        <h4 th:text=" 'Price : ' + ${oneEvent.price} + '€'">Τιμή : </h4>
-		                        <h4 th:text="${oneEvent.location.address}">Διεύθυνση:</h4>
-		                        <h4 th:text=" 'Date : ' + ${oneEvent.day}">Ημερομηνία:</h4>
+		                        <h4 th:text=" 'Τιμή : ' + ${oneEvent.price} + '€'"></h4>
+		                        <h4 th:text=" 'Διεύθυνση : ' + ${oneEvent.location.address}"></h4>
+		                        <h4 th:text=" 'Ημερομηνία : ' + ${oneEvent.day}"></h4>
 		                        <br/>
 		                    </div>
 		                    <div class="ratings">
