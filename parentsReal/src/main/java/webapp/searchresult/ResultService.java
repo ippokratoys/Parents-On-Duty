@@ -1,6 +1,9 @@
 package webapp.searchresult;
 
 import org.elasticsearch.common.unit.Fuzziness;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.search.MultiMatchQuery;
@@ -40,9 +43,13 @@ public class ResultService {
     List<Eventsgroup> getResults(String searchterm){
 
 
-        QueryBuilder myQuery= QueryBuilders.multiMatchQuery(searchterm, "name^10", "description^1", "type^2")
+        QueryBuilder myQuery= QueryBuilders.multiMatchQuery(searchterm)
                 .fuzziness(Fuzziness.AUTO)
-                .analyzer("standard");
+                .field("name", 7)
+                .field("description", 1)
+                .field("type", 2)
+                .type(MultiMatchQueryBuilder.Type.BEST_FIELDS)
+                .analyzer("greek");
         Iterable<Eventsgroup> resultsIter= esEventsgroupRepository.search(myQuery);
         List <Eventsgroup> results=null;
         ArrayList <Integer> ids=new ArrayList<>();
