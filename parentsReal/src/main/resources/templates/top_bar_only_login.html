@@ -54,7 +54,7 @@
             <li><a style="color: white" href="/login"><span class="glyphicon glyphicon-log-in"></span> Σύνδεση</a></li>
         </ul>
         <ul th:if="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
-            <li>
+            <li style="padding-top:4%;">
                 <form th:action="@{/logout}" method="post">
                     <input type="submit" value="Αποσύνδεση"/>
                 </form>
