@@ -87,7 +87,7 @@ public class RegisterHostController {
 
         Organiser newOrganiser = new Organiser();
         newOrganiser.setLogin_email(newLogin.getEmail());
-        newOrganiser.setPolice_id(allParams.get("ID"));
+        newOrganiser.setTaxpayerId(allParams.get("ID"));
         newOrganiser.setName(allParams.get("Name"));
         newOrganiser.setSurname(allParams.get("Surname"));
         loginRepository.save(newLogin);

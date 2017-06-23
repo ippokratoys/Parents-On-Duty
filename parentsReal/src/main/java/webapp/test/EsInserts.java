@@ -35,7 +35,7 @@ public class EsInserts {
             aEvent.setEvents(null);
             esEventsgroupRepository.save(aEvent);
         }
-        return "index";
+        return "redirect:/";
     }
 
     @RequestMapping("/test/search")

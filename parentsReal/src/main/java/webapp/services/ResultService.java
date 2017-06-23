@@ -58,7 +58,7 @@ public class ResultService {
             ids.add(aEventsgroup.getIdEventsGroup());
         }
         results = (List<Eventsgroup>) eventsgroupHandler.findAll(ids);
-
+        System.out.println(results);
         return results;
     }
 

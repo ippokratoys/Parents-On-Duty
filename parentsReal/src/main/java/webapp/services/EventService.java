@@ -2,10 +2,16 @@ package webapp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import webapp.database.BookEvent;
 import webapp.database.Customer;
 import webapp.database.Event;
+import webapp.database.Organiser;
+import webapp.database.repositories.BookEventRepository;
 import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.EventRepository;
+import webapp.database.repositories.OrganiserRepository;
+
+import java.util.Date;
 
 /**
  * Created by thanasis on 22/6/2017.
@@ -17,10 +23,13 @@ public class EventService {
     EventRepository eventHandler;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    BookEventRepository bookEventRepository;
+    @Autowired
+    OrganiserRepository organiserRepository;
 
     public int getAvailableSpots(Event event){
-        return 10;
-//        return event.getSpots()-event.getEventHasCustomers().size();
+        return event.getSpots()-event.getBookEvents().size();
     }
 
     public boolean bookEvent(Event event,Customer customer,int numberOfSpots) throws Exception{
@@ -31,18 +40,26 @@ public class EventService {
             throw new Exception("Customer is null");
         }
 
-        //somehow lock here
+////////////////somehow lock here//////////////////////
         if(customer.getPoints()<event.getPrice()){
             throw new Exception("Not enough points");
         }
         if(getAvailableSpots(event)<numberOfSpots){
             throw new Exception("Not enough sports available");
         }
-//        event.getEventHasCustomers().add(customer);
+
+        BookEvent bookEventNew=new BookEvent();
+        bookEventNew.setBookDate(new Date());
+        bookEventNew.setCustomer(customer);
+        bookEventNew.setEvent(event);
+        bookEventRepository.save(bookEventNew);
+
         customer.setPoints(customer.getPoints()-event.getPrice());
+        Organiser organiser=event.getOrganiser();
+        organiser.addPoints(event.getPrice());
         eventHandler.save(event);
         customerRepository.save(customer);
-        //somehow unlock here
+//////////////////somehow unlock here//////////////////////////////////
         return true;
     }
 

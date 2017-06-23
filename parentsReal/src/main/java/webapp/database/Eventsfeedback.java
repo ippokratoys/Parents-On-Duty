@@ -1,6 +1,8 @@
 package webapp.database;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import javax.persistence.*;
 
 
@@ -22,6 +24,7 @@ public class Eventsfeedback implements Serializable {
 
 	private int rating;
 
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date date;
 
 	//bi-directional many-to-one association to Event

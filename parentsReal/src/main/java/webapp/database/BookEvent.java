@@ -1,9 +1,13 @@
 package webapp.database;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import static javax.persistence.TemporalType.DATE;
 
 /**
  * Created by thanasis on 23/6/2017.
@@ -22,6 +26,8 @@ public class BookEvent implements Serializable {
     @ManyToOne()
     private Event event;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(DATE)
     private Date bookDate;
 
     private int ticket;

@@ -1,8 +1,12 @@
 package webapp.database;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import static javax.persistence.TemporalType.DATE;
 
 
 /**
@@ -31,6 +35,8 @@ public class Location implements Serializable {
 
 	private String imagePath;
 
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(DATE)
 	private Date validUntil;
 
 	private String certificatePath;

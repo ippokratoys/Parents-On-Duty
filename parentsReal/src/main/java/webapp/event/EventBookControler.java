@@ -46,8 +46,7 @@ public class EventBookControler {
 				return "redirect:/user/wallet?error=Not_enough_points";
 			}
 
-			int availableSits=0;
-//			availableSits=curEvent.getSpots() - curEvent.getEventHasCustomers().size();
+			int availableSits=eventService.getAvailableSpots(curEvent);
 			model.addAttribute("availableSits",availableSits);
 			model.addAttribute("curEvent",curEvent);
 			model.addAttribute("customer",curUser);

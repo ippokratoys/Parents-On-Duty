@@ -1,11 +1,16 @@
 package webapp.database;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
 import java.sql.Time;
+//import java.sql.Date;
 import java.util.Date;
 import java.util.List;
+
+import static javax.persistence.TemporalType.DATE;
 
 /**
  * The persistent class for the events database table.
@@ -23,6 +28,8 @@ public class Event implements Serializable {
 
 	private int spots;
 
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(DATE)
 	private Date day;
 
 	private Time time;
@@ -49,19 +56,6 @@ public class Event implements Serializable {
 		this.bookEvents = bookEvents;
 	}
 
-	//bi-directional many-to-many association to Customer
-//	@ManyToMany
-//	@JoinTable(
-//		name="events_has_customer"
-//		, joinColumns={
-//				@JoinColumn(name="Events_idEvents",insertable=false, updatable=false, referencedColumnName = "idEvents")
-//			}
-//		, inverseJoinColumns={
-//				@JoinColumn(name="Customer_Login_email",insertable=false, updatable=false,referencedColumnName = "login_email")
-//			}
-//	)
-//	@ManyToMany(mappedBy = "primaryKey.event",
-//			cascade = CascadeType.ALL)
 	@OneToMany(mappedBy = "event")
 	private List<BookEvent> bookEvents;
 

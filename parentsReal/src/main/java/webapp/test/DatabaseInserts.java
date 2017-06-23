@@ -73,7 +73,7 @@ public class DatabaseInserts {
 		myCsvHandler.locationCsvInsertions(locationRepository,"../stp_back_end/locations10.csv",organiserRepository);
 		myCsvHandler.eventsgroupCsvInsertions(eventsgroupHandler,"../stp_back_end/events_group.csv",organiserRepository);
 		myCsvHandler.eventsCsvInsertions(eventHandler,"../stp_back_end/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
-		return "redirect:/";
+		return "redirect:/test/add";
 	}
 
 }

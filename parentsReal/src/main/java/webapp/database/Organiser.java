@@ -1,8 +1,12 @@
 package webapp.database;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import static javax.persistence.TemporalType.DATE;
 
 
 /**
@@ -21,10 +25,25 @@ public class Organiser implements Serializable {
 
 	private String surname;
 
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(DATE)
 	private Date birthdate;
 
 	private String taxpayerId;
 
+
+	private double points;
+
+	public double getPoints() {
+		return points;
+	}
+
+	public void setPoints(double points) {
+		this.points = points;
+	}
+	public void addPoints(double points) {
+		this.points += points;
+	}
 	//bi-directional many-to-one association to Event
 	@OneToMany(mappedBy="organiser")
 	private List<Event> events;
