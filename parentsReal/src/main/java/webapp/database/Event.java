@@ -18,6 +18,7 @@ public class Event implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int idEvents;
 
 	private int spots;
@@ -40,6 +41,14 @@ public class Event implements Serializable {
 	@ManyToOne
 	private Organiser organiser;
 
+	public List<BookEvent> getBookEvents() {
+		return bookEvents;
+	}
+
+	public void setBookEvents(List<BookEvent> bookEvents) {
+		this.bookEvents = bookEvents;
+	}
+
 	//bi-directional many-to-many association to Customer
 //	@ManyToMany
 //	@JoinTable(
@@ -53,7 +62,8 @@ public class Event implements Serializable {
 //	)
 //	@ManyToMany(mappedBy = "primaryKey.event",
 //			cascade = CascadeType.ALL)
-//	private List<Event> eventHasCustomers;
+	@OneToMany(mappedBy = "event")
+	private List<BookEvent> bookEvents;
 
 	//bi-directional many-to-one association to Eventsfeedback
 	//that means that get-it only if asked
