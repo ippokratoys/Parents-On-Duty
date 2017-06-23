@@ -16,8 +16,8 @@ import java.util.List;
 public class Eventsgroup implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 //this annotation is for the elastic search key used in repositories
 	@org.springframework.data.annotation.Id
 	private int idEventsGroup;
@@ -26,14 +26,26 @@ public class Eventsgroup implements Serializable {
 
 	private String type;
 
-	private String description;
+	@ManyToOne
+	private Organiser organiser;
+
+	private String imagePath;
+
 	//bi-directional many-to-one association to Event
 	@OneToMany(mappedBy="eventsgroup")
 	private List<Event> events;
 
 	//bi-directional many-to-one association to Organiser
-	@ManyToOne
-	private Organiser organiser;
+
+	private String description;
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 
 	public Eventsgroup() {
 	}

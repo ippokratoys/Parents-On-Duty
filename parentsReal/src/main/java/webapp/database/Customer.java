@@ -1,4 +1,5 @@
 package webapp.database;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -18,10 +19,14 @@ public class Customer implements Serializable {
 	@Id
 	private String login_email;
 
-
 	private double points;
 
 	private double wallet;
+
+	@Column(precision=10, scale=6)
+	float lat;
+	@Column(precision=10, scale=6)
+	float lot;
 
 	//bi-directional one-to-one association to Login
 	@JoinColumn(name="Login_email", insertable=false, updatable=false)
@@ -29,10 +34,13 @@ public class Customer implements Serializable {
 	private Login login;
 
 	//bi-directional many-to-many association to Event
-	@ManyToMany(mappedBy="customers")
-	private List<Event> events;
+//	@ManyToMany(mappedBy="customer")
+//	@OneToMany(mappedBy = "primaryKey.customer",
+//			cascade = CascadeType.ALL)
+//	private List<EventHasCustomer> eventHasCustomers;
 
 	public Customer() {
+
 	}
 
 	public String getLogin_email() {
@@ -53,13 +61,14 @@ public class Customer implements Serializable {
 		this.login = login;
 	}
 
-	public List<Event> getEvents() {
-		return this.events;
-	}
+//	public List<EventHasCustomer> getEventHasCustomers() {
+//		return this.eventHasCustomers;
+//	}
+//
+//	public void setEventHasCustomers(List<EventHasCustomer> eventHasCustomers) {
+//		this.eventHasCustomers = eventHasCustomers;
+//	}
 
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
 	public double getPoints() {
 		return points;
 	}
@@ -74,6 +83,22 @@ public class Customer implements Serializable {
 
 	public void setWallet(double wallet) {
 		this.wallet = wallet;
+	}
+
+	public float getLat() {
+		return lat;
+	}
+
+	public void setLat(float lat) {
+		this.lat = lat;
+	}
+
+	public float getLot() {
+		return lot;
+	}
+
+	public void setLot(float lot) {
+		this.lot = lot;
 	}
 
 }

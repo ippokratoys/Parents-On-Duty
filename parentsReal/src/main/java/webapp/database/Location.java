@@ -1,6 +1,7 @@
 package webapp.database;
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,21 +15,34 @@ public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+
+	@Column(precision=10, scale=6)
+	float lat;
+	@Column(precision=10, scale=6)
+	float lot;
 
 	private String address;
 
+	private String postcode;
+
 	private String name;
 
-	private String postcode;
+	private String imagePath;
+
+	private Date validUntil;
+
+	private String certificatePath;
+
 
 	//bi-directional many-to-one association to Event
 	@OneToMany(mappedBy="location")
 	private List<Event> events;
 
-	//bi-directional many-to-one association to Locationowner
+	//bi-directional many-to-one association to Organiser
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Locationowner locationowner;
+	private Organiser locationOwner;
 
 	public Location() {
 	}
@@ -57,12 +71,52 @@ public class Location implements Serializable {
 		this.name = name;
 	}
 
+	public float getLat() {
+		return lat;
+	}
+
+	public void setLat(float lat) {
+		this.lat = lat;
+	}
+
+	public float getLot() {
+		return lot;
+	}
+
+	public void setLot(float lot) {
+		this.lot = lot;
+	}
+
 	public String getPostcode() {
 		return this.postcode;
 	}
 
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public Date getValidUntil() {
+		return validUntil;
+	}
+
+	public void setValidUntil(Date validUntil) {
+		this.validUntil = validUntil;
+	}
+
+	public String getCertificatePath() {
+		return certificatePath;
+	}
+
+	public void setCertificatePath(String certificatePath) {
+		this.certificatePath = certificatePath;
 	}
 
 	public List<Event> getEvents() {
@@ -87,13 +141,13 @@ public class Location implements Serializable {
 		return event;
 	}
 
-	public Locationowner getLocationowner() {
-		return this.locationowner;
+	public Organiser getLocationOwner() {
+		return this.locationOwner;
 	}
 	
 	//change in the future
-	public void setLocationowner(Locationowner locationowner) {
-		this.locationowner = locationowner;
+	public void setLocationOwner(Organiser locationOwner) {
+		this.locationOwner = locationOwner;
 	}
 
 }

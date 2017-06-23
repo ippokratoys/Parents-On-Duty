@@ -30,10 +30,6 @@ public class Login implements Serializable {
 	@OneToOne(mappedBy="login")
 	private Customer customer;
 
-	//bi-directional one-to-one association to Locationowner
-	@OneToOne(mappedBy="login")
-	private Locationowner locationowner;
-
 	//bi-directional one-to-one association to Organiser
 	@OneToOne(mappedBy="login")
 	private Organiser organiser;
@@ -63,14 +59,6 @@ public class Login implements Serializable {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-	}
-
-	public Locationowner getLocationowner() {
-		return this.locationowner;
-	}
-
-	public void setLocationowner(Locationowner locationowner) {
-		this.locationowner = locationowner;
 	}
 
 	public Organiser getOrganiser() {

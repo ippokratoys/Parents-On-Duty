@@ -1,9 +1,10 @@
 package webapp.database;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="events")
+//@Table(name="events")
 //@NamedQuery(name="Event.findAll", query="SELECT e FROM Event e")
 public class Event implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,12 +20,11 @@ public class Event implements Serializable {
 	@Id
 	private int idEvents;
 
-
 	private int spots;
 
-	private String day;
+	private Date day;
 
-	private String time;
+	private Time time;
 
 	private double price;
 
@@ -41,17 +41,19 @@ public class Event implements Serializable {
 	private Organiser organiser;
 
 	//bi-directional many-to-many association to Customer
-	@ManyToMany
-	@JoinTable(
-		name="events_has_customer"
-		, joinColumns={
-			@JoinColumn(name="Events_idEvents",insertable=false, updatable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="Customer_Login_email",insertable=false, updatable=false)
-			}
-		)
-	private List<Customer> customers;
+//	@ManyToMany
+//	@JoinTable(
+//		name="events_has_customer"
+//		, joinColumns={
+//				@JoinColumn(name="Events_idEvents",insertable=false, updatable=false, referencedColumnName = "idEvents")
+//			}
+//		, inverseJoinColumns={
+//				@JoinColumn(name="Customer_Login_email",insertable=false, updatable=false,referencedColumnName = "login_email")
+//			}
+//	)
+//	@ManyToMany(mappedBy = "primaryKey.event",
+//			cascade = CascadeType.ALL)
+//	private List<Event> eventHasCustomers;
 
 	//bi-directional many-to-one association to Eventsfeedback
 	//that means that get-it only if asked
@@ -70,19 +72,19 @@ public class Event implements Serializable {
 		this.idEvents = idEvents;
 	}
 
-	public String getDay() {
+	public Date getDay() {
 		return this.day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(Date day) {
 		this.day = day;
 	}
 
-	public String getTime() {
+	public Time getTime() {
 		return this.time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(Time time) {
 		this.time = time;
 	}
 
@@ -110,13 +112,13 @@ public class Event implements Serializable {
 		this.organiser = organiser;
 	}
 
-	public List<Customer> getCustomers() {
-		return this.customers;
-	}
-
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
-	}
+//	public List<EventHasCustomer> getEventHasCustomers() {
+//		return this.eventHasCustomers;
+//	}
+//
+//	public void setEventHasCustomers(List<EventHasCustomer> eventHasCustomers) {
+//		this.eventHasCustomers = eventHasCustomers;
+//	}
 
 	public List<Eventsfeedback> getEventsfeedbacks() {
 		return this.eventsfeedbacks;

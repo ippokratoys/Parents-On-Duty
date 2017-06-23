@@ -1,5 +1,6 @@
 package webapp.database;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 
@@ -18,6 +19,10 @@ public class Eventsfeedback implements Serializable {
 	private EventsfeedbackPK id;
 
 	private String content;
+
+	private int rating;
+
+	private Date date;
 
 	//bi-directional many-to-one association to Event
 	@ManyToOne
@@ -50,6 +55,21 @@ public class Eventsfeedback implements Serializable {
 
 	public void setEvent(Event event) {
 		this.event = event;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

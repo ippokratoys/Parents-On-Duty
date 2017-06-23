@@ -50,12 +50,4 @@ public class EventsfeedbackPK implements Serializable {
 			&& (this.eventsIdEvents == castOther.eventsIdEvents);
 	}
 
-	public int hashCode() {
-		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idEventsFeedback;
-		hash = hash * prime + this.eventsIdEvents;
-		
-		return hash;
-	}
 }

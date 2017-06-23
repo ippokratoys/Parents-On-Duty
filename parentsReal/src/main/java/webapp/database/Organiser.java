@@ -17,14 +17,13 @@ public class Organiser implements Serializable {
 	@Id
 	private String login_email;
 
-	@Temporal(TemporalType.DATE)
-	private Date birthdate;
-
 	private String name;
 
-	private String police_id;
-
 	private String surname;
+
+	private Date birthdate;
+
+	private String taxpayerId;
 
 	//bi-directional many-to-one association to Event
 	@OneToMany(mappedBy="organiser")
@@ -66,14 +65,6 @@ public class Organiser implements Serializable {
 		this.name = name;
 	}
 
-	public String getPolice_id() {
-		return this.police_id;
-	}
-
-	public void setPolice_id(String police_id) {
-		this.police_id = police_id;
-	}
-
 	public String getSurname() {
 		return this.surname;
 	}
@@ -89,6 +80,15 @@ public class Organiser implements Serializable {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
+
+	public String getTaxpayerId() {
+		return taxpayerId;
+	}
+
+	public void setTaxpayerId(String taxpayerId) {
+		this.taxpayerId = taxpayerId;
+	}
+
 
 	public Event addEvent(Event event) {
 		getEvents().add(event);
