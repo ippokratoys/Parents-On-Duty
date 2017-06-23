@@ -1,15 +1,11 @@
-package webapp.event;
+package webapp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.annotations.Setting;
 import org.springframework.stereotype.Service;
 import webapp.database.Customer;
 import webapp.database.Event;
 import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.EventRepository;
-
-import javax.sound.midi.Track;
-import java.beans.EventHandler;
 
 /**
  * Created by thanasis on 22/6/2017.
@@ -22,11 +18,12 @@ public class EventService {
     @Autowired
     CustomerRepository customerRepository;
 
-    int getAvailableSpots(Event event){
-        return event.getSpots()-event.getCustomers().size();
+    public int getAvailableSpots(Event event){
+        return 10;
+//        return event.getSpots()-event.getEventHasCustomers().size();
     }
 
-    boolean bookEvent(Event event,Customer customer,int numberOfSpots) throws Exception{
+    public boolean bookEvent(Event event,Customer customer,int numberOfSpots) throws Exception{
         if(event==null){
             throw new Exception("Event is null");
         }
@@ -41,7 +38,7 @@ public class EventService {
         if(getAvailableSpots(event)<numberOfSpots){
             throw new Exception("Not enough sports available");
         }
-        event.getCustomers().add(customer);
+//        event.getEventHasCustomers().add(customer);
         customer.setPoints(customer.getPoints()-event.getPrice());
         eventHandler.save(event);
         customerRepository.save(customer);

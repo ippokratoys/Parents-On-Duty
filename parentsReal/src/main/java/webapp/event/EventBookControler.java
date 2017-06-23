@@ -13,6 +13,7 @@ import webapp.database.Customer;
 import webapp.database.Event;
 import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.EventRepository;
+import webapp.services.EventService;
 
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class EventBookControler {
 			}
 
 			int availableSits=0;
-			availableSits=curEvent.getSpots() - curEvent.getCustomers().size();
+//			availableSits=curEvent.getSpots() - curEvent.getEventHasCustomers().size();
 			model.addAttribute("availableSits",availableSits);
 			model.addAttribute("curEvent",curEvent);
 			model.addAttribute("customer",curUser);

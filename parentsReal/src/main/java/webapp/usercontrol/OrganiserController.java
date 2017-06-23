@@ -7,15 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import webapp.database.Customer;
 import webapp.database.Location;
-import webapp.database.Locationowner;
 import webapp.database.Organiser;
-import webapp.database.repositories.CustomerRepository;
-import webapp.database.repositories.LocationownerRepository;
 import webapp.database.repositories.OrganiserRepository;
-
-import java.util.List;
+import webapp.services.OrganiserService;
 
 /**
  * Created by thanasis on 22/6/2017.
@@ -24,8 +19,11 @@ import java.util.List;
 public class OrganiserController {
     @Autowired
     OrganiserRepository organiserRepository;
+
     @Autowired
-    LocationownerRepository locationownerRepository;
+    OrganiserService organiserService;
+//    @Autowired
+//    LocationownerRepository locationownerRepository;
 
     @RequestMapping(value = "/organiser/add_event",method = RequestMethod.GET)
     public String newEventPage(Model model,
@@ -34,7 +32,7 @@ public class OrganiserController {
         Organiser curOrganiser = organiserRepository.findOne(userDetails.getUsername());
         model.addAttribute("organiser",curOrganiser);
 
-        Iterable<Locationowner> organiserLocations = locationownerRepository.findAll();
+        Iterable<Location> organiserLocations = organiserService.getLocations(curOrganiser);
         model.addAttribute("organiserPlaces",organiserLocations);
         return "profile/organiser/add_event";
     }

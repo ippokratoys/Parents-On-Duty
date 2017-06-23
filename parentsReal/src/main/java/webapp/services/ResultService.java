@@ -1,4 +1,4 @@
-package webapp.searchresult;
+package webapp.services;
 
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -37,7 +37,7 @@ public class ResultService {
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
-    List<Eventsgroup> getResults(String searchterm){
+    public List<Eventsgroup> getResults(String searchterm){
 
 
         QueryBuilder myQuery= QueryBuilders.multiMatchQuery(searchterm, "name^10", "description^1", "type^2")
@@ -55,7 +55,7 @@ public class ResultService {
         return results;
     }
 
-    List getResultsByUser(String address){
+    public List<Eventsgroup> getResultsByUser(String address){
         List<Eventsgroup> results=eventsgroupHandler.findByName(address);
         String allWords[]=address.split(" ");
         for (String oneWord:allWords) {

@@ -33,12 +33,24 @@ public class Organiser implements Serializable {
 	@OneToMany(mappedBy="organiser")
 	private List<Eventsgroup> eventsgroups;
 
+
+	@OneToMany(mappedBy="locationOwner")
+	private List<Location> locations;
+
 	//bi-directional one-to-one association to Login
 	@OneToOne
 	@JoinColumn(name="Login_email", insertable=false, updatable=false)
 	private Login login;
 
 	public Organiser() {
+	}
+
+	public List<Location> getLocations() {
+		return locations;
+	}
+
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
 	}
 
 	public String getLogin_email() {

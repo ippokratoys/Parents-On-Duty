@@ -47,7 +47,7 @@
 		 <div class="container">
 			<div class="col-xs-12 col-md-6 col-sm-12">
 		        <th:block th:if="${allEventsGroup.size() != 0}" th:each="oneEventGroup : ${allEventsGroup}" >
-		        	<th:block th:if="${oneEventGroup.events.size() != 0}" th:each="oneEvent : ${oneEventGroup.events}">
+		        	<th:block th:if="${oneEventGroup.eventHasCustomers.size() != 0}" th:each="oneEvent : ${oneEventGroup.eventHasCustomers}">
 		            
                         <div class="row">
                             <p th:inline="text"> [[${oneEvent.eventsgroup.name}]]</p>
@@ -76,7 +76,7 @@
 		                </div>
 		            
               </th:block>
-              <h2 th:if="${oneEventGroup.events.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>
+              <h2 th:if="${oneEventGroup.eventHasCustomers.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>
             </th:block>
             
             	<h2 th:if="${allEventsGroup == null || allEventsGroup.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>
