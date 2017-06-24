@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -19,14 +20,19 @@ public class Customer implements Serializable {
 	@Id
 	private String login_email;
 
-	private double points;
+	private int points;
 
-	private double wallet;
+	private int wallet;
 
-	@Column(precision=10, scale=6)
-	float lat;
-	@Column(precision=10, scale=6)
-	float lot;
+//	@Column(precision=10, scale=6)
+//	float lat;
+//	@Column(precision=10, scale=6)
+//	float lot;
+	@Column(precision = 10, scale = 6)
+	private BigDecimal lat;
+
+	@Column(precision = 10, scale = 6)
+	private BigDecimal lon;
 
 	//bi-directional one-to-one association to Login
 	@JoinColumn(name="Login_email", insertable=false, updatable=false)
@@ -69,36 +75,36 @@ public class Customer implements Serializable {
 //		this.eventHasCustomers = eventHasCustomers;
 //	}
 
-	public double getPoints() {
+	public int getPoints() {
 		return points;
 	}
 
-	public void setPoints(double points) {
+	public void setPoints(int points) {
 		this.points = points;
 	}
 
-	public double getWallet() {
+	public int getWallet() {
 		return wallet;
 	}
 
-	public void setWallet(double wallet) {
+	public void setWallet(int wallet) {
 		this.wallet = wallet;
 	}
 
-	public float getLat() {
+	public BigDecimal getLat() {
 		return lat;
 	}
 
-	public void setLat(float lat) {
+	public void setLat(BigDecimal lat) {
 		this.lat = lat;
 	}
 
-	public float getLot() {
-		return lot;
+	public BigDecimal getLon() {
+		return lon;
 	}
 
-	public void setLot(float lot) {
-		this.lot = lot;
+	public void setLon(BigDecimal lon) {
+		this.lon = lon;
 	}
 
 }

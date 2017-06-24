@@ -35,14 +35,13 @@ public class LoginController {
 								 @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
 	){
 		if(userDetails.getAuthorities().toString().contains("PARENT")){
-			return "profile/parent/profile";
-//			return "redirect:parent/profile";
+//			return "profile/parent/profile";
+			return "redirect:parent/profile";
 		}else if(userDetails.getAuthorities().toString().contains("ADMIN")){
-			return "profile/admin/profile";
-//			return "redirect:admin/profile";
+//			return "profile/admin/profile";
+			return "redirect:admin/profile";
 		}else{
-			return "profile/organiser/profile";
-//			return "redirect:organiser/profile";
+			return "redirect:organiser/profile";
 		}
 	}
 

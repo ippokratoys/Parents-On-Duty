@@ -3,6 +3,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import static javax.persistence.TemporalType.DATE;
  * 
  */
 @Entity
-@NamedQuery(name="Location.findAll", query="SELECT l FROM Location l")
+//@NamedQuery(name="Location.findAll", query="SELECT l FROM Location l")
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,10 +23,19 @@ public class Location implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
-	@Column(precision=10, scale=6)
-	float lat;
-	@Column(precision=10, scale=6)
-	float lot;
+//	@Column(precision=10, scale=6)
+//	float lat;
+
+//	@DECIMAL(8,6)
+	@Column(precision = 10, scale = 6)
+	private BigDecimal lat;
+
+	@Column(precision = 10, scale = 6)
+	private BigDecimal lon;
+
+
+//	@Column(precision=10, scale=6)
+//	float lot;
 
 	private String address;
 
@@ -77,20 +87,20 @@ public class Location implements Serializable {
 		this.name = name;
 	}
 
-	public float getLat() {
+	public BigDecimal getLat() {
 		return lat;
 	}
 
-	public void setLat(float lat) {
+	public void setLat(BigDecimal lat) {
 		this.lat = lat;
 	}
 
-	public float getLot() {
-		return lot;
+	public BigDecimal getLon() {
+		return lon;
 	}
 
-	public void setLot(float lot) {
-		this.lot = lot;
+	public void setLon(BigDecimal lon) {
+		this.lon = lon;
 	}
 
 	public String getPostcode() {

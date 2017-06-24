@@ -10,15 +10,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import webapp.database.Location;
 import webapp.database.Organiser;
 import webapp.database.repositories.OrganiserRepository;
+import webapp.services.EventService;
 import webapp.services.OrganiserService;
 
 /**
  * Created by thanasis on 22/6/2017.
  */
 @Controller
-public class OrganiserController {
+public class OrganiserController{
     @Autowired
     OrganiserRepository organiserRepository;
+    @Autowired
+    EventService eventService;
 
     @Autowired
     OrganiserService organiserService;
@@ -46,5 +49,14 @@ public class OrganiserController {
         return "profile/organiser/add_place";
     }
 
+    @RequestMapping(value = "/organiser/profile",method = RequestMethod.GET)
+    public String profilePage(Model model,
+                              @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
+    ){
+        Organiser organiser= organiserRepository.findOne(userDetails.getUsername());
+        model.addAttribute("organiser",organiser);
+//        model.addAttribute("availableSpots",eventService.getAvailableSpots());
+        return "profile/organiser/profile";
+    }
 
 }

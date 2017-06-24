@@ -17,7 +17,6 @@ import webapp.database.repositories.CustomerRepository;
 @Controller
 public class UserProfileController {
 
-
     @Autowired
     CustomerRepository customerRepository;
 

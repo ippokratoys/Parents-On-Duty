@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,8 +67,11 @@ public class CsvInserts {
                 if(log.getRole().equals("PARENT")){
                     Customer newCustomer=new Customer();
                     newCustomer.setLogin_email(log.getEmail());
-                    newCustomer.setWallet( new Random().nextInt(500)+20 );
-                    newCustomer.setPoints( new Random().nextInt(500)+20 );
+                    newCustomer.setWallet( (new Random().nextInt(500)+75)*100 );
+                    newCustomer.setPoints( (new Random().nextInt(500)+20)*100 );
+                    newCustomer.setLat(new BigDecimal("38.018433") );
+                    newCustomer.setLon(new BigDecimal("23.848057") );
+
                     if(customerRepository==null){
                         System.out.println("It's null customer");
                         System.out.println(customerRepository);
@@ -187,9 +191,9 @@ public class CsvInserts {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                newEvent.setPrice( Double.parseDouble(arr_in[2]) );
-                //instead of this we must add the ellement from the csvs
-                newEvent.setTime( new Time(8,1,2) );
+                newEvent.setPrice( Integer.parseInt(arr_in[2].replace(".","") ) );
+                //instead of this we must add the ellement from the csv
+                newEvent.setTime( new Time(16,20,0) );
                 newEvent.setEventsgroup(eventsgroupRepository.findOne( Integer.parseInt(arr_in[4]) ));
                 newEvent.setLocation(locationRepository.findOne(Integer.parseInt(arr_in[5])));
                 newEvent.setOrganiser(organiserRepository.findOne(eventsgroupRepository.findOne( Integer.parseInt(arr_in[4]) ).getOrganiser().getLogin_email()));
@@ -290,6 +294,8 @@ public class CsvInserts {
 				newLoc.setPostcode(arr_in[1]);
 				newLoc.setName(arr_in[2]);
 				newLoc.setLocationOwner(organiserRepository.findOne("edutnall3@github.io"));
+				newLoc.setLat(new BigDecimal("37.974535"));
+				newLoc.setLon(new BigDecimal("23.775358"));
 				locationRepository.save(newLoc);
             }
         }

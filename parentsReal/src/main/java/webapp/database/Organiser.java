@@ -31,17 +31,16 @@ public class Organiser implements Serializable {
 
 	private String taxpayerId;
 
+	private int points;
 
-	private double points;
-
-	public double getPoints() {
+	public int getPoints() {
 		return points;
 	}
 
-	public void setPoints(double points) {
+	public void setPoints(int points) {
 		this.points = points;
 	}
-	public void addPoints(double points) {
+	public void addPoints(int points) {
 		this.points += points;
 	}
 	//bi-directional many-to-one association to Event

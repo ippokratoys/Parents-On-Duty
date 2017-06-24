@@ -34,7 +34,7 @@ public class Event implements Serializable {
 
 	private Time time;
 
-	private double price;
+	private int price;
 
 	//bi-directional many-to-one association to Eventsgroup
 	@ManyToOne
@@ -47,6 +47,8 @@ public class Event implements Serializable {
 	//bi-directional many-to-one association to Organiser
 	@ManyToOne
 	private Organiser organiser;
+
+	private int importance;
 
 	public List<BookEvent> getBookEvents() {
 		return bookEvents;
@@ -146,6 +148,15 @@ public class Event implements Serializable {
 		return eventsfeedback;
 	}
 
+	public int getImportance() {
+		return importance;
+	}
+
+	public void setImportance(int importance) {
+		this.importance = importance;
+	}
+
+
 	public int getSpots() {
 		return spots;
 	}
@@ -154,11 +165,11 @@ public class Event implements Serializable {
 		this.spots = spots;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
