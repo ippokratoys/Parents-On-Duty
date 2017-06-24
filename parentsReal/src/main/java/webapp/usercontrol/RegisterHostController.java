@@ -31,7 +31,7 @@ public class RegisterHostController {
 
     @Autowired
     RegisterService registerService;
-    @RequestMapping(value = "/register/host", method = RequestMethod.GET)
+    @RequestMapping(value = "/host_register", method = RequestMethod.GET)
     public String showPage(
             @AuthenticationPrincipal final UserDetails userDetails,//we add this so we know if is logged to show correct bar
             @RequestParam(name = "id", required = false) Map allParams,
@@ -65,15 +65,15 @@ public class RegisterHostController {
             if(e.getMessage()=="User exists"){
                 model.addAttribute("oldFields", allParams);
                 model.addAttribute("error", "exists");
-                return "/register/host";
+                return "host_register";
             }else if(e.getMessage()=="Password not strong enough"){
                 model.addAttribute("oldFields", allParams);
                 model.addAttribute("error", "empty");
-                return "/register/host";
+                return "host_register";
             }else if(e.getMessage()=="Empty Field"){
                 model.addAttribute("oldFields", allParams);
                 model.addAttribute("error", "pwd_not_good");
-                return "/register/host";
+                return "host_register";
             }else{
                 System.out.println("ERROR HAPPENED CAN'T HANDLE");
                 return "/";

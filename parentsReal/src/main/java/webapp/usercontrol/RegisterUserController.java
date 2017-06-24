@@ -36,10 +36,10 @@ public class RegisterUserController {
 			//if the user is connected can't register
 			return "redirect:/profile";
 		}
-		return "register";
+		return "user_register";
 	}
 
-	@RequestMapping(value="/register/user",method= RequestMethod.POST)
+	@RequestMapping(value="/register",method= RequestMethod.POST)
 	public String showPage(
 			@RequestParam Map<String, String> allParams,
 			@AuthenticationPrincipal final UserDetails userDetails,//we add this so we know if is logged to show correct bar
