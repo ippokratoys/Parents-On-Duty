@@ -48,7 +48,6 @@ hr {
     padding-bottom: 56.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
 }
 .iframe-container > *{
-    display: block;
     position: absolute;
     top: 0;
     right: 0;

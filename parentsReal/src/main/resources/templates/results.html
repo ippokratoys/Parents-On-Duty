@@ -39,7 +39,7 @@
 		        	<th:block th:if="${oneEventGroup.events.size() != 0}" th:each="oneEvent : ${oneEventGroup.events}">
 		            	<a  style="color: black !important;" th:href="'/event?id='+${oneEvent.idEvents}"><h2 th:text="${oneEvent.eventsgroup.name}"></h2></a>
                         <div class="row">
-                            
+
                             <hr/>
 		                    <div class="col-sm-6">
 		                    	<a th:href="'/event?id='+${oneEvent.idEvents}">
@@ -64,17 +64,17 @@
 		                        </p>
 		                    </div>
 		                </div>
-		            
+
               </th:block>
               <!--<h2 th:if="${oneEventGroup.eventHasCustomers.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>-->
             </th:block>
-            
+
             	<h2 th:if="${allEventsGroup == null || allEventsGroup.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>
            	</div>
 	            <div class="col-xs-12 col-md-6 col-sm-12" id="right">
 	                    <div class="iframe-container">
 	            			<div id="map" style="background:yellow"></div>
-	                	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;callback=myMap"></script>
+	                	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;callback=initMap"></script>
 						</div>
 	            </div>
     </div>

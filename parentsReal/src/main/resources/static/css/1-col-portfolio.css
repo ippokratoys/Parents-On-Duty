@@ -38,7 +38,6 @@ body, html {
     padding-bottom: 56.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
 }
 .iframe-container > *{
-    display: block;
     position: absolute;
     top: 0;
     right: 0;
@@ -58,9 +57,9 @@ body, html {
     left: 0;
     width: 60%;
     padding-top: 55px;
-    overflow-y: scroll; 
+    overflow-y: scroll;
   }
-  
+
   #right {
     padding-top: 55px;
     position: absolute;
