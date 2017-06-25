@@ -17,7 +17,7 @@
   </head>
 
  <body>
- 
+
 		<div class="navbar navbar-default navbar-fixed-top">
 		    <div class="navbar-header">
 		    	<a style="color:white" class="navbar-brand" href="/">
@@ -47,57 +47,60 @@
 		          </p>
 		          <h2>Προσθήκη Μέρους</h2>
 		          <hr/>
-		          <div class="row">
-		           <div class="col-xs-12 col-md-4 col-sm-8">  
-		           		<h3>Συμπλήρωσε Όνομα Χώρου</h3>
-				          <div class="form-group">
-							<input type="text" class="form-control" id="Place_Name" name="Place" placeholder="Παιζοδρόμιο" aria-describedby="helpQuery" value=""/>
-		        		</div>
-		        	</div>
-	        	</div>
-		          <div class="row">
-		              <div class="col-md-12">
-		              		<h3>Συμπλήρωσε Διεύθυνση</h3>
-		              		<div class="well" id="locationField">
-								<input id="autocomplete" placeholder="Πχ Σιγγρού 15" onFocus="geolocate()" type="text"/>
-							</div>
-							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR7e_1Er6gEoMB_i69MOiljeHJepWdVKA&amp;libraries=places&amp;callback=initAutocomplete"
-         					async="async" defer="defer"></script>
-		              	</div>
-		          </div>
-		          <br/>
-		          <div class="row">
-		               <div class="col-xs-12 col-md-4 col-sm-8">  
-		               		<h3>Aνέβασε Φωτογραφία</h3>
-					        <!-- image-preview-filename input [CUT FROM HERE]-->
-					        <div class="input-group image-preview">
-					            <input type="text" class="form-control image-preview-filename" disabled="disabled"/> <!-- don't give a name === doesn't send on POST/GET -->
-					            <span class="input-group-btn">
-					                <!-- image-preview-clear button -->
-					                <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-					                    <span class="glyphicon glyphicon-remove"></span> Clear
-					                </button>
-					                <!-- image-preview-input -->
-					                <div class="btn btn-default image-preview-input">
-					                    
-					                    <span class="image-preview-input-title">Browse</span>
-					                    <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
-					                </div>
-					            </span>
-					        </div><!-- /input-group image-preview [TO HERE]--> 
-					    </div>
-		          </div>
+                <form method="get" id="Add_place">
+                    <div class="row">
+  		               <div class="form-group col-xs-12 col-md-4 col-sm-8">
+  		           		 <h3>Συμπλήρωσε Όνομα Χώρου</h3>
+  				           <div class="form-group">
+  							 <input type="text" class="form-control" id="Place_Name" name="Place" placeholder="Πεζοδρόμιο" aria-describedby="helpQuery" value=""/>
+  		        		   </div>
+  		        	   </div>
+  	        	    </div>
+                    <div class="row">
+  		              <div class="form-group col-md-12">
+  		              		<h3>Συμπλήρωσε Διεύθυνση</h3>
+  		              		<div class="well" id="locationField">
+  								<input id="autocomplete" placeholder="Πχ Συγγρού 15" onFocus="geolocate()" type="text"/>
+  							</div>
+  							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR7e_1Er6gEoMB_i69MOiljeHJepWdVKA&amp;libraries=places&amp;callback=initAutocomplete"
+           					async="async" defer="defer"></script>
+  		              	</div>
+  		          </div>
+  		          <br/>
+  		          <div class="row">
+  		               <div class="form-group col-xs-12 col-md-4 col-sm-8">
+  		               		<h3>Aνέβασε Φωτογραφία</h3>
+  					        <!-- image-preview-filename input [CUT FROM HERE]-->
+  					        <div class="input-group image-preview">
+  					            <input type="text" class="form-control image-preview-filename" disabled="disabled"/> <!-- don't give a name === doesn't send on POST/GET -->
+  					            <span class="input-group-btn">
+  					                <!-- image-preview-clear button -->
+  					                <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+  					                    <span class="glyphicon glyphicon-remove"></span> Clear
+  					                </button>
+  					                <!-- image-preview-input -->
+  					                <div class="btn btn-default image-preview-input">
+
+  					                    <span class="image-preview-input-title">Browse</span>
+  					                    <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+  					                </div>
+  					            </span>
+  					        </div><!-- /input-group image-preview [TO HERE]-->
+  					    </div>
+  		          </div>
+                    <div class="row col-xs-6 col-md-2 col-sm-4 col-md-offset-1 col-sm-offset-2 col-xs-offset-3">
+                        	<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="Add_place" value="Submit"><i class="fa fa-search" aria-hidden="true">Πρόσθεσε Μέρος</i></button>
+                    </div>
+                </form>
 		          <div class="row">
 					  <p id="demo"></p>
 		              <p id="demo2"></p>
 				  </div>
-		             
+
 		      </div>
 		  </div>
 		</div><!--/row-offcanvas -->
-		  
-		  
+
+
 	</body>
 </html>
-    
-    
