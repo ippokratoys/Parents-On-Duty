@@ -48,7 +48,7 @@ public class Event implements Serializable {
 	@ManyToOne
 	private Organiser organiser;
 
-	private int importance;
+	private int importance=1;
 
 	public List<BookEvent> getBookEvents() {
 		return bookEvents;

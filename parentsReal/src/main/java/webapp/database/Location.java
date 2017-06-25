@@ -49,6 +49,8 @@ public class Location implements Serializable {
 	@Temporal(DATE)
 	private Date validUntil;
 
+	private boolean certificateChecked;
+
 	private String certificatePath;
 
 
@@ -133,6 +135,14 @@ public class Location implements Serializable {
 
 	public void setCertificatePath(String certificatePath) {
 		this.certificatePath = certificatePath;
+	}
+
+	public boolean isCertificateChecked() {
+		return certificateChecked;
+	}
+
+	public void setCertificateChecked(boolean certificateChecked) {
+		this.certificateChecked = certificateChecked;
 	}
 
 	public List<Event> getEvents() {

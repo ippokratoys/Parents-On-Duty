@@ -40,4 +40,7 @@ public class EventSearch implements Serializable {
 
     private String description;
 
+    private int ageFrom;
+
+    private int ageTo;
 }

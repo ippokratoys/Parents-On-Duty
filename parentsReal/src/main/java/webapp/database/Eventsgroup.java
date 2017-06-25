@@ -47,6 +47,10 @@ public class Eventsgroup implements Serializable {
 		this.imagePath = imagePath;
 	}
 
+	private int ageFrom;
+	private int ageTo;
+
+
 	public Eventsgroup() {
 	}
 
@@ -119,6 +123,21 @@ public class Eventsgroup implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public int getAgeFrom() {
+		return ageFrom;
+	}
+
+	public void setAgeFrom(int ageFrom) {
+		this.ageFrom = ageFrom;
+	}
+
+	public int getAgeTo() {
+		return ageTo;
+	}
+
+	public void setAgeTo(int ageTo) {
+		this.ageTo = ageTo;
 	}
 
 	@Override

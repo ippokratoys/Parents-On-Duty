@@ -206,6 +206,7 @@ public class CsvInserts {
                 newEvent.setEventsgroup(eventsgroupRepository.findOne( Integer.parseInt(arr_in[4]) ));
                 newEvent.setLocation(locationRepository.findOne(Integer.parseInt(arr_in[5])));
                 newEvent.setOrganiser(organiserRepository.findOne(eventsgroupRepository.findOne( Integer.parseInt(arr_in[4]) ).getOrganiser().getLogin_email()));
+                newEvent.setImportance(1);
                 eventRepository.save(newEvent);
             }
         }
@@ -250,13 +251,15 @@ public class CsvInserts {
 
 				/*here create the objects to insert in the db*/
 				/*insert the info email,pwd*/
+//                    System.out.println(line);
                     Eventsgroup curEvent=new Eventsgroup();
-//                    curEvent.setIdEventsGroup(Integer.parseInt(arr_in[0]));
-                    curEvent.setDescription(arr_in[1]);
-                    curEvent.setName(arr_in[2]);
-                    curEvent.setType(arr_in[3]);
-                    curEvent.setOrganiser(organiserRepository.findOne(arr_in[4]));
-
+                    curEvent.setIdEventsGroup(Integer.parseInt(arr_in[0]));
+                    curEvent.setDescription(arr_in[1].trim());
+                    curEvent.setName(arr_in[2].trim());
+                    curEvent.setType(arr_in[3].trim());
+                    curEvent.setOrganiser(organiserRepository.findOne(arr_in[4].trim()));
+                    curEvent.setAgeFrom(3);
+                    curEvent.setAgeTo(9);
                     eventsgroupRepository.save(curEvent);
 
                 }

@@ -27,7 +27,7 @@
         <div class="col-md-12">
             <h3>Άλλες Επιλογές</h3>
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="/organiser/host_profile">Προφίλ</a></li>
+                <li class="active"><a href="/organiser/profile">Προφίλ</a></li>
                 <li><a href="/organiser/add_place">Προσθήκη Μέρους</a></li>
                 <li><a href="/organiser/add_event">Προσθήκη Εκδήλωσης</a></li>
                 <li><a href="/organiser/wallet">Πορτοφόλι</a></li>
@@ -67,9 +67,15 @@
                         <div id="myevents">
                             <h4><b>Οι Εκδηλώσεις μου:</b></h4>
                             <th:block th:if="${ organiser.events != null}" th:each="oneEvent : ${organiser.events}">
-                                <!--<p th:text=" 'Θεσεις : '+${eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>-->
-                                <p th:text=" 'Ημερομινια : '+${oneEvent.day}"></p>
-                                <p th:text=" 'Τοποθεσια :'+${oneEvent.location.name}"></p>
+                                <th:block th:if="${oneEvent.importance > 1}">
+                                    <p style="color:green" th:text="'Προωθούμενη'"></p>
+                                </th:block>
+                                <th:block th:unless="${oneEvent.importance > 1}">
+                                    <button style="color:#202f80" th:text="'Προωθήστε την εκδήλωση'"></button>
+                                </th:block>
+                                <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
+                                <p th:text=" 'Ημερομηνία : '+${oneEvent.day}"></p>
+                                <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>
                                 <hr/>
                             </th:block>
                         </div>
