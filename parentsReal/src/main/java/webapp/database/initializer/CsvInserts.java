@@ -1,16 +1,17 @@
 package webapp.database.initializer;
 
+import org.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import webapp.database.*;
 import webapp.database.repositories.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
+import java.nio.Buffer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,11 +45,15 @@ public class CsvInserts {
 		/*here will insert to the login*/
 		/*read the csv*/
 		PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
-        BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
+        BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+//            br = new BufferedReader(new FileReader(csvFile,"utf-8"));
+            br = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(csvFile), "UTF8"));
+
             br.readLine();
             while ((line = br.readLine()) != null) {
 				/*use comma as separator*/
@@ -112,7 +117,9 @@ public class CsvInserts {
         String line = "";
         String cvsSplitBy = ",";
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(csvFile), "UTF8"));
             br.readLine();
             while ((line = br.readLine()) != null) {
 				/*use comma as separator*/
@@ -173,7 +180,9 @@ public class CsvInserts {
         String line = "";
         String cvsSplitBy = ",";
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(csvFile), "UTF8"));
             br.readLine();
             while ((line = br.readLine()) != null) {
 				/*use comma as separator*/
@@ -226,7 +235,11 @@ public class CsvInserts {
             String line = "";
             String cvsSplitBy = ",";
             try {
-                br = new BufferedReader(new FileReader(csvFile));
+
+                 br = new BufferedReader(
+                        new InputStreamReader(
+                                new FileInputStream(csvFile), "UTF8"));
+
                 br.readLine();
                 while ((line = br.readLine()) != null){
 				/*use comma as separator*/
@@ -275,7 +288,9 @@ public class CsvInserts {
         String line = "";
         String cvsSplitBy = ",";
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(csvFile), "UTF8"));
             br.readLine();
             int i=0;
             while ((line = br.readLine()) != null) {

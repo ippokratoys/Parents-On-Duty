@@ -15,8 +15,6 @@ import webapp.database.repositories.*;
 
 @Controller
 public class HomePage {
-	@Autowired
-    private LoginRepository loginRepository;
 
     @RequestMapping("/")
     public String getHomePage(
