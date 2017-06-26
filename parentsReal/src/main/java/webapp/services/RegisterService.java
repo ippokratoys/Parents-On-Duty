@@ -98,7 +98,7 @@ public class RegisterService {
         }
         newLogin=new Login();
         newLogin.setEmail(allParams.get("Email"));
-        newLogin.setRole("ORGANISER");
+        newLogin.setRole("PARENT");
         newLogin.setActive(true);
         newLogin.setPwd(hashPassword(allParams.get("Pwd")));
 
