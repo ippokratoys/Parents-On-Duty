@@ -16,7 +16,6 @@
 
     <!-- Custom CSS -->
     <link href="css/event_page.css" rel="stylesheet"/>
-    <script type="text/javascript" src="js/map.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -33,7 +32,28 @@
 </head>
 
 <body>
+    <script th:inline="javascript">
+        var map;
+        /*[+
 
+        var latlng = { lng: [[${theEvent.location.lon}]] ,
+                        lat:[[${theEvent.location.lat}]]}
+        +]*/
+        var myLatLng = { lng: /*[[${theEvent.location.lon}]]*/,
+        lat: /*[[${theEvent.location.lat}]]*/
+        }
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: myLatLng,
+                zoom: 12
+            });
+            var marker = new google.maps.Marker({
+                  position: latlng,
+                  map: map,
+                  title: 'Hello World!'
+            });
+        }
+    </script>
     <!-- Navigation -->
    <nav th:replace="top_bar_full :: 'nav-bar-full' "></nav>
 
