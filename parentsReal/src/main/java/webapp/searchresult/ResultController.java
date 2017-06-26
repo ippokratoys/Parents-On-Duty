@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import webapp.database.*;
 //import webapp.database.initializer.CsvInserts;
+import webapp.database.elasticsearch.EventSearch;
 import webapp.database.repositories.*;
 import webapp.services.ResultService;
 
@@ -43,12 +44,12 @@ public class ResultController {
     	System.out.println("Extra Tags:"+extraTags);
     	*/
 
-    	List<Eventsgroup> results=eventsgroupHandler.findByName(freeText);
+    	List<EventSearch> results=null;
 		results=resultService.getResults(freeText);
     	//System.out.println(results.get(0).getEventHasCustomers().get(0).getEventsfeedbacks());
 
 		model.addAttribute("allParams",allRequestParams);
-		model.addAttribute("allEventsGroup",results);
+		model.addAttribute("searchResults",results);
     	return "results";
     }
 

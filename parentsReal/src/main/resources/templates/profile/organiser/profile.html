@@ -54,9 +54,9 @@
                         <div id="myplaces">
                             <h4><b>Τα Μέρη μου:</b></h4>
                             <th:block th:if="${ organiser.locations != null}" th:each="oneLocation : ${organiser.locations}" >
-                                <p th:text="'Ονομα : ' + ${oneLocation.name}"></p>
-                                <p th:text="'Διευθηνση :' + ${oneLocation.address}"></p>
-                                <p th:text="'Εγκυρο μεχρι τις :' + ${oneLocation.validUntil}"></p>
+                                <p th:text="'Όνομα : ' + ${oneLocation.name}"></p>
+                                <p th:text="'Διεύθυνση :' + ${oneLocation.address}"></p>
+                                <p th:text="'Έγκυρο μέχρι τις :' + ${oneLocation.validUntil}"></p>
                                 <hr/>
                             </th:block>
                         </div>
