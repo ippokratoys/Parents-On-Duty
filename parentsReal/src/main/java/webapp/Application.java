@@ -19,7 +19,7 @@ import webapp.database.repositories.OrganiserRepository;
 
 @EnableJpaRepositories(basePackages="webapp.database.*")
 @ComponentScan("webapp.database.initializer.*")
-@EnableElasticsearchRepositories("webapp.database.elasticsearch.")
+@EnableElasticsearchRepositories("webapp.database.elasticsearch.*")
 @ComponentScan("webapp.*")
 @SpringBootApplication
 @EnableWebSecurity

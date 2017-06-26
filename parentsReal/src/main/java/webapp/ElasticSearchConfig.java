@@ -11,6 +11,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.context.annotation.Configuration;
 import webapp.database.Eventsgroup;
+import webapp.database.elasticsearch.EventSearch;
 
 import java.net.InetAddress;
 
@@ -56,11 +57,10 @@ public class ElasticSearchConfig {
         System.out.println("I am here\n\n\n\n\n\nEEEE\n\n\n");
         ElasticsearchOperations elasticsearchOperations=new ElasticsearchTemplate(nodeBuilder().local(true).node().client());
         //initialize the index of elastic search
-        elasticsearchOperations.deleteIndex(Eventsgroup.class);
-        elasticsearchOperations.createIndex(Eventsgroup.class);
-        elasticsearchOperations.putMapping(Eventsgroup.class);
-        elasticsearchOperations.refresh(Eventsgroup.class);
-
+        elasticsearchOperations.deleteIndex(EventSearch.class);
+        elasticsearchOperations.createIndex(EventSearch.class);
+        elasticsearchOperations.putMapping(EventSearch.class);
+        elasticsearchOperations.refresh(EventSearch.class);
         return elasticsearchOperations;
     }
 

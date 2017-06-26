@@ -10,7 +10,6 @@ import java.util.List;
  * The persistent class for the eventsgroup database table.
  * 
  */
-@Document(indexName = "events_index" , type = "eventsgroup")
 @Entity
 @NamedQuery(name="Eventsgroup.findAll", query="SELECT e FROM Eventsgroup e")
 public class Eventsgroup implements Serializable {
