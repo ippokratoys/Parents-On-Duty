@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Welcome boss admin</title>
+    <title>Accept_Event</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
-	<link href="/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/css/admin_profile.css" rel="stylesheet"/>
+	<link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/admin_profile.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/admin_profile.js"></script>
@@ -32,18 +32,20 @@
                 <li><a href="/admin/profile">Προφίλ</a></li>
                 <li><a href="/admin/block_user">Μπλοκάρισμα Χρήστη</a></li>
                 <li class="active"><a href="/admin/accept_event">Αποδοχή Εκδήλωσης</a></li>
-                <li><a href="/admin/wallet">Πορτοφόλι</a></li>
             </ul>
         </div>
     </div>
     <div id="main">
         <div class="col-md-12">
+            <h2>Αποδοχή Εκδηλώσεων</h2>
+            <hr/>
+            <br/>
             <p class="visible-xs">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
             </p>
 
             <div class="row">
-			
+
                 <div class="col-md-4">
                     <div class="well pre-scrollable">
                         <div id="myevents">
@@ -60,15 +62,15 @@
                                 <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>
                                 <hr/>
                             </th:block-->
-							
+
 							<p>123123123123123123123123123&nbsp;<button class="button1" onclick="BlockToggle()">Αποδοχή</button>&nbsp;<button class="button1" onclick="BlockToggle()">Απόρριψη</button></p>
 							<p>456456456456456456456456456&nbsp;<button class="button1" onclick="BlockToggle()">Αποδοχή</button>&nbsp;<button class="button1" onclick="BlockToggle()">Απόρριψη</button></p>
 							<p>789789789789789789789789789&nbsp;<button class="button1" onclick="BlockToggle()">Αποδοχή</button>&nbsp;<button class="button1" onclick="BlockToggle()">Απόρριψη</button></p>
-							
+
                         </div>
                     </div>
                 </div>
-				
+
             </div>
 
         </div>
