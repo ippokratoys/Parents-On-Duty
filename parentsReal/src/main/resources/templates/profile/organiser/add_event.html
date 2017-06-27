@@ -4,28 +4,21 @@
     <title>New event</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/css/add_place.css" rel="stylesheet"/>
+    <link href="/css/add_event.css" rel="stylesheet"/>
     <!--DatePicker-->
-     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
- 	<link rel="stylesheet" href="/resources/demos/style.css"/>
-  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  	<script>
-  		$( function() {
-    	$( "#datepicker" ).datepicker();
-  		} );
-  	</script>
-  	 <script type="text/javascript" src="/js/Datepair.js"></script>
-  	  <script type="text/javascript" src="/js/jquery.datepair.js"></script>
-	<script>
-  	$('#durationExample').timepicker({
-  	    'minTime': '09:00am',
-  	    'maxTime': '11:30pm',
-  	    'showDuration': true
-  		});
-  	</script>
+    <!-- ... -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/moment.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/js/jasny-bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
+    <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+    </script>
   </head>
 
  <body>
@@ -61,44 +54,98 @@
 		          <h2>Προσθήκη Εκδήλωσης</h2>
 		          <hr/>
                   <form th:action="@{/organiser/add_event}" method="get" id="Add_event">
-                      <div class="row">
-                        <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
-                            <h3>Διάλεξε Μέρος</h3>
-                            <div id="selectionplace">
-                                <select class="selectplace">
-                                    <th:block th:each="onePlace : ${organiserPlaces}" >
-                                        <option th:value="onePlace.id" th:text="${onePlace.address}"></option>
-                                    </th:block>
-                                  </select>
-                            </div>
-                        </div>
+                      <script>
+                      function create_event(){
+                          document.getElementById("forma").style.display="block";
+                          document.getElementById("choices").style.display="none";
+                      }
+                      </script>
+                      <script>
+                      function choose_event(){
+                          document.getElementById("oldevent").style.display="block";
+                          document.getElementById("choices").style.display="none";
+                      }
+                      </script>
+                      <div class="btn-toolbar "  id="choices">
+                          <button type="button" class="btn btn-primary " onclick="create_event()">Δημιουγία Νέας</button>
+                          <button type="button" class="btn btn-primary " onclick="choose_event()">Επέλεξε Υπάρχον</button>
                       </div>
-    		          <div class="row">
-    		           <div class="col-xs-12 col-md-4 col-sm-8">
-    		           		<h3>Συμπλήρωσε Όνομα Εκδήλωσης</h3>
-    				          <div class="form-group">
-    							<input type="text" class="form-control" id="Place_Name" name="Place" placeholder="Π.χ. Βραδιά Ποδόσφαιρου " aria-describedby="helpQuery" value=""/>
-    		        		</div>
-    		        	</div>
-    	        	</div>
-    	        	<div class="row">
-    		           <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
-    		           		<h3>Συμπλήρωσε Ημερομηνία</h3>
-
-    		              	<input class="form-control" id="datepicker" name="date" placeholder="MM/DD/YYY" type="text"/>
-    		        	</div>
-    	        	</div>
-    		          <div class="row">
-    		          	<div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
-    		           		<h3>Συμπλήρωσε Ώρα</h3>
-
-    		              	<input class="form-control" id="timepicker" name="time" placeholder="Π.χ. 13:55" type="text"/>
-    		        	</div>
-    		          </div>
-                      <div class="row">
-                          <div class="row col-xs-6 col-md-2 col-sm-4 col-md-offset-1 col-sm-offset-2 col-xs-offset-3">
-                              	<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="Add_event" value="Submit"><i class="fa fa-search" aria-hidden="true">Πρόσθεσε Μέρος</i></button>
+                      <div id="forma">
+                          <div class="row">
+                            <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
+                                <h3>Διάλεξε Μέρος</h3><a href="/organiser/add_place">Θες Καινούργιο Πατησέ Με!</a>
+                                <div id="selectionplace">
+                                    <select class="selectplace">
+                                        <th:block th:each="onePlace : ${organiserPlaces}" >
+                                            <option th:value="onePlace.id" th:text="${onePlace.address}"></option>
+                                        </th:block>
+                                      </select>
+                                </div>
+                            </div>
                           </div>
+        		        <div class="row">
+        		              <div class="col-xs-12 col-md-4 col-sm-8">
+        		           		<h3>Συμπλήρωσε Όνομα Εκδήλωσης</h3>
+        				          <div class="form-group">
+        							<input type="text" class="form-control" id="Place_Name" name="Place" placeholder="Π.χ. Βραδιά Ποδόσφαιρου " aria-describedby="helpQuery" value=""/>
+        		        		</div>
+        		        	</div>
+        	        	</div>
+                        <div class="row">
+        		           <div class="col-xs-12 col-md-4 col-sm-8">
+        		           		<h3>Περιέγραψε την Εκδήλωση</h3>
+        				          <div class="form-group">
+                                     <textarea class="form-control custom-control" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι εμείς και τα παιδιά σας.... " rows="3" style="resize:none"></textarea>
+        		        		</div>
+        		        	</div>
+        	        	</div>
+        	        	<div class="row">
+        		           <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
+        		           		<h3>Συμπλήρωσε Ημερομηνία και Ώρα</h3>
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+        		        	</div>
+        	        	</div>
+                          <div class="row">
+        		          	<div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
+        		           		<h3>Συμπλήρωσε Θέσεις</h3>
+        		              	<input type="number" min="1"/>
+        		        	</div>
+        		          </div>
+                          <div class="row">
+        		          	<div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
+        		           		<h3>Συμπλήρωσε Τιμή</h3>
+        		              	<input type="number" min="1.00" step="0.01"/>
+        		        	</div>
+        		          </div>
+                          <div class="row">
+        		          	<div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
+        		           		<h3>Ανέβασε Φωτογραφία Εκδήλωσης</h3>
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <span class="btn btn-default btn-file"><input type="file" name="..."/></span>
+                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                </div>
+        		        	</div>
+                        </div>
+                          <div class="row">
+                              <div class="row col-xs-6 col-md-2 col-sm-4 col-md-offset-1 col-sm-offset-2 col-xs-offset-3">
+                                  	<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="Add_event" value="Submit">Πρόσθεσε Εκδήλωση</button>
+                              </div>
+                          </div>
+                      </div>
+                      <div id="oldevent">
+                        <div class="well pre-scrollable" >
+                            <th:block th:if="${ organiser.events != null}" th:each="oneEvent : ${organiser.events}">
+                                <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
+                                <p th:text=" 'Ημερομηνία : '+${oneEvent.day}"></p>
+                                <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>
+                                <hr/>
+                            </th:block>
+                        </div>
                       </div>
                   </form>
 		          <br/>

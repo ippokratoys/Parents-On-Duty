@@ -29,7 +29,6 @@ hr {
 
 body, html {
   margin: 0;
-  overflow: hidden;
   height:100%;
 }
 .iframe-container{
