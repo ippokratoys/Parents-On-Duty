@@ -7,6 +7,7 @@ import org.elasticsearch.index.query.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 import webapp.database.Customer;
@@ -37,18 +38,47 @@ public class ResultService {
         SimpleDateFormat dateParser = new SimpleDateFormat("dd/mm/yyyy");
     }
 
+    int fromPrice(int price)
+    {
+        if(price == 1)
+            return 0;
+        else if (price == 2)
+            return 100;
+        else if (price == 3)
+            return 500;
+        else if (price == 4)
+            return 1000;
+        else if (price == 5)
+            return 2000;
+        else
+            return 3000;
+    }
+    int toPrice(int price)
+    {
+        if(price == 1)
+            return 0;
+        else if (price == 2)
+            return 500;
+        else if (price == 3)
+            return 1000;
+        else if (price == 4)
+            return 2000;
+        else if (price == 5)
+            return 3000;
+        else
+            return 999999999;
+    }
     @Autowired
     EventsgroupRepository eventsgroupHandler;
-
     @Autowired
     private EventSearchRepository esEventSearchRepository;
 
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
-    public List<EventSearch> getResults(String searchterm, String fromDate, String toDate, int price, int age, int distance){
+    public List<EventSearch> getResults(String searchTerm, String fromDate, String toDate, int price, int age, int distance){
 
-        QueryBuilder myQuery= QueryBuilders.multiMatchQuery(searchterm)
+        QueryBuilder myQuery= QueryBuilders.multiMatchQuery(searchTerm)
                 .field("name^3")
                 .field("description^1")
                 .field("type^2")
@@ -57,21 +87,26 @@ public class ResultService {
                 .zeroTermsQuery(MatchQueryBuilder.ZeroTermsQuery.ALL)
                 .analyzer("greek");
 
+        BoolQueryBuilder finalQuery = new BoolQueryBuilder();
 
-        RangeQueryBuilder rangeAge = QueryBuilders.rangeQuery("price").from(100).to(1500);
-        RangeQueryBuilder rangeDate = null;
-
-        try {
-            rangeDate = QueryBuilders.rangeQuery("day")
-                    .from( dateParser.parse("1/1/2017") )
-                    .to( dateParser.parse("15/1/2017") );
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if(fromDate != null) {
+            RangeQueryBuilder rangeDate = null;
+            try {
+                rangeDate = QueryBuilders.rangeQuery("day").from(dateParser.parse(fromDate)).to(dateParser.parse(toDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            finalQuery = finalQuery.filter(rangeDate);
         }
 
-        BoolQueryBuilder finalQuery = new BoolQueryBuilder()
-                .must(rangeAge)
-                .must(rangeDate);
+        int fromP = fromPrice(price);
+        int toP = toPrice(price);
+
+        if(fromP > 0){
+            RangeQueryBuilder rangePrice = QueryBuilders.rangeQuery("price").from(fromP).to(toP);
+            finalQuery = finalQuery.filter(rangePrice);
+        }
+
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(myQuery)
                 .withFilter(finalQuery)
@@ -82,13 +117,20 @@ public class ResultService {
         List <EventSearch> results= new ArrayList<EventSearch>();
         for (EventSearch aEventSearch :
                 resultsIter) {
-            results.add(aEventSearch);
+            if(age >= 0  ){
+                if( aEventSearch.getAgeTo()>=age && aEventSearch.getAgeFrom()<=age){
+                    results.add(aEventSearch);
+                }
+            }else {
+                results.add(aEventSearch);
+            }
         }
         System.out.println(results);
         return results;
     }
 
-    public List<EventSearch> getResultsByUser(String searchterm, Customer customer){
-        return getResults(searchterm);
+
+    public List<EventSearch> getResultsByUser(String searchTerm, String fromDate, String toDate, int price, int age, int distance, Customer customer){
+        return getResults(searchTerm, fromDate,toDate,price,age, distance);
     }
 }
