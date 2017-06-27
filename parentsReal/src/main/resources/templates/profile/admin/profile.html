@@ -3,8 +3,59 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Welcome boss admin</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+	<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/admin_profile.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/admin_profile.js"></script>
 </head>
+
 <body>
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <a style="color:white" class="navbar-brand" href="/">
+            <div style="font-family:Comic Sans MS,cursive,sans-serif">
+                <div class="title_spec" >Parents On Duty</div>
+            </div>
+        </a>
+    </div>
+</div><!--/.navbar -->
+
+
+<div class="row-offcanvas row-offcanvas-left">
+    <div id="sidebar" class="sidebar-offcanvas">
+        <div class="col-md-12">
+            <h3>Άλλες Επιλογές</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/admin/profile">Προφίλ</a></li>
+                <li><a href="/admin/block_user">Μπλοκάρισμα Χρήστη</a></li>
+                <li><a href="/admin/accept_event">Αποδοχή Εκδήλωσης</a></li>
+                <li><a href="/admin/wallet">Πορτοφόλι</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <div class="col-md-12">
+            <p class="visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
+            </p>
+            <h2>Το προφίλ μου</h2>
+            <div class="row">
+                <div class="col-md-8"><div class="well">
+                    <h4 th:inline="text"><b>Όνομα: [[${organiser.name}]]</b></h4>
+                    <h4 th:inline="text"><b>Επίθετο: [[${organiser.surname}]]</b></h4>
+                    <h4 th:inline="text"><b>E-mail: [[${organiser.login_email}]]</b></h4>
+                    <h4 th:inline="text"><b>Γενέθλια: [[${organiser.birthdate}]]</b></h4>
+                </div></div>
+            </div>
+
+            <div class="row">
+            </div>
+        </div>
+    </div>
+</div><!--/row-offcanvas -->
 
 </body>
 </html>
