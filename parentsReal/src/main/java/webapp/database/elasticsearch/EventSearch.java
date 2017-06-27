@@ -1,6 +1,9 @@
 package webapp.database.elasticsearch;
 
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldIndex;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import webapp.database.Event;
 import webapp.database.Location;
 import webapp.database.Organiser;
@@ -48,6 +51,7 @@ public class EventSearch implements Serializable {
 
     private Time time;
 
+    @Field(type = FieldType.Integer)
     private int price;
 
     private BigDecimal lat;
@@ -56,10 +60,13 @@ public class EventSearch implements Serializable {
 
     private int importance;
 
+    @Field(type = FieldType.String, index = FieldIndex.analyzed, analyzer = "greek", searchAnalyzer = "greek" )
     private String name;
 
+    @Field(type = FieldType.String, index = FieldIndex.analyzed, analyzer = "greek", searchAnalyzer = "greek" )
     private String type;
 
+    @Field(type = FieldType.String, index = FieldIndex.analyzed, analyzer = "greek", searchAnalyzer = "greek" )
     private String description;
 
     private int ageFrom;
