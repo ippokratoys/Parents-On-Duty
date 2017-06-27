@@ -96,6 +96,10 @@
 							<i class="fa fa-building-o form-control-feedback"></i>
 							<span id="helpQuery" class="help-block hidden">Σε τι βοηθάει αυτό;</span>
 						</div>
+						<div class="form-group">
+							<label for="distance">Αποσταση</label>
+							<input type="number" class="form-control" id="distance" name="distance" min="1" max="30" th:value="${allParams!=null} ? ${allParams.get('distance')} : '4'"/>
+						</div>
 						<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
 	            	</form>
 	    		</div>
