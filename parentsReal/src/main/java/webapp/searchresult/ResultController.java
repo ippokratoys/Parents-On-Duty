@@ -74,12 +74,12 @@ public class ResultController {
 
 
     	List<EventSearch> results=null;
-
+		String dates[] = date.split("-");
 		if(userDetails!=null && userDetails.getAuthorities().toString().contains("PARENT")){
 			Customer myUser=customerRepository.findOne(userDetails.getUsername());
-			results=resultService.getResultsByUser(freeText,myUser);
+//			results=resultService.getResultsByUser(freeText,dates[0].trim(),dates[1].trim(),price,ageArg,myUser);
 		}else{
-			results=resultService.getResults(freeText);
+			results=resultService.getResults(freeText,dates[0].trim(),dates[1].trim(),price,ageArg,distanceArg);
 		}
 			//System.out.println(results.get(0).getEventHasCustomers().get(0).getEventsfeedbacks());
 
