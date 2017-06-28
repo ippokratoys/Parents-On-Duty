@@ -47,7 +47,6 @@ public class ResultController {
 			@RequestParam(name="Dates") String date,
 			@RequestParam(name="Price") int price,
 			@RequestParam(name="Age") String age,
-			@RequestParam(name="ExtraTags") String extraTags,
 			@RequestParam(name="distance") String distance,
 			Model model
 	){
@@ -69,17 +68,21 @@ public class ResultController {
     	System.out.println("Free text:"+freeText);
     	System.out.println("Date:"+date);
     	System.out.println("Price "+ price);
-    	System.out.println("Age "+age);
-    	System.out.println("Extra Tags:"+extraTags);
+    	System.out.println("Age "+ageArg);
+    	System.out.println("Distance"+distanceArg);
 
 
     	List<EventSearch> results=null;
-		String dates[] = date.split("-");
+		String[] dates = date.split("-");
+		if(date ==null || date=="" || date==" " ||dates.length==1){
+			dates=new String[2];
+			dates[0]=null;dates[1]=null;
+		}
 		if(userDetails!=null && userDetails.getAuthorities().toString().contains("PARENT")){
 			Customer myUser=customerRepository.findOne(userDetails.getUsername());
-//			results=resultService.getResultsByUser(freeText,dates[0].trim(),dates[1].trim(),price,ageArg,myUser);
+//			results=resultService.getResultsByUser(freeText,dates[0],dates[1],price,ageArg,myUser);
 		}else{
-			results=resultService.getResults(freeText,dates[0].trim(),dates[1].trim(),price,ageArg,distanceArg);
+			results=resultService.getResults(freeText,dates[0],dates[1],price,ageArg,distanceArg);
 		}
 			//System.out.println(results.get(0).getEventHasCustomers().get(0).getEventsfeedbacks());
 

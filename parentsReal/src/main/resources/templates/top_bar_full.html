@@ -96,7 +96,7 @@
 						</div>
 						<div class="form-group">
 	                   		<label for="Age">Ηλικία</label>
-							<input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2" th:value="${allParams!=null} ? ${allParams.get('Age')} : '4'"/>
+							<input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2" th:value="${allParams!=null} ? ${allParams.get('Age')} : ''"/>
 						</div>
 						<div class="form-group">
 	                   		<label for="query_tags">Extra Tags</label>
@@ -106,7 +106,7 @@
 						</div>
 						<div class="form-group">
 							<label for="distance">Αποσταση</label>
-							<input type="number" class="form-control" id="distance" name="distance" min="1" max="30" th:value="${allParams!=null} ? ${allParams.get('distance')} : '4'"/>
+							<input type="number" class="form-control" id="distance" name="distance" min="1" max="30" th:value="${allParams!=null} ? ${allParams.get('distance')} : ''"/>
 						</div>
 						<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
 	            	</form>

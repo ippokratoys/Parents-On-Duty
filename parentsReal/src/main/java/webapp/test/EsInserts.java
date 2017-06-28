@@ -10,6 +10,9 @@ import webapp.database.elasticsearch.EventSearch;
 import webapp.database.elasticsearch.EventSearchRepository;
 import webapp.database.repositories.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -55,4 +58,18 @@ public class EsInserts {
         return "index";
     }
 
+    @RequestMapping("/test/show")
+    public String allPage(){
+        Iterator<EventSearch> restult=  eventSearchRepository.findAll().iterator();
+        int i=1;
+        while (restult.hasNext()){
+            EventSearch current=restult.next();
+            System.out.print("-------  "+i+"  ----------");
+            System.out.print(current.getId()+" ");
+            System.out.print(current.getName()+" ");
+            System.out.print("\n");
+            i++;
+        }
+        return "index";
+    }
 }

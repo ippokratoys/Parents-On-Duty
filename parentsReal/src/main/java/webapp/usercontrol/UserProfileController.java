@@ -25,6 +25,8 @@ public class UserProfileController {
             @AuthenticationPrincipal final UserDetails userDetails,//we add this so we know if is logged to show correct bar
             Model model
     ){
+        Customer customer=customerRepository.findOne(userDetails.getUsername());
+        model.addAttribute("curUser",customer);
         return "profile/parent/profile";
     }
 

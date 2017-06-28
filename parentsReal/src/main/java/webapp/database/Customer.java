@@ -39,6 +39,10 @@ public class Customer implements Serializable {
 	@OneToOne
 	private Login login;
 
+	@OneToMany(mappedBy = "customer")
+	private List<BookEvent> bookEvents;
+
+
 	//bi-directional many-to-many association to Event
 //	@ManyToMany(mappedBy="customer")
 //	@OneToMany(mappedBy = "primaryKey.customer",
@@ -95,6 +99,7 @@ public class Customer implements Serializable {
 		return lat;
 	}
 
+
 	public void setLat(BigDecimal lat) {
 		this.lat = lat;
 	}
@@ -107,4 +112,11 @@ public class Customer implements Serializable {
 		this.lon = lon;
 	}
 
+	public List<BookEvent> getBookEvents() {
+		return bookEvents;
+	}
+
+	public void setBookEvents(List<BookEvent> bookEvents) {
+		this.bookEvents = bookEvents;
+	}
 }

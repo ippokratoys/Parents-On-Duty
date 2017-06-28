@@ -9,10 +9,10 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Search Results</title>
+    <title>Αποτελέσματα Αναζήτησης</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom CSS -->
     <link href="/css/1-col-portfolio.css" rel="stylesheet"/>
@@ -34,7 +34,7 @@
 <!-- Page Content -->
     <div class="container">
 			<div class="col-xs-12 col-md-6 col-sm-12" id="left">
-				<h1 class="page-header">Αποτελέσματα Αναζήτησης</h1>
+				<h1 class="page-header" th:text="'Αποτελέσματα Αναζήτησης ('+( ${searchResults!=null} ? ${searchResults.size()} : 0) +')'"></h1>
 				<th:block th:unless="${searchResults== null || searchResults.size() == 0}" th:each="oneEvent : ${searchResults}">
 					<hr/>
 					<a  style="color: black !important;" th:href="'/event?id='+${oneEvent.id}"><h2 th:text="${oneEvent.name}"></h2></a>

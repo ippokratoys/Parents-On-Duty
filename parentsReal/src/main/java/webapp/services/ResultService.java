@@ -120,7 +120,7 @@ public class ResultService {
 
        SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(myQuery)
-                .withFilter(finalQuery)
+//                .withFilter(finalQuery)
                 .build();
 
 

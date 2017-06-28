@@ -36,7 +36,7 @@ public class LoginController {
 	){
 		if(userDetails.getAuthorities().toString().contains("PARENT")){
 //			return "profile/parent/profile";
-			return "redirect:parent/profile";
+			return "redirect:user/profile";
 		}else if(userDetails.getAuthorities().toString().contains("ADMIN")){
 //			return "profile/admin/profile";
 			return "redirect:admin/profile";
