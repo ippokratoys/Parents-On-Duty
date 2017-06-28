@@ -1,9 +1,7 @@
 package webapp.database.elasticsearch;
 
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldIndex;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.*;
+import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 import webapp.database.Event;
 import webapp.database.Location;
 import webapp.database.Organiser;
@@ -34,6 +32,7 @@ public class EventSearch implements Serializable {
         this.price=event.getPrice();
         this.lat=event.getLocation().getLat();
         this.lon=event.getLocation().getLon();
+        this.location= new GeoPoint(lat.doubleValue(),lon.doubleValue());
         this.importance=event.getImportance();
         this.name=event.getEventsgroup().getName();
         this.type=event.getEventsgroup().getType();
@@ -54,6 +53,17 @@ public class EventSearch implements Serializable {
 
     @Field(type = FieldType.Integer)
     private int price;
+
+    @GeoPointField
+    GeoPoint location;
+
+    public GeoPoint getLocation() {
+        return location;
+    }
+
+    public void setLocation(GeoPoint location) {
+        this.location = location;
+    }
 
     private BigDecimal lat;
 

@@ -6,10 +6,10 @@ import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.Query;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.data.elasticsearch.core.geo.GeoPoint;
+import org.springframework.data.elasticsearch.core.query.*;
 import org.springframework.stereotype.Service;
 import webapp.database.Customer;
 import webapp.database.Event;
@@ -90,7 +90,7 @@ public class ResultService {
         BoolQueryBuilder finalQuery = new BoolQueryBuilder();
 
 
-        /*
+
         if(fromDate != null) {
             RangeQueryBuilder rangeDate = null;
             try {
@@ -100,7 +100,7 @@ public class ResultService {
             }
             finalQuery = finalQuery.filter(rangeDate);
         }
-        */
+
 
 
         int fromP = fromPrice(price);
@@ -111,22 +111,30 @@ public class ResultService {
             finalQuery = finalQuery.filter(rangePrice);
         }
 
-        /*
-       QueryBuilder qb = QueryBuilders.geoDistanceQuery("lat,lon")
-                .point(37.97945, 23.71622)
-                .distance(dist, DistanceUnit.KILOMETERS);
-       finalQuery.must(qb);
-       */
+
+        System.out.println("DIST IS : "+ dist);
+        if(dist>0) {
+//            CriteriaQuery distanceCriteria= new CriteriaQuery(
+//                    new Criteria("location").within(
+//                            new GeoPoint(37.974535, 23.775358),String.valueOf(dist)+"km"));
+            QueryBuilder qb = QueryBuilders.geoDistanceQuery("location")
+                    .point(37.97945, 23.71622)
+                    .distance(dist, DistanceUnit.KILOMETERS);
+            finalQuery.must(qb);
+        }
+
 
        SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(myQuery)
-//                .withFilter(finalQuery)
+                .withPageable(new PageRequest(0, 50))
+                .withFilter(finalQuery)
                 .build();
 
 
        Iterable<EventSearch> resultsIter = elasticsearchTemplate.queryForList(searchQuery,EventSearch.class);
 
        List <EventSearch> results= new ArrayList<EventSearch>();
+
        for (EventSearch aEventSearch :
                 resultsIter) {
             if(age >= 0  ){
@@ -142,7 +150,75 @@ public class ResultService {
     }
 
 
-    public List<EventSearch> getResultsByUser(String searchTerm, String fromDate, String toDate, int price, int age, int distance, Customer customer){
-        return getResults(searchTerm, fromDate,toDate,price,age, distance);
+    public List<EventSearch> getResultsByUser(String searchTerm, String fromDate, String toDate, int price, int age, int dist, double lat, double lon){
+
+        QueryBuilder myQuery= QueryBuilders.multiMatchQuery(searchTerm)
+                .field("name^3")
+                .field("description^1")
+                .field("type^2")
+                .type(MultiMatchQueryBuilder.Type.BEST_FIELDS)
+                .fuzziness(Fuzziness.TWO)
+                .zeroTermsQuery(MatchQueryBuilder.ZeroTermsQuery.ALL)
+                .analyzer("greek");
+        BoolQueryBuilder finalQuery = new BoolQueryBuilder();
+
+
+
+        if(fromDate != null) {
+            RangeQueryBuilder rangeDate = null;
+            try {
+                rangeDate = QueryBuilders.rangeQuery("day").from(dateParser.parse(fromDate)).to(dateParser.parse(toDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            finalQuery = finalQuery.filter(rangeDate);
+        }
+
+
+
+        int fromP = fromPrice(price);
+        int toP = toPrice(price);
+
+        if(fromP > 0){
+            RangeQueryBuilder rangePrice = QueryBuilders.rangeQuery("price").from(fromP).to(toP);
+            finalQuery = finalQuery.filter(rangePrice);
+        }
+
+
+        System.out.println("DIST IS : "+ dist);
+        if(dist>0) {
+//            CriteriaQuery distanceCriteria= new CriteriaQuery(
+//                    new Criteria("location").within(
+//                            new GeoPoint(37.974535, 23.775358),String.valueOf(dist)+"km"));
+            QueryBuilder qb = QueryBuilders.geoDistanceQuery("location")
+                    .point(lat, lon)
+                    .distance(dist, DistanceUnit.KILOMETERS);
+            finalQuery.must(qb);
+        }
+
+
+        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(myQuery)
+                .withPageable(new PageRequest(0, 50))
+                .withFilter(finalQuery)
+                .build();
+
+
+        Iterable<EventSearch> resultsIter = elasticsearchTemplate.queryForList(searchQuery,EventSearch.class);
+
+        List <EventSearch> results= new ArrayList<EventSearch>();
+
+        for (EventSearch aEventSearch :
+                resultsIter) {
+            if(age >= 0  ){
+                if( aEventSearch.getAgeTo()>=age && aEventSearch.getAgeFrom()<=age){
+                    results.add(aEventSearch);
+                }
+            }else {
+                results.add(aEventSearch);
+            }
+        }
+        System.out.println(results);
+        return results;
     }
 }
