@@ -2,6 +2,7 @@ package webapp.database;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -28,8 +29,8 @@ public class Event implements Serializable {
 
 	private int spots;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date day;
 
 	private Time time;

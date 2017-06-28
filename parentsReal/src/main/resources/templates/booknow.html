@@ -65,7 +65,7 @@
 				  </tr>
 				  <tr>
 					<th>Ημερομηνία</th>
-					<td><b><i th:text="${curEvent.day}">16/06/18</i></b></td>
+					<td><b><i th:text="${#dates.format(curEvent.day,'dd/MM/yyyy')}">06/06/06</i></b></td>
 				  </tr>
 
 				</table>

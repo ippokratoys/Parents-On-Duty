@@ -2,12 +2,14 @@ package webapp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import webapp.database.Event;
 import webapp.database.Location;
 import webapp.database.Organiser;
 import webapp.database.repositories.LocationRepository;
 import webapp.database.repositories.OrganiserRepository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by thanasis on 23/6/2017.
@@ -24,4 +26,13 @@ public class OrganiserService {
         return organiser.getLocations();
     }
 
+    public Event createEvent(Event newEvent){
+
+        return null;
+    }
+
+    public Event createEvent(Map<String,String> allParams){
+
+        return null;
+    }
 }

@@ -132,7 +132,7 @@
 	            	<div class="thumbnail">
 	                    <div class="caption-full">
 	                    	<h2 th:text=" ${theEvent.eventsgroup.name}" > </h2>
-	                    	<h4 th:inline="text">Ημερομηνία: [[${theEvent.day}]] [[${theEvent.time}]]</h4>
+	                    	<h4 th:inline="text">Ημερομηνία: [[${#dates.format(theEvent.day,'dd/MM/yyyy')}]] [[${theEvent.time}]]</h4>
 	                        <p th:inline="text">[[${theEvent.eventsgroup.description}]]</p>
 	                        <hr/>
 	                        <!--    <h5><b>Telephone: 2109245444</b></h5> -->

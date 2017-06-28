@@ -22,10 +22,16 @@ public class NewEventController {
                                      @RequestParam Map<String,String> allRequestParams,
                                      @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
     ){
+        System.out.println("allRequestParams = [" + allRequestParams +"]");
+        for (int i = 0; i < allRequestParams.size(); i++) {
+            if(allRequestParams.get(i)=="" || allRequestParams.get(i).trim()==""){
+                return "reditect:profile/organiser/add_event?error=empty_field";
+            }
+        }
+
         //check if form elements are ok
 
-
-        return "redirect:profile/organiser/my_events?EventAdded=True";
+        return "redirect:profile/organiser/profile?EventAdded=True";
     }
 
 }
