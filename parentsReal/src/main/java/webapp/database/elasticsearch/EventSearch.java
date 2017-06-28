@@ -47,6 +47,7 @@ public class EventSearch implements Serializable {
     @org.springframework.data.annotation.Id
     private int id;
 
+    @Field(type = FieldType.Date)
     private Date day;
 
     private Time time;

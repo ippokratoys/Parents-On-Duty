@@ -2,6 +2,7 @@ package webapp.services;
 
 import org.apache.lucene.queryparser.xml.FilterBuilder;
 import org.apache.lucene.queryparser.xml.builders.RangeFilterBuilder;
+import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import webapp.database.Eventsgroup;
 import webapp.database.elasticsearch.EventSearch;
 import webapp.database.elasticsearch.EventSearchRepository;
 import webapp.database.repositories.EventsgroupRepository;
-
+import org.elasticsearch.search.sort.SortBuilders;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -76,19 +77,20 @@ public class ResultService {
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
-    public List<EventSearch> getResults(String searchTerm, String fromDate, String toDate, int price, int age, int distance){
+    public List<EventSearch> getResults(String searchTerm, String fromDate, String toDate, int price, int age, int dist){
 
         QueryBuilder myQuery= QueryBuilders.multiMatchQuery(searchTerm)
                 .field("name^3")
                 .field("description^1")
                 .field("type^2")
-                .fuzziness(Fuzziness.TWO)
                 .type(MultiMatchQueryBuilder.Type.BEST_FIELDS)
+                .fuzziness(Fuzziness.TWO)
                 .zeroTermsQuery(MatchQueryBuilder.ZeroTermsQuery.ALL)
                 .analyzer("greek");
-
         BoolQueryBuilder finalQuery = new BoolQueryBuilder();
 
+
+        /*
         if(fromDate != null) {
             RangeQueryBuilder rangeDate = null;
             try {
@@ -98,24 +100,34 @@ public class ResultService {
             }
             finalQuery = finalQuery.filter(rangeDate);
         }
+        */
+
 
         int fromP = fromPrice(price);
         int toP = toPrice(price);
 
-        if(fromP > 0){
+       if(fromP > 0){
             RangeQueryBuilder rangePrice = QueryBuilders.rangeQuery("price").from(fromP).to(toP);
             finalQuery = finalQuery.filter(rangePrice);
         }
 
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+        /*
+       QueryBuilder qb = QueryBuilders.geoDistanceQuery("lat,lon")
+                .point(37.97945, 23.71622)
+                .distance(dist, DistanceUnit.KILOMETERS);
+       finalQuery.must(qb);
+       */
+
+       SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(myQuery)
                 .withFilter(finalQuery)
                 .build();
 
-        Iterable<EventSearch> resultsIter = elasticsearchTemplate.queryForList(searchQuery,EventSearch.class);
 
-        List <EventSearch> results= new ArrayList<EventSearch>();
-        for (EventSearch aEventSearch :
+       Iterable<EventSearch> resultsIter = elasticsearchTemplate.queryForList(searchQuery,EventSearch.class);
+
+       List <EventSearch> results= new ArrayList<EventSearch>();
+       for (EventSearch aEventSearch :
                 resultsIter) {
             if(age >= 0  ){
                 if( aEventSearch.getAgeTo()>=age && aEventSearch.getAgeFrom()<=age){
@@ -125,8 +137,8 @@ public class ResultService {
                 results.add(aEventSearch);
             }
         }
-        System.out.println(results);
-        return results;
+       System.out.println(results);
+       return results;
     }
 
 
