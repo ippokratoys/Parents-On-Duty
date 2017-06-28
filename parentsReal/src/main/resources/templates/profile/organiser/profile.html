@@ -73,6 +73,7 @@
                                 <th:block th:unless="${oneEvent.importance > 1}">
                                     <button style="color:#202f80" th:text="'Προωθήστε την εκδήλωση'"></button>
                                 </th:block>
+                                <p th:text=" 'Όνομα : '+${oneEvent.eventsgroup.name}"></p>
                                 <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
                                 <p th:text=" 'Ημερομηνία : '+${oneEvent.day}"></p>
                                 <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>

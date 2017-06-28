@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
     <script type="text/javascript">
             $(function () {
-                $('#datetimepicker1').datetimepicker();
+                $('#datetimepicker1').datetimepicker({format : "DD/MM/YYYY HH:mm"});
             });
     </script>
   </head>
@@ -140,9 +140,8 @@
                       <div id="oldevent">
                         <div class="well pre-scrollable" >
                             <th:block th:if="${ organiser.events != null}" th:each="oneEvent : ${organiser.events}">
-                                <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
-                                <p th:text=" 'Ημερομηνία : '+${oneEvent.day}"></p>
-                                <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>
+                                <p th:text=" 'Όνομα : '+${oneEvent.eventsgroup.name}"></p>
+                                <button type="submit" class="btn btn-primary btn-md " form="Add_event" value="Submit">Επέλεξε</button>
                                 <hr/>
                             </th:block>
                         </div>

@@ -15,18 +15,11 @@
 
 	<!--Yparxei h epilogh gia ta css pou kanoume link mesw istoselidas na ta syndeoume topika-->
     <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-	<!--DatePicker-->
-      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
-      <link rel="stylesheet" type="text/css" media="all" href="/bootstrap-daterangepicker-master/daterangepicker.css" />
-      <style type="text/css">
-      .demo { position: relative; }
-      .demo i {
-        position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer;
-      }
-      </style>
-    <!-- Custom CSS -->
     <link href="/css/full-width-pics.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <!-- Custom CSS -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,15 +56,15 @@
 				</div>
 				<table  class="form-group col-md-12" style="width:100%">
 				  <tr>
-					<th>Host</th>
+					<th>Οικοδεσπότης</th>
 					  <td><b><i th:text="${curEvent.getOrganiser().getName()} + ' ' + ${curEvent.getOrganiser().getSurname()} " id="Host"> </i></b></td>
 				  </tr>
 				  <tr>
-					<th>Price</th>
+					<th>Τιμή</th>
 					<td><b><i th:text="${curEvent.price/100}" id="Price"></i></b></td>
 				  </tr>
 				  <tr>
-					<th>Date</th>
+					<th>Ημερομηνία</th>
 					<td><b><i th:text="${curEvent.day}">16/06/18</i></b></td>
 				  </tr>
 
@@ -79,11 +72,34 @@
 				<p><br/><br/></p>
 				<form th:action=" '/event/book/confirm' " method="post" id="BookNow">
 					<label for="theseis">Αριθμός θέσεων</label>
-					<input type="number"  id="theseis" name="theseis" min="1" th:max="${availableSits}" value="1"/>
+					<input type="number"  id="theseis" name="theseis" min="1" max="10" th:max="${availableSits}" value="1"/>
+                    <br/>
 					<input type="hidden" id="eventId" name="eventId" th:value="${curEvent.idEvents}" />
+                    <hr/>
 					<div class="form-group col-md-12">
-						<button type="submit"  class="btn btn-info btn-lg btn-block" form="BookNow" value="Submit"><i class="fa fa-search" aria-hidden="true">Book Now!</i></button>
+                          <button type="button" class="btn btn-block btn-info btn-lg" data-toggle="modal" data-target="#myModal">Κλείσε Τώρα!</button>
 					</div>
+                    <!-- Modal -->
+                      <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h2 class="modal-title">Επιβεβαίωση</h2>
+                            </div>
+                            <div class="modal-body text-center" >
+                              <h3>Είστε σίγουρος ότι θέλετε να κάνετε την κράτηση;</h3>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-lg btn-primary pull-left" data-dismiss="modal">Ναί</button>
+                              <button type="button" class="btn btn-lg btn-primary pull-right" data-dismiss="modal">Όχι</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
 				</form>
 			</div>
 		</section>

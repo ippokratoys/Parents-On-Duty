@@ -4,11 +4,11 @@
     <title>User Profile</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/host_profile.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/host_profile.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <script type="text/javascript" src="js/host_profile.js"></script>
+    <script type="text/javascript" src="/js/host_profile.js"></script>
   </head>
 
 	<body>
@@ -21,7 +21,7 @@
 				</a>
 		    </div>
 		</div><!--/.navbar -->
-		
+
 		<div class="row-offcanvas row-offcanvas-left">
 		  <div id="sidebar" class="sidebar-offcanvas">
 		      <div class="col-md-12">
@@ -39,6 +39,8 @@
 		            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
 		          </p>
 		          <h2>Το προφίλ μου</h2>
+                  <hr />
+                  <br/>
 		          <div class="row">
 		              <div class="col-md-12"><div class="well">
 		              	<h4 th:inline="text"><b>Όνομα: [[${Organiser.Name}]]</b></h4>
@@ -72,9 +74,7 @@
 		      </div>
 		  </div>
 		</div><!--/row-offcanvas -->
-		  
-		  
+
+
 	</body>
 </html>
-    
-    
