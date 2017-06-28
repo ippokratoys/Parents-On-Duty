@@ -10,10 +10,18 @@
     <meta name="author" content=""/>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+	    <script src="js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
 	<!--Datepicker-->
-	     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
-      <link rel="stylesheet" type="text/css" media="all" href="bootstrap-daterangepicker-master/daterangepicker.css" />
+	  
+    <script type="text/javascript" src="js/datepicker/jquery.min.js"></script>
+	<script type="text/javascript" src="js/datepicker/moment.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="js/datepicker/bootstrap.css" />
+	
       <style type="text/css">
       .demo { position: relative; }
       .demo i {
@@ -107,16 +115,36 @@
 		</div>
     </nav>
 
-	<!--DatePicker-->
 
-	<script type="text/javascript" src="bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+	
+		<script type="text/javascript">
+		$(function() {
 
+		  $('input[name="Dates"]').daterangepicker({
+			  autoUpdateInput: false,
+			  locale: {
+			  
+				  cancelLabel: 'Clear'
+
+			  }
+		  });
+		  
+
+			
+		  $('input[name="Dates"]').on('apply.daterangepicker', function(ev, picker) {
+			  $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+		  });
+
+		  $('input[name="Dates"]').on('cancel.daterangepicker', function(ev, picker) {
+			  $(this).val('');
+		  });
+
+		});
+	</script>			
+	<link rel="stylesheet" type="text/css" media="all" href="js/datepicker/daterangepicker.css" />
+	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
 </body>
 
 </html>
