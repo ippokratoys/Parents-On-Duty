@@ -50,9 +50,20 @@
 		              <div class="col-md-4">
 		              	<div class="well">
 		              		<div id="myevents">
-		              			<h4><b>Εκδηλώσεις που έχω κλείσει:</b></h4>
-		              			<!--<h4  th:text="${curUser.bookEvents}"></h4>-->
-		              		</div>
+		              			<h4><b>Μελλοντικές Εκδηλώσεις που έχω κλείσει:</b></h4>
+								<th:block th:each="oneEvent : ${curUser.getBookEvents()}" th:if="${ oneEvent.event.day >= localDate}">
+									<hr/>
+									<div class="row">
+										<div>
+											<h2 th:text="${oneEvent.event.eventsgroup.name}"></h2>
+											<h4 th:text=" 'Τιμή : ' + ${oneEvent.event.price}/100 + '€'"></h4>
+											<h4 th:text=" 'Διεύθυνση : ' + ${oneEvent.event.location.address}"></h4>
+											<h4 th:text=" 'Ημερομηνία : ' + ${oneEvent.event.day}"></h4>
+											<br/>
+										</div>
+									</div>
+								</th:block>
+							</div>
 		              	</div>
 		              </div>
 		          </div>

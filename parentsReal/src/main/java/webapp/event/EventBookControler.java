@@ -76,7 +76,7 @@ public class EventBookControler {
 				return "error404";
 			}else if(e.getMessage()=="Customer is null"){
 				return "redirect:/login";
-			}else if(e.getMessage()=="Note enough points"){
+			}else if(e.getMessage()=="Not enough points"){
 				return "event?id="+curEvent.getIdEvents()+"?error=Not_enough_points"+"=True";
 			}else if(e.getMessage()=="Not enough sports available"){
 				return "redirect:/event/book?id="+eventId+"&"+"Not_enough_spots"+"=True";
