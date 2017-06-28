@@ -43,6 +43,10 @@ public class Customer implements Serializable {
 	private List<BookEvent> bookEvents;
 
 
+	@OneToMany(mappedBy = "customer")
+	private List<CustomerPaymentHistory> paymentHistories;
+
+
 	//bi-directional many-to-many association to Event
 //	@ManyToMany(mappedBy="customer")
 //	@OneToMany(mappedBy = "primaryKey.customer",
@@ -119,4 +123,13 @@ public class Customer implements Serializable {
 	public void setBookEvents(List<BookEvent> bookEvents) {
 		this.bookEvents = bookEvents;
 	}
+
+	public List<CustomerPaymentHistory> getPaymentHistories() {
+		return paymentHistories;
+	}
+
+	public void setPaymentHistories(List<CustomerPaymentHistory> paymentHistories) {
+		this.paymentHistories = paymentHistories;
+	}
+
 }

@@ -52,6 +52,10 @@ public class Organiser implements Serializable {
 	private List<Eventsgroup> eventsgroups;
 
 
+	@OneToMany(mappedBy="organiser",fetch = FetchType.LAZY)
+	private List<OrganiserPaymentHistory> organiserPaymentHistories;
+
+
 	@OneToMany(mappedBy="locationOwner")
 	private List<Location> locations;
 
@@ -119,6 +123,13 @@ public class Organiser implements Serializable {
 		this.taxpayerId = taxpayerId;
 	}
 
+	public List<OrganiserPaymentHistory> getOrganiserPaymentHistories() {
+		return organiserPaymentHistories;
+	}
+
+	public void setOrganiserPaymentHistories(List<OrganiserPaymentHistory> organiserPaymentHistories) {
+		this.organiserPaymentHistories = organiserPaymentHistories;
+	}
 
 	public Event addEvent(Event event) {
 		getEvents().add(event);
