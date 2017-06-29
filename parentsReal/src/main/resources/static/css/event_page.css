@@ -32,6 +32,14 @@ footer {
     margin: 0 auto;
 }
 
+#search_bar{
+    display: none;
+}
+
+#button_hide{
+    display: none;
+}
+
 hr {
     display: block;
     margin-top: 0.5em;

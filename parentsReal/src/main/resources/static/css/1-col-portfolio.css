@@ -27,6 +27,14 @@ hr {
     color: dodgerblue;
 }
 
+#search_bar{
+    display: none;
+}
+
+#button_hide{
+    display: none;
+}
+
 body, html {
   margin: 0;
   height:100%;

@@ -13,7 +13,14 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-
+    <script type="text/javascript" src="js/datepicker/jquery.min.js"></script>
+    <script type="text/javascript" src="js/datepicker/moment.min.js"></script>
+    <style type="text/css">
+      .demo { position: relative; }
+      .demo i {
+        position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer;
+      }
+    </style>
     <!-- Custom CSS -->
     <link href="/css/1-col-portfolio.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/map.js"></script>
@@ -23,24 +30,82 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <div th:replace="top_bar_full :: head-top-bar"></div>
+    <div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
 </head>
 
 <body>
 
     <!-- Navigation -->
-    <nav th:replace="top_bar_full :: 'nav-bar-full' "></nav>
+    <nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
 
 <!-- Page Content -->
     <div class="container">
 			<div class="col-xs-12 col-md-6 col-sm-12" id="left">
 				<h1 class="page-header" th:text="'Αποτελέσματα Αναζήτησης ('+( ${searchResults!=null} ? ${searchResults.size()} : 0) +')'"></h1>
+                <script>
+                function show_search(){
+                    document.getElementById("button_show").style.display="none";
+                    document.getElementById("button_hide").style.display="block";
+                    document.getElementById("search_bar").style.display="block";
+                }
+                </script>
+                <script>
+                function hide_search(){
+                    document.getElementById("button_show").style.display="block";
+                    document.getElementById("button_hide").style.display="none";
+                    document.getElementById("search_bar").style.display="none";
+                }
+                </script>
+                <button id="button_show" type="button" class="btn btn-primary " onclick="show_search()">Μήπως Ψάχνεις Κάτι Άλλο;</button>
+                <button id="button_hide" type="button" class="btn btn-primary " onclick="hide_search()">Κλείσιμο Αναζήτησης</button>
+                <!-- The searh-->
+                <form  action="/results" method="get" id="AboutSearches">
+
+                <div id="search_bar">
+                    <div class="form-group">
+                        <label for="Address_Search">Αναζήτηση Εκδήλωσης</label>
+                        <input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
+                        <i class="fa fa-building-o form-control-feedback"></i>
+                        <span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="config-demo">Επιλογή ημερομηνίας διοργάνωσης</label>
+                        <input type="text" id="config-demo" name="Dates" class="form-control" value="" th:value="${allParams!=null} ? ${allParams.get('Dates')} : ''"/>
+                    </div>
+                    <div class=" col-md-4 ">
+                        <div class="form-group">
+                            <label for="Prices">Εύρος Τιμών</label>
+                            <select name="Price" id="Prices"  class="form-control" th:selected="${allParams!=null} ? ${allParams.get('Price')} : 1 ">
+                                <option value="1"></option>
+                                <option value="2">1-5</option>
+                                <option value="3">5-10</option>
+                                <option value="4">10-15</option>
+                                <option value="5">15-20</option>
+                                <option value="6">20-25</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class=" col-md-4  ">
+                        <div class="form-group">
+                            <label for="Age">Ηλικία</label>
+                            <input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2" th:value="${allParams!=null} ? ${allParams.get('Age')} : ''"/>
+                        </div>
+                    </div>
+                    <div class=" col-md-4 ">
+                        <div class="form-group">
+                            <label for="distance">Αποσταση</label>
+                            <input type="number" class="form-control" id="distance" name="distance" min="1" max="30" th:value="${allParams!=null} ? ${allParams.get('distance')} : ''"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-lg btn-block search_button" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
+                </div>
+                </form>
+
+                <!--   END  -->
 				<th:block th:unless="${searchResults== null || searchResults.size() == 0}" th:each="oneEvent : ${searchResults}">
 					<hr/>
 					<a  style="color: black !important;" th:href="'/event?id='+${oneEvent.id}"><h2 th:text="${oneEvent.name}"></h2></a>
 					<div class="row">
-
-
 						<div class="col-sm-6">
 							<a th:href="'/event?id='+${oneEvent.id}">
 								<img  class="img-responsive" src="images.png" alt=""/>
@@ -80,7 +145,32 @@
     <script src="/js/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
+    <script type="text/javascript">
+        $(function() {
+
+          $('input[name="Dates"]').daterangepicker({
+              autoUpdateInput: false,
+              locale: {
+
+                  cancelLabel: 'Clear'
+
+              }
+          });
+
+
+
+          $('input[name="Dates"]').on('apply.daterangepicker', function(ev, picker) {
+              $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+          });
+
+          $('input[name="Dates"]').on('cancel.daterangepicker', function(ev, picker) {
+              $(this).val('');
+          });
+
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" media="all" href="/js/datepicker/daterangepicker.css" />
+    <script type="text/javascript" src="/js/datepicker/daterangepicker.js"></script>
 
 </body>
 

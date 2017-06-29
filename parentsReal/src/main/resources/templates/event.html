@@ -28,7 +28,7 @@
      	$("#includedContent").load("bar/bar.html");
       });
     </script>
-    <div th:replace="top_bar_full :: head-top-bar"></div>
+    <div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
 </head>
 
 <body>
@@ -55,10 +55,39 @@
         }
     </script>
     <!-- Navigation -->
-   <nav th:replace="top_bar_full :: 'nav-bar-full' "></nav>
-
+   <nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
    <div id="includedContent"></div>
     <!-- Page Content -->
+    <div class="container">
+        <h1>Σελίδα Εκδήλωσης</h1>
+        <script>
+        function show_search(){
+            document.getElementById("button_show").style.display="none";
+            document.getElementById("button_hide").style.display="block";
+            document.getElementById("search_bar").style.display="block";
+        }
+        </script>
+        <script>
+        function hide_search(){
+            document.getElementById("button_show").style.display="block";
+            document.getElementById("button_hide").style.display="none";
+            document.getElementById("search_bar").style.display="none";
+        }
+        </script>
+        <button id="button_show" type="button" class="btn btn-primary " onclick="show_search()">Μήπως Ψάχνεις Κάτι Άλλο;</button>
+        <button id="button_hide" type="button" class="btn btn-primary " onclick="hide_search()">Κλείσιμο Αναζήτησης</button>
+        <form  action="/results" method="get" id="AboutSearches">
+            <div id="search_bar">
+                <div class="form-group">
+                    <label for="Address_Search">Αναζήτηση Εκδήλωσης</label>
+                    <input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
+                    <i class="fa fa-building-o form-control-feedback"></i>
+                    <span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
+                </div>
+            </div>
+        </form>
+        <hr/>
+    </div>
     <div class="container">
             <div class="col-xs-12 col-md-6 col-sm-12">
                 <img class="img-responsive" src="images.png" alt=""/>
