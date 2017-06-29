@@ -87,7 +87,7 @@
         		              <div class="col-xs-12 col-md-4 col-sm-8">
         		           		<h3>Συμπλήρωσε Όνομα Εκδήλωσης</h3>
         				          <div class="form-group">
-        							<input type="text" class="form-control" id="Place_Name" name="Place" placeholder="Π.χ. Βραδιά Ποδόσφαιρου " aria-describedby="helpQuery" value=""/>
+        							<input type="text" class="form-control" id="Place_Name" name="title" placeholder="Π.χ. Βραδιά Ποδόσφαιρου " aria-describedby="helpQuery" value=""/>
         		        		</div>
         		        	</div>
         	        	</div>
@@ -95,7 +95,7 @@
         		           <div class="col-xs-12 col-md-4 col-sm-8">
         		           		<h3>Περιέγραψε την Εκδήλωση</h3>
         				          <div class="form-group">
-                                     <textarea class="form-control custom-control" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι εμείς και τα παιδιά σας.... " rows="3" style="resize:none"></textarea>
+                                     <textarea class="form-control custom-control" name="desc" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι εμείς και τα παιδιά σας.... " rows="3" style="resize:none"></textarea>
         		        		</div>
         		        	</div>
         	        	</div>
@@ -103,7 +103,7 @@
         		           <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
         		           		<h3>Συμπλήρωσε Ημερομηνία και Ώρα</h3>
                                 <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' class="form-control" />
+                                    <input type='text' name="date" class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -113,13 +113,13 @@
                           <div class="row">
         		          	<div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
         		           		<h3>Συμπλήρωσε Θέσεις</h3>
-        		              	<input type="number" min="1"/>
+        		              	<input type="number" name="spots" min="1"/>
         		        	</div>
         		          </div>
                           <div class="row">
         		          	<div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
         		           		<h3>Συμπλήρωσε Τιμή</h3>
-        		              	<input type="number" min="1.00" step="0.01"/>
+        		              	<input type="number" min="1.00" name="price" step="0.01"/>
         		        	</div>
         		          </div>
                           <div class="row">
