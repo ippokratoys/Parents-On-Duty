@@ -3,8 +3,6 @@
         street_number: 'short_name',
         route: 'long_name',
         locality: 'long_name',
-        administrative_area_level_1: 'short_name',
-        country: 'long_name',
         postal_code: 'short_name'
       };
 
@@ -17,18 +15,12 @@
 
         // When the user selects an address from the dropdown, populate the address
         // fields in the form.
-        autocomplete.addListener('place_changed', geocodeAddress());
+        autocomplete.addListener('place_changed', geocodeAddress);
       }
 
-      function fillInAddress() {
-        // Get the place details from the autocomplete object.
+
+	function geocodeAddress() {
         var place = autocomplete.getPlace();
-
-        for (var component in componentForm) {
-          document.getElementById(component).value = '';
-          document.getElementById(component).disabled = false;
-        }
-
         // Get each component of the address from the place details
         // and fill the corresponding field on the form.
         for (var i = 0; i < place.address_components.length; i++) {
@@ -38,20 +30,18 @@
             document.getElementById(addressType).value = val;
           }
         }
-      }
 
-	function geocodeAddress() {
-  	      var address = document.getElementById('autocomplete').value;
+  	    var address = document.getElementById('autocomplete').value;
 		var geocoder = new google.maps.Geocoder();
-		document.getElementById("demo2").innerHTML =address;
-  	      geocoder.geocode({'address': address}, function(results, status) {
-   	  	 if (status === 'OK') {
-			document.getElementById("demo").innerHTML =results[0].geometry.location;
-       			
-       	 	  } else {
-         		   var a=1;
-          	 }
-       	     });
+  	     geocoder.geocode({'address': address}, function(results, status) {
+       	  	 if (status === 'OK') {
+    			document.getElementById("lng").value =results[0].geometry.location.lng();
+                document.getElementById("lat").value =results[0].geometry.location.lat();
+
+           	 } else {
+             	 var a=1;
+              }
+       	  });
       	}
 
 
@@ -72,4 +62,3 @@
           });
         }
       }
-

@@ -51,7 +51,7 @@
   		               <div class="form-group col-xs-12 col-md-4 col-sm-8">
   		           		 <h3>Όνομα Χώρου</h3>
   				           <div class="form-group">
-  							 <input type="text" class="form-control" id="Place_Name" name="Place" placeholder="Πεζοδρόμιο" aria-describedby="helpQuery" value=""/>
+  							 <input type="text" class="form-control" required="true" autofocus="true" id="Place_Name" name="Place" placeholder="Πεζοδρόμιο" aria-describedby="helpQuery" value=""/>
   		        		   </div>
   		        	   </div>
   	        	    </div>
@@ -59,31 +59,58 @@
   		              <div class="form-group col-md-12">
   		              		<h3>Διεύθυνση</h3>
   		              		<div class="well" id="locationField">
-  								<input id="autocomplete" placeholder="Π.χ. Συγγρού 15" onFocus="geolocate()" type="text"/>
+  								<input id="autocomplete" placeholder="Π.χ. Συγγρού 15" required="true" onFocus="geolocate()" type="text"/>
   							</div>
   							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR7e_1Er6gEoMB_i69MOiljeHJepWdVKA&amp;libraries=places&amp;callback=initAutocomplete"
            					async="async" defer="defer"></script>
+
   		              	</div>
   		          </div>
   		          <br/>
-  		          <div class="row">
+                  <div class="row">
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+                          <h4>Όδος</h4>
+                          <input readonly="true" type="text" required="true" value="" name="route" id="route"/>
+                      </div>
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+                          <h4>Αριθμός</h4>
+                          <input type="number" value="" name="number" id="street_number"/>
+                      </div>
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+                          <h4>Πόλη</h4>
+                          <input readonly="true" type="text" required="true" value="" name="town" id="locality"/>
+                      </div>
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+                          <h4>X</h4>
+                          <input readonly="true" type="text" required="true" value="" name="lat" id="lat"/>
+                      </div>
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+                          <h4>Y</h4>
+                          <input readonly="true" type="text" required="true" value="" name="lon" id="lng"/>
+                      </div>
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+                          <h4>Ταχυδρομικός Κώδικας</h4>
+                          <input readonly="true" type="text" value="" name="zip" id="postal_code"/>
+                      </div>
+                  </div>
+                  <br/>
+
+                  <br/>
+  		          <!-- <div class="row">
                       <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
                           <h3>Ανέβασε Φωτογραφία Μέρους</h3>
                           <div class="fileinput fileinput-new" data-provides="fileinput">
-                              <span class="btn btn-default btn-file"><input type="file" name="..."/></span>
+                              <span class="btn btn-default btn-file"><input required="true" type="file" name="..."/></span>
                               <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
                           </div>
                       </div>
-  		          </div>
-                    <div class="row col-xs-6 col-md-2 col-sm-4 col-md-offset-1 col-sm-offset-2 col-xs-offset-3">
+  		          </div> -->
+                    <div class="row col-xs-6 col-md-2 col-sm-4 col-md-offset-4 col-sm-offset-2 col-xs-offset-3">
                         	<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="Add_place" value="Submit"><i class="fa fa-search" aria-hidden="true">Πρόσθεσε Μέρος</i></button>
                     </div>
-                </form>
-		          <div class="row">
-					  <p id="demo"></p>
-		              <p id="demo2"></p>
-				  </div>
 
+
+                </form>
 		      </div>
 		  </div>
 		</div><!--/row-offcanvas -->
