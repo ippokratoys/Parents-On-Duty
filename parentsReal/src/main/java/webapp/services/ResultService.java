@@ -34,9 +34,9 @@ import static org.elasticsearch.index.query.QueryBuilders.multiMatchQuery;
 @Service
 public class ResultService {
 
-    SimpleDateFormat dateParser = new SimpleDateFormat("dd/mm/yyyy");
+    SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy");
     {
-        SimpleDateFormat dateParser = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     int fromPrice(int price)
@@ -84,7 +84,7 @@ public class ResultService {
                 .field("description^1")
                 .field("type^2")
                 .type(MultiMatchQueryBuilder.Type.BEST_FIELDS)
-                .fuzziness(Fuzziness.TWO)
+                .fuzziness(Fuzziness.ONE)
                 .zeroTermsQuery(MatchQueryBuilder.ZeroTermsQuery.ALL)
                 .analyzer("greek");
         BoolQueryBuilder finalQuery = new BoolQueryBuilder();

@@ -33,9 +33,9 @@ public class CsvInserts {
 //    private static CustomerRepository customerRepository;
 //    @Autowired
 //    private static OrganiserRepository organiserRepository;
-    SimpleDateFormat dateParser = new SimpleDateFormat("dd/mm/yyyy");
+    SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy");
     {
-        SimpleDateFormat dateParser = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     public String loginCsvInsertions(LoginRepository loginRepository,CustomerRepository customerRepository,String csvFile){
