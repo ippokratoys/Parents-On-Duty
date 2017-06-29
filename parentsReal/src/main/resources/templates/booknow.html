@@ -65,7 +65,7 @@
 				  </tr>
 				  <tr>
 					<th>Ημερομηνία</th>
-					<td><b><i th:text="${curEvent.day}">16/06/18</i></b></td>
+					<td><b><i th:text="${#dates.format(curEvent.day,'dd/MM/yyyy')}">06/06/06</i></b></td>
 				  </tr>
 
 				</table>
@@ -93,7 +93,7 @@
                               <h3>Είστε σίγουρος ότι θέλετε να κάνετε την κράτηση;</h3>
                             </div>
                             <div class="modal-footer">
-                              <button type="submit" class="btn btn-lg btn-primary pull-left" data-dismiss="modal">Ναί</button>
+                              <button type="submit" class="btn btn-lg btn-primary pull-left" form="BookNow" value="Submit">Ναί</button>
                               <button type="button" class="btn btn-lg btn-primary pull-right" data-dismiss="modal">Όχι</button>
                             </div>
                           </div>

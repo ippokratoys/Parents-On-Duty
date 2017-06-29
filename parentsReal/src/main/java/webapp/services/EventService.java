@@ -41,24 +41,27 @@ public class EventService {
         }
 
 ////////////////somehow lock here//////////////////////
-        if(customer.getPoints()<event.getPrice()){
+        if(customer.getPoints()<(event.getPrice()*numberOfSpots)){
             throw new Exception("Not enough points");
         }
         if(getAvailableSpots(event)<numberOfSpots){
             throw new Exception("Not enough sports available");
         }
 
-        BookEvent bookEventNew=new BookEvent();
-        bookEventNew.setBookDate(new Date());
-        bookEventNew.setCustomer(customer);
-        bookEventNew.setEvent(event);
-        bookEventRepository.save(bookEventNew);
+        for (int i=0 ; i < numberOfSpots; i++) {
 
-        customer.setPoints(customer.getPoints()-event.getPrice());
-        Organiser organiser=event.getOrganiser();
-        organiser.addPoints(event.getPrice());
-        eventHandler.save(event);
-        customerRepository.save(customer);
+            BookEvent bookEventNew = new BookEvent();
+            bookEventNew.setBookDate(new Date());
+            bookEventNew.setCustomer(customer);
+            bookEventNew.setEvent(event);
+            bookEventRepository.save(bookEventNew);
+
+            customer.setPoints(customer.getPoints() - event.getPrice());
+            Organiser organiser = event.getOrganiser();
+            organiser.addPoints(event.getPrice());
+            eventHandler.save(event);
+            customerRepository.save(customer);
+        }
 //////////////////somehow unlock here//////////////////////////////////
         return true;
     }

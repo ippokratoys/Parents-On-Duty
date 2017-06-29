@@ -49,7 +49,7 @@
 						<div class="col-sm-6">
 							<h4 th:text=" 'Τιμή : ' + ${oneEvent.price}/100 + '€'"></h4>
 							<h4 th:text=" 'Διεύθυνση : ' + ${oneEvent.address}"></h4>
-							<h4 th:text=" 'Ημερομηνία : ' + ${oneEvent.day}"></h4>
+							<h4 th:text=" 'Ημερομηνία : ' + ${#dates.format(oneEvent.day,'dd/MM/yyyy')}"></h4>
 							<br/>
 						</div>
 						<div class="ratings">

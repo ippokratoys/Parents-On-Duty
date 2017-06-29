@@ -2,6 +2,7 @@ package webapp.database.elasticsearch;
 
 import org.springframework.data.elasticsearch.annotations.*;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
+import org.springframework.format.annotation.DateTimeFormat;
 import webapp.database.Event;
 import webapp.database.Location;
 import webapp.database.Organiser;
@@ -47,6 +48,7 @@ public class EventSearch implements Serializable {
     private int id;
 
     @Field(type = FieldType.Date)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date day;
 
     private Time time;

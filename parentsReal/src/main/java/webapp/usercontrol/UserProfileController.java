@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import webapp.database.Customer;
 import webapp.database.repositories.CustomerRepository;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  * Created by thanasis on 6/6/2017.
  */
@@ -26,7 +31,12 @@ public class UserProfileController {
             Model model
     ){
         Customer customer=customerRepository.findOne(userDetails.getUsername());
+
+        LocalDate localDate = LocalDate.now();
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        //String date = (DateTimeFormatter.ofPattern("yyyy/MM/dd").format(localDate));
         model.addAttribute("curUser",customer);
+        model.addAttribute("localDate", date);
         return "profile/parent/profile";
     }
 
