@@ -1,6 +1,7 @@
 package webapp.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import webapp.database.Event;
 import webapp.database.Eventsgroup;
 import webapp.database.Organiser;
+import webapp.database.elasticsearch.EventSearch;
+import webapp.database.elasticsearch.EventSearchRepository;
 import webapp.database.repositories.EventRepository;
 import webapp.database.repositories.EventsgroupRepository;
 import webapp.database.repositories.OrganiserRepository;
@@ -32,7 +35,7 @@ public class NewEventController {
 //    the get method is in usercontroller / organiser
 
     @Autowired
-    OrganiserService organiserService;
+    private OrganiserService organiserService;
     @Autowired
     private OrganiserRepository organiserRepository;
 
@@ -46,9 +49,9 @@ public class NewEventController {
                                      @RequestParam(name="price") String priceStr,
                                      @RequestParam(name="location_id") int location,
                                      @RequestParam(name="file",required = false) MultipartFile file,
-//                                     @RequestParam(name="age_from") int ageFrom,
-//                                     @RequestParam(name="age_to") int ageTo,
-//                                     @RequestParam(name="categories") String categories,
+                                     @RequestParam(name="age_from") int ageFrom,
+                                     @RequestParam(name="age_to") int ageTo,
+                                     @RequestParam(name="categories") String categories,
                                      @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
     ) throws ParseException {
         System.out.println("allRequestParams = [" + allRequestParams +"]");

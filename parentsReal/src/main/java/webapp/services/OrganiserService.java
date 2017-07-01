@@ -9,6 +9,8 @@ import webapp.database.Event;
 import webapp.database.Eventsgroup;
 import webapp.database.Location;
 import webapp.database.Organiser;
+import webapp.database.elasticsearch.EventSearch;
+import webapp.database.elasticsearch.EventSearchRepository;
 import webapp.database.repositories.EventRepository;
 import webapp.database.repositories.EventsgroupRepository;
 import webapp.database.repositories.LocationRepository;
@@ -33,6 +35,9 @@ public class OrganiserService {
     EventsgroupRepository eventsgroupRepository;
     @Autowired
     EventRepository eventRepository;
+
+    @Autowired
+    private EventSearchRepository eventSearchRepository;
 
     public List<Location> getLocations(Organiser organiser){
         return organiser.getLocations();
@@ -73,6 +78,7 @@ public class OrganiserService {
         event.setLocation(locationRepository.findOne(loacationID));
 
         Event dbEvent = eventRepository.save(event);
+        addEventToEs(dbEvent);
         return dbEvent;
     }
 
@@ -80,4 +86,11 @@ public class OrganiserService {
 
         return null;
     }
+
+    public boolean addEventToEs(Event event){
+        EventSearch eventSearch= new EventSearch(event);
+        eventSearchRepository.save(eventSearch);
+        return true;
+    }
+
 }

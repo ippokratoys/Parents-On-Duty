@@ -1,6 +1,7 @@
 package webapp.searchresult;
 
 import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -25,9 +26,9 @@ import webapp.services.ResultService;
 @Controller
 public class ResultController {
 
-	SimpleDateFormat dateParser = new SimpleDateFormat("dd/mm/yyyy");
+	SimpleDateFormat dateParser = new SimpleDateFormat("dd/ΜΜ/yyyy");
 	{
-		SimpleDateFormat dateParser = new SimpleDateFormat("dd/mm/yyyy");
+		SimpleDateFormat dateParser = new SimpleDateFormat("dd/ΜΜ/yyyy");
 	}
 
 	@Autowired
@@ -85,6 +86,7 @@ public class ResultController {
 			results=resultService.getResults(freeText,dates[0],dates[1],price,ageArg,distanceArg);
 		}
 			//System.out.println(results.get(0).getEventHasCustomers().get(0).getEventsfeedbacks());
+
 
 		model.addAttribute("allParams",allRequestParams);
 		model.addAttribute("searchResults",results);
