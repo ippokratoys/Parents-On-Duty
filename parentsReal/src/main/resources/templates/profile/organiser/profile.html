@@ -75,7 +75,7 @@
                                 </th:block>
                                 <p th:text=" 'Όνομα : '+${oneEvent.eventsgroup.name}"></p>
                                 <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
-                                <p th:text=" 'Ημερομηνία : '+${oneEvent.day}"></p>
+                                <p th:text=" 'Ημερομηνία : '+ ${#dates.format(oneEvent.day,'dd/MM/yyyy')} "></p>
                                 <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>
                                 <hr/>
                             </th:block>

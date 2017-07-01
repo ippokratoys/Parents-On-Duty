@@ -1,5 +1,6 @@
 package webapp.event;
 
+import org.omg.CORBA.DATA_CONVERSION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,82 +40,99 @@ public class NewEventController {
     @Autowired
     private OrganiserRepository organiserRepository;
 
-    @RequestMapping(value = "/organiser/add_event",method = RequestMethod.POST)
+    private int getPrice(String priceStr) {
+        int price = 0;
+        if (priceStr.contains(".")) {
+            String[] bufferprice = priceStr.split("\\.");
+            System.out.println("price0 " + bufferprice[0]);
+            System.out.println("price1 " + bufferprice[1]);
+            price = Integer.parseInt(priceStr.replace(".", "")) * ((int) Math.pow(10, (double) 3 - bufferprice[1].length()));
+        } else if (priceStr.contains(",")) {
+            String[] buffer = priceStr.split(",");
+            System.out.println("price0 " + buffer);
+            System.out.println("price1 " + buffer);
+            price = Integer.parseInt(priceStr.replace(",", "")) * buffer[1].length();
+        } else {
+            price = Integer.parseInt(priceStr) * 100;
+        }
+        return price;
+    }
+
+    private Time getTime(String dateTime) {
+        String[] splited = dateTime.split(" ");
+        String[] timeSplit = splited[1].split(":");
+
+        int minute = Integer.parseInt(timeSplit[0]);
+        int hour = Integer.parseInt(timeSplit[1]);
+
+        Time time = new Time(hour, minute, 0);
+        return time;
+    }
+
+    private Date getDate(String dateTime) {
+        String[] splited = dateTime.split(" ");
+        Date date1=null;
+        try {
+            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(splited[0]);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return date1;
+    }
+
+    @RequestMapping(value = "/organiser/add_event", method = RequestMethod.POST)
     public String newEventFormSubmit(Model model,
-                                     @RequestParam Map<String,String> allRequestParams,
-                                     @RequestParam(name="title") String name,
-                                     @RequestParam(name="desc") String description,
-                                     @RequestParam(name="date") String dateTime,
-                                     @RequestParam(name="spots") int spots,
-                                     @RequestParam(name="price") String priceStr,
-                                     @RequestParam(name="location_id") int location,
-                                     @RequestParam(name="file",required = false) MultipartFile file,
-                                     @RequestParam(name="age_from") int ageFrom,
-                                     @RequestParam(name="age_to") int ageTo,
-                                     @RequestParam(name="categories") String categories,
+                                     @RequestParam Map<String, String> allRequestParams,
+                                     @RequestParam(name = "title") String name,
+                                     @RequestParam(name = "desc") String description,
+                                     @RequestParam(name = "date") String dateTime,
+                                     @RequestParam(name = "spots") int spots,
+                                     @RequestParam(name = "price") String priceStr,
+                                     @RequestParam(name = "location_id") int location,
+                                     @RequestParam(name = "file", required = false) MultipartFile file,
+                                     @RequestParam(name = "age_from") int ageFrom,
+                                     @RequestParam(name = "age_to") int ageTo,
+                                     @RequestParam(name = "categories") String categories,
                                      @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
     ) throws ParseException {
-        System.out.println("allRequestParams = [" + allRequestParams +"]");
+        System.out.println("allRequestParams = [" + allRequestParams + "]");
         for (int i = 0; i < allRequestParams.size(); i++) {
-            if(name=="" || description=="" || dateTime=="" || spots==0 /* || file.isEmpty()*/){
+            if (name == "" || description == "" || dateTime == "" || spots == 0 /* || file.isEmpty()*/) {
                 return "reditect:profile/organiser/add_event?error=empty_field";
             }
         }
         System.out.println(allRequestParams);
 //        String dateStr = allRequestParams.get("date");
 
-        String[] splited = dateTime.split(" ");
-//        System.out.println("all "+dateTime);
-//        System.out.println("0 "+splited[0]);
-//        System.out.println("1 "+splited[1]);
-        String[] timeSplit = splited[1].split(":");
-        int minute = Integer.parseInt(timeSplit[0]);
-        int hour = Integer.parseInt(timeSplit[1]);
 
-        Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(splited[0]);
-        Time time= new Time(hour,minute,0);
+        Date date1 = getDate(dateTime);
+        Time time = getTime(dateTime);
+        int price = getPrice(priceStr);
         Organiser organiser = organiserRepository.findOne(userDetails.getUsername());
-        int price = 0;
-        if(priceStr.contains(".")){
-            String[] bufferprice = priceStr.split("\\.");
-            System.out.println("price0 "+bufferprice[0]);
-            System.out.println("price1 "+bufferprice[1]);
-            price = Integer.parseInt(priceStr.replace(".",""))* ((int) Math.pow(10, (double)  3-bufferprice[1].length()));
-        }else if(priceStr.contains(",")){
-            String[] buffer = priceStr.split(",");
-            System.out.println("price0 "+buffer);
-            System.out.println("price1 "+buffer);
-            price = Integer.parseInt(priceStr.replace(",",""))*buffer[1].length();
-        }else{
-            price = Integer.parseInt(priceStr)*100;
-        }
         try {
-            organiserService.createNewEvent(organiser,name,description,date1,time,spots,price,location,file);
+            organiserService.createNewEvent(organiser, name, description, date1, time, spots, price, location, ageFrom, ageTo, categories, file);
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        Event newEvent = new Event();
-//        //newEvent.setOrganiser();
-//        newEvent.setDay(date1);
-//        newEvent.setSpots(Integer.parseInt(allRequestParams.get("spots")));
-//        newEvent.setTime(Time.valueOf(splited[1]));
-//        newEvent.setPrice(Integer.parseInt(allRequestParams.get("price")));
-//        newEvent.setImportance(1);
-////        newEvent.setLocation();
-//
-//        Eventsgroup newEventsgroup = new Eventsgroup();
-//        newEventsgroup.setName(allRequestParams.get("title"));
-//        newEventsgroup.setDescription(allRequestParams.get("desc"));
-//  //      newEventsgroup.setAgeFrom("agefrom");
-////        newEventsgroup.setAgeTo("ageto");
-//      //  newEventsgroup.setType("type");
-////        newEventsgroup.setOrganiser();
-////        newEventsgroup.setEvents(newEvent);
-////         newEvent.setEventsgroup(newEventsgroup);
-////        newEventsgroup.setImagePath("the place where we are gonna store");
-//        //check if form elements are ok
-//
         return "redirect:/organiser/profile?EventAdded=True";
     }
 
+    @RequestMapping(value = "/organiser/add_existing_event", method = RequestMethod.POST)
+    public String newExistingEventFormSubmit(Model model,
+                                             @RequestParam Map<String, String> allRequestParams,
+                                             @RequestParam(name = "date") String dateTime,
+                                             @RequestParam(name = "spots") int spots,
+                                             @RequestParam(name = "price") String priceStr,
+                                             @RequestParam(name = "location_id") int location,
+                                             @RequestParam(name = "existing_event_id") int eventsGroupId,
+                                             @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
+    ){
+        int price = getPrice(priceStr);
+        Date date1 = getDate(dateTime);
+        Time time = getTime(dateTime);
+        Organiser organiser = organiserRepository.findOne(userDetails.getUsername());
+        organiserService.createExistingEvent(organiser,date1,time,spots,price,eventsGroupId,location);
+        return "redirect:/organiser/profile?EventAdded=True";
+    }
 }

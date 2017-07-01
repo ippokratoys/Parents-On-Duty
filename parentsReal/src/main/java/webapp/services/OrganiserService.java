@@ -43,18 +43,43 @@ public class OrganiserService {
         return organiser.getLocations();
     }
 
+    public Event createExistingEvent(Organiser organiser,
+                                Date date,
+                                Time time,
+                                int spots,
+                                int price,
+                                int eventsGroupId,
+                                int loacationID
+    ){
+        Eventsgroup eventsgroup= eventsgroupRepository.findOne(eventsGroupId);
+
+        Event event=new Event();
+        event.setEventsgroup(eventsgroup);
+        event.setImportance(1);
+        event.setDay(date);
+        event.setTime(time);
+        event.setSpots(spots);
+        event.setPrice(price);
+        event.setOrganiser(organiser);
+        event.setLocation(locationRepository.findOne(loacationID));
+
+        Event dbEvent = eventRepository.save(event);
+        addEventToEs(dbEvent);
+        return dbEvent;
+    }
+
     public Event createNewEvent(Organiser organiser,
-                             String name,
-                             String description,
-                             Date date,
-                             Time time,
-                             int spots,
-                             int price,
-                             int loacationID,
-                             MultipartFile file
-//                             int ageFrom,
-//                             int ageTo,
-//                             String categories
+                                String name,
+                                String description,
+                                Date date,
+                                Time time,
+                                int spots,
+                                int price,
+                                int loacationID,
+                                int ageFrom,
+                                int ageTo,
+                                String categories,
+                                MultipartFile file
     )throws Exception{
         Eventsgroup eventsgroup= new Eventsgroup();
         eventsgroup.setName(name);
@@ -62,9 +87,9 @@ public class OrganiserService {
         eventsgroup.setOrganiser(organiser);
 
         eventsgroup.setImagePath("");
-//        eventsgroup.setAgeFrom(ageFrom);
-//        eventsgroup.setAgeTo(ageTo);
-//        eventsgroup.setType(categories);
+        eventsgroup.setAgeFrom(ageFrom);
+        eventsgroup.setAgeTo(ageTo);
+        eventsgroup.setType(categories);
         Eventsgroup dbEventsgroup = eventsgroupRepository.save(eventsgroup);
 
         Event event=new Event();
