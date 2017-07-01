@@ -78,13 +78,14 @@
                 <div id="search_bar">
                     <div class="form-group">
                         <label for="Address_Search">Αναζήτηση Εκδήλωσης</label>
-                        <input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
+                        <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
                         <i class="fa fa-building-o form-control-feedback"></i>
                         <span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
                     </div>
                     <div class="form-group">
                         <label for="config-demo">Επιλογή ημερομηνίας διοργάνωσης</label>
-                        <input type="text" id="config-demo" name="Dates" class="form-control" value="" th:value="${allParams!=null} ? ${allParams.get('Dates')} : ''"/>
+                        <input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
+                        <!--<input type="text" id="config-demo" name="Dates" class="form-control" value="" th:value="${allParams!=null} ? ${allParams.get('Dates')} : ''"/>-->
                     </div>
                     <div class=" col-md-4 ">
                         <div class="form-group">

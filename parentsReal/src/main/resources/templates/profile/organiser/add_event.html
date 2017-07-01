@@ -65,9 +65,11 @@
                           document.getElementById("oldevent").style.display="block";
                           document.getElementById("choices").style.display="none";
                       }
-                      function exist_form(){
+                      function exist_form(eventid,eventName){
                           document.getElementById("oldevent").style.display="none";
                           document.getElementById("exists").style.display="block";
+                          document.getElementById("existing_event_id").value=eventid;
+                          document.getElementById("existing_event_name").textContent=eventName;
                       }
                       </script>
                       <div class="btn-toolbar "  id="choices">
@@ -170,24 +172,26 @@
                       </div>
                       <div id="oldevent">
                         <div class="well pre-scrollable" >
-                            <th:block th:if="${ organiser.events != null}" th:each="oneEvent : ${organiser.events}">
-                                <p th:text=" 'Όνομα : '+${oneEvent.eventsgroup.name}"></p>
-                                <button type="submit" class="btn btn-primary btn-md " form="Add_event" value="Submit" onclick="exist_form()">Επέλεξε</button>
+                            <th:block th:if="${ organiser.eventsgroups != null}" th:each="oneEventgroup : ${organiser.eventsgroups}">
+                                <p th:text=" 'Όνομα : '+${oneEventgroup.name}"></p>
+                                <button class="btn btn-primary btn-md " value="Submit" th:onclick="'exist_form(\''+ ${oneEventgroup.idEventsGroup}+'\',\''+${oneEventgroup.name} + '\' )'" onclick="exist_form()">Επέλεξε</button>
                                 <hr/>
                             </th:block>
                         </div>
                       </div>
                   </form>
-                  <form th:action="@{/organiser/add_event}" method="post" >
+                  <form th:action="@{/organiser/add_existing_event}" method="post" id="Add_event_existing">
+                      <input type="hidden" id="existing_event_id" name="existing_event_id" />
                     <div id="exists" >
+                        <strong><h2 id="existing_event_name"></h2></strong>
                         <h6>Το όνομα,οι κατηγορίες,η περιγραφή και το εύρος της ηλικίας παραμένουν τα ίδια με την εκδήλωση που επιλέξατε!</h6>
                         <div class="row">
                           <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
                               <h3>Διάλεξε Μέρος</h3><a href="/organiser/add_place">Θες Καινούργιο Πατησέ Με!</a>
                               <div id="selectionplace">
-                                  <select class="selectplace">
+                                  <select class="selectplace" name="location_id">
                                       <th:block th:each="onePlace : ${organiserPlaces}" >
-                                          <option th:value="onePlace.id" th:text="${onePlace.address}"></option>
+                                          <option th:value="${onePlace.id}" th:text="${onePlace.address}"></option>
                                       </th:block>
                                     </select>
                               </div>
@@ -218,7 +222,7 @@
       		          </div>
                         <div class="row">
                             <div class="row col-xs-6 col-md-2 col-sm-4 col-md-offset-1 col-sm-offset-2 col-xs-offset-3">
-                                	<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="Add_event" value="Submit">Πρόσθεσε Εκδήλωση</button>
+                                	<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="Add_event_existing" value="Submit">Πρόσθεσε Εκδήλωση</button>
                             </div>
                         </div>
                     </div>
