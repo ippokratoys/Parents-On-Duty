@@ -39,6 +39,11 @@ body {
     display:none;
 }
 
+#exists{
+    display: none;
+}
+
+
 #choices{
     align-items: center;
     display:block;
