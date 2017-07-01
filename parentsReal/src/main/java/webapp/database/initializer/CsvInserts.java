@@ -50,6 +50,13 @@ public class CsvInserts {
         BufferedReader br = null;
         try {
 //            br = new BufferedReader(new FileReader(csvFile,"utf-8"));
+            Login adminlog = new Login();
+            adminlog.setEmail("admin@admin.com");
+            adminlog.setPwd(passwordEncoder.encode("123456"));
+            adminlog.setRole("ADMIN");
+            adminlog.setActive(true);
+            loginRepository.save(adminlog);
+
             br = new BufferedReader(
                     new InputStreamReader(
                             new FileInputStream(csvFile), "UTF8"));

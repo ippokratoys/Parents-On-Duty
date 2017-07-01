@@ -46,7 +46,7 @@
 		          </p>
 		          <h2>Προσθήκη Μέρους</h2>
 		          <hr/>
-                <form method="get" id="Add_place">
+                <form method="post" id="Add_place" th:action="@{/organiser/add_place}">
                     <div class="row">
   		               <div class="form-group col-xs-12 col-md-4 col-sm-8">
   		           		 <h3>Όνομα Χώρου</h3>
@@ -83,6 +83,14 @@
                       <div class="col-md-2 col-sm-6 col-xs-12">
                           <h4>Ταχυδρομικός Κώδικας</h4>
                           <input readonly="true" type="text" value="" name="zip" id="postal_code"/>
+                      </div>
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+                          
+                          <input style="display:none;" readonly="true" type="text" required="true" value="" name="lat" id="lat"/>
+                      </div>
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+
+                          <input style="display:none;" readonly="true" type="text" required="true" value="" name="lon" id="lng"/>
                       </div>
                   </div>
                   <br/>

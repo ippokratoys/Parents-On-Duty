@@ -14,13 +14,13 @@
 
 
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-	<script type="text/javascript" src="js/datepicker/jquery.min.js"></script>
-	<script type="text/javascript" src="js/datepicker/moment.min.js"></script>
+	<script type="text/javascript" src="/js/datepicker/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/datepicker/moment.min.js"></script>
 
 
-      
-	  
-	<link rel="stylesheet" type="text/css" href="js/datepicker/bootstrap.css" />
+
+
+	<link rel="stylesheet" type="text/css" href="/js/datepicker/bootstrap.css" />
     <style type="text/css">
       .demo { position: relative; }
       .demo i {
@@ -31,8 +31,94 @@
     <link href="/css/full-width-pics.css" rel="stylesheet"/>
 
 	<div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
+	<!--Carousel-->
+	<style>
+		.multi-item-carousel{
+	  .carousel-inner{
+		> .item{
+		  transition: 500ms ease-in-out left;
+		}
+		.active{
+		  &amp;.left{
+			left:-33%;
+		  }
+		  &amp;.right{
+			left:33%;
+		  }
+		}
+		.next{
+		  left: 33%;
+		}
+		.prev{
+		  left: -33%;
+		}
+		@media all and (transform-3d), (-webkit-transform-3d) {
+		  > .item{
+			// use your favourite prefixer here
+			transition: 500ms ease-in-out left;
+			transition: 500ms ease-in-out all;
+			backface-visibility: visible;
+			transform: none!important;
+		  }
+		}
+	  }
+	  .carouse-control{
+		&amp;.left, &amp;.right{
+		  background-image: none;
+		}
+	  }
+	}
 
+	// non-related styling:
+	body{
+	  background: #333;
+	  color: #ddd;
+	}
+	h1{
+	  color: white;
+	  font-size: 2.25em;
+	  text-align: center;
+	  margin-top: 1em;
+	  margin-bottom: 2em;
+	  text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);
+	}
 
+	</style>
+
+	<!--Background Image bgimg-1-->
+	<style>
+
+	body, html {
+	  height: 100%;
+	  margin: 0;
+	  font: 400 15px/1.8 "Lato", sans-serif;
+	  color: #777;
+	}
+	.bgimg-1, .bgimg-2, .bgimg-3 {
+	  position: relative;
+
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+
+	}
+	.bgimg-1 {
+	  background-image: url("css/kids-on-grass-2.jpg");
+	  height: 100%;
+	  background-attachment: fixed;
+	  overflow:scroll;
+	}
+
+	.caption {
+	  position: absolute;
+	  left: 0;
+	  top: 50%;
+	  width: 100%;
+	  text-align: center;
+	  color: #000;
+	}
+
+	</style>
 
 </head>
 
@@ -42,116 +128,128 @@
 	<div>
 		<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
 	</div>
+	<!--Background image fixed-modules scroll inside the image-->
+	<div class="bgimg-1">
 
-    <!-- Full Width Image Header with Logo -->
-    <!-- Image backgrounds are set within the full-width-pics.css file. -->
-    <header class="image-bg-fixed-height">
-		<!--Fotografia twn paidiwn-->
-    </header>
 
-    <!-- Content Section -->
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="section-paragraph">
-						<div class="container">
-							<!--Search Bar html code-->
-							<div class="col-md-12" id="Search_Section">
-								<div class="text-center" id="content-home">
-									<div class="tab-content">
-										<div role="tabpanel" class="tab-pane active" id="AllSearchForms">
-											<form action="/results" method="get" id="AboutSearches">
-												<div class="form-group has-feedback col-md-8 col-sm-10 cols-xs-12 col-md-offset-2  col-sm-offset-1 ">
-													<label for="Address_Search">Αναζήτησης Εκδήλωσης</label>
-													<!--input type="hidden" id="hidden1" name="by" value=""-->
-													<!--input type="hidden" id="hidden2" name="id" value=""-->
-													<input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" value=""/>
-													<i class="fa fa-building-o form-control-feedback"></i>
-													<span id="helpQuery" class="help-block hidden">123abc!@#</span>
-													<a onclick="myFunction()" id="mybutt" >Περισσότερα</a>
-												</div>
-													<div id="AdvancedSearch" style="display : none;">
-														  <div class="form-group has-feedback col-md-8 col-sm-10 cols-xs-12 col-md-offset-2  col-sm-offset-1">
-															<label for="config-demo">Επιλογή ημερομηνίας διοργάνωσης</label>
-															<input type="text" id="config-demo" name="Dates" class="form-control" value=" "/>
-														  </div>
+		<!-- Content Section -->
+		<section>
+			<div class="container" >
+				<div class="row">
+					<div class="col-lg-12">
+						<p class="section-paragraph">
+							<div class="container"  >
+								<!--Search Bar html code-->
+								<div class="col-md-12" id="Search_Section">
+									<div class="text-center" id="content-home">
+										<div class="tab-content">
+											<div role="tabpanel" class="tab-pane active" id="AllSearchForms">
+												<form action="/results" method="get" id="AboutSearches">
+													<div class="form-group has-feedback col-md-8 col-sm-10 cols-xs-12 col-md-offset-2  col-sm-offset-1 ">
+														<label for="Address_Search">Αναζήτησης Εκδήλωσης</label>
+														<!--input type="hidden" id="hidden1" name="by" value=""-->
+														<!--input type="hidden" id="hidden2" name="id" value=""-->
+														<input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" value=""/>
+														<i class="fa fa-building-o form-control-feedback"></i>
+														<span id="helpQuery" class="help-block hidden">123abc!@#</span>
+														<a onclick="myFunction()" id="mybutt" >Περισσότερα</a>
+													</div>
+														<div id="AdvancedSearch" style="display : none;">
+															  <div class="form-group has-feedback col-md-8 col-sm-10 cols-xs-12 col-md-offset-2  col-sm-offset-1">
+																<label for="config-demo">Επιλογή ημερομηνίας διοργάνωσης</label>
+																<input type="text" id="config-demo" name="Dates" class="form-control" value=" "/>
+															  </div>
 
-														<div class="form-group col-md-2 col-sm-10 col-md-offset-2 col-sm-offset-1">
-															<label for="Prices">Εύρος τιμών</label>
-															<select name="Price" id="Prices"  class="form-control">
-																<option value="1"></option>
-																<option value="2">1-5</option>
-																<option value="3">5-10</option>
-																<option value="4">10-15</option>
-																<option value="5">15-20</option>
-																<option value="6">20-25</option>
-															</select>
-															<!--<input type="number" class="form-control" id="rooms" name="hab" min="1" max="10" value="1">-->
-														</div>
-														<div id="Age_Tags">
-															<div class="hab-group">
-																<div class="form-group col-md-2 col-sm-10 col-sm-offset-1">
-																	<label for="Age">Ηλικία</label>
-																	<input type="number" class="form-control" name="Age" min="1" max="15" value=""/>
+															<div class="form-group col-md-2 col-sm-10 col-md-offset-2 col-sm-offset-1">
+																<label for="Prices">Εύρος τιμών</label>
+																<select name="Price" id="Prices"  class="form-control">
+																	<option value="1"></option>
+																	<option value="2">1-5</option>
+																	<option value="3">5-10</option>
+																	<option value="4">10-15</option>
+																	<option value="5">15-20</option>
+																	<option value="6">20-25</option>
+																</select>
+																<!--<input type="number" class="form-control" id="rooms" name="hab" min="1" max="10" value="1">-->
+															</div>
+															<div id="Age_Tags">
+																<div class="hab-group">
+																	<div class="form-group col-md-2 col-sm-10 col-sm-offset-1">
+																		<label for="Age">Ηλικία</label>
+																		<input type="number" class="form-control" name="Age" min="1" max="15" value=""/>
+																	</div>
+
+																	<div class="form-group col-md-2 col-sm-10 col-sm-offset-1">
+																		<label for="distance">Αποσταση</label>
+																		<input type="number" class="form-control" id="distance" name="distance" min="1" max="30" value=""/>
+																	</div>
+
+																	<div class="age-chd"></div>
 																</div>
-
-																<div class="form-group col-md-2 col-sm-10 col-sm-offset-1">
-																	<label for="distance">Αποσταση</label>
-																	<input type="number" class="form-control" id="distance" name="distance" min="1" max="30" value=""/>
-																</div>
-
-																<div class="age-chd"></div>
 															</div>
 														</div>
+													<div class="form-group col-md-4 col-sm-10 cols-xs-12 col-md-offset-4  col-sm-offset-1">
+														<button type="submit" class="btn btn-info btn-lg btn-block" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
 													</div>
-												<div class="form-group col-md-4 col-sm-10 cols-xs-12 col-md-offset-4  col-sm-offset-1">
-													<button type="submit" class="btn btn-info btn-lg btn-block" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
-												</div>
-																								
-											</form>
+
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
+								<!--End of search bar html code-->
 							</div>
-						</div>
-					</p>
-<!--End of search bar html code-->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Fixed Height Image Aside -->
-    <!-- Image backgrounds are set within the full-width-pics.css file. -->
-    <!--aside class="image-bg-fixed-height"></aside-->
+						</p>
 
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>And do not forget team...</p>
-					<h1 class="section-heading">Parents on duty never give up!</h1>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </footer>
+					</div>
+				</div>
+			</div>
+							<!--For Carousel-->
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+			<div class="container" >
+			  <p style="text-align:center;color:black;"><i><b><u>Προτεινόμενες Εκδηλώσεις</u></b></i></p>
+			  <div class="row">
+				<div class="col-md-12">
+				  <div class="carousel slide multi-item-carousel" id="theCarousel" style="margin:0 auto;height:50%;width:50%;">
+					<div class="carousel-inner" >
+					  <div class="item active">
+						<div class="col-xs-4"><a href="#1"><img  src="http://placehold.it/300/f44336/000000" style="height:150px;width:200px" class="img-responsive"/></a></div>
+					  </div>
+					  <div class="item">
+						<div class="col-xs-4"><a href="#2"><img src="http://placehold.it/300/e91e63/000000" style="height:150px;width:200px" class="img-responsive"/></a></div>
+					  </div>
+					  <div class="item">
+						<div class="col-xs-4"><a href="#3"><img src="http://placehold.it/300/9c27b0/000000" style="height:150px;width:200px" class="img-responsive"/></a></div>
+					  </div>
+					  <div class="item">
+						<div class="col-xs-4"><a href="#4"><img src="http://placehold.it/300/673ab7/000000" style="height:150px;width:200px" class="img-responsive"/></a></div>
+					  </div>
+
+					  <!--  Example item end -->
+					</div>
+					<a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+					<a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</section>
+	</div>
 
 
-			
+
+
+
 			<!--AdvancedSearch-->
 			<script>
 				function myFunction() {
 					var x = document.getElementById('AdvancedSearch');
-					
+
 					var elem = document.getElementById("mybutt");
 					if (elem.innerHTML=="Λιγότερα") elem.innerHTML = "Περισσότερα";
 					else elem.innerHTML = "Λιγότερα";
-					
+
 					if (x.style.display === 'none') {
 						x.value="Περισσότερα";
 						x.style.display = 'block';
@@ -162,21 +260,21 @@
 			</script>
 			<!-- Bootstrap Core JavaScript -->
 			<script src="js/bootstrap.min.js"></script>
-
+	<!--For date picking-->
 	<script type="text/javascript">
 		$(function() {
 
 		  $('input[name="Dates"]').daterangepicker({
 			  autoUpdateInput: false,
 			  locale: {
-			  
+
 				  cancelLabel: 'Clear'
 
 			  }
 		  });
-		  
 
-			
+
+
 		  $('input[name="Dates"]').on('apply.daterangepicker', function(ev, picker) {
 			  $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
 		  });
@@ -186,9 +284,38 @@
 		  });
 
 		});
-	</script>			
-	<link rel="stylesheet" type="text/css" media="all" href="js/datepicker/daterangepicker.css" />
-	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
-</body>
+	</script>
+
+
+
+	<!--For The carousel-->
+	<script>
+
+			// Instantiate the Bootstrap carousel
+		$('.multi-item-carousel').carousel({
+		  interval: false
+		});
+
+		// for every slide in carousel, copy the next slide's item in the slide.
+		// Do the same for the next, next item.
+		$('.multi-item-carousel .item').each(function(){
+		  var next = $(this).next();
+		  if (!next.length) {
+			next = $(this).siblings(':first');
+		  }
+		  next.children(':first-child').clone().appendTo($(this));
+
+		  if (next.next().length>0) {
+			next.next().children(':first-child').clone().appendTo($(this));
+		  } else {
+			$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+		  }
+		});
+
+	</script>
+
+		<link rel="stylesheet" type="text/css" media="all" href="js/datepicker/daterangepicker.css" />
+		<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
+	</body>
 
 </html>
