@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Accept_Event</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+	<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/admin_profile.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/admin_profile.js"></script>
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <a style="color:white" class="navbar-brand" href="/">
+            <div style="font-family:Comic Sans MS,cursive,sans-serif">
+                <div class="title_spec" >Parents On Duty</div>
+            </div>
+        </a>
+    </div>
+</div><!--/.navbar -->
+
+
+<div class="row-offcanvas row-offcanvas-left">
+    <div id="sidebar" class="sidebar-offcanvas">
+        <div class="col-md-12">
+            <h3>Άλλες Επιλογές</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="/admin/profile">Προφίλ</a></li>
+                <li><a href="/admin/block_user">Μπλοκάρισμα Χρήστη</a></li>
+                <li class="active"><a href="/admin/accept_event">Αποδοχή Εκδήλωσης</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <div class="col-md-12">
+            <h2>Αποδοχή Εκδηλώσεων</h2>
+            <hr/>
+            <br/>
+            <p class="visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
+            </p>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="well pre-scrollable">
+                        <div id="myevents">
+                            <h4><b>Χρειάζονται αποδοχή:</b></h4>
+                            <th:block th:unless="${locations== null || locations.size() == 0}" th:each="location : ${locations}">
+                                <p th:inline="text">Τοποθεσία: [[ ${location.name} ]]</p>
+                                <p th:inline="text">Διεύθυνση: [[ ${location.address} ]]</p>
+                                <p>
+                                    <button class="button1" >Αποδοχή</button>&nbsp;
+                                    <button class="button1" >Απόρριψη</button><a href="/css/children.jpg" ><img src="/js/datepicker/downloadarrow.png" /></a>
+                                </p>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div><!--/row-offcanvas -->
+
+	<script type="text/javascript">
+		$('.button1').click(function() {
+			/*if($(this).hasClass('active')) {
+				$(this).removeClass('active');
+				$(this).text('Block');
+			} else {
+				$(this).text('Unblock');
+				$(this).addClass('active')
+			}*/
+			//do something
+			$(this).hide();
+		});
+	</script>
+
+</body>
+</html>
