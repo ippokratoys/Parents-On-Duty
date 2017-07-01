@@ -22,14 +22,14 @@ public class AdminController {
     @Autowired
     LocationRepository locationRepository;
 
-    @RequestMapping(value="/admin/accept_event",method= RequestMethod.GET)
+    @RequestMapping(value="/admin/accept_location",method= RequestMethod.GET)
     public String AcceptLocations(Model model){
 
         List<Location> locations = locationRepository.findAllByCertificateChecked(false);
         System.out.println(locations.toString());
         model.addAttribute("locations", locations);
 
-        return "profile/admin/accept_location   ";
+        return "profile/admin/accept_location";
     }
 
 }
