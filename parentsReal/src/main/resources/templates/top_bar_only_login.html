@@ -54,12 +54,12 @@
             <li><a style="color: white" href="/login"><span class="glyphicon glyphicon-log-in"></span> Σύνδεση</a></li>
         </ul>
         <ul th:if="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
-            <li style="padding-top:4%;">
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Αποσύνδεση"/>
+            <li>
+                <form th:action="@{/logout}"  method="post">
+                    <a style="color: white" href="/login"><span class="glyphicon glyphicon-log-out"></span> Αποσύνδεση</a>
                 </form>
             </li>
-            <li><a style="color: white" href="/profile"><span class="glyphicon glyphicon-log-in"></span> <span th:text="${#httpServletRequest.remoteUser}"> </span></a></li>
+            <li><a style="color: white" href="/profile"><span class="glyphicon glyphicon-user"></span> <span th:text="${#httpServletRequest.remoteUser}"> </span></a></li>
         </ul>
 	</div>
 </nav>
@@ -67,12 +67,11 @@
     <th:block th:fragment="scripts-top-bar">
 
         <!-- jQuery -->
-        <script src="js/jquery.js"></script>
+        <script src="/js/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
     </th:block>
 </body>
 
 </html>
-
