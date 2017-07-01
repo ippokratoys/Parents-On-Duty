@@ -79,9 +79,9 @@
                             <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
                                 <h3>Διάλεξε Μέρος</h3><a href="/organiser/add_place">Θες Καινούργιο Πατησέ Με!</a>
                                 <div id="selectionplace">
-                                    <select class="selectplace">
+                                    <select class="selectplace" name="location_id" id="location">
                                         <th:block th:each="onePlace : ${organiserPlaces}" >
-                                            <option th:value="onePlace.id" th:text="${onePlace.address}"></option>
+                                            <option th:value="${onePlace.id}" th:text="${onePlace.address}"></option>
                                         </th:block>
                                       </select>
                                 </div>
@@ -157,7 +157,7 @@
         		          	<div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
         		           		<h3>Ανέβασε Φωτογραφία Εκδήλωσης</h3>
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <span class="btn btn-default btn-file"><input type="file"  required="true" name="..."/></span>
+                                    <span class="btn btn-default btn-file"><input type="file"  required="true" name="file"/></span>
                                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
                                 </div>
         		        	</div>
