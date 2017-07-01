@@ -60,6 +60,7 @@
     <!-- Page Content -->
     <div class="container">
         <h1>Σελίδα Εκδήλωσης</h1>
+        <hr/>
         <script>
         function show_search(){
             document.getElementById("button_show").style.display="none";
@@ -79,15 +80,15 @@
         <form  action="/results" method="get" id="AboutSearches">
             <div id="search_bar">
                 <div class="form-group">
-                    <label for="Address_Search">Αναζήτηση Εκδήλωσης</label>
+                    <h5 class="text-center" for="Address_Search">Αναζήτηση Εκδήλωσης</h5>
                     <input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
                     <i class="fa fa-building-o form-control-feedback"></i>
                     <span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
                 </div>
             </div>
         </form>
-        <hr/>
     </div>
+    <br/>
     <div class="container">
             <div class="col-xs-12 col-md-6 col-sm-12">
                 <img class="img-responsive" src="images.png" alt=""/>
