@@ -11,9 +11,14 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
 
+war {
+    baseName = 'ParentsOnDuty'
+    version =  '0.0.1'
+}
 jar {
-    baseName = 'gs-spring-boot'
+    baseName = 'ParentsOnDuty'
     version =  '0.1.0'
 }
 

@@ -41,6 +41,7 @@ public class EventSearch implements Serializable {
         this.ageFrom=event.getEventsgroup().getAgeFrom();
         this.ageTo=event.getEventsgroup().getAgeTo();
         this.address=event.getLocation().getAddress();
+        this.imagePath=event.getEventsgroup().getImagePath();
     }
 
     //this annotation is for the elastic search key used in repositories
@@ -87,6 +88,16 @@ public class EventSearch implements Serializable {
     private int ageTo;
 
     private String address;
+
+    private String imagePath;
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath= imagePath;
+    }
 
     public int getId() {
         return id;

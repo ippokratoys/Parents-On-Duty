@@ -90,7 +90,7 @@ public class NewEventController {
                                      @RequestParam(name = "spots") int spots,
                                      @RequestParam(name = "price") String priceStr,
                                      @RequestParam(name = "location_id") int location,
-                                     @RequestParam(name = "file", required = false) MultipartFile file,
+                                     @RequestParam(name = "file") MultipartFile file,
                                      @RequestParam(name = "age_from") int ageFrom,
                                      @RequestParam(name = "age_to") int ageTo,
                                      @RequestParam(name = "categories") String categories,
@@ -98,7 +98,7 @@ public class NewEventController {
     ) throws ParseException {
         System.out.println("allRequestParams = [" + allRequestParams + "]");
         for (int i = 0; i < allRequestParams.size(); i++) {
-            if (name == "" || description == "" || dateTime == "" || spots == 0 /* || file.isEmpty()*/) {
+            if (name == "" || description == "" || dateTime == "" || spots == 0  || file.isEmpty()) {
                 return "reditect:profile/organiser/add_event?error=empty_field";
             }
         }
@@ -110,6 +110,7 @@ public class NewEventController {
         Time time = getTime(dateTime);
         int price = getPrice(priceStr);
         Organiser organiser = organiserRepository.findOne(userDetails.getUsername());
+        System.out.println(file.getSize());
         try {
             organiserService.createNewEvent(organiser, name, description, date1, time, spots, price, location, ageFrom, ageTo, categories, file);
         } catch (Exception e) {

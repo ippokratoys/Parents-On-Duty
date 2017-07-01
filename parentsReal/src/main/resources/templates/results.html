@@ -109,7 +109,7 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<a th:href="'/event?id='+${oneEvent.id}">
-								<img  class="img-responsive" src="images.png" alt=""/>
+								<img  class="img-responsive" th:src="${oneEvent.imagePath}" alt=""/>
 							</a>
 						</div>
 						<div class="col-sm-6">

@@ -1,5 +1,7 @@
 package webapp;
 
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import webapp.database.repositories.CustomerRepository;
@@ -50,5 +52,4 @@ public class Application extends WebMvcConfigurerAdapter{
 ////        registry.addRedirectViewController("/home", "/hello");
 ////        registry.addStatusController("/detail", HttpStatus.BAD_REQUEST);        
 //    }
-
 }

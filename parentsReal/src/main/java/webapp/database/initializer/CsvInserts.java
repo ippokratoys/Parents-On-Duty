@@ -260,8 +260,10 @@ public class CsvInserts {
                     curEvent.setOrganiser(organiserRepository.findOne(arr_in[4].trim()));
                     curEvent.setAgeFrom(3);
                     curEvent.setAgeTo(9);
-                    eventsgroupRepository.save(curEvent);
+                    Eventsgroup curEventdb= eventsgroupRepository.save(curEvent);
+                    curEventdb.setImagePath("/file/event/"+String.valueOf(curEventdb.getIdEventsGroup())+".png");
 
+                    eventsgroupRepository.save(curEventdb);
                 }
             }
             catch (FileNotFoundException e) {

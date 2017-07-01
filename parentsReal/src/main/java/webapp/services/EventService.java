@@ -1,16 +1,16 @@
 package webapp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import webapp.database.BookEvent;
-import webapp.database.Customer;
-import webapp.database.Event;
-import webapp.database.Organiser;
-import webapp.database.repositories.BookEventRepository;
-import webapp.database.repositories.CustomerRepository;
-import webapp.database.repositories.EventRepository;
-import webapp.database.repositories.OrganiserRepository;
+import org.springframework.web.multipart.MultipartFile;
+import webapp.database.*;
+import webapp.database.repositories.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 
 /**
@@ -22,11 +22,21 @@ public class EventService {
     @Autowired
     EventRepository eventHandler;
     @Autowired
+    EventsgroupRepository eventsgroupRepository;
+    @Autowired
     CustomerRepository customerRepository;
     @Autowired
     BookEventRepository bookEventRepository;
     @Autowired
     OrganiserRepository organiserRepository;
+    @Autowired
+    private FileUploadService fileUploadService;
+
+    @Value("file_save.folder.prefix")
+    String MAIN_PREFIX="";
+
+    @Value("file_save.folder.event.pictures.prefix")
+    String PHOTO_PREFIX="";
 
     public int getAvailableSpots(Event event){
         return event.getSpots()-event.getBookEvents().size();
@@ -65,4 +75,31 @@ public class EventService {
 //////////////////somehow unlock here//////////////////////////////////
         return true;
     }
+
+    public String saveEventFile(MultipartFile file, Eventsgroup eventsgroup){
+
+        if (file.isEmpty()) {
+            return "null";
+        }
+        String fileName=null;
+        fileName = String.valueOf(eventsgroup.getIdEventsGroup());
+        String[] buff=file.getName().split("\\.");
+        String fileNamePostFix=buff[buff.length-1];
+        fileName+="."+fileNamePostFix;
+        fileUploadService.store(file,fileName, FileUploadService.FileType.EVENT);
+//        try {
+//            String pathStr = MAIN_PREFIX + PHOTO_PREFIX +eventsgroup.getName() + "_" + file.getOriginalFilename();
+//            // Get the file and save it somewhere
+//            byte[] bytes = file.getBytes();
+//            Path path = Paths.get(pathStr);
+//            Files.write(path, bytes);
+//        }catch (IOException e){
+//            e.printStackTrace();
+//            return null;
+//        }
+        eventsgroup.setImagePath("file/event/"+fileName);
+        eventsgroupRepository.save(eventsgroup);
+        return "redirect:/uploadStatus";
+    }
+
 }

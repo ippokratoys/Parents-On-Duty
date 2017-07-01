@@ -1,9 +1,7 @@
 package webapp.services;
 
-import ch.qos.logback.core.boolex.EvaluationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import webapp.database.Event;
 import webapp.database.Eventsgroup;
@@ -27,6 +25,9 @@ import java.util.Map;
 
 @Service
 public class OrganiserService {
+
+
+
     @Autowired
     OrganiserRepository organiserRepository;
     @Autowired
@@ -35,6 +36,8 @@ public class OrganiserService {
     EventsgroupRepository eventsgroupRepository;
     @Autowired
     EventRepository eventRepository;
+    @Autowired
+    EventService eventService;
 
     @Autowired
     private EventSearchRepository eventSearchRepository;
@@ -103,6 +106,9 @@ public class OrganiserService {
         event.setLocation(locationRepository.findOne(loacationID));
 
         Event dbEvent = eventRepository.save(event);
+        System.out.println(file.getSize());
+        String path = eventService.saveEventFile(file,dbEventsgroup);
+
         addEventToEs(dbEvent);
         return dbEvent;
     }
