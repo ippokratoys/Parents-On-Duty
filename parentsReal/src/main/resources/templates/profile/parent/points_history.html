@@ -1,10 +1,99 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>My history</title>
-</head>
-<body>
+<html lang="en"	xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>History</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/history.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="js/host_profile.js"></script>
+  </head>
 
-</body>
+	<body>
+		<div class="navbar navbar-default navbar-fixed-top">
+		    <div class="navbar-header">
+		    	<a style="color:white" class="navbar-brand" href="/">
+					<div style="font-family:Comic Sans MS,cursive,sans-serif">
+						<div class="title_spec" >Parents On Duty</div>
+					</div>
+				</a>
+		    </div>
+		</div><!--/.navbar -->
+
+		<div class="row-offcanvas row-offcanvas-left">
+		  <div id="sidebar" class="sidebar-offcanvas">
+		      <div class="col-md-12">
+		        <h3>Άλλες Επιλογές</h3>
+		        <ul class="nav nav-pills nav-stacked">
+		          <li><a href="/user/profile">Προφίλ</a></li>
+		          <li class="active"><a href="/user/events">Ιστορικό Εκδηλώσεων</a></li>
+		          <li><a href="/user/wallet">Πορτοφόλι</a></li>
+		        </ul>
+		      </div>
+		  </div>
+		  <div id="main">
+		      <div class="col-md-12">
+		      	  <p class="visible-xs">
+		            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
+		          </p>
+		          <h2>Το Ιστορικό Μου</h2>
+                  <hr />
+                  <br/>
+                    <div class="agenda">
+                          <div class="table-responsive">
+                              <h3>Παρελθοντικές Εκδηλώσεις</h3>
+                              <table class="table table-condensed table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>Ημερομηνία</th>
+                                          <th>Ώρα</th>
+                                          <th>Εκδήλωση</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <!-- Single event in a single day -->
+                                      <tr>
+                                          <td class="agenda-date" class="active" rowspan="1">
+                                              <div class="dayofmonth">26</div>
+                                              <div class="dayofweek">Σάββατο</div>
+                                              <div class="shortdate text-muted">Ιουλιος,2014</div>
+                                          </td>
+                                          <td class="agenda-time">
+                                              5:30 AM
+                                          </td>
+                                          <td class="agenda-events">
+                                              <div class="agenda-event">
+                                                  Ποδοσφαιρο
+                                              </div>
+                                          </td>
+                                      </tr>
+
+                                      <!-- Multiple events in a single day (note the rowspan) -->
+                                      <tr>
+                                          <td class="agenda-date" class="active" rowspan="1">
+                                              <div class="dayofmonth">24</div>
+                                              <div class="dayofweek">Πεμτπη</div>
+                                              <div class="shortdate text-muted">Ιουλιος,2014</div>
+                                          </td>
+                                          <td class="agenda-time">
+                                              8:00 - 9:00 AM
+                                          </td>
+                                          <td class="agenda-events">
+                                              <div class="agenda-event">
+                                                  Ερωτα με μικρα παιδακια
+                                              </div>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+		      </div>
+		  </div>
+		</div><!--/row-offcanvas -->
+
+
+	</body>
 </html>

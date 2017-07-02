@@ -55,9 +55,15 @@
         </ul>
         <ul th:if="${#httpServletRequest.remoteUser}" class="nav navbar-nav navbar-right logsign">
             <li>
+                <a style="color: white" onclick="log_out_fun()" href="#" ><span class="glyphicon glyphicon-log-out"></span>Αποσύνδεση</a>
                 <form th:action="@{/logout}"  method="post">
-                    <button type="submit" style="color: white"  class="btn btn-link"> <span class="glyphicon glyphicon-log-out"></span>Αποσύνδεση</button>
+                    <button  type="submit" id="real_logout" style="color: white; display: none;"  class="btn btn-link "> <span class="glyphicon glyphicon-log-out"></span>Αποσύνδεση</button>
                 </form>
+                <script>
+                    function log_out_fun(){
+                        document.getElementById("real_logout").click();
+                    }
+                </script>
             </li>
             <li><a style="color: white" href="/profile"><span class="glyphicon glyphicon-user"></span> <span th:text="${#httpServletRequest.remoteUser}"> </span></a></li>
         </ul>

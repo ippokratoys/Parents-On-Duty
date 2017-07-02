@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/css/host_profile.css" rel="stylesheet"/>
+    <link href="/css/history.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/host_profile.js"></script>
@@ -47,7 +47,56 @@
 		              </div></div>
 		          </div>
 		          <div class="row">
-		              <div class="col-md-4">
+                      <div class="col-md-10">
+                          <div class="agenda">
+                              <div class="table-responsive">
+                                  <h3>Μελλοντικές Εκδηλώσεις</h3>
+                                  <table class="table table-condensed table-bordered">
+                                      <thead>
+                                          <tr>
+                                              <th>Ημερομηνία</th>
+                                              <th>Ώρα</th>
+                                              <th>Εκδήλωση</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <!-- Single event in a single day -->
+                                          <tr>
+                                              <td class="agenda-date active" rowspan="1">
+                                                  <div class="dayofmonth">26</div>
+                                                  <div class="dayofweek">Σάββατο</div>
+                                                  <div class="shortdate text-muted">Ιουλιος,2014</div>
+                                              </td>
+                                              <td class="agenda-time">
+                                                  5:30 AM
+                                              </td>
+                                              <td class="agenda-events">
+                                                  <div class="agenda-event">
+                                                      Ποδοσφαιρο
+                                                  </div>
+                                              </td>
+                                          </tr>
+
+                                          <!-- Multiple events in a single day (note the rowspan) -->
+                                          <tr>
+                                              <td class="agenda-date active" rowspan="1">
+                                                  <div class="dayofmonth">24</div>
+                                                  <div class="dayofweek">Πεμτπη</div>
+                                                  <div class="shortdate text-muted">Ιουλιος,2014</div>
+                                              </td>
+                                              <td class="agenda-time">
+                                                  8:00 - 9:00 AM
+                                              </td>
+                                              <td class="agenda-events">
+                                                  <div class="agenda-event">
+                                                      Ερωτα με μικρα παιδακια
+                                                  </div>
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
 		              	<div class="well">
 		              		<div id="myevents">
 		              			<h4><b>Μελλοντικές Εκδηλώσεις που έχω κλείσει:</b></h4>
