@@ -12,10 +12,10 @@
     <title>Event Page</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom CSS -->
-    <link href="/css/event_page.css" rel="stylesheet"/>
+    <link href="css/event_page.css" rel="stylesheet"/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,6 +36,7 @@
 	  height: 100%;
 	  margin: 0;
 	  font: 400 15px/1.8 "Lato", sans-serif;
+
 	}
 	.bgimg-1, .bgimg-2, .bgimg-3 {
 	  position: relative;
@@ -51,7 +52,6 @@
 	  background-attachment: fixed;
 	  overflow:scroll;
 	}
-
 	.caption {
 	  position: absolute;
 	  left: 0;
@@ -60,7 +60,9 @@
 	  text-align: center;
 	  color: #000;
 	}
+	
 
+}
 	</style>
 </head>
 
@@ -91,13 +93,9 @@
    <br/>
    <div id="includedContent"></div>
 <!--Background Image-->
-<div class="bgimg-1">
+<div class="bgimg-1">  
     <!-- Page Content -->
-    <div class="container" style="opacity:100%">
-<!--<<<<<<< HEAD-->
-<!--=======-->
-        <br/>
-<!--&gt;>>>>>> aa54ddc6c6084b11f3fb975859ca7034c8388647-->
+    <div class="container"style="opacity:100%">
         <h1>Σελίδα Εκδήλωσης</h1>
         <hr/>
         <script>
@@ -118,15 +116,23 @@
         <button id="button_hide" type="button" class="btn btn-primary " onclick="hide_search()">Κλείσιμο Αναζήτησης</button>
         <form  action="/results" method="get" id="AboutSearches">
             <div id="search_bar">
-                <div class="form-group">
+                <div class="form-group" >
                     <h5 class="text-center" for="Address_Search">Αναζήτηση Εκδήλωσης</h5>
-                    <input type="text" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
-                    <i class="fa fa-building-o form-control-feedback"></i>
+					
+					<div class="input-group">
+					  <input type="text" class="form-control" name="free_text" id="Address_Search" placeholder="Καλοκαίρι με Πινκγ Πονγκ" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
+					  <span class="input-group-btn">
+						<button type="submit" class="btn  btn-primary" form="AboutSearches" >Αναζήτηση</button>
+					  </span>
+					</div>
+
+					<i class="fa fa-building-o form-control-feedback"></i>
                     <span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
                 </div>
             </div>
         </form>
     </div>
+    <br/>
     <div class="container" style="opacity:1">
             <div class="col-xs-12 col-md-6 col-sm-12">
                 <img class="img-responsive" th:src="${theEvent.eventsgroup.imagePath}" src="images.png" alt=""/>
@@ -223,15 +229,15 @@
 	            </div>
             </div>
     </div>
-</div>
+</div>  
 
-    <script type="text/javascript" src="/bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
+    <script type="text/javascript" src="bootstrap-daterangepicker-master\example\amd/require.js" data-main="bootstrap-daterangepicker-master\example\amd/main.js"></script>
 
     <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
+    <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </body>
 
