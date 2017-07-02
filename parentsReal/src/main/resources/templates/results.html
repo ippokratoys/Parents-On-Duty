@@ -75,11 +75,12 @@
                 zoom: 6
             });
         }
-        function addMarker() {
-            var latlng={lat:document.getElementById("lat").value,lng:document.getElementById("lng").value}
+        function addMarker(latArg,lngArg,tilteArg){
+            var latlng={lat:latArg,lng:lngArg}
             var marker = new google.maps.Marker({
-                  position: latlng,
-                  map: map
+                position: latlng,
+                map: map
+                title : tilteArg
             });
         }
     </script>
@@ -193,6 +194,14 @@
 						</div>
 	            </div>
     </div>
+    <th:block th:unless="${searchResults== null || searchResults.size() == 0}" th:each="oneEvent : ${searchResults}">
+        <script th:inline="javascript">
+            /*[+
+            addMarker([[${oneEvent.lat}]],[[${oneEvent.lon}]],[[${oneEvent.name}]])
+             +]*/
+        </script>
+    </th:block>
+
     <!-- /.container -->
 
     <!-- jQuery -->
