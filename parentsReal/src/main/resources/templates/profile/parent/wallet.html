@@ -40,7 +40,7 @@
 	<h1 class="welcome text-center">Πορτοφολί<br/></h1>
 		<div class="card card-container">
 		<h2 class='login_title text-center'><b>Διαχείρηση Πορτοφολιού</b></h2>
-			<form th:action="@{/wallet}" class="form-signin" method="post">
+			<form name="add_money" id="add_money" th:action="@{/user/wallet/add_money}" class="form-signin" method="post">
 				<span id="reauth-email" class="reauth-email"></span>
 				<hr/>
 				<br/>
@@ -60,18 +60,18 @@
 				        </div>
 				        <div class="modal-body">
 							<h3>Ονοματεπώνυμο</h3>
-							<input type="text" placeholder="Φώτιος Πλάκ" aria-describedby="helpQuery" value=""/>
+							<input type="text" name="name" placeholder="Φώτιος Πλάκ" aria-describedby="helpQuery" value=""/>
 							<h3>Αριθμός Κάρτας</h3>
-							<input type="text" maxlength="16" size="16" placeholder="123456789012" aria-describedby="helpQuery" value=""/>
+							<input type="text" name="card_number" maxlength="16" size="16" placeholder="123456789012" aria-describedby="helpQuery" value=""/>
 							<h3>Κωδικός Ασφάλειας</h3>
-							<input type="text" maxlength="6" placeholder="321" aria-describedby="helpQuery" value=""/>
+							<input type="text" name="card_code" maxlength="6" placeholder="321" aria-describedby="helpQuery" value=""/>
 							<h3>Αριθμός Πόντων</h3>
 						    <div class="form-group">
-						  		<input type="number" min="1" max="1000" class="form-control"  aria-describedby="helpQuery" value=""/>
+						  		<input type="number" name="amount" min="1" max="1000" class="form-control"  aria-describedby="helpQuery" value=""/>
 					  	    </div>
 				        </div>
 				        <div class="modal-footer">
-				          <button type="submit" class="btn btn-default" data-dismiss="modal">Προσθήκη</button>
+				          <button form="add_money" type="submit" class="btn btn-default">Προσθήκη</button>
 				        </div>
 				      </div>
 
