@@ -40,6 +40,16 @@ public class UserProfileController {
         return "profile/parent/profile";
     }
 
+    @RequestMapping(value = "/user/history",method = RequestMethod.GET)
+    public String showHistory(
+            Model model,
+            @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
+    ){
+        Customer curCustomer=customerRepository.findOne(userDetails.getUsername());
+        model.addAttribute("curUser",curCustomer);
+        return "profile/parent/history";
+    }
+
     @RequestMapping(value = "/user/wallet",method = RequestMethod.GET)
     public String showWallet(
             Model model,

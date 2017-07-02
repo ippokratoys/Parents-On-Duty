@@ -49,12 +49,23 @@ public class OrganiserController{
         return "profile/organiser/add_place";
     }
 
-    @RequestMapping(value = "/organiser/wallet",method = RequestMethod.GET)
+    @RequestMapping(value = "/organiser/profile",method = RequestMethod.GET)
     public String profilePage(Model model,
                               @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
     ){
         Organiser organiser= organiserRepository.findOne(userDetails.getUsername());
         model.addAttribute("organiser",organiser);
+//        model.addAttribute("availableSpots",eventService.getAvailableSpots());
+        return "profile/organiser/profile";
+    }
+
+    @RequestMapping(value = "/organiser/wallet",method = RequestMethod.GET)
+    public String walletPage(Model model,
+                              @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
+    ){
+        Organiser organiser= organiserRepository.findOne(userDetails.getUsername());
+        model.addAttribute("organiser",organiser);
+//        model.addAttribute("availableSpots",eventService.getAvailableSpots());
         return "profile/organiser/wallet";
     }
 
