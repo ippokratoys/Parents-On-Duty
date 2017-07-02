@@ -37,6 +37,41 @@
 		}
 	</style>
 	<div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
+	
+	<!--For Background-->
+	<style>
+
+	body, html {
+	  height: 100%;
+	  margin: 0;
+	  font: 400 15px/1.8 "Lato", sans-serif;
+
+	}
+	.bgimg-1, .bgimg-2, .bgimg-3 {
+	  position: relative;
+
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+
+	}
+	.bgimg-1 {
+	  background-image: url("/css/booknowbackground.jpg");
+	  height: 100%;
+	  background-attachment: fixed;
+	  overflow:scroll;
+	}
+
+	.caption {
+	  position: absolute;
+	  left: 0;
+	  top: 50%;
+	  width: 100%;
+	  text-align: center;
+	  color: #000;
+	}
+
+	</style>	
 </head>
 
 <body>
@@ -46,6 +81,9 @@
 		<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
 	</div>
 	<!--EEEEnd of Naaavi-->
+	
+	
+<div class="bgimg-1">
 	<div class="form-group col-md-12">
 
 		<p><br/><br/></p><!--to adjust below top bar -->
@@ -104,6 +142,7 @@
 			</div>
 		</section>
 	</div>
+</div>
 </body>
 
 </html>
