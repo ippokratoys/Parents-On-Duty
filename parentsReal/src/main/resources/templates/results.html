@@ -37,7 +37,6 @@
 	  height: 100%;
 	  margin: 0;
 	  font: 400 15px/1.8 "Lato", sans-serif;
-	  color: #777;
 	}
 	.bgimg-1, .bgimg-2, .bgimg-3 {
 	  position: relative;
@@ -181,8 +180,6 @@
 								4.0 Αστέρια
 							</p>
 						</div>
-                        <input type="text" style="display:none" id="lat" th:value="${oneEvent.location.lat}" />
-                        <input type="text" style="display:none" id="lng" th:value="${oneEvent.location.lon}" />
 					</div>
 				</th:block>
             	<h2 th:if="${searchResults== null || searchResults.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>
