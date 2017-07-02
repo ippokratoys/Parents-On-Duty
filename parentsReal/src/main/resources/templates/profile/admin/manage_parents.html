@@ -29,9 +29,10 @@
         <div class="col-md-12">
             <h3>Άλλες Επιλογές</h3>
             <ul class="nav nav-pills nav-stacked">
-                <li><a href="/admin/profile">Προφίλ</a></li>
-                <li class="active"><a href="/admin/block_user">Μπλοκάρισμα Χρήστη</a></li>
-                <li><a href="/admin/accept_event">Αποδοχή Εκδήλωσης</a></li>
+                <li><a href="/admin/profile">Σύνοψη</a></li>
+                <li><a href="/admin/manage_organisers">Διαχείριση Διοργανώτών</a></li>
+                <li class="active"><a href="/admin/manage_parents">Διαχείριση Γονέων</a></li>
+                <li><a href="/admin/accept_location">Αποδοχή Εκδήλωσης</a></li>
             </ul>
         </div>
     </div>
@@ -47,16 +48,17 @@
                 <div class="col-md-4">
                     <div class="well pre-scrollable">
                         <div id="myplaces">
-                            <h4><b>Χρήστες</b></h4>
+                            <h4><b>Γονείς</b></h4>
                             <!--th:block th:if="${ organiser.locations != null}" th:each="oneLocation : ${organiser.locations}" >
                                 <p th:text="'Όνομα : ' + ${oneLocation.name}"></p>
                                 <p th:text="'Διεύθυνση :' + ${oneLocation.address}"></p>
                                 <p th:text="'Έγκυρο μέχρι τις :' + ${oneLocation.validUntil}"></p>
                                 <hr/>
                             </th:block-->
-							<p>123123123123123123123123123&nbsp;<button  id="" class="button1" >Block</button></p>
-							<p>456456456456456456456456456&nbsp;<button  id="" class="button1" >Block</button></p>
-							<p>789789789789789789789789789&nbsp;<button  id="" class="button1" >Block</button></p>
+                            <th:block th:unless="${parents== null || parents.size() == 0}" th:each="parent : ${parents}">
+                                <p th:inline="text"> [[ ${parent.login_email} ]] [[ ${parent.wallet/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p>
+                            </th:block>
+
 
                         </div>
                     </div>
