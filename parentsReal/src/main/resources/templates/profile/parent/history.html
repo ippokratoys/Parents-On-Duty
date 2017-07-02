@@ -54,36 +54,26 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <tr>
-                                          <td class="agenda-date active" rowspan="1">
-                                              <div class="dayofmonth">26</div>
-                                              <div class="dayofweek">Σάββατο</div>
-                                              <div class="shortdate text-muted">Ιουλιος,2014</div>
-                                          </td>
-                                          <td class="agenda-time">
-                                              5:30 AM
-                                          </td>
-                                          <td class="agenda-events">
-                                              <div class="agenda-event">
-                                                  Ποδοσφαιρο
-                                              </div>
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td class="agenda-date active" rowspan="1">
-                                              <div class="dayofmonth">24</div>
-                                              <div class="dayofweek">Πεμτπη</div>
-                                              <div class="shortdate text-muted">Ιουλιος,2014</div>
-                                          </td>
-                                          <td class="agenda-time">
-                                              8:00 - 9:00 AM
-                                          </td>
-                                          <td class="agenda-events">
-                                              <div class="agenda-event">
-                                                  Ερωτα με μικρα παιδακια
-                                              </div>
-                                          </td>
-                                      </tr>
+                                      <th:block th:each="oneBook : ${curUser.getBookEvents()}" th:if="${ oneBook.event.day <= localDate}">
+                                          <tr>
+                                              <td class="agenda-date active" rowspan="1">
+                                                  <div class="dayofmonth" th:text="${@generalService.dayOfMonth(oneBook.event.day)}"></div>
+                                                  <div class="dayofweek" th:text="${@generalService.dayOfWeek(oneBook.event.day)}">Σάββατο</div>
+                                                  <div class="shortdate text-muted" th:text="${@generalService.shortDate(oneBook.event.day)}">Ιουλιος,2014</div>
+                                              </td>
+                                              <td class="agenda-time" th:text="${oneBook.event.time}">
+                                                  5:30 AM
+                                              </td>
+                                              <td class="agenda-events">
+                                                  <div class="agenda-event" th:text="${oneBook.event.name}">
+                                                      Ποδοσφαιρο
+                                                  </div>
+                                              </td>
+                                              <td class="agenda-events" th:text="${oneBook.event.price}/100+'€'">
+                                                  4,20 €
+                                              </td>
+                                          </tr>
+                                      </th:block>
                                   </tbody>
                               </table>
                           </div>
