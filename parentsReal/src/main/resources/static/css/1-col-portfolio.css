@@ -19,6 +19,18 @@ hr {
     border-width: 1px;
 }
 
+h1 {
+    font-weight: bold;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+h2 {
+    font-weight: bold;
+}
+
 .onnav{
     color:black;
 }
@@ -56,7 +68,7 @@ body, html {
     width: 100%;
 }
 
-@media (min-width: 768px){
+
   #left {
     position: absolute;
     top: 0px;
@@ -76,7 +88,6 @@ body, html {
     overflow-y: scroll;
     width: 40%;
   }
-}
 
 #left {
   height:100%;
