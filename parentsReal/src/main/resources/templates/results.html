@@ -30,6 +30,40 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
+	<!--For Background-->
+	<style>
+
+	body, html {
+	  height: 100%;
+	  margin: 0;
+	  font: 400 15px/1.8 "Lato", sans-serif;
+	  color: #777;
+	}
+	.bgimg-1, .bgimg-2, .bgimg-3 {
+	  position: relative;
+	  opacity: 0.4;
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+
+	}
+	.bgimg-1 {
+	  background-image: url("/css/resultbackground.jpg");
+	  height: 100%;
+	  background-attachment: fixed;
+	  overflow:scroll;
+	}
+
+	.caption {
+	  position: absolute;
+	  left: 0;
+	  top: 50%;
+	  width: 100%;
+	  text-align: center;
+	  color: #000;
+	}
+
+	</style>
 </head>
 
 <body>
@@ -52,7 +86,10 @@
     <!-- Navigation -->
     <nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
     <br/>
+	<!--Background Image-->
+	<div class="bgimg-1"></div>
 <!-- Page Content -->
+
     <div class="container">
 			<div class="col-xs-12 col-md-6 col-sm-12" id="left">
 				<h1 class="page-header" th:text="'Αποτελέσματα Αναζήτησης ('+( ${searchResults!=null} ? ${searchResults.size()} : 0) +')'"></h1>
