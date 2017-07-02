@@ -99,7 +99,7 @@ public class GeneralService {
 
         int year = cal.get(Calendar.YEAR);
 
-        shortDate += year;
+        shortDate += ", "+year;
 
         return shortDate;
     }

@@ -54,18 +54,18 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <th:block th:each="oneBook : ${curUser.getBookEvents()}" th:if="${ oneBook.event.day <= localDate}">
+                                      <th:block th:each="oneBook : ${curUser.getBookEvents()}" th:if="${ localDate >= oneBook.event.day }">
                                           <tr>
                                               <td class="agenda-date active" rowspan="1">
                                                   <div class="dayofmonth" th:text="${@generalService.dayOfMonth(oneBook.event.day)}"></div>
                                                   <div class="dayofweek" th:text="${@generalService.dayOfWeek(oneBook.event.day)}">Σάββατο</div>
                                                   <div class="shortdate text-muted" th:text="${@generalService.shortDate(oneBook.event.day)}">Ιουλιος,2014</div>
                                               </td>
-                                              <td class="agenda-time" th:text="${oneBook.event.time}">
+                                              <td class="agenda-time" th:text="${oneBook.event.time.hours}+':'+${oneBook.event.time.minutes}">
                                                   5:30 AM
                                               </td>
                                               <td class="agenda-events">
-                                                  <div class="agenda-event" th:text="${oneBook.event.name}">
+                                                  <div class="agenda-event" th:text="${oneBook.event.eventsgroup.name}">
                                                       Ποδοσφαιρο
                                                   </div>
                                               </td>
