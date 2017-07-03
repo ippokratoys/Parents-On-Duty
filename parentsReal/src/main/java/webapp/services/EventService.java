@@ -72,7 +72,7 @@ public class EventService {
 
             customer.setPoints(customer.getPoints() - event.getPrice());
             Organiser organiser = event.getOrganiser();
-            organiser.addPoints(event.getPrice());
+            organiser.addPoints((int)Math.round(event.getPrice()*0.8));
             eventHandler.save(event);
             customerRepository.save(customer);
         }
