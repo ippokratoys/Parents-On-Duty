@@ -77,6 +77,12 @@
         var autocomplete =     autocomplete = new google.maps.places.Autocomplete(
                 /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
                 {types: ['geocode']});
+        var input = document.getElementById('autocomplete');
+        google.maps.event.addDomListener(input, 'keydown', function(event) {
+            if(event.keyCode === 13) {
+                event.preventDefault();
+            }
+        });
         autocomplete.addListener('place_changed', function() {
             var address = document.getElementById('autocomplete').value;
             var geocoder = new google.maps.Geocoder();
@@ -129,49 +135,57 @@
                 <!-- The searh-->
                 <form  action="/results" method="get" id="AboutSearches">
 
-                <div id="search_bar">
-                    <div class="form-group">
-                        <label for="Address_Search">Αναζήτηση Εκδήλωσης</label>
-                        <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
-                        <i class="fa fa-building-o form-control-feedback"></i>
-                        <span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="config-demo">Επιλογή ημερομηνίας διοργάνωσης</label>
-                        <input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
-                        <!--<input type="text" id="config-demo" name="Dates" class="form-control" value="" th:value="${allParams!=null} ? ${allParams.get('Dates')} : ''"/>-->
-                    </div>
-                    <div class=" col-md-4 ">
-                        <div class="form-group">
-                            <label for="Prices">Εύρος Τιμών</label>
-                            <select name="Price" id="Prices"  class="form-control" th:selected="${allParams!=null} ? ${allParams.get('Price')} : 1 ">
-                                <option value="1"></option>
-                                <option value="2">1-5</option>
-                                <option value="3">5-10</option>
-                                <option value="4">10-15</option>
-                                <option value="5">15-20</option>
-                                <option value="6">20-25</option>
-                            </select>
+                <div id="search_bar" style="text-align:center;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Address_Search">Αναζήτηση Εκδήλωσης</label>
+                                <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="Address_Search" name="free_text" placeholder="Καλοκαίρι Με Ποδόσφαιρο" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
+                                <i class="fa fa-building-o form-control-feedback"></i>
+                                <span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class=" col-md-2 ">
-                        <div class="form-group">
-                            <label for="Age">Ηλικία</label>
-                            <input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2" th:value="${allParams!=null} ? ${allParams.get('Age')} : ''"/>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="config-demo">Ημερομηνία Εκδήλωσης</label>
+                                <input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
+                                <!--<input type="text" id="config-demo" name="Dates" class="form-control" value="" th:value="${allParams!=null} ? ${allParams.get('Dates')} : ''"/>-->
+                            </div>
                         </div>
-                    </div>
-                    <div class=" col-md-2 ">
-                        <div class="form-group">
-                            <label for="distance">Αποσταση</label>
-                            <input type="number" class="form-control" id="distance" name="distance" min="1" max="30" th:value="${allParams!=null} ? ${allParams.get('distance')} : ''"/>
+                        <div class=" col-md-2 ">
+                            <div class="form-group">
+                                <label for="Prices">Εύρος Τιμών</label>
+                                <select name="Price" id="Prices"  class="form-control" th:selected="${allParams!=null} ? ${allParams.get('Price')} : 1 ">
+                                    <option value="1"></option>
+                                    <option value="2">1-5</option>
+                                    <option value="3">5-10</option>
+                                    <option value="4">10-15</option>
+                                    <option value="5">15-20</option>
+                                    <option value="6">20-25</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div  id="locationField" class="form-group col-md-4">
-                        <label for="config-demo">Διεύθυνση Που Βρίσκεστε:</label>
-                        <input id="autocomplete" placeholder="Π.χ. Συγγρού 15"  onFocus="geolocate()" type="text"/>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 ">
+                        <div class=" col-md-2 col-md-offset-3">
+                            <div class="form-group">
+                                <label for="Age">Ηλικία</label>
+                                <input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2" th:value="${allParams!=null} ? ${allParams.get('Age')} : ''"/>
+                            </div>
+                        </div>
+                        <div class=" col-md-2 ">
+                            <div class="form-group">
+                                <label for="distance">Αποσταση</label>
+                                <input type="number" class="form-control" id="distance" name="distance" min="1" max="30" th:value="${allParams!=null} ? ${allParams.get('distance')} : ''"/>
+                            </div>
+                        </div>
+                        <div  id="locationField" class="form-group col-md-4">
+                            <label for="config-demo">Διεύθυνση Αναζήτησης</label>
+                            <input id="autocomplete" placeholder="Π.χ. Συγγρού 15"  onFocus="geolocate()" type="text"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-sm-offset-4 col-md-offset-5 col-xs-offset-2">
                             <button type="submit" class="btn btn-primary btn-lg btn-block search_button" form="AboutSearches" value="Submit"><i class="fa fa-search" aria-hidden="true">Αναζήτηση</i></button>
                         </div>
                     </div>
@@ -205,11 +219,11 @@
 						<div class="ratings">
 							<!--<p th:text="${oneEvent.eventsfeedbacks.size()} + ' Review'" class="pull-right">3 Αξιολογήσεις</p>-->
 							<p>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star-empty"></span>
+								<span class="glyphicon glyphicon-star" style="color:#428BCA;"></span>
+								<span class="glyphicon glyphicon-star" style="color:#428BCA;"></span>
+								<span class="glyphicon glyphicon-star" style="color:#428BCA;"></span>
+								<span class="glyphicon glyphicon-star" style="color:#428BCA;"></span>
+								<span class="glyphicon glyphicon-star-empty" style="color:#428BCA;"></span>
 								4.0 Αστέρια
 							</p>
 						</div>
