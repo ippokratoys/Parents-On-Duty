@@ -209,11 +209,15 @@ public class CsvInserts {
                 }
                 newEvent.setPrice( Integer.parseInt(arr_in[2].replace(".","") ) );
                 //instead of this we must add the ellement from the csv
-                newEvent.setTime( new Time(16,20,0) );
+                String[] splitTime = arr_in[3].split(":");
+                newEvent.setTime( new Time(Integer.parseInt(splitTime[0]),Integer.parseInt(splitTime[1]),0) );
                 newEvent.setEventsgroup(eventsgroupRepository.findOne( Integer.parseInt(arr_in[4]) ));
                 newEvent.setLocation(locationRepository.findOne(Integer.parseInt(arr_in[5])));
                 newEvent.setOrganiser(organiserRepository.findOne(eventsgroupRepository.findOne( Integer.parseInt(arr_in[4]) ).getOrganiser().getLogin_email()));
-                newEvent.setImportance(1);
+                newEvent.setImportance(Integer.parseInt(arr_in[7]));
+                newEvent.setSpots(Integer.parseInt(arr_in[8]));
+                newEvent.setPrice( (int) (100 * Double.parseDouble(arr_in[9])) );
+
                 eventRepository.save(newEvent);
             }
         }
@@ -321,8 +325,13 @@ public class CsvInserts {
 				newLoc.setPostcode(arr_in[1]);
 				newLoc.setName(arr_in[2]);
 				newLoc.setLocationOwner(organiserRepository.findOne("edutnall3@github.io"));
-				newLoc.setLat(new BigDecimal("37.974535"));
-				newLoc.setLon(new BigDecimal("23.775358"));
+				newLoc.setLat( new BigDecimal(arr_in[4]) );
+				newLoc.setLon( new BigDecimal(arr_in[5]) );
+				if( i==8 ){
+    				newLoc.setCertificateChecked(true);
+                }else{
+    				newLoc.setCertificateChecked(true);
+                }
 				locationRepository.save(newLoc);
             }
         }
@@ -342,7 +351,6 @@ public class CsvInserts {
                 }
             }
         }
-
     }
 
     public void doInserts(){

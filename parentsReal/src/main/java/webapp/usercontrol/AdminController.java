@@ -32,9 +32,6 @@ public class AdminController {
 
     @RequestMapping(value="/admin/profile")
     public String profilePage(Model model){
-
-
-
         return "profile/admin/profile";
     }
 
