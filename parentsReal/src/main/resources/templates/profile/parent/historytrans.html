@@ -29,8 +29,8 @@
 		        <ul class="nav nav-pills nav-stacked">
 		          <li><a href="/user/profile">Προφίλ</a></li>
 		          <li><a href="/user/history">Ιστορικό Εκδηλώσεων</a></li>
+                  <li class="active"><a href="/user/historytrans">Ιστορικό Συναλλαγών</a></li>
 		          <li><a href="/user/wallet">Πορτοφόλι</a></li>
-				  <li class="active"><a href="/user/historytrans">Ιστορικό Συναλλαγών</a></li>
 		        </ul>
 		      </div>
 		  </div>
@@ -68,7 +68,7 @@
                                               </td>
                                               <td class="agenda-received" th:text="${oneBook.event.time.hours}+':'+${oneBook.event.time.minutes}">
                                                   69 €
-                                              </td>											  
+                                              </td>
                                               <td class="agenda-payment">
                                                   <div class="agenda-event" th:text="${oneBook.event.eventsgroup.name}">
                                                       paypall
