@@ -73,21 +73,23 @@ hr {
   line-height: 36px;
   float: left;
   text-align: right;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 .agenda .agenda-date .shortdate {
-  font-size: 0.75em; 
+  font-size: 0.75em;
 }
 
 
 /* Times */
-.agenda .agenda-time { width: 140px; } 
+.agenda .agenda-time { width: 70px; }
+
+.agenda .agenda-button { width: 80px; }
 
 
 /* Events */
-.agenda .agenda-events {  } 
-.agenda .agenda-events .agenda-event {  } 
+.agenda .agenda-events {  }
+.agenda .agenda-events .agenda-event {  }
 
 @media (max-width: 767px) {
-    
+
 }

@@ -96,17 +96,22 @@ public class ResultService {
         BoolQueryBuilder finalQuery = new BoolQueryBuilder();
 
 
-
+        RangeQueryBuilder rangeDate = null;
         if(fromDate != null) {
-            RangeQueryBuilder rangeDate = null;
+
             try {
                 rangeDate = QueryBuilders.rangeQuery("day").from(dateParser.parse(fromDate)).to(dateParser.parse(toDate));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            finalQuery = finalQuery.filter(rangeDate);
+
+        }
+        else{
+            Date date = new Date();
+            rangeDate = QueryBuilders.rangeQuery("day").from(date);
         }
 
+        finalQuery = finalQuery.filter(rangeDate);
 
 
         int fromP = fromPrice(price);
