@@ -86,17 +86,9 @@ public class EventService {
         String[] buff=file.getName().split("\\.");
         String fileNamePostFix=buff[buff.length-1];
         fileName+="."+fileNamePostFix;
+
         fileUploadService.store(file,fileName, FileUploadService.FileType.EVENT);
-//        try {
-//            String pathStr = MAIN_PREFIX + PHOTO_PREFIX +eventsgroup.getName() + "_" + file.getOriginalFilename();
-//            // Get the file and save it somewhere
-//            byte[] bytes = file.getBytes();
-//            Path path = Paths.get(pathStr);
-//            Files.write(path, bytes);
-//        }catch (IOException e){
-//            e.printStackTrace();
-//            return null;
-//        }
+
         eventsgroup.setImagePath("file/event/"+fileName);
         eventsgroupRepository.save(eventsgroup);
         return "redirect:/uploadStatus";

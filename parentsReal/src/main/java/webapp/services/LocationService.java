@@ -3,6 +3,7 @@ package webapp.services;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import webapp.database.Location;
 import webapp.database.Organiser;
 import webapp.database.repositories.LocationRepository;
@@ -20,7 +21,10 @@ public class LocationService {
     @Autowired
     LocationRepository locationRepository;
 
-    public boolean createLocation(String name, String route, String number, String town, String lat, String lon, String zip, Organiser organiser){
+    @Autowired
+    private FileUploadService fileUploadService;
+
+    public boolean createLocation(String name, String route, String number, String town, String lat, String lon, String zip, Organiser organiser,MultipartFile locationFile,MultipartFile certificateFile){
 
         Location newLocation = new Location();
 
@@ -43,7 +47,30 @@ public class LocationService {
         newLocation.setCertificateChecked(false);
         newLocation.setLocationOwner(organiser);
 
-        locationRepository.save(newLocation);
+        Location dbLocation = locationRepository.save( newLocation );
+
+
+        String fileName="";
+        fileName = String.valueOf(dbLocation.getId());
+        String[] buff=locationFile.getName().split("\\.");
+        String fileNamePostFix=buff[buff.length-1];
+        fileName+="."+fileNamePostFix;
+
+        fileUploadService.store(locationFile,fileName, FileUploadService.FileType.LOCATION);
+        dbLocation.setImagePath(fileName);
+
+
+//        fileName = String.valueOf(dbLocation.getId());
+//        String[] buff=locationFile.getName().split("\\.");
+//        String fileNamePostFix=buff[buff.length-1];
+//        fileName+="."+fileNamePostFix;
+//
+//        fileUploadService.store(locationFile,fileName, FileUploadService.FileType.LOCATION);
+//        dbLocation.setCertificatePath(fileName);
+
+
+
+        locationRepository.save( dbLocation );
 
         return true;
     }

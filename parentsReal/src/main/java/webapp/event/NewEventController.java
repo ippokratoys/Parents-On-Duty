@@ -90,10 +90,10 @@ public class NewEventController {
                                      @RequestParam(name = "spots") int spots,
                                      @RequestParam(name = "price") String priceStr,
                                      @RequestParam(name = "location_id") int location,
-                                     @RequestParam(name = "file") MultipartFile file,
                                      @RequestParam(name = "age_from") int ageFrom,
                                      @RequestParam(name = "age_to") int ageTo,
                                      @RequestParam(name = "categories") String categories,
+                                     @RequestParam(name = "file") MultipartFile file,
                                      @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
     ) throws ParseException {
         System.out.println("allRequestParams = [" + allRequestParams + "]");

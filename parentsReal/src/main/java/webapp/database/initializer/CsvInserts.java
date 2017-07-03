@@ -322,6 +322,8 @@ public class CsvInserts {
 				Location newLoc=new Location();
 //				newLoc.setId(i);
 				newLoc.setAddress(arr_in[0]);
+				newLoc.setImagePath("/file/location/"+i+".png");
+				newLoc.setCertificatePath("/file/certificate/"+i+".png");
 				newLoc.setPostcode(arr_in[1]);
 				newLoc.setName(arr_in[2]);
 				newLoc.setLocationOwner(organiserRepository.findOne("edutnall3@github.io"));

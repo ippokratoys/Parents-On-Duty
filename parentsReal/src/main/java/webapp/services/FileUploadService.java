@@ -1,11 +1,7 @@
 package webapp.services;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -19,9 +15,10 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
 
+import static webapp.services.FileUploadService.FileType.CERFICATE;
 import static webapp.services.FileUploadService.FileType.EVENT;
+import static webapp.services.FileUploadService.FileType.LOCATION;
 
 /**
  * Created by thanasis on 1/7/2017.
@@ -33,15 +30,21 @@ public class FileUploadService{
     Environment env;
     public enum FileType{
         EVENT,
-        CERFICATE;
+        CERFICATE,
+        LOCATION;
     }
 
-    Path photoLocation;
+    Path eventPhoto;
+
+    Path locationPhoto;
 
     Path certificateLocation;
 
     @Value("${file_save.folder.prefix}")
     String MAIN_PREFIX;
+
+    @Value("${file_save.folder.location.prefix}")
+    String LOCATION_PREFIX;
 
     @Value("${file_save.folder.event.pictures.prefix}")
     String PHOTO_PREFIX;
@@ -59,9 +62,11 @@ public class FileUploadService{
             }
 
             if(fileType==EVENT){
-                Files.copy(file.getInputStream(), this.photoLocation.resolve(fileName));
-            }else{
-                Files.copy(file.getInputStream(), this.photoLocation.resolve(fileName));
+                Files.copy(file.getInputStream(), this.eventPhoto.resolve(fileName));
+            }else if(fileType==LOCATION){
+                Files.copy(file.getInputStream(), this.locationPhoto.resolve(fileName));
+            }else if(fileType==CERFICATE){
+                Files.copy(file.getInputStream(), this.certificateLocation.resolve(fileName));
             }
         } catch (IOException e) {
 //            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
@@ -70,11 +75,13 @@ public class FileUploadService{
 
     public Path load(String filename,FileType fileType) {
         if(fileType==EVENT){
-            return photoLocation.resolve(filename);
-        }else{
+            return eventPhoto.resolve(filename);
+        }else if(fileType==LOCATION){
+            return locationPhoto.resolve(filename);
+        }else if(fileType==CERFICATE){
             return certificateLocation.resolve(filename);
         }
-
+        return null;
     }
 
     public Resource loadAsResource(String filename,FileType fileType) {
@@ -103,18 +110,23 @@ public class FileUploadService{
     public void init() {
         System.out.println("FileUploadService.FileUploadService");
         try {
-            photoLocation=Paths.get(MAIN_PREFIX+PHOTO_PREFIX);
-            certificateLocation=Paths.get(MAIN_PREFIX+CERTIFICATE_PREFIX);
             rootLocation=Paths.get(MAIN_PREFIX);
+            eventPhoto =Paths.get(MAIN_PREFIX+PHOTO_PREFIX);
+            certificateLocation=Paths.get(MAIN_PREFIX+CERTIFICATE_PREFIX);
+            locationPhoto=Paths.get(MAIN_PREFIX+LOCATION_PREFIX);
+
 
             if(!Files.exists(rootLocation)){
                 Files.createDirectory(rootLocation);
             }
-            if(!Files.exists(photoLocation)){
-                Files.createDirectory(photoLocation);
+            if(!Files.exists(eventPhoto)){
+                Files.createDirectory(eventPhoto);
             }
             if(!Files.exists(certificateLocation)){
                 Files.createDirectory(certificateLocation);
+            }
+            if(!Files.exists(locationPhoto)){
+                Files.createDirectory(locationPhoto);
             }
         } catch (IOException e) {
 //            throw new StorageException("Could not initialize storage", e);

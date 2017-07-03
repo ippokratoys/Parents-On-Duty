@@ -46,7 +46,8 @@
 		          </p>
 		          <h2>Προσθήκη Μέρους</h2>
 		          <hr/>
-                <form method="post" id="Add_place" th:action="@{/organiser/add_place}">
+                <form method="post" id="Add_place" enctype="multipart/form-data" th:action="@{/organiser/add_place}">
+
                     <div class="row">
   		               <div class="form-group col-xs-12 col-md-4 col-sm-8">
   		           		 <h3>Όνομα Χώρου</h3>
@@ -96,15 +97,15 @@
                   <br/>
 
                   <br/>
-  		          <!-- <div class="row">
+  		          <div class="row">
                       <div class="col-xs-12 col-md-4 col-sm-8 form-group has-feedback ">
                           <h3>Ανέβασε Φωτογραφία Μέρους</h3>
                           <div class="fileinput fileinput-new" data-provides="fileinput">
-                              <span class="btn btn-default btn-file"><input required="true" type="file" name="..."/></span>
+                              <span class="btn btn-default btn-file"><input required="true" type="file" name="location_file"/></span>
                               <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
                           </div>
                       </div>
-  		          </div> -->
+  		          </div>
                     <div class="row col-xs-6 col-md-2 col-sm-4 col-md-offset-3 col-sm-offset-2 col-xs-offset-3">
                         	<button type="submit" class="btn btn-info btn-lg btn-block search_button" form="Add_place" value="Submit"><i class="fa fa-search" aria-hidden="true">Πρόσθεσε Μέρος</i></button>
                     </div>

@@ -19,6 +19,7 @@ import webapp.services.FileUploadService;
 public class FileController {
     @Autowired
     FileUploadService fileUploadService;
+
     @RequestMapping("file/event/{fileName:.+}")
     ResponseEntity<Resource> getEventFile(@PathVariable String fileName){
         Resource file = fileUploadService.loadAsResource(fileName, FileUploadService.FileType.EVENT);
@@ -33,7 +34,7 @@ public class FileController {
                 .body(file);
     }
 
-    @RequestMapping("file/certificates/{fileName:.+}")
+    @RequestMapping("file/certificate/{fileName:.+}")
     @PreAuthorize("ADMIN")
     ResponseEntity<Resource> getCerficate(@PathVariable String fileName){
         Resource file = fileUploadService.loadAsResource(fileName, FileUploadService.FileType.CERFICATE);
@@ -42,4 +43,19 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
                 .body(file);
     }
+
+    @RequestMapping("file/location/{fileName:.+}")
+    ResponseEntity<Resource> getLocationFile(@PathVariable String fileName){
+        Resource file = fileUploadService.loadAsResource(fileName, FileUploadService.FileType.LOCATION);
+        if(file==null){
+            return ResponseEntity
+                    .notFound()
+                    .build();
+        }
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
+                .body(file);
+    }
+
 }

@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import webapp.database.Organiser;
 import webapp.database.repositories.LocationRepository;
 import webapp.database.repositories.OrganiserRepository;
+import webapp.services.FileUploadService;
 import webapp.services.LocationService;
 
 import java.util.Map;
@@ -20,7 +22,6 @@ import java.util.Map;
  */
 @Controller
 public class NewLocationController {
-
     @Autowired
     LocationRepository locationRepository;
 
@@ -39,12 +40,15 @@ public class NewLocationController {
                                         @RequestParam(name="lat") String lat,
                                         @RequestParam(name="lon") String lon,
                                         @RequestParam(name="zip") String zip,
+                                        @RequestParam(name = "location_file") MultipartFile locationFile,
+                                        @RequestParam(name = "certificate_file", required = false) MultipartFile certificateFile,
                                         @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
     ){
         System.out.println("allRequestParams = [" + name + route +"]");
 
         Organiser organiser= organiserRepository.findOne(userDetails.getUsername());
-        locationService.createLocation(name, route, number, town, lat, lon, zip, organiser);
+        locationService.createLocation(name, route, number, town, lat, lon, zip, organiser,locationFile,certificateFile);
+
 
         return "redirect:/organiser/profile?added_new_location=true";
     }
