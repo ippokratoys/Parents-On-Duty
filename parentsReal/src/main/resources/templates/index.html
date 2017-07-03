@@ -246,7 +246,8 @@
 								</div>
 							</div>
 
-							<th:block th:unless="${recommendedEvents== null || recommendedEvents.size() == 0}" th:each="oneEvent : ${recommendedEvents}">
+							<th:block th:unless="${recommendedEvents== null || recommendedEvents.size() == 0}"
+									  th:each="oneEvent : ${recommendedEvents}" th:if="${oneEvent.id}!=${recommendedEvents.get(0).id}">
 							  <div class="item">
 								<div class="col-xs-4">
 									<a th:href="'/event?id='+${oneEvent.id}">
