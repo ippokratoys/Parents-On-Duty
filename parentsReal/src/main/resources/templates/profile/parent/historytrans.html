@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"	xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>History</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/history.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/host_profile.js"></script>
+  </head>
+
+	<body>
+		<div class="navbar navbar-default navbar-fixed-top">
+		    <div class="navbar-header">
+		    	<a style="color:white" class="navbar-brand" href="/">
+					<div style="font-family:Comic Sans MS,cursive,sans-serif">
+						<div class="title_spec" >Parents On Duty</div>
+					</div>
+				</a>
+		    </div>
+		</div><!--/.navbar -->
+
+		<div class="row-offcanvas row-offcanvas-left">
+		  <div id="sidebar" class="sidebar-offcanvas">
+		      <div class="col-md-12">
+		        <h3>Άλλες Επιλογές</h3>
+		        <ul class="nav nav-pills nav-stacked">
+		          <li><a href="/user/profile">Προφίλ</a></li>
+		          <li><a href="/user/history">Ιστορικό Εκδηλώσεων</a></li>
+		          <li><a href="/user/wallet">Πορτοφόλι</a></li>
+				  <li class="active"><a href="/user/historytrans">Ιστορικό Συναλλαγών</a></li>
+		        </ul>
+		      </div>
+		  </div>
+		  <div id="main">
+		      <div class="col-md-12">
+		      	  <p class="visible-xs">
+		            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
+		          </p>
+		          <h2>Το Ιστορικό Μου</h2>
+                  <hr />
+                  <br/>
+                    <div class="agenda">
+                          <div class="table-responsive">
+                              <h3>Παρελθοντικές Εκδηλώσεις</h3>
+                              <table class="table table-condensed table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>Ημερομηνία</th>
+                                          <th>Πλήρωσα</th>
+                                          <th>Έλαβα</th>
+                                          <th>Τρόπος πληρωμής</th>
+										  <th>Συναλλαγή</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <th:block th:each="oneBook : ${curUser.getBookEvents()}" th:if="${ localDate >= oneBook.event.day }">
+                                          <tr>
+                                              <td class="agenda-date active" rowspan="1">
+                                                  <div class="dayofmonth" th:text="${@generalService.dayOfMonth(oneBook.event.day)}"></div>
+                                                  <div class="dayofweek" th:text="${@generalService.dayOfWeek(oneBook.event.day)}">Σάββατο</div>
+                                                  <div class="shortdate text-muted" th:text="${@generalService.shortDate(oneBook.event.day)}">Ιουλιος,2014</div>
+                                              </td>
+                                              <td class="agenda-paid" th:text="${oneBook.event.time.hours}+':'+${oneBook.event.time.minutes}">
+                                                  4,20 €
+                                              </td>
+                                              <td class="agenda-received" th:text="${oneBook.event.time.hours}+':'+${oneBook.event.time.minutes}">
+                                                  69 €
+                                              </td>											  
+                                              <td class="agenda-payment">
+                                                  <div class="agenda-event" th:text="${oneBook.event.eventsgroup.name}">
+                                                      paypall
+                                                  </div>
+                                              </td>
+											  <td class="agenda-transid" th:text="${oneBook.event.price}/100+'€'">
+                                                  69420666sataniasmena
+                                              </td>
+                                          </tr>
+                                      </th:block>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+		      </div>
+		  </div>
+		</div><!--/row-offcanvas -->
+
+
+	</body>
+</html>

@@ -118,7 +118,6 @@ public class ResultService {
         }
 
 
-        System.out.println("DIST IS : "+ dist);
         if(dist>0) {
 //            CriteriaQuery distanceCriteria= new CriteriaQuery(
 //                    new Criteria("location").within(
@@ -157,7 +156,7 @@ public class ResultService {
 
     public Iterable<EventSearch> recommendedEvents(){
         Iterable <EventSearch> recommended;
-        
+
         Date date = new Date();
         System.out.println(date.toString());
         BoolQueryBuilder finalQuery = new BoolQueryBuilder();
