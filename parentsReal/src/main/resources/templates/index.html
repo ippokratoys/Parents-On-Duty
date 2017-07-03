@@ -233,8 +233,21 @@
 					<div class="col-md-12">
 					  <div class="carousel slide multi-item-carousel" id="theCarousel" style="margin:0 auto;height:50%;width:50%;">
 						<div class="carousel-inner" >
+							<div class="active item">
+								<div class="col-xs-4">
+									<a th:href="'/event?id='+${recommendedEvents.get(0).id}">
+										<img th:src="${recommendedEvents.get(0).imagePath}" style="height:150px;width:200px" class="img-responsive " />
+										<div type="text" style="color:white;">
+											<h4 th:inline="text"><i>[[${recommendedEvents.get(0).name}]]</i></h4>
+											<h4 th:inline="text"><i>[[${#dates.format(recommendedEvents.get(0).day,'dd/MM/yyyy')}]]</i></h4>
+											<h4 th:inline="text"><i>[[${recommendedEvents.get(0).address}]]</i></h4>
+										</div>
+									</a>
+								</div>
+							</div>
+
 							<th:block th:unless="${recommendedEvents== null || recommendedEvents.size() == 0}" th:each="oneEvent : ${recommendedEvents}">
-							  <div class="item active">
+							  <div class="item">
 								<div class="col-xs-4">
 									<a th:href="'/event?id='+${oneEvent.id}">
 										<img th:src="${oneEvent.imagePath}" style="height:150px;width:200px" class="img-responsive " />
