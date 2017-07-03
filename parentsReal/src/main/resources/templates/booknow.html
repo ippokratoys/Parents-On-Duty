@@ -20,7 +20,6 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <!-- Custom CSS -->
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -92,6 +91,11 @@
 				<div class="form-group col-md-12">
 					<img id="eventimage" class="img-responsive" src="/images.png" width="100%" height="auto" /><!--maybe needs width=" X px" height=" Y px" depending on the resolution-->
 				</div>
+				
+				<div  style="text-align: center">
+					<div  style="display: inline-block;"><h2><i>Επιβεβαιώστε την κράτησή σας τώρα!</h2></i></div>
+				</div>
+				
 				<table  class="form-group col-md-12" style="width:100%">
 				  <tr>
 					<th>Οικοδεσπότης</th>
@@ -115,7 +119,7 @@
 					<input type="hidden" id="eventId" name="eventId" th:value="${curEvent.idEvents}" />
                     <hr/>
 					<div class="form-group col-md-12">
-                          <button type="button" class="btn btn-block btn-info btn-lg" data-toggle="modal" data-target="#myModal">Κλείσε Τώρα!</button>
+                          <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal">Κλείσε Τώρα!</button>
 					</div>
                     <!-- Modal -->
                       <div class="modal fade" id="myModal" role="dialog">

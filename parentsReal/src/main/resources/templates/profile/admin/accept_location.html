@@ -56,7 +56,8 @@
                                 <p th:inline="text">Διεύθυνση: [[ ${location.address} ]]</p>
                                 <p>
                                     <button class="button1" >Αποδοχή</button>&nbsp;
-                                    <button class="button1" >Απόρριψη</button><a href="/css/children.jpg" ><img src="/js/datepicker/downloadarrow.png" /></a>
+                                    <button class="button1" >Απόρριψη</button>
+                                    <a th:href="${location.certificatePath}" ><img  src="/js/datepicker/downloadarrow.png" /></a>
                                 </p>
                             </th:block>
                         </div>
