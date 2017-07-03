@@ -46,6 +46,9 @@ public class Customer implements Serializable {
 	@OneToMany(mappedBy = "customer")
 	private List<CustomerPaymentHistory> paymentHistories;
 
+	@OneToMany(mappedBy = "customer",fetch = FetchType.LAZY)
+	private List<EventFeedback> eventFeedbacks;
+
 
 	//bi-directional many-to-many association to Event
 //	@ManyToMany(mappedBy="customer")
@@ -131,5 +134,14 @@ public class Customer implements Serializable {
 	public void setPaymentHistories(List<CustomerPaymentHistory> paymentHistories) {
 		this.paymentHistories = paymentHistories;
 	}
+
+	public List<EventFeedback> getEventFeedbacks() {
+		return eventFeedbacks;
+	}
+
+	public void setEventFeedbacks(List<EventFeedback> eventFeedbacks) {
+		this.eventFeedbacks = eventFeedbacks;
+	}
+
 
 }

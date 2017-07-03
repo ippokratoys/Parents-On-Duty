@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import webapp.database.*;
+import webapp.database.elasticsearch.EventSearch;
 import webapp.database.repositories.*;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by thanasis on 22/6/2017.
@@ -19,6 +21,8 @@ import java.util.Date;
 @Service
 public class EventService {
 
+    @Autowired
+    EventFeedbackRepositorie eventFeedbackRepositorie;
     @Autowired
     EventRepository eventHandler;
     @Autowired
@@ -92,6 +96,46 @@ public class EventService {
         eventsgroup.setImagePath("file/event/"+fileName);
         eventsgroupRepository.save(eventsgroup);
         return "redirect:/uploadStatus";
+    }
+
+    public int getRating(Event event){
+        if(event==null){
+            return -1;
+        }
+        List<EventFeedback> allFeedbacks = eventFeedbackRepositorie.findOrganiserFeedbacks(event.getOrganiser());
+        System.out.println(allFeedbacks);
+        int avg=0;
+        if(allFeedbacks.size()==0 ){
+            return 0;
+        }
+        for (EventFeedback aFeedback :
+                allFeedbacks) {
+            avg += aFeedback.getRating();
+        }
+        avg  = (int) Math.round(((double) avg) / allFeedbacks.size());
+        return 5;
+    }
+
+    public int getRating(EventSearch event){
+//        eventHandler.findOne(event.getId());
+        System.out.println("event id = " + event.getId());
+        return getRating( eventHandler.findOne(event.getId()) );
+    }
+
+
+    public List<EventFeedback> allFeedbacks(Event event){
+        List<EventFeedback> allFeedbacks = eventFeedbackRepositorie.findOrganiserFeedbacks(event.getOrganiser());
+        System.out.println(allFeedbacks);
+
+        //if it's about the same event(but old) it get's higher
+        for (EventFeedback aFeeback :
+                allFeedbacks) {
+            if (aFeeback.getEvent().getEventsgroup() == event.getEventsgroup()) {
+                allFeedbacks.remove(aFeeback);
+                allFeedbacks.add(0,aFeeback);
+            }
+         }
+         return allFeedbacks;
     }
 
 }

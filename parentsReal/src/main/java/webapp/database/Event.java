@@ -62,11 +62,10 @@ public class Event implements Serializable {
 	@OneToMany(mappedBy = "event")
 	private List<BookEvent> bookEvents;
 
-	//bi-directional many-to-one association to Eventsfeedback
 	//that means that get-it only if asked
 	// correct is id.eventsIdEvents
 	@OneToMany(mappedBy="event",fetch = FetchType.LAZY)
-	private List<Eventsfeedback> eventsfeedbacks;
+	private List<EventFeedback> eventFeedbacks;
 
 	public Event() {
 	}
@@ -127,27 +126,19 @@ public class Event implements Serializable {
 //		this.eventHasCustomers = eventHasCustomers;
 //	}
 
-	public List<Eventsfeedback> getEventsfeedbacks() {
-		return this.eventsfeedbacks;
+	public List<EventFeedback> getEventFeedback() {
+		return this.eventFeedbacks;
 	}
 
-	public void setEventsfeedbacks(List<Eventsfeedback> eventsfeedbacks) {
-		this.eventsfeedbacks = eventsfeedbacks;
+	public void setEventFeedback(List<EventFeedback> eventFeedback) {
+		this.eventFeedbacks = eventFeedback;
 	}
 
-	public Eventsfeedback addEventsfeedback(Eventsfeedback eventsfeedback) {
-		getEventsfeedbacks().add(eventsfeedback);
-		eventsfeedback.setEvent(this);
-
-		return eventsfeedback;
+	public List<EventFeedback> addEventsfeedback(EventFeedback newFeedback){
+		this.eventFeedbacks.add(newFeedback);
+		return eventFeedbacks;
 	}
 
-	public Eventsfeedback removeEventsfeedback(Eventsfeedback eventsfeedback) {
-		getEventsfeedbacks().remove(eventsfeedback);
-		eventsfeedback.setEvent(null);
-
-		return eventsfeedback;
-	}
 
 	public int getImportance() {
 		return importance;

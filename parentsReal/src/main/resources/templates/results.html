@@ -216,15 +216,16 @@
 							<h3 style="color: black !important;" th:text=" 'Ημερομηνία : ' + ${#dates.format(oneEvent.day,'dd/MM/yyyy')}"></h3>
 							<br/>
 						</div>
-						<div class="ratings">
-							<!--<p th:text="${oneEvent.eventsfeedbacks.size()} + ' Review'" class="pull-right">3 Αξιολογήσεις</p>-->
-							<p>
-								<span class="glyphicon glyphicon-star" style="color:#428BCA;"></span>
-								<span class="glyphicon glyphicon-star" style="color:#428BCA;"></span>
-								<span class="glyphicon glyphicon-star" style="color:#428BCA;"></span>
-								<span class="glyphicon glyphicon-star" style="color:#428BCA;"></span>
-								<span class="glyphicon glyphicon-star-empty" style="color:#428BCA;"></span>
-								4.0 Αστέρια
+						<div class="ratings" th:with="eventStats=${@eventService.getRating(oneEvent)}">
+							<!--<p th:text="${eventStats} + ' Αξιολογήσεις'" class="pull-right">3 Αξιολογήσεις</p>-->
+							<p th:if="${eventStats>0}">
+                                <!--<th:block th:each="str,iterStat : strings">-->
+                                <span th:each="i : ${#numbers.sequence( 1, eventStats,1)}" class="glyphicon glyphicon-star" style="color:#428BCA;"></span>
+
+                                <th:block th:if="${5>eventStats}">
+                                    <span th:each="i : ${#numbers.sequence( 4, eventStats,-1)}" class="glyphicon glyphicon-star-empty" style="color:#428BCA;"></span>
+                                </th:block>
+                                <th:block th:text="${eventStats}"></th:block>
 							</p>
 						</div>
 					</div>

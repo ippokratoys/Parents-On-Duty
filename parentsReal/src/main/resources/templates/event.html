@@ -139,15 +139,14 @@
                 <img class="img-responsive" th:src="${theEvent.eventsgroup.imagePath}" src="images.png" alt=""/>
                 <hr/>
                 <div class="well">
-                    <div class="ratings">
-                        <p class="pull-right">1 Αξιολόγηση από organizer</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 Αστέρια
+                    <div class="ratings" th:with="allFeedbacks=${@eventService.allFeedbacks(theEvent)} , eventStats=${@eventService.getRating(theEvent)}">
+                        <p class="pull-right" th:text="${allFeedbacks.size()}+' Αξιολογήσεις από γονέα'"> 0 </p>
+                        <p th:if="${eventStats>0}">
+                            <!--<th:block th:each="str,iterStat : strings">-->
+                            <span th:each="i : ${#numbers.sequence( 1, eventStats,1)}" class="glyphicon glyphicon-star"></span>
+                            <th:block th:if="${5>eventStats}">
+                                <span th:each="i : ${#numbers.sequence( 4, eventStats,-1)}" class="glyphicon glyphicon-star-empty"></span>
+                            </th:block>
                         </p>
                     </div>
 
