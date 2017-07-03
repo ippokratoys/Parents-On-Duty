@@ -1,11 +1,11 @@
-Address,Postcode,Name,OwnerEmail
-Glenroy Crescent,17723,vqksbrrq,xzitxslb@di.uoa.gr
-Edgehill Crescent,14958,prjlrlha,ysaxlgwo@gmail.com
-Russell Avenue,15893,tqwyobrw,rcsewpnw@hotmail.com
-Plane Tree Drive,11800,tedvgoao,znifrcqj@gmail.com
-Walmer Gardens,16705,zxoykgis,hkgnxisg@di.uoa.gr
-Rosewood Avenue,16444,xdhinjqa,ehalbnqr@gmail.com
-Butternut Lane,15172,gwbqygry,lpxxhidz@di.uoa.gr
-Montebello Drive,10884,qcrukvpd,aycltqnq@gmail.com
-Invicta Court,12914,rrldrfmz,wkpccfym@di.uoa.gr
-Exeter Road,18719,uqnpigol,nmjtthna@gmail.com
+Address,Postcode,Name,OwnerEmail,lat,lon
+Πανθηναικου 12,17723,Γηπεδαρα,xzitxslb@di.uoa.gr,38.00391792,23.73674139
+Αττικης 2,14958,Παιδοτοπαρα,ysaxlgwo@gmail.com,37.97730246,23.70963055
+Κρητης 14,15893,Πολυχωρος,rcsewpnw@hotmail.com,37.99981463,23.70882877
+Παπαγια 11,11800,Χαλι μαγικο,znifrcqj@gmail.com,38.00814297,23.70020973
+Καποδιστρια 44,16705,Πλατεια Νερου,hkgnxisg@di.uoa.gr,37.99006534,23.7470043
+Κλεισθενους 77,16444,Το Καλυτερο,ehalbnqr@gmail.com,37.98607554,23.69167036
+Μαραθωνος 1,15172,Το Χειροτερο,lpxxhidz@di.uoa.gr,38.00678463,23.75773459
+Αλεξανδρας 5,10884,Τα Παιδια σας ειναι δικα μας,aycltqnq@gmail.com,38.00356733,23.73478007
+Ανδρα Παπανδρεου 4,12914,Ολα καλα,wkpccfym@di.uoa.gr,37.97603303,23.7678489
+Γεωργιου Παπανδρεου 11,18719,Ολα τελεια,nmjtthna@gmail.com,37.9655359,23.72882841
