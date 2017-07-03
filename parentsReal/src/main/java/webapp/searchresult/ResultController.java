@@ -49,11 +49,13 @@ public class ResultController {
 			@RequestParam(name="Price") int price,
 			@RequestParam(name="Age") String age,
 			@RequestParam(name="distance") String distance,
+			@RequestParam(name="lat") String lat,
+			@RequestParam(name="lon") String lon,
 			Model model
 	){
 		int distanceArg=-1;
 		if (distance == null || distance == ""){
-			distanceArg=-1;
+			distanceArg= 100;
 		}else{
 			distanceArg=Integer.parseInt(distance);
 		}
@@ -66,11 +68,11 @@ public class ResultController {
 		}
 
 		System.out.println(allRequestParams.toString());
-    	System.out.println("Free text:"+freeText);
-    	System.out.println("Date:"+date);
-    	System.out.println("Price "+ price);
-    	System.out.println("Age "+ageArg);
-    	System.out.println("Distance"+distanceArg);
+    	System.out.println("Free text: "+freeText);
+    	System.out.println("Date: "+date);
+    	System.out.println("Price: "+ price);
+    	System.out.println("Age: "+ageArg);
+    	System.out.println("Distance: "+distanceArg);
 
 
     	List<EventSearch> results=null;
@@ -79,14 +81,21 @@ public class ResultController {
 			dates=new String[2];
 			dates[0]=null;dates[1]=null;
 		}
-		if(userDetails!=null && userDetails.getAuthorities().toString().contains("PARENT")){
-			Customer myUser=customerRepository.findOne(userDetails.getUsername());
-			results=resultService.getResultsByUser(freeText,dates[0],dates[1],price,ageArg,distanceArg,myUser.getLat().doubleValue(),myUser.getLon().doubleValue());
-		}else{
-			results=resultService.getResults(freeText,dates[0],dates[1],price,ageArg,distanceArg);
-		}
-			//System.out.println(results.get(0).getEventHasCustomers().get(0).getEventsfeedbacks());
 
+		if ((lat != "") && (lon != "")) {
+			double latd = Double.parseDouble(lat);
+			double lond = Double.parseDouble(lon);
+			results = resultService.getResultsByUser(freeText, dates[0], dates[1], price, ageArg, distanceArg, latd, lond);
+		}
+		else {
+			if (userDetails != null && userDetails.getAuthorities().toString().contains("PARENT")) {
+				Customer myUser = customerRepository.findOne(userDetails.getUsername());
+				results = resultService.getResultsByUser(freeText, dates[0], dates[1], price, ageArg, distanceArg, myUser.getLat().doubleValue(), myUser.getLon().doubleValue());
+			} else {
+				results = resultService.getResults(freeText, dates[0], dates[1], price, ageArg, distanceArg);
+			}
+			//System.out.println(results.get(0).getEventHasCustomers().get(0).getEventsfeedbacks());
+		}
 
 		model.addAttribute("allParams",allRequestParams);
 		model.addAttribute("searchResults",results);

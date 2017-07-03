@@ -226,72 +226,35 @@
 			</div>
 							<!--For Carousel-->
 			<br/>
-			<div class="container" >
-			  <p style="text-align:center;color:black;"><i><b><u>Προτεινόμενες Εκδηλώσεις</u></b></i></p>
-			  <div class="row">
-				<div class="col-md-12">
-				  <div class="carousel slide multi-item-carousel" id="theCarousel" style="margin:0 auto;height:50%;width:50%;">
-					<div class="carousel-inner" >
-					  <div class="item active">
-						<div class="col-xs-4">
-							<a href="#1">
-								<img  src="http://placehold.it/300/f44336/000000" style="height:150px;width:200px" class="img-responsive " />
-								<div type="text" style="color:white;">
-									<h4><i>05/06/07</i></h4>
-									<h4><i>Plateia syntagmatos</i></h4>
-									<h4><i>Gay Pride</i></h4>
+			<th:block th:if="${recommendedEvents != null || recommendedEvents.size() > 0}">
+				<div class="container" >
+				  <p style="text-align:center;color:black;"><i><b><u>Προτεινόμενες Εκδηλώσεις</u></b></i></p>
+				  <div class="row">
+					<div class="col-md-12">
+					  <div class="carousel slide multi-item-carousel" id="theCarousel" style="margin:0 auto;height:50%;width:50%;">
+						<div class="carousel-inner" >
+							<th:block th:unless="${recommendedEvents== null || recommendedEvents.size() == 0}" th:each="oneEvent : ${recommendedEvents}">
+							  <div class="item active">
+								<div class="col-xs-4">
+									<a th:href="'/event?id='+${oneEvent.id}">
+										<img th:src="${oneEvent.imagePath}" style="height:150px;width:200px" class="img-responsive " />
+										<div type="text" style="color:white;">
+											<h4 th:inline="text"><i>[[${oneEvent.name}]]</i></h4>
+											<h4 th:inline="text"><i>[[${#dates.format(oneEvent.day,'dd/MM/yyyy')}]]</i></h4>
+											<h4 th:inline="text"><i>[[${oneEvent.address}]]</i></h4>
+										</div>
+									</a>
 								</div>
-							</a>
-
+							  </div>
+							</th:block>
 						</div>
+						<a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+						<a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 					  </div>
-					  <div class="item">
-						<div class="col-xs-4">
-							<a href="#2">
-								<img src="http://placehold.it/300/e91e63/000000" style="height:150px;width:200px" class="img-responsive"/>
-								<div type="text" style="color:white;">
-									<h4><i>09/02/02</i></h4>
-									<h4><i>Plateia syntagmatos</i></h4>
-									<h4><i>Gay Pride</i></h4>
-								</div>
-							</a>
-						</div>
-					  </div>
-					  <div class="item">
-						<div class="col-xs-4">
-							<a href="#3">
-								<img src="http://placehold.it/300/9c27b0/000000" style="height:150px;width:200px" class="img-responsive"/>
-								<div type="text" style="color:white;">
-									<h4><i>02/03/04</i></h4>
-									<h4><i>Plateia syntagmatos</i></h4>
-									<h4><i>Gay Pride</i></h4>
-								</div>
-							</a>
-						</div>
-					  </div>
-					  <div class="item">
-						<div class="col-xs-4">
-							<a href="#4">
-								<img src="http://placehold.it/300/9c27b0/000000" style="height:150px;width:200px" class="img-responsive"/>
-								<div type="text" style="color:white;">
-									<h4><i>11/11/11</i></h4>
-									<h4><i>Plateia syntagmatos</i></h4>
-									<h4><i>Gay Pride</i></h4>
-								</div>
-							</a>
-						</div>
-					  </div>
-
-
-
-					  <!--  Example item end -->
 					</div>
-					<a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-					<a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 				  </div>
 				</div>
-			  </div>
-			</div>
+			</th:block>
 		</section>
 	</div>
 
