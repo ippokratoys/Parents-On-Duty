@@ -5,8 +5,10 @@ import org.apache.lucene.queryparser.xml.builders.RangeFilterBuilder;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.*;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Range;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 import org.springframework.data.elasticsearch.core.query.*;
@@ -18,9 +20,13 @@ import webapp.database.elasticsearch.EventSearch;
 import webapp.database.elasticsearch.EventSearchRepository;
 import webapp.database.repositories.EventsgroupRepository;
 import org.elasticsearch.search.sort.SortBuilders;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Filter;
 
@@ -149,6 +155,34 @@ public class ResultService {
        return results;
     }
 
+    public Iterable<EventSearch> recommendedEvents(){
+        Iterable <EventSearch> recommended;
+        
+        Date date = new Date();
+        System.out.println(date.toString());
+        BoolQueryBuilder finalQuery = new BoolQueryBuilder();
+
+        RangeQueryBuilder rangeDate = null;
+        rangeDate = QueryBuilders.rangeQuery("day").from(date);
+        finalQuery = finalQuery.must(rangeDate);
+
+        RangeQueryBuilder importance = null;
+        importance = QueryBuilders.rangeQuery("importance").from(2);
+        finalQuery = finalQuery.must(importance);
+
+        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(finalQuery)
+                .withSort(SortBuilders.fieldSort("importance").order(SortOrder.DESC))
+                .build();
+
+        recommended = elasticsearchTemplate.queryForList(searchQuery, EventSearch.class);
+        System.out.println(recommended.toString());
+        for (EventSearch aResult :
+                recommended) {
+            System.out.println(aResult.getName());
+        }
+        return recommended;
+    }
 
     public List<EventSearch> getResultsByUser(String searchTerm, String fromDate, String toDate, int price, int age, int dist, double lat, double lon){
 
@@ -184,8 +218,6 @@ public class ResultService {
             finalQuery = finalQuery.filter(rangePrice);
         }
 
-
-        System.out.println("DIST IS : "+ dist);
         if(dist>0) {
 //            CriteriaQuery distanceCriteria= new CriteriaQuery(
 //                    new Criteria("location").within(

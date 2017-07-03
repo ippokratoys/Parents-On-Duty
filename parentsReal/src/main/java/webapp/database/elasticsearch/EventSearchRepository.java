@@ -6,6 +6,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import org.springframework.stereotype.Repository;
 import webapp.database.Eventsgroup;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,5 +18,5 @@ public interface EventSearchRepository extends ElasticsearchRepository<EventSear
     EventSearch save(EventSearch eventSearch);
     Page<EventSearch> findByDescription(String description, Pageable pageable);
     List<EventSearch> findByName(String name);
-
+    List<EventSearch> findEventSearchesByDayAfterAndImportanceAfter(Date date, int importance);
 }

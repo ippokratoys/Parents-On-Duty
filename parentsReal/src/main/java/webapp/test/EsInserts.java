@@ -67,6 +67,7 @@ public class EsInserts {
             System.out.print("-------  "+i+"  ----------");
             System.out.print(current.getId()+" ");
             System.out.print(current.getName()+" ");
+            System.out.print(current.getImportance()+" ");
             System.out.print("\n");
             i++;
         }
