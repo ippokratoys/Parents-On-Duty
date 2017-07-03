@@ -48,7 +48,7 @@ public class CustomerService {
         customerPaymentHistory.setTimeStamp(dateNow);
         customerPaymentHistory.setMessage("Normal form page | old money="+customer.getPoints());
 
-        customer.setPoints(customer.getPoints()+realMoneyToPoints(amount)+100);
+        customer.setPoints(customer.getPoints()+realMoneyToPoints(amount)*100);
 
         customerRepository.save(customer);
         customerPaymentHistoryRepository.save(customerPaymentHistory);
