@@ -52,30 +52,30 @@
                                           <th>Πλήρωσα</th>
                                           <th>Έλαβα</th>
                                           <th>Τρόπος πληρωμής</th>
-										  <th>Συναλλαγή</th>
+										  <th>Αναγνωριστικό Συναλλαγής</th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <th:block th:each="oneBook : ${curUser.getBookEvents()}" th:if="${ localDate >= oneBook.event.day }">
+                                      <th:block th:each="onePayment : ${curUser.paymentHistories}">
                                           <tr>
                                               <td class="agenda-date active" rowspan="1">
-                                                  <div class="dayofmonth" th:text="${@generalService.dayOfMonth(oneBook.event.day)}"></div>
-                                                  <div class="dayofweek" th:text="${@generalService.dayOfWeek(oneBook.event.day)}">Σάββατο</div>
-                                                  <div class="shortdate text-muted" th:text="${@generalService.shortDate(oneBook.event.day)}">Ιουλιος,2014</div>
+                                                  <div class="dayofmonth" th:text="${@generalService.dayOfMonth(onePayment.timeStamp)}"></div>
+                                                  <div class="dayofweek" th:text="${@generalService.dayOfWeek(onePayment.timeStamp)}">Σάββατο</div>
+                                                  <div class="shortdate text-muted" th:text="${@generalService.shortDate(onePayment.timeStamp)}">Ιουλιος,2014</div>
                                               </td>
-                                              <td class="agenda-paid" th:text="${oneBook.event.time.hours}+':'+${oneBook.event.time.minutes}">
-                                                  4,20 €
+                                              <td class="agenda-paid" th:text="${onePayment.moneyPayed}/100">
+                                                  100 €
                                               </td>
-                                              <td class="agenda-received" th:text="${oneBook.event.time.hours}+':'+${oneBook.event.time.minutes}">
+                                              <td class="agenda-received" th:text="${onePayment.moneyGot}/100">
                                                   69 €
-                                              </td>											  
+                                              </td>
                                               <td class="agenda-payment">
-                                                  <div class="agenda-event" th:text="${oneBook.event.eventsgroup.name}">
+                                                  <div class="agenda-event" th:text="${onePayment.paymentMethod}">
                                                       paypall
                                                   </div>
                                               </td>
-											  <td class="agenda-transid" th:text="${oneBook.event.price}/100+'€'">
-                                                  69420666sataniasmena
+											  <td class="agenda-transid" th:text="${onePayment.transactionID}">
+                                                  420
                                               </td>
                                           </tr>
                                       </th:block>

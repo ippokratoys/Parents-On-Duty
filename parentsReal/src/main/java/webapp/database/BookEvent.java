@@ -26,7 +26,7 @@ public class BookEvent implements Serializable {
     @ManyToOne()
     private Event event;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(DATE)
     private Date bookDate;
 

@@ -84,4 +84,15 @@ public class UserProfileController {
         customerService.addPoints(curCustomer,amount);
         return "redirect:/user/profile";
     }
+
+    @RequestMapping(value = "/user/historytrans",method = RequestMethod.GET)
+    public String getTrans(
+            Model model,
+            @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
+    ){
+        Customer curCustomer=customerRepository.findOne(userDetails.getUsername());
+        model.addAttribute("curUser",curCustomer);
+
+        return "profile/parent/historytrans";
+    }
 }
