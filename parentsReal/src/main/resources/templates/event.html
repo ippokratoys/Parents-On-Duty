@@ -144,10 +144,10 @@
                         <p th:if="${eventStats>0}">
                             <!--<th:block th:each="str,iterStat : strings">-->
                             <span th:each="i : ${#numbers.sequence( 1, eventStats,1)}" class="glyphicon glyphicon-star"></span>
-                            <th:block th:if="${5>eventStats}">
-                                <span th:each="i : ${#numbers.sequence( 4, eventStats,-1)}" class="glyphicon glyphicon-star-empty"></span>
-                            </th:block>
                         </p>
+                        <th:block th:if="${5>eventStats}">
+                            <span th:each="i : ${#numbers.sequence( 4, eventStats,-1)}" class="glyphicon glyphicon-star-empty"></span>
+                        </th:block>
                     </div>
 
 
