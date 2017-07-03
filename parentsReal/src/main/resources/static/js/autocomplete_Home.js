@@ -12,7 +12,12 @@
         autocomplete = new google.maps.places.Autocomplete(
             /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
             {types: ['geocode']});
-
+        var input = document.getElementById('autocomplete');
+        google.maps.event.addDomListener(input, 'keydown', function(event) {
+            if(event.keyCode === 13) {
+                event.preventDefault();
+            }
+        });
         // When the user selects an address from the dropdown, populate the address
         // fields in the form.
         autocomplete.addListener('place_changed', geocodeAddress);
@@ -32,4 +37,3 @@
               }
        	  });
       	}
-
