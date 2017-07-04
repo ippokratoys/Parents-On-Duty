@@ -21,8 +21,6 @@ import java.util.function.Predicate;
 @Service
 public class OrganiserService {
 
-
-
     @Autowired
     OrganiserRepository organiserRepository;
     @Autowired
@@ -205,6 +203,21 @@ public class OrganiserService {
         eventRepository.delete(event);
 
         return moneyReturned;
+    }
+
+    public boolean organiserAddMoney(Organiser organiser, int amount){
+        OrganiserPaymentHistory organiserPaymentHistory = new OrganiserPaymentHistory();
+
+        organiserPaymentHistory.setMessage("Organiser added " + amount+"("+amount/100+"e)"+" via card to his profile (probably for promotion)");
+        organiserPaymentHistory.setMoneyPayed(amount);
+        organiserPaymentHistory.setOldBalcend(organiser.getPoints());
+        organiserPaymentHistory.setOrganiser(organiser);
+        organiserPaymentHistory.setTimeStamp(new Date());
+        organiser.addPoints(amount);
+
+        organiserRepository.save(organiser);
+        organiserPaymentHistoryRepository.save(organiserPaymentHistory);
+        return true;
     }
 
 }
