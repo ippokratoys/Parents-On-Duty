@@ -1,5 +1,6 @@
 package webapp.usercontrol;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import jdk.nashorn.internal.objects.NativeUint8Array;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import webapp.database.Customer;
+import webapp.database.Event;
 import webapp.database.repositories.CustomerRepository;
+import webapp.database.repositories.EventRepository;
 import webapp.services.CustomerService;
 
+import javax.jws.WebParam;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -30,6 +34,8 @@ public class UserProfileController {
     private CustomerRepository customerRepository;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private EventRepository eventRepository;
 
     @RequestMapping(value="/user/profile",method= RequestMethod.GET)
     public String showProfile(
@@ -109,6 +115,20 @@ public class UserProfileController {
         System.out.println("id:" + bookID);
         customerService.cancelEvent(bookID);
         return "profile/parent/profile";
+    }
+
+    @RequestMapping(value = "/user/feedback",method = RequestMethod.POST)
+    public String newFeedback(@RequestParam("event_id")int eventID,
+                              @RequestParam("text")String text,
+                              @RequestParam("rating")int rating,
+                              @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
+    ){
+        Customer curCustomer = customerRepository.findOne(userDetails.getUsername());
+        Event curEvent = eventRepository.findOne(eventID);
+
+        customerService.newFeedback(curCustomer,curEvent,text,rating);
+
+        return "redirect:/user/history?feedback_done=true";
     }
 
 }

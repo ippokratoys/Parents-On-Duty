@@ -22,6 +22,8 @@ public class CustomerService {
     CustomerRepository customerRepository;
     @Autowired
     BookEventRepository bookEventRepository;
+    @Autowired
+    EventFeedbackRepositorie eventFeedbackRepositorie;
 
     @Autowired
     private AdminTableRepository adminTableRepository;
@@ -29,47 +31,47 @@ public class CustomerService {
     @Autowired
     CustomerPaymentHistoryRepository customerPaymentHistoryRepository;
 
-    public int realMoneyToPoints(int realMoney){
-        if(realMoney>=100){
-            return realMoney+8;
-        }else if(realMoney>=80){
-            return realMoney+5;
-        }else if(realMoney>=30){
-            return realMoney+1;
-        }else {
+    public int realMoneyToPoints(int realMoney) {
+        if (realMoney >= 100) {
+            return realMoney + 8;
+        } else if (realMoney >= 80) {
+            return realMoney + 5;
+        } else if (realMoney >= 30) {
+            return realMoney + 1;
+        } else {
             return realMoney;
         }
     }
 
-    public void addPoints(Customer customer,int amount){
+    public void addPoints(Customer customer, int amount) {
         LocalDate localDate = LocalDate.now();
-        int dbAmount=amount*100;
+        int dbAmount = amount * 100;
         CustomerPaymentHistory customerPaymentHistory = new CustomerPaymentHistory();
         Date dateNow = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
 
         customerPaymentHistory.setCustomer(customer);
         customerPaymentHistory.setMoneyPayed(dbAmount);
-        customerPaymentHistory.setMoneyGot(realMoneyToPoints(amount)*100);
+        customerPaymentHistory.setMoneyGot(realMoneyToPoints(amount) * 100);
         customerPaymentHistory.setPaymentMethod("Card");
         customerPaymentHistory.setTimeStamp(dateNow);
-        customerPaymentHistory.setMessage("Normal form page | old money="+customer.getPoints());
+        customerPaymentHistory.setMessage("Normal form page | old money=" + customer.getPoints());
 
-        customer.setPoints(customer.getPoints()+realMoneyToPoints(amount)*100);
+        customer.setPoints(customer.getPoints() + realMoneyToPoints(amount) * 100);
 
         customerRepository.save(customer);
         customerPaymentHistoryRepository.save(customerPaymentHistory);
     }
 
-    public void cancelEvent(BookEvent bookEvent){
+    public void cancelEvent(BookEvent bookEvent) {
         Customer customer = bookEvent.getCustomer();
         Event event = bookEvent.getEvent();
         Organiser organiser = event.getOrganiser();
         AdminTable adminTable = adminTableRepository.findOne(1);
 
-        int customerNewBalance = customer.getPoints()+event.getPrice();
-        int organiserNewBalance = organiser.getPoints() - (int) Math.round(event.getPrice()*0.9);
-        int adminNewBalance = adminTableRepository.findOne(1).getOurPointsFromEvents()- (event.getPrice() - (int) Math.round(event.getPrice()*0.9)) ;
+        int customerNewBalance = customer.getPoints() + event.getPrice();
+        int organiserNewBalance = organiser.getPoints() - (int) Math.round(event.getPrice() * 0.9);
+        int adminNewBalance = adminTableRepository.findOne(1).getOurPointsFromEvents() - (event.getPrice() - (int) Math.round(event.getPrice() * 0.9));
 
         customer.setPoints(customerNewBalance);
         organiser.setPoints(organiserNewBalance);
@@ -81,11 +83,18 @@ public class CustomerService {
         bookEventRepository.delete(bookEvent);
     }
 
-    public void cancelEvent(int bookId){
+    public void cancelEvent(int bookId) {
         BookEvent bookEvent = bookEventRepository.findOne(bookId);
-        if(bookEvent==null){
-            return ;
+        if (bookEvent == null) {
+            return;
         }
         cancelEvent(bookEvent);
+    }
+
+    public void newFeedback(Customer customer, Event event, String text, int rating) {
+        System.out.println("customer = [" + customer + "], event = [" + event + "], text = [" + text + "], rating = [" + rating + "]");
+        //maybe check the date
+        EventFeedback eventFeedback = new EventFeedback(text,rating,new Date,event,customer);
+        EventFeedbackRepositorie
     }
 }

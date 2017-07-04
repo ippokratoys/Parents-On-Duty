@@ -17,7 +17,7 @@
 
         <script>
             function enterIdInModal(eventId) {
-                document.getElementById("cancel").action="/user/cancel/"+eventId.toString();
+                document.getElementById("event_id").value=eventId.toString();
             }
         </script>
 
@@ -84,7 +84,7 @@
                                                   4,20 €
                                               </td>
                                               <td class="agenda-button">
-                                                  <button type="button" class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#myModal" th:onclick="'enterIdInModal('+${oneBook.bookId}+')'">Αξιολόγηση</button>
+                                                  <button type="button" class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#myModal" th:onclick="'enterIdInModal('+${oneBook.event.idEvents}+')'">Αξιολόγηση</button>
                                               </td>
                                           </tr>
                                       </th:block>
@@ -102,16 +102,17 @@
         				          <h4 class="modal-title">Αξιολόγηση</h4>
         				        </div>
         				        <div class="modal-body">
-                                    <form th:action="@{/}" method="post">
+                                    <form th:action="@{/user/feedback}" method="post">
                                         <div class="form-group">
                                             <h3>Γράψτε Την Αξιολογησή Σας</h3>
-                                            <textarea class="form-control custom-control" required="true" name="desc" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι στο ακαν8υς με τα πιτσιρακια μας :)  " rows="3" style="resize:none"></textarea>
+                                            <textarea class="form-control custom-control" required="true" id="feedback_text" name="text" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι στο ακαν8υς με τα πιτσιρακια μας :)  " rows="3" style="resize:none"></textarea>
                                             <h3>Βαθμολογία</h3>
-                                            <input type="number" class="rating" id="stars" name="stars" data-min="1" data-max="5" value="0"/>
+                                            <input type="number" class="rating" id="stars" name="rating" data-min="1" data-max="5" value="0"/>
+                                            <input type="number" id="event_id" name="event_id" value=""/>
                                         </div>
                                     <div class="modal-footer">
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary" data-dismiss="modal">Πρόσθεσε</button>
+                                            <button type="submit" class="btn btn-primary">Πρόσθεσε</button>
                                         </div>
                                     </div>
                                     </form>
