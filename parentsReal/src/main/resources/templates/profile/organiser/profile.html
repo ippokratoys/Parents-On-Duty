@@ -74,13 +74,15 @@
                             <h4><b>Οι Εκδηλώσεις μου:</b></h4>
                             <th:block th:if="${ organiser.events != null}" th:each="oneEvent : ${organiser.events}">
                                 <th:block th:if="${oneEvent.day.compareTo(date)>0}" >
+                                    <h5 th:text=" 'Όνομα : '+${oneEvent.eventsgroup.name}"></h5>
                                     <th:block th:if="${oneEvent.importance > 1}">
                                         <p style="color:green" th:text="'Προωθούμενη'"></p>
                                     </th:block>
                                     <th:block th:unless="${oneEvent.importance > 1}">
                                         <button type="button" style="color:#202f80" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'"></button>
                                     </th:block>
-                                    <p th:text=" 'Όνομα : '+${oneEvent.eventsgroup.name}"></p>
+                                    <button type="button" style="color:#202f80" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'"></button>
+
                                     <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
                                     <p th:text=" 'Ημερομηνία : '+ ${#dates.format(oneEvent.day,'dd/MM/yyyy')} "></p>
                                     <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>

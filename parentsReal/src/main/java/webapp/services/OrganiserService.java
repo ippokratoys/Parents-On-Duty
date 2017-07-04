@@ -39,6 +39,8 @@ public class OrganiserService {
     AdminTableRepository adminTableRepository;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    OrganiserPaymentHistoryRepository organiserPaymentHistoryRepository;
 
     @Autowired
     private EventSearchRepository eventSearchRepository;
@@ -127,6 +129,49 @@ public class OrganiserService {
         EventSearch eventSearch= new EventSearch(event);
         eventSearchRepository.save(eventSearch);
         return true;
+    }
+
+    public boolean boostEvent(Event event, String category) throws Exception{
+        int importance=1;
+        int cost = 0;
+        if (category.equals("bronze")){
+            importance = 2;
+            cost = 10;
+        }else if(category.equals("silver")){
+            importance = 3;
+            cost = 20;
+        }else if(category.equals("gold")){
+            importance = 4;
+            cost = 30;
+        }else{
+            throw new Exception("Not Valid Option");
+        }
+
+
+        Organiser organiser = event.getOrganiser();
+        if(organiser.getPoints() < cost*100){
+            throw new Exception("Not enough money");
+        }
+
+        OrganiserPaymentHistory organiserPaymentHistory = new OrganiserPaymentHistory();
+        organiserPaymentHistory.setTimeStamp(new Date());
+        organiserPaymentHistory.setOldBalcend(organiser.getPoints());
+        organiserPaymentHistory.setOrganiser(organiser);
+        organiserPaymentHistory.setMoneyPayed(cost);
+        organiserPaymentHistoryRepository.save(organiserPaymentHistory);
+
+        organiser.setPoints(organiser.getPoints() - cost);
+        organiserRepository.save(organiser);
+
+        EventSearch eventSearch = eventSearchRepository.findOne(event.getIdEvents());
+        eventSearch.setImportance(importance);
+        eventSearchRepository.save(eventSearch);
+
+        event.setImportance(importance);
+        eventRepository.save(event);
+
+        return true;
+
     }
 
     public int cancelEvent(Event event){
