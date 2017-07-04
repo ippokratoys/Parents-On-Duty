@@ -19,8 +19,9 @@
     <script>
         function give_their_money(login_email,amount){
             document.getElementById("give_money").value=login_email.toString();
-            document.getElementById("amount_money").max=amount;
-            document.getElementById("header_amount").innerHTML="Ποσό"+amount;
+            var input = document.getElementById("amount_money");
+            input.setAttribute("max",amount);
+            document.getElementById("header_amount").innerHTML="Ποσό "+amount/100+"€";
         }
     </script>
 
@@ -94,7 +95,12 @@
                                                       4,20 €
                                                   </td>
                                                   <td class="agenda-button">
-                                                      <button type="button" data-toggle="modal" data-target="#myModal_payment" class="button1" th:onclick="'give_their_money('+${organiser.login_email}+','+${organiser.points}+')'">Πληρωμή</button>
+                                                     <th:block th:if="${organiser.points} > 0">
+                                                        <button type="button" data-toggle="modal" data-target="#myModal_payment" class="button1" th:onclick="'give_their_money(\''+${organiser.login_email}+'\','+${organiser.points}+')'">Πληρωμή</button>
+                                                     </th:block>
+                                                     <th:block th:unless="${organiser.points} > 0">
+                                                        <button type="button" class="button1" disabled="true">Πληρωμή</button>
+                                                     </th:block>
                                                   </td>
     											  <td class="agenda-button">
                                                       <form th:action="@{/admin/login/block}" name="block_unblock" th:id="'block_unblock'" method="post">
@@ -126,7 +132,7 @@
     				    <div class="modal-dialog">
 
     				      <!-- Modal content-->
-                          <form th:action="@{/admin/login/give_money}" name="give_money"  method="get">
+                          <form th:action="@{/admin/login/give_money}" name="give_money"  method="post">
         				      <div class="modal-content">
         				        <div class="modal-header">
         				          <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -135,13 +141,13 @@
         				        <div class="modal-body">
                                     <div class="text-center">
                                         <h3 id="header_amount"></h3>
-                                        <input type="text" name="login_email" value="" id="give_money"/>
+                                        <input type="hidden" name="login_email" value="" id="give_money"/>
                                         <input  type="number" name="amount" required="true" id="amount_money"/>
                                     </div>
         				        </div>
         				        <div class="modal-footer">
                                     <div class="text-center">
-                                        <button form="give_money" type="submit" class="btn btn-primary">Παραχώρηση Ποσού</button>
+                                        <button type="submit" class="btn btn-primary">Παραχώρηση Ποσού</button>
                                     </div>
         				        </div>
         				      </div>

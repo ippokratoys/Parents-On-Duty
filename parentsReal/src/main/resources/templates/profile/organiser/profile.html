@@ -13,6 +13,22 @@
 </head>
 
 <body>
+    <script>
+        function existing_money(){
+            document.getElementById("ex-btn").style.display="none";
+            document.getElementById("ex-btn2").style.display="none";
+            document.getElementById("ex-btn3").style.display="block";
+            document.getElementById("boost").style.display="block";
+            document.getElementById("boost2").style.display="block";
+        }
+        function return_modal(){
+            document.getElementById("ex-btn").style.display="block";
+            document.getElementById("ex-btn2").style.display="block";
+            document.getElementById("ex-btn3").style.display="none";
+            document.getElementById("boost").style.display="none";
+            document.getElementById("boost2").style.display="none";
+        }
+    </script>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <a style="color:white" class="navbar-brand" href="/">
@@ -107,22 +123,6 @@
                       <div class="text-center">
                           <h3 id="ex-btn">Επέλεξε Τρόπο Πληρωμής</h3>
                           <div class="row">
-                              <script>
-                                  function existing_money(){
-                                      document.getElementById("ex-btn").style.display="none";
-                                      document.getElementById("ex-btn2").style.display="none";
-                                      document.getElementById("ex-btn3").style.display="block";
-                                      document.getElementById("boost").style.display="block";
-                                      document.getElementById("boost2").style.display="block";
-                                  }
-                                  function return_modal(){
-                                      document.getElementById("ex-btn").style.display="block";
-                                      document.getElementById("ex-btn2").style.display="block";
-                                      document.getElementById("ex-btn3").style.display="none";
-                                      document.getElementById("boost").style.display="none";
-                                      document.getElementById("boost2").style.display="none";
-                                  }
-                              </script>
                               <div id="ex-btn2">
                                   <button type="button"  style="width:175px;"  class="btn btn-primary btn-lg" onclick="existing_money()">Υπάρχον Χρήματα</button>
                                   <button type="button" style="width:175px;"  class="btn btn-primary btn-lg" onclick="location.href='/organiser/wallet';">Πρόσθεσε</button>
@@ -144,7 +144,7 @@
                   </div>
                   <div class="modal-footer">
                       <div class="text-center" style="display:none;" id="ex-btn3">
-                          <button type="submit"   class="btn btn-lg btn-primary " form="BookNow" value="Submit">Ναί</button>
+                          <button type="submit"   class="btn btn-lg btn-primary "  value="Submit">Ναί</button>
                           <button type="button"  class="btn btn-lg btn-primary " onclick="return_modal()" data-dismiss="modal">Όχι</button>
                       </div>
                   </div>
