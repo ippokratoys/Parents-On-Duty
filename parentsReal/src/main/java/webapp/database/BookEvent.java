@@ -30,6 +30,8 @@ public class BookEvent implements Serializable {
     @Temporal(DATE)
     private Date bookDate;
 
+    private boolean hasComment;
+
     private int ticket;
 
     public int getBookId() {
@@ -70,5 +72,13 @@ public class BookEvent implements Serializable {
 
     public void setTicket(int ticket) {
         this.ticket = ticket;
+    }
+
+    public boolean isHasComment() {
+        return hasComment;
+    }
+
+    public void setHasComment(boolean hasComment) {
+        this.hasComment = hasComment;
     }
 }

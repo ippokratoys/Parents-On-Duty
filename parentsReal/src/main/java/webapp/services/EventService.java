@@ -35,12 +35,15 @@ public class EventService {
     OrganiserRepository organiserRepository;
     @Autowired
     private FileUploadService fileUploadService;
+    @Autowired
+    private AdminTableRepositorie adminTableRepositorie;
 
     @Value("file_save.folder.prefix")
     String MAIN_PREFIX="";
 
     @Value("file_save.folder.event.pictures.prefix")
     String PHOTO_PREFIX="";
+
 
     public int getAvailableSpots(Event event){
         return event.getSpots()-event.getBookEvents().size();
@@ -72,9 +75,12 @@ public class EventService {
 
             customer.setPoints(customer.getPoints() - event.getPrice());
             Organiser organiser = event.getOrganiser();
-            organiser.addPoints(event.getPrice());
+            organiser.addPoints((int) Math.round(event.getPrice()*0.9) );
+            AdminTable adminTable = adminTableRepositorie.findOne(1);
+            adminTable.setOurPointsFromEvents(event.getPrice() - (int) Math.round(event.getPrice()*0.9));
             eventHandler.save(event);
             customerRepository.save(customer);
+            adminTableRepositorie.save(adminTable);
         }
 //////////////////somehow unlock here//////////////////////////////////
         return true;

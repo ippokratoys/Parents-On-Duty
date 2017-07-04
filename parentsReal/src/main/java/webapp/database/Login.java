@@ -11,6 +11,7 @@ import javax.persistence.Id;
  * The persistent class for the login database table.
  * 
  */
+
 @Entity
 @NamedQuery(name="Login.findAll", query="SELECT l FROM Login l")
 public class Login implements Serializable {
@@ -18,6 +19,8 @@ public class Login implements Serializable {
 
 	@Id
 	private String email;
+
+	private String username;
 
 	private String pwd;
 
@@ -82,5 +85,13 @@ public class Login implements Serializable {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

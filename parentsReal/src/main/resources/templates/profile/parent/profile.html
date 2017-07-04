@@ -11,8 +11,12 @@
     <script type="text/javascript" src="/js/host_profile.js"></script>
     <link href="/css/history.css" rel="stylesheet"/>
   </head>
-
 	<body>
+		<script>
+            function enterIdInModal(eventId) {
+                document.getElementById("cancel").action="/user/cancel/"+eventId.toString();
+            }
+		</script>
 		<div class="navbar navbar-default navbar-fixed-top">
 		    <div class="navbar-header">
 		    	<a style="color:white" class="navbar-brand" href="/">
@@ -81,7 +85,7 @@
 													  </div>
 												  </td>
                                                   <td class="agenda-button">
-                                                      <button type="button" class="btn btn-danger btn-md btn-block" data-toggle="modal" data-target="#myModal">Ακύρωση!</button>
+                                                      <button type="button" class="btn btn-danger btn-md btn-block" data-toggle="modal" data-target="#myModal" th:onclick="'enterIdInModal('+${oneBook.bookId}+')'">Ακύρωση!</button>
                                                   </td>
 											  </tr>
 										  </th:block>
@@ -105,7 +109,7 @@
                                   <h3>Είστε σίγουρος ότι θέλετε να ακυρώσετε την κράτηση;</h3>
                               </div>
                               <div class="modal-footer">
-                                  <form th:action=" ' candeletion' " method="post" id="cancel">
+                                  <form th:action="'/user/candeletion'" method="post" id="cancel">
                                       <input style="display:none;"/>
                                       <button type="submit" class="btn btn-lg btn-primary pull-left" form="cancel" value="Submit">Ναί</button>
                                   </form>

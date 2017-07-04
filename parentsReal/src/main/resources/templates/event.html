@@ -135,11 +135,11 @@
     </div>
     <br/>
     <div class="container" style="opacity:1">
-            <div class="col-xs-12 col-md-6 col-sm-12">
+            <div th:with="allFeedbacks=${@eventService.allFeedbacks(theEvent)}"  class="col-xs-12 col-md-6 col-sm-12">
                 <img class="img-responsive" th:src="${theEvent.eventsgroup.imagePath}" src="images.png" alt=""/>
                 <hr/>
                 <div class="well">
-                    <div class="ratings" th:with="allFeedbacks=${@eventService.allFeedbacks(theEvent)} , eventStats=${@eventService.getRating(theEvent)}">
+                    <div class="ratings" th:with="eventStats=${@eventService.getRating(theEvent)}">
                         <p class="pull-right" th:text="${allFeedbacks.size()}+' Αξιολογήσεις από γονέα'"> 0 </p>
                         <p th:if="${eventStats>0}">
                             <!--<th:block th:each="str,iterStat : strings">-->
@@ -152,53 +152,23 @@
 
 
                     <hr/>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <!--<span class="pull-right">10 days ago</span>-->
-                            <!--<p th:inline="text"> [[${theEvent?.eventsfeedbacks?.get(0)?.content}]]</p>-->
+                    <th:block th:each="i,oneFeedback:${allFeedbacks}">
+                        <div class="row" th:with="eventStats=${oneFeedback.rating}">
+                            <div class="col-sm-6">
+                                <span th:each="i : ${#numbers.sequence( 1, eventStats,1)}" class="glyphicon glyphicon-star"></span>
+                                <th:block th:if="${5>eventStats}">
+                                    <span th:each="i : ${#numbers.sequence( 4, eventStats,-1)}" class="glyphicon glyphicon-star-empty"></span>
+                                </th:block>
+                                Anonymous
+                                <span class="pull-right" th:text="${oneFeedback.date}">10 days ago</span>
+                                <p th:inline="text" th:text="oneFeedback.content"></p>
+                            </div>
                         </div>
-                    </div>
+                        <hr/>
+                    </th:block>
 
-                    <hr/>
 
-<!--                     <div class="row">
-                        <div class="col-sm-6">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">12 days ago</span>
-                            <p>I've already ordered another one!</p>
-                        </div>
-                    </div>
 
-                    <hr/>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">15 days ago</span>
-                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <a class="btn btn-success">Leave a Review</a>
-                    </div>
- -->
                 </div>
             </div>
             <div class="col-xs-12 col-md-6 col-sm-12">

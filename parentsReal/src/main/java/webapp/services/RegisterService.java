@@ -63,7 +63,7 @@ public class RegisterService {
         newLogin.setRole("ORGANISER");
         newLogin.setActive(true);
         newLogin.setPwd(hashPassword(allParams.get("Pwd")));
-
+        newLogin.setUsername(allParams.get("username"));
 
         Organiser newOrganiser = new Organiser();
         newOrganiser.setLogin_email(newLogin.getEmail());
@@ -101,7 +101,7 @@ public class RegisterService {
         newLogin.setRole("PARENT");
         newLogin.setActive(true);
         newLogin.setPwd(hashPassword(allParams.get("Pwd")));
-
+        newLogin.setUsername(allParams.get("username"));
 
         Customer newCustomer = new Customer();
         newCustomer.setLogin_email(newLogin.getEmail());

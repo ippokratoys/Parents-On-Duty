@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ import java.util.Date;
 public class UserProfileController {
 
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
     @Autowired
     private CustomerService customerService;
 
@@ -95,4 +96,19 @@ public class UserProfileController {
 
         return "profile/parent/historytrans";
     }
+
+    @RequestMapping(value = "/user/cancel/{book_id}",method = RequestMethod.POST)
+    public String cancelEvent(
+            Model model,
+            @PathVariable("book_id") int bookID,
+            @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
+    ){
+        Customer curCustomer=customerRepository.findOne(userDetails.getUsername());
+        model.addAttribute("curUser",curCustomer);
+        System.out.println(curCustomer.getLogin_email());
+        System.out.println("id:" + bookID);
+        customerService.cancelEvent(bookID);
+        return "profile/parent/profile";
+    }
+
 }

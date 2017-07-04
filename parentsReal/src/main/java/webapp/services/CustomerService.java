@@ -2,8 +2,7 @@ package webapp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import webapp.database.Customer;
-import webapp.database.CustomerPaymentHistory;
+import webapp.database.*;
 import webapp.database.repositories.*;
 
 import java.time.LocalDate;
@@ -16,8 +15,16 @@ import java.util.Date;
 
 @Service
 public class CustomerService {
+
+    @Autowired
+    OrganiserRepository organiserRepository;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    BookEventRepository bookEventRepository;
+
+    @Autowired
+    private AdminTableRepositorie adminTableRepositorie;
 
     @Autowired
     CustomerPaymentHistoryRepository customerPaymentHistoryRepository;
@@ -52,5 +59,33 @@ public class CustomerService {
 
         customerRepository.save(customer);
         customerPaymentHistoryRepository.save(customerPaymentHistory);
+    }
+
+    public void cancelEvent(BookEvent bookEvent){
+        Customer customer = bookEvent.getCustomer();
+        Event event = bookEvent.getEvent();
+        Organiser organiser = event.getOrganiser();
+        AdminTable adminTable = adminTableRepositorie.findOne(1);
+
+        int customerNewBalance = customer.getPoints()+event.getPrice();
+        int organiserNewBalance = organiser.getPoints() - (int) Math.round(event.getPrice()*0.9);
+        int adminNewBalance = adminTableRepositorie.findOne(1).getOurPointsFromEvents()- (event.getPrice() - (int) Math.round(event.getPrice()*0.9)) ;
+
+        customer.setPoints(customerNewBalance);
+        organiser.setPoints(organiserNewBalance);
+        adminTable.setGivenPoints(adminNewBalance);
+
+        customerRepository.save(customer);
+        organiserRepository.save(organiser);
+        adminTableRepositorie.save(adminTable);
+        bookEventRepository.delete(bookEvent);
+    }
+
+    public void cancelEvent(int bookId){
+        BookEvent bookEvent = bookEventRepository.findOne(bookId);
+        if(bookEvent==null){
+            return ;
+        }
+        cancelEvent(bookEvent);
     }
 }

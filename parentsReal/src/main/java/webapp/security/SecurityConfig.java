@@ -55,7 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/event/book").hasAuthority("PARENT")
 				.antMatchers("/organiser/**").hasAuthority("ORGANISER")
 				.antMatchers("/user/**").hasAuthority("PARENT")
+				.antMatchers("/admin/**").hasAuthority("ADMIN")
+				.antMatchers("/file/certificate").hasAuthority("ADMIN")
 				.antMatchers("/profile**").hasAnyAuthority( "PARENT", "ORGANISER", "ADMIN" )
+
 				.antMatchers("**").permitAll()
 			.and()
 				.formLogin().loginPage("/login").permitAll()
