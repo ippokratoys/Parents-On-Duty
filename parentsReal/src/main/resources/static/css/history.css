@@ -87,8 +87,8 @@ hr {
 
 
 /* Events */
-.agenda .agenda-events {  }
-.agenda .agenda-events .agenda-event {  }
+.agenda .agenda-events { width: 120px; }
+.agenda .agenda-events .agenda-event { width: 120px; }
 
 @media (max-width: 767px) {
 
