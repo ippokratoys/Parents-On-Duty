@@ -21,7 +21,10 @@
             document.getElementById("give_money").value=login_email.toString();
             var input = document.getElementById("amount_money");
             input.setAttribute("max",amount);
-            document.getElementById("header_amount").innerHTML="Ποσό "+amount/100+"€";
+            document.getElementById("header_amount").innerHTML="Διαθέσιμο Ποσό "+amount/100+"€";
+        }
+        function reset_pwd(login_email){
+            document.getElementById("login_reset").value=login_email.toString();
         }
     </script>
 
@@ -116,7 +119,7 @@
                                                       </form>
     											  </td>
     											  <td class="agenda-button">
-                                                      <button>reset password</button>
+                                                      <button type="button" data-toggle="modal" data-target="#myModal_reset" class="button1" th:onclick="'reset_pwd(\''+${organiser.login_email}+'\')'">Επαναφορά Κωδικού</button>
     											  </td>
     											</tr>
     										</th:block>
@@ -142,6 +145,7 @@
                                     <div class="text-center">
                                         <h3 id="header_amount"></h3>
                                         <input type="hidden" name="login_email" value="" id="give_money"/>
+                                        <h3>Ποσό Για Παραχώρηση</h3>
                                         <input  type="number" name="amount" required="true" id="amount_money"/>
                                     </div>
         				        </div>
@@ -154,6 +158,34 @@
                         </form>
     				    </div>
     				  </div>
+                      <!-- Modal -->
+      				  <div class="modal fade" id="myModal_reset" role="dialog">
+      				    <div class="modal-dialog">
+
+      				      <!-- Modal content-->
+                            <form th:action="@{/admin/login/reset}" name="reset"  method="post">
+          				      <div class="modal-content">
+          				        <div class="modal-header">
+          				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          				          <h4 class="modal-title">Επαναφορά Κωδικού Οικοδεσπότη</h4>
+          				        </div>
+          				        <div class="modal-body">
+                                      <div class="text-center">
+                                          <h3 id="header_amount"></h3>
+                                          <input type="hidden" name="login_email" value="" id="login_reset"/>
+                                          <h3>Νέος Κωδικός</h3>
+                                          <input type="text" required="true" name="new_pwd" />
+                                      </div>
+          				        </div>
+          				        <div class="modal-footer">
+                                      <div class="text-center">
+                                          <button type="submit" class="btn btn-primary">Επαναφορά Κωδικού</button>
+                                      </div>
+          				        </div>
+          				      </div>
+                          </form>
+      				    </div>
+      				  </div>
         </div>
     </div>
 </div><!--/row-offcanvas -->
