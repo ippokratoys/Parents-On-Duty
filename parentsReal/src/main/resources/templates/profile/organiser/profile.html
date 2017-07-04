@@ -29,6 +29,9 @@
             document.getElementById("boost").style.display="none";
             document.getElementById("boost2").style.display="none";
         }
+        function sent_eventId(eventid){
+            document.getElementById("eventID").value=eventid.toString();
+        }
     </script>
 <nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
 <div class="row-offcanvas row-offcanvas-left">
@@ -83,10 +86,8 @@
                                         <p style="color:green" th:text="'Προωθούμενη'"></p>
                                     </th:block>
                                     <th:block th:unless="${oneEvent.importance > 1}">
-                                        <button type="button" style="color:#202f80" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'"></button>
+                                        <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'" th:onclick="'sent_eventId('+${oneEvent.idEvents}+')'"></button>
                                     </th:block>
-                                    <button type="button" style="color:#202f80" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'"></button>
-
                                     <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
                                     <p th:text=" 'Ημερομηνία : '+ ${#dates.format(oneEvent.day,'dd/MM/yyyy')} "></p>
                                     <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>
@@ -110,14 +111,14 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h2 class="modal-title">Προώθηση</h2>
               </div>
-              <form th:action=".." method="post">
+              <form th:action="'/organiser/promote_event'" method="get">
                   <div class="modal-body">
                       <div class="text-center">
                           <h3 id="ex-btn">Επέλεξε Τρόπο Πληρωμής</h3>
                           <div class="row">
                               <div id="ex-btn2">
-                                  <button type="button"  style="width:175px;"  class="btn btn-primary btn-lg" onclick="existing_money()">Υπάρχον Χρήματα</button>
-                                  <button type="button" style="width:175px;"  class="btn btn-primary btn-lg" onclick="location.href='/organiser/wallet';">Πρόσθεσε</button>
+                                  <button type="button"  style="width:36%;"  class="btn btn-primary btn-lg" onclick="existing_money()">Υπάρχον Χρήματα</button>
+                                  <button type="button" style="width:36%;"  class="btn btn-primary btn-lg" onclick="location.href='/organiser/wallet';">Πρόσθεσε</button>
                               </div>
                               <h3 style="display:none;" id="boost2">Επέλεξε Κατηγορία Προώθησης</h3>
                               <style>
@@ -126,6 +127,7 @@
                                     margin: 0 auto;
                                 }
                               </style>
+                              <input type="hidden" name="eventID" id="eventID" value="" required="true" />
                               <select name="boost_cat" id="boost" style="display:none;">
                                  <option value="gold">Gold-30€</option>
                                  <option value="silver">Silver-20€</option>
