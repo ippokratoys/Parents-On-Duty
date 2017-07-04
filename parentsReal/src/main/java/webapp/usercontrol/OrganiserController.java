@@ -64,7 +64,7 @@ public class OrganiserController{
                               @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
     ){
         Organiser organiser= organiserRepository.findOne(userDetails.getUsername());
-        model.addAttribute("organiser",organiser);
+        model.addAttribute("curUser",organiser);
 //        model.addAttribute("availableSpots",eventService.getAvailableSpots());
         return "profile/organiser/wallet";
     }
