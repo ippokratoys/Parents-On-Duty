@@ -40,6 +40,9 @@
 	<h1 class="welcome text-center">Πορτοφολί<br/></h1>
 		<div class="card card-container">
 		<h2 class='login_title text-center'><b>Διαχείρηση Πορτοφολιού</b></h2>
+			<h5 th:if="${param.Not_enough_points}" class="important" style="color:red"
+				th:text="'Δεν έχετε αρκετά χρήματα για να ολοκληρωθεί η κράτηση! Παρακαλώ προσθέστε για να συνεχίσετε.'"> </h5>
+
 			<form name="add_money" id="add_money" th:action="@{/user/wallet/add_money}" class="form-signin" method="post">
 				<span id="reauth-email" class="reauth-email"></span>
 				<hr/>
