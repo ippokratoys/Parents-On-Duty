@@ -98,6 +98,8 @@
     <div class="container" style="opacity:100%">
         <br/>
         <h1>Σελίδα Εκδήλωσης</h1>
+        <h1 th:if="${param.Event_Expired}" class="important" th:text="'Η συγκεγκριμένη εκδήλωση έχει ήδη διεξαχθεί.'"> </h1>
+
         <hr/>
         <script>
         function show_search(){
