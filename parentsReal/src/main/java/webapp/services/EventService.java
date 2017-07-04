@@ -77,6 +77,7 @@ public class EventService {
             eventHandler.save(event);
             customerRepository.save(customer);
             adminTableRepository.save(adminTable);
+            organiserRepository.save(organiser);
         }
 //////////////////somehow unlock here//////////////////////////////////
         return true;
