@@ -86,7 +86,7 @@ public class AdminService {
         }
         OrganiserPaymentHistory organiserPaymentHistory = new OrganiserPaymentHistory();
         organiserPaymentHistory.setOrganiser(organiser);
-        organiserPaymentHistory.setMoneyPayed(money);
+        organiserPaymentHistory.setMoneyPayed(-money);
         organiserPaymentHistory.setOldBalcend(organiser.getPoints());
         organiserPaymentHistory.setTimeStamp(new Date());
 
