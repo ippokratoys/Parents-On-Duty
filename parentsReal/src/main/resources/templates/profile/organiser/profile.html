@@ -7,6 +7,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/css/host_profile.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/host_profile.js"></script>
 </head>
@@ -72,7 +73,7 @@
                                         <p style="color:green" th:text="'Προωθούμενη'"></p>
                                     </th:block>
                                     <th:block th:unless="${oneEvent.importance > 1}">
-                                        <button style="color:#202f80" th:text="'Προωθήστε την εκδήλωση'"></button>
+                                        <button type="button" style="color:#202f80" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'"></button>
                                     </th:block>
                                     <p th:text=" 'Όνομα : '+${oneEvent.eventsgroup.name}"></p>
                                     <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
@@ -86,6 +87,65 @@
                 </div>
             </div>
             <div class="row">
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">Προώθηση</h2>
+              </div>
+              <form th:action=".." method="post">
+                  <div class="modal-body">
+                      <div class="text-center">
+                          <h3 id="ex-btn">Επέλεξε Τρόπο Πληρωμής</h3>
+                          <div class="row">
+                              <script>
+                                  function existing_money(){
+                                      document.getElementById("ex-btn").style.display="none";
+                                      document.getElementById("ex-btn2").style.display="none";
+                                      document.getElementById("ex-btn3").style.display="block";
+                                      document.getElementById("boost").style.display="block";
+                                      document.getElementById("boost2").style.display="block";
+                                  }
+                                  function return_modal(){
+                                      document.getElementById("ex-btn").style.display="block";
+                                      document.getElementById("ex-btn2").style.display="block";
+                                      document.getElementById("ex-btn3").style.display="none";
+                                      document.getElementById("boost").style.display="none";
+                                      document.getElementById("boost2").style.display="none";
+                                  }
+                              </script>
+                              <div id="ex-btn2">
+                                  <button type="button"  style="width:175px;"  class="btn btn-primary btn-lg" onclick="existing_money()">Υπάρχον Χρήματα</button>
+                                  <button type="button" style="width:175px;"  class="btn btn-primary btn-lg" onclick="location.href='/organiser/wallet';">Πρόσθεσε</button>
+                              </div>
+                              <h3 style="display:none;" id="boost2">Επέλεξε Κατηγορία Προώθησης</h3>
+                              <style>
+                                select{
+                                    display: block;
+                                    margin: 0 auto;
+                                }
+                              </style>
+                              <select name="boost_cat" id="boost" style="display:none;">
+                                 <option value="gold">Gold-30€</option>
+                                 <option value="silver">Silver-20€</option>
+                                 <option value="bronze">Bronze-10€</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <div class="text-center" style="display:none;" id="ex-btn3">
+                          <button type="submit"   class="btn btn-lg btn-primary " form="BookNow" value="Submit">Ναί</button>
+                          <button type="button"  class="btn btn-lg btn-primary " onclick="return_modal()" data-dismiss="modal">Όχι</button>
+                      </div>
+                  </div>
+              </form>
             </div>
         </div>
     </div>
