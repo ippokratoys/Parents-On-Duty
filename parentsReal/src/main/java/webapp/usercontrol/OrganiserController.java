@@ -13,6 +13,8 @@ import webapp.database.repositories.OrganiserRepository;
 import webapp.services.EventService;
 import webapp.services.OrganiserService;
 
+import java.util.Date;
+
 /**
  * Created by thanasis on 22/6/2017.
  */
@@ -55,6 +57,8 @@ public class OrganiserController{
     ){
         Organiser organiser= organiserRepository.findOne(userDetails.getUsername());
         model.addAttribute("organiser",organiser);
+        Date date = new Date();
+        model.addAttribute("date", date);
 //        model.addAttribute("availableSpots",eventService.getAvailableSpots());
         return "profile/organiser/profile";
     }
