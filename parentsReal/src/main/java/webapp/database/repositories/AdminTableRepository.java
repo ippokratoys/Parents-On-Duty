@@ -6,6 +6,6 @@ import webapp.database.AdminTable;
 /**
  * Created by thanasis on 4/7/2017.
  */
-public interface AdminTableRepositorie extends CrudRepository<AdminTable,Integer>{
+public interface AdminTableRepository extends CrudRepository<AdminTable,Integer>{
 
 }

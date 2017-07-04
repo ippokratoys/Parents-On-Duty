@@ -5,10 +5,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import webapp.database.Event;
 import webapp.database.Location;
 import webapp.database.Organiser;
+import webapp.database.repositories.EventRepository;
 import webapp.database.repositories.OrganiserRepository;
 import webapp.services.EventService;
 import webapp.services.OrganiserService;
@@ -22,6 +25,8 @@ import java.util.Date;
 public class OrganiserController{
     @Autowired
     OrganiserRepository organiserRepository;
+    @Autowired
+    EventRepository eventRepository;
     @Autowired
     EventService eventService;
 
@@ -71,6 +76,18 @@ public class OrganiserController{
         model.addAttribute("curUser",organiser);
 //        model.addAttribute("availableSpots",eventService.getAvailableSpots());
         return "profile/organiser/wallet";
+    }
+
+    @RequestMapping(value = "/organiser/profile/cancel_event/{id}", method = RequestMethod.GET)
+    public String cancelPage(Model model,
+                             @PathVariable ("id") int id,
+                             @AuthenticationPrincipal final UserDetails userDetails){
+
+        Event event = eventRepository.findOne(id);
+        int moneyreturned = organiserService.cancelEvent(event);
+        Organiser organiser= organiserRepository.findOne(userDetails.getUsername());
+        model.addAttribute("curUser",organiser);
+        return "profile/organiser/profile?event_canceled=True";
     }
 
 }

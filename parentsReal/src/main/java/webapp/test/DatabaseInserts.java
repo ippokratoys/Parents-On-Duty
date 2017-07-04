@@ -4,14 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sun.util.resources.ga.LocaleNames_ga;
 import webapp.database.AdminTable;
-import webapp.database.Eventsgroup;
 import webapp.database.Login;
 import webapp.database.initializer.CsvInserts;
 import webapp.database.repositories.*;
-
-import java.beans.EventHandler;
 
 /**
  * Created by thanasis on 23/6/2017.
@@ -19,7 +15,7 @@ import java.beans.EventHandler;
 @Controller
 public class DatabaseInserts {
     @Autowired
-	AdminTableRepositorie adminTableRepositorie;
+    AdminTableRepository adminTableRepository;
     @Autowired
     LoginRepository loginRepository;
 
@@ -81,7 +77,7 @@ public class DatabaseInserts {
 		adminTable.setGivenPoints(0);
 		adminTable.setOurPointsFromEvents(0);
 		adminTable.setOurPointsFromPromotion(0);
-		adminTableRepositorie.save(adminTable);
+		adminTableRepository.save(adminTable);
 		return "redirect:/";
 	}
 
@@ -111,7 +107,7 @@ public class DatabaseInserts {
 		adminTable.setGivenPoints(0);
 		adminTable.setOurPointsFromEvents(0);
 		adminTable.setOurPointsFromPromotion(0);
-		adminTableRepositorie.save(adminTable);
+		adminTableRepository.save(adminTable);
 
 		Login login = new Login();
 		login.setUsername("admin");

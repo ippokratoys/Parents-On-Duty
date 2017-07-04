@@ -24,7 +24,7 @@ public class CustomerService {
     BookEventRepository bookEventRepository;
 
     @Autowired
-    private AdminTableRepositorie adminTableRepositorie;
+    private AdminTableRepository adminTableRepository;
 
     @Autowired
     CustomerPaymentHistoryRepository customerPaymentHistoryRepository;
@@ -65,11 +65,11 @@ public class CustomerService {
         Customer customer = bookEvent.getCustomer();
         Event event = bookEvent.getEvent();
         Organiser organiser = event.getOrganiser();
-        AdminTable adminTable = adminTableRepositorie.findOne(1);
+        AdminTable adminTable = adminTableRepository.findOne(1);
 
         int customerNewBalance = customer.getPoints()+event.getPrice();
         int organiserNewBalance = organiser.getPoints() - (int) Math.round(event.getPrice()*0.9);
-        int adminNewBalance = adminTableRepositorie.findOne(1).getOurPointsFromEvents()- (event.getPrice() - (int) Math.round(event.getPrice()*0.9)) ;
+        int adminNewBalance = adminTableRepository.findOne(1).getOurPointsFromEvents()- (event.getPrice() - (int) Math.round(event.getPrice()*0.9)) ;
 
         customer.setPoints(customerNewBalance);
         organiser.setPoints(organiserNewBalance);
@@ -77,7 +77,7 @@ public class CustomerService {
 
         customerRepository.save(customer);
         organiserRepository.save(organiser);
-        adminTableRepositorie.save(adminTable);
+        adminTableRepository.save(adminTable);
         bookEventRepository.delete(bookEvent);
     }
 
