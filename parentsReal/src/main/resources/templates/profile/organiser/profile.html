@@ -31,7 +31,8 @@
                 <li class="active"><a href="/organiser/profile">Προφίλ</a></li>
                 <li><a href="/organiser/add_place">Προσθήκη Μέρους</a></li>
                 <li><a href="/organiser/add_event">Προσθήκη Εκδήλωσης</a></li>
-                <li><a href="/organiser/wallet">Πορτοφόλι</a></li>
+                <li><a href="/organiser/history">Ιστορικό</a></li>
+				<li><a href="/organiser/wallet">Πορτοφόλι</a></li>
             </ul>
         </div>
     </div>
@@ -57,12 +58,7 @@
                             <th:block th:if="${ organiser.locations != null}" th:each="oneLocation : ${organiser.locations}" >
                                 <p th:text="'Όνομα : ' + ${oneLocation.name}"></p>
                                 <p th:text="'Διεύθυνση :' + ${oneLocation.address}"></p>
-                                <th:block th:if="${oneLocation.certificateChecked}==true">
-                                    <p style="color:green">Επικυρωμένο</p>
-                                </th:block>
-                                <th:block th:unless="${oneLocation.certificateChecked}==true">
-                                    <p style="color:red">Μη Επικυρωμένο</p>
-                                </th:block>
+                                <!--<p th:text="'Έγκυρο μέχρι τις :' + ${oneLocation.validUntil}"></p>-->
                                 <hr/>
                             </th:block>
                         </div>
