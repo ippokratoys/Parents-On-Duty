@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Block Users</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+	<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/admin_profile.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/admin_profile.js"></script>
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <a style="color:white" class="navbar-brand" href="/">
+            <div style="font-family:Comic Sans MS,cursive,sans-serif">
+                <div class="title_spec" >Parents On Duty</div>
+            </div>
+        </a>
+    </div>
+</div><!--/.navbar -->
+
+
+<div class="row-offcanvas row-offcanvas-left">
+    <div id="sidebar" class="sidebar-offcanvas">
+        <div class="col-md-12">
+            <h3>Άλλες Επιλογές</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="/admin/profile">Σύνοψη</a></li>
+                <li><a href="/admin/manage_organisers">Διαχείριση Διοργανώτών</a></li>
+                <li class="active"><a href="/admin/manage_parents">Διαχείριση Γονέων</a></li>
+                <li><a href="/admin/accept_location">Αποδοχή Τοποθεσίας</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <div class="col-md-12">
+            <h2>Μπλόκαρε Κάποιον Χρήστη</h2>
+            <hr/>
+            <br />
+            <p class="visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
+            </p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="well pre-scrollable" style="max-height:800px;max-width:600px;" >
+                        <div id="myplaces">
+                            <h4><b>Γονείς</b></h4>
+                            <!--th:block th:if="${ organiser.locations != null}" th:each="oneLocation : ${organiser.locations}" >
+                                <p th:text="'Όνομα : ' + ${oneLocation.name}"></p>
+                                <p th:text="'Διεύθυνση :' + ${oneLocation.address}"></p>
+                                <p th:text="'Έγκυρο μέχρι τις :' + ${oneLocation.validUntil}"></p>
+                                <hr/>
+                            </th:block-->
+                            <!--th:block th:unless="${parents== null || parents.size() == 0}" th:each="parent : ${parents}">
+                                <p th:inline="text"> [[ ${parent.login_email} ]] [[ ${parent.wallet/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p>
+                            </th:block-->
+
+							<div class="agenda">
+							<div class="table-responsive">
+								<table class="table table-condensed table-bordered">
+							  <!--  <h4><b>Οικοδεσπότες</b></h4>-->
+									<thead>
+										<tr>
+                                          <th>E-mail</th>
+                                          <th>Υπόλοιπο(€)</th>
+										  <th>Μπλοκάρισμα Γονέα</th>
+										</tr>
+									</thead>
+									<tbody>
+										
+										<th:block th:unless="${parents== null || parents.size() == 0}" th:each="parent : ${parents}">
+											<tr>
+											  <!--p th:inline="text"> [[ ${organiser.name} ]] [[ ${organiser.surname} ]] [[ ${organiser.points/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p-->
+											  <td class="agenda-email" th:text="${parent.login_email}">
+                                                  Kappas
+                                              </td>
+											  <td class="agenda-money" th:text="${parent.wallet}/100+'€'">
+                                                  4,20 €
+                                              </td>
+											  <td class="agenda-button">
+												<button  id="" class="button1" >Block</button>
+											  </td>
+											</tr>
+										</th:block>
+										
+									</tbody>
+								</table>
+							</div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </div>
+</div><!--/row-offcanvas -->
+
+
+	<script type="text/javascript">
+		$('.button1').click(function() {
+			if($(this).hasClass('active')) {
+				$(this).removeClass('active');
+				$(this).text('Block');
+			} else {
+				$(this).text('Unblock');
+				$(this).addClass('active')
+			}
+		});
+	</script>
+</body>
+</html>
