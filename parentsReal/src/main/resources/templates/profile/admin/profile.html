@@ -9,20 +9,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/admin_profile.js"></script>
+    <div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
 </head>
 
 <body>
-
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <a style="color:white" class="navbar-brand" href="/">
-            <div style="font-family:Comic Sans MS,cursive,sans-serif">
-                <div class="title_spec" >Parents On Duty</div>
-            </div>
-        </a>
-    </div>
-</div><!--/.navbar -->
-
+<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
 
 <div class="row-offcanvas row-offcanvas-left">
     <div id="sidebar" class="sidebar-offcanvas">
