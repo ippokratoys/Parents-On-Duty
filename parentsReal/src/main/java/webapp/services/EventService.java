@@ -115,7 +115,7 @@ public class EventService {
             avg += aFeedback.getRating();
         }
         avg  = (int) Math.round(((double) avg) / allFeedbacks.size());
-        return 5;
+        return avg;
     }
 
     public int getRating(EventSearch event){
