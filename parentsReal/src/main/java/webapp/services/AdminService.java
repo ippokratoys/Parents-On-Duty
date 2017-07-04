@@ -20,5 +20,5 @@ public class AdminService {
     @Autowired
     OrganiserRepository organiserRepository;
 
-    
+
 }
