@@ -4,11 +4,13 @@
     <title>History</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/css/history.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/css/history.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/host_profile.js"></script>
+    <script type="text/javascript" src="/js/rating.js"></script>
   </head>
 
 	<body>
@@ -52,6 +54,7 @@
                                           <th>Ώρα</th>
                                           <th>Εκδήλωση</th>
                                           <th>Τιμή</th>
+                                          <th>Αξιολόγηση</th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -70,13 +73,43 @@
                                                       Ποδοσφαιρο
                                                   </div>
                                               </td>
-                                              <td class="agenda-events" th:text="${oneBook.event.price}/100+'€'">
+                                              <td class="agenda-time" th:text="${oneBook.event.price}/100+'€'">
                                                   4,20 €
+                                              </td>
+                                              <td class="agenda-button">
+                                                  <button type="button" class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#myModal" th:onclick="'enterIdInModal('+${oneBook.bookId}+')'">Αξιολόγηση</button>
                                               </td>
                                           </tr>
                                       </th:block>
                                   </tbody>
                               </table>
+                          </div>
+                      </div>
+                      <!-- Modal -->
+                      <div class="modal fade" id="myModal" role="dialog">
+                          <div class="modal-dialog">
+                              <!-- Modal content-->
+                              <div class="modal-content">
+        				        <div class="modal-header">
+        				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        				          <h4 class="modal-title">Αξιολόγηση</h4>
+        				        </div>
+        				        <div class="modal-body">
+                                    <form th:action=".." method="post">
+                                        <div class="form-group">
+                                            <h3>Γράψτε Την Αξιολογησή Σας</h3>
+                                            <textarea class="form-control custom-control" required="true" name="desc" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι στο ακαν8υς με τα πιτσιρακια μας :)  " rows="3" style="resize:none"></textarea>
+                                            <h3>Βαθμολογία</h3>
+                                            <input type="number" class="rating" id="stars" name="stars" data-min="1" data-max="5" value="0"/>
+                                        </div>
+                                    <div class="modal-footer">
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal">Πρόσθεσε</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+        				      </div>
                           </div>
                       </div>
 		      </div>

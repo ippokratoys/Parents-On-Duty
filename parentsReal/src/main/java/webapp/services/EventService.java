@@ -8,10 +8,6 @@ import webapp.database.*;
 import webapp.database.elasticsearch.EventSearch;
 import webapp.database.repositories.*;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +32,7 @@ public class EventService {
     @Autowired
     private FileUploadService fileUploadService;
     @Autowired
-    private AdminTableRepositorie adminTableRepositorie;
+    private AdminTableRepository adminTableRepository;
 
     @Value("file_save.folder.prefix")
     String MAIN_PREFIX="";
@@ -76,11 +72,11 @@ public class EventService {
             customer.setPoints(customer.getPoints() - event.getPrice());
             Organiser organiser = event.getOrganiser();
             organiser.addPoints((int) Math.round(event.getPrice()*0.9) );
-            AdminTable adminTable = adminTableRepositorie.findOne(1);
+            AdminTable adminTable = adminTableRepository.findOne(1);
             adminTable.setOurPointsFromEvents(event.getPrice() - (int) Math.round(event.getPrice()*0.9));
             eventHandler.save(event);
             customerRepository.save(customer);
-            adminTableRepositorie.save(adminTable);
+            adminTableRepository.save(adminTable);
         }
 //////////////////somehow unlock here//////////////////////////////////
         return true;

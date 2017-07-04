@@ -3,16 +3,10 @@ package webapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import webapp.database.Event;
-import webapp.database.Eventsgroup;
-import webapp.database.Location;
-import webapp.database.Organiser;
+import webapp.database.*;
 import webapp.database.elasticsearch.EventSearch;
 import webapp.database.elasticsearch.EventSearchRepository;
-import webapp.database.repositories.EventRepository;
-import webapp.database.repositories.EventsgroupRepository;
-import webapp.database.repositories.LocationRepository;
-import webapp.database.repositories.OrganiserRepository;
+import webapp.database.repositories.*;
 
 import java.sql.Time;
 import java.util.Date;
@@ -39,6 +33,12 @@ public class OrganiserService {
     EventRepository eventRepository;
     @Autowired
     EventService eventService;
+    @Autowired
+    BookEventRepository bookEventRepository;
+    @Autowired
+    AdminTableRepository adminTableRepository;
+    @Autowired
+    CustomerRepository customerRepository;
 
     @Autowired
     private EventSearchRepository eventSearchRepository;
@@ -118,15 +118,46 @@ public class OrganiserService {
         return dbEvent;
     }
 
-    public Event createEvent(Map<String,String> allParams){
+/*    public Event createEvent(Map<String,String> allParams){
 
         return null;
-    }
+    }*/
 
     public boolean addEventToEs(Event event){
         EventSearch eventSearch= new EventSearch(event);
         eventSearchRepository.save(eventSearch);
         return true;
+    }
+
+    public int cancelEvent(Event event){
+        int moneyReturned = 0;
+
+        List <BookEvent> bookEvents = bookEventRepository.findAllByEvent(event);
+
+        for (BookEvent book: bookEvents) {
+            Customer customer = book.getCustomer();
+            Organiser organiser = book.getEvent().getOrganiser();
+            AdminTable adminTable = adminTableRepository.findOne(1);
+
+
+            int customerNewBalance = customer.getPoints()+event.getPrice();
+            moneyReturned += event.getPrice();
+            int organiserNewBalance = organiser.getPoints() - (int) Math.round(event.getPrice()*0.9);
+            int adminNewBalance = adminTableRepository.findOne(1).getOurPointsFromEvents()- (event.getPrice() - (int) Math.round(event.getPrice()*0.9)) ;
+
+            customer.setPoints(customerNewBalance);
+            organiser.setPoints(organiserNewBalance);
+            adminTable.setGivenPoints(adminNewBalance);
+
+            customerRepository.save(customer);
+            organiserRepository.save(organiser);
+            adminTableRepository.save(adminTable);
+            bookEventRepository.delete(book);
+        }
+
+        eventRepository.delete(event);
+
+        return moneyReturned;
     }
 
 }
