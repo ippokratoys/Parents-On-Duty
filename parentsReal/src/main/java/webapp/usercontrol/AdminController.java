@@ -68,7 +68,7 @@ public class AdminController {
         return "profile/admin/manage_parents";
     }
 
-    @RequestMapping(value = "/admin/login/reset/",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/login/reset",method = RequestMethod.POST)
     public String resetPassword(Model model,
                                 @RequestParam("login_email")String loginEmail,
                                 @RequestParam("new_pwd")String newPwd
@@ -81,11 +81,10 @@ public class AdminController {
         if(customerRepository.findOne(loginEmail)!=null){
             return "redirect:/admin/manage_parents?"+"customer_deleted=true";
         }else if(organiserRepository.findOne(loginEmail)!=null){
-            return "redirect:/admin/profile?"+"organiser_deleted=true";
+            return "redirect:/admin/manage_organisers?"+"organiser_deleted=true";
         }else{
             return "redirect:/admin/profile?"+"someone_deleted=true";
         }
-
     }
 
     @RequestMapping(value = "/admin/accept_location/{location_id}",method = RequestMethod.POST)
@@ -144,6 +143,15 @@ public class AdminController {
     ){
         if(adminService.payOrganiser(loginEmail,amount*100)==false){
             return "redirect:/admin/manage_organisers?problem=true";
+        }
+        return "redirect:/admin/manage_organisers";
+    }
+    @RequestMapping(value = "admin/login/give_money",method = RequestMethod.POST)
+    public String payOrganiser(@RequestParam("login_email") String login_email,
+                               @RequestParam("amount") int amount
+    ){
+        if(adminService.payOrganiser(login_email,amount*100) == false ){
+            return "redirect:/admin/manage_organisers?failed_pay=true";
         }
         return "redirect:/admin/manage_organisers";
     }
