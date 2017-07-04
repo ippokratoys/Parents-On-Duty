@@ -125,7 +125,7 @@
 					<div class="input-group">
 					  <input type="text" class="form-control" name="free_text" id="Address_Search" placeholder="Καλοκαίρι με Πινκγ Πονγκ" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
                         <input  style="display:none;" readonly="true" type="text" required="true" value="" name="Dates" />
-                        <input  style="display:none;" readonly="true" type="text" required="true" value="1" name="Price" />
+                        <input  style="display:none;" readonly="true" type="text" required="true" value="0" name="Price" />
                         <input  style="display:none;" readonly="true" type="text" required="true" value="" name="Age" />
                         <input  style="display:none;" readonly="true" type="text" required="true" value="" name="distance" />
                         <input  style="display:none;" readonly="true" type="text" required="true" value="" name="lat" id="lat"/>
@@ -176,9 +176,6 @@
                         </div>
                         <hr/>
                     </th:block>
-
-
-
                 </div>
             </div>
             <div class="col-xs-12 col-md-6 col-sm-12">

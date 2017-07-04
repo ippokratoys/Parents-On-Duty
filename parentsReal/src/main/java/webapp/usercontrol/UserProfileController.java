@@ -113,7 +113,7 @@ public class UserProfileController {
         System.out.println(curCustomer.getLogin_email());
         System.out.println("id:" + bookID);
         customerService.cancelEvent(bookID);
-        return "profile/parent/profile";
+        return "redirect:/user/history";
     }
 
     @RequestMapping(value = "/user/feedback",method = RequestMethod.POST)
