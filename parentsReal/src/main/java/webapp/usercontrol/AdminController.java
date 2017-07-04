@@ -11,6 +11,7 @@ import webapp.database.*;
 import webapp.database.repositories.*;
 import webapp.services.AdminService;
 
+import javax.jws.WebParam;
 import java.util.List;
 
 /**
@@ -65,17 +66,24 @@ public class AdminController {
         return "profile/admin/manage_parents";
     }
 
-    @RequestMapping(value = "/admin/login/reset/{login_email}",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/login/reset/",method = RequestMethod.POST)
     public String resetPassword(Model model,
-                                @PathVariable("login_email")String loginEmail,
+                                @RequestParam("login_email")String loginEmail,
                                 @RequestParam("new_pwd")String newPwd
     ){
         Login login = loginRepository.findOne(loginEmail);
         if(login==null){
-            return "redirect:/admin/profile?"+"user_not_found=true";
+            return "redirect:/admin/manage_organisers?"+"user_not_found=true";
         }
         adminService.resetLoginPassword(login,newPwd);
-        return "redirect:/admin/progile?"+"user_deleted=true";
+        if(customerRepository.findOne(loginEmail)!=null){
+            return "redirect:/admin/manage_parents?"+"customer_deleted=true";
+        }else if(organiserRepository.findOne(loginEmail)!=null){
+            return "redirect:/admin/profile?"+"organiser_deleted=true";
+        }else{
+            return "redirect:/admin/profile?"+"someone_deleted=true";
+        }
+
     }
 
     @RequestMapping(value = "/admin/accept_location/{location_id}",method = RequestMethod.POST)
@@ -97,6 +105,34 @@ public class AdminController {
         adminService.manageLocation(location,res);
 
         return "redirect:/admin/accept_location";
+    }
+
+
+    @RequestMapping(value = "/admin/login/block",method = RequestMethod.POST)
+    public String blockLogin(Model model,
+                             @RequestParam("login_email") String loginEmail,
+                             @RequestParam("action") String action
+    ){
+        if(action.equals("block")){
+            System.out.println("will block "+ loginEmail);
+            if(adminService.blockLogin(loginEmail)==false){
+                return "redirect:/admin/profile?login_not_found=true";
+            }
+        }else if(action.equals("unblock")){
+            System.out.println("will un block "+ loginEmail);
+            if(adminService.unblockLogin(loginEmail)==false){
+                return "redirect:/admin/profile?login_not_found=true";
+            }
+        }
+
+        if(customerRepository.findOne(loginEmail)!=null){
+            return "redirect:/admin/manage_parents?"+"customer_blocked=true";
+        }else if(organiserRepository.findOne(loginEmail)!=null){
+            return "redirect:/admin/manage_organisers?"+"organiser_blocked=true";
+        }else{
+            return "redirect:/admin/profile?"+"someone_blocked=true";
+        }
+
     }
 
 

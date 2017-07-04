@@ -52,22 +52,23 @@ public class LocationService {
 
 
         String fileName="";
-        fileName = String.valueOf(dbLocation.getId());
+        fileName += String.valueOf(dbLocation.getId());
         String[] buff=locationFile.getName().split("\\.");
         String fileNamePostFix=buff[buff.length-1];
         fileName+="."+fileNamePostFix;
 
         fileUploadService.store(locationFile,fileName, FileUploadService.FileType.LOCATION);
-        dbLocation.setImagePath(fileName);
+        dbLocation.setImagePath("file/certificate/"+fileName);
 
 
-//        fileName = String.valueOf(dbLocation.getId());
-//        String[] buff=locationFile.getName().split("\\.");
-//        String fileNamePostFix=buff[buff.length-1];
-//        fileName+="."+fileNamePostFix;
-//
-//        fileUploadService.store(locationFile,fileName, FileUploadService.FileType.LOCATION);
-//        dbLocation.setCertificatePath(fileName);
+        fileName="";
+        fileName += String.valueOf(dbLocation.getId());
+        String[] buff1=locationFile.getName().split("\\.");
+        String fileNamePostFix1=buff1[buff1.length-1];
+        fileName+="."+fileNamePostFix1;
+
+        fileUploadService.store(locationFile,fileName, FileUploadService.FileType.CERFICATE);
+        dbLocation.setCertificatePath("file/certificate/"+fileName);
 
 
 
