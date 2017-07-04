@@ -11,19 +11,11 @@
     <link href="/css/history.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/host_profile.js"></script>
     <script type="text/javascript" src="/js/rating.js"></script>
+    <div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
   </head>
 
 	<body>
-		<div class="navbar navbar-default navbar-fixed-top">
-		    <div class="navbar-header">
-		    	<a style="color:white" class="navbar-brand" href="/">
-					<div style="font-family:Comic Sans MS,cursive,sans-serif">
-						<div class="title_spec" >Parents On Duty</div>
-					</div>
-				</a>
-		    </div>
-		</div><!--/.navbar -->
-
+		<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
 		<div class="row-offcanvas row-offcanvas-left">
 		  <div id="sidebar" class="sidebar-offcanvas">
 		      <div class="col-md-12">
