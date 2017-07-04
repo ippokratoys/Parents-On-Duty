@@ -48,13 +48,44 @@
                 <div class="col-md-4">
                     <div class="well pre-scrollable">
                         <div id="myplaces">
-                          <!--  <h4><b>Οικοδεσπότες</b></h4>-->
-                            <th:block th:unless="${organisers== null || organisers.size() == 0}" th:each="organiser : ${organisers}">
-                                <p th:inline="text"> [[ ${organiser.name} ]] [[ ${organiser.surname} ]] [[ ${organiser.points/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p>
-                            </th:block>
-
-                        </div>
-                    </div>
+							<div class="agenda">
+							<div class="table-responsive">
+								<table class="table table-condensed table-bordered">
+							  <!--  <h4><b>Οικοδεσπότες</b></h4>-->
+									<thead>
+										<tr>
+                                          <th>Όνομα</th>
+                                          <th>Επώνυμο</th>
+                                          <th>Υπόλοιπο(€)</th>
+										  <th>Μπλοκάρισμα Διοργανωτή</th>
+										</tr>
+									</thead>
+									<tbody>
+										
+										<th:block th:unless="${organisers== null || organisers.size() == 0}" th:each="organiser : ${organisers}">
+											<tr>
+												<!--p th:inline="text"> [[ ${organiser.name} ]] [[ ${organiser.surname} ]] [[ ${organiser.points/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p-->
+											  <td class="agenda-name" th:text="${organiser.name}">
+                                                  Kappas
+                                              </td>
+											  <td class="agenda-surname" th:text="${organiser.surname}">
+                                                  Keepos
+                                              </td>
+											  <td class="agenda-money" th:text="${organiser.points}/100+'€'">
+                                                  4,20 €
+                                              </td>
+											  <td class="agenda-button">
+												<button  id="" class="button1" >Block</button>
+											  </td>
+											</tr>
+										</th:block>
+										
+									</tbody>
+								</table>
+							</div>
+							</div>
+						</div>
+					</div>
                 </div>
             </div>
             <div class="row">
