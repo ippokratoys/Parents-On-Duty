@@ -89,7 +89,7 @@ public class DatabaseInserts {
 	public String initAdminUser(){
 		Login login = new Login();
 		login.setUsername("admin");
-		login.setUsername("admin@pod.gr");
+		login.setEmail("admin@pod.gr");
 		login.setPwd(passwordEncoder.encode("admin"));
 		login.setRole("ADMIN");
 		login.setActive(true);
@@ -105,6 +105,21 @@ public class DatabaseInserts {
 		myCsvHandler.locationCsvInsertions(locationRepository,"csv/locations10.csv",organiserRepository);
 		myCsvHandler.eventsgroupCsvInsertions(eventsgroupHandler,"csv/events_group.csv",organiserRepository);
 		myCsvHandler.eventsCsvInsertions(eventHandler,"csv/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
+
+		AdminTable adminTable = new AdminTable();
+		adminTable.setId(1);
+		adminTable.setGivenPoints(0);
+		adminTable.setOurPointsFromEvents(0);
+		adminTable.setOurPointsFromPromotion(0);
+		adminTableRepositorie.save(adminTable);
+
+		Login login = new Login();
+		login.setUsername("admin");
+		login.setEmail("admin@pod.gr");
+		login.setPwd(passwordEncoder.encode("admin"));
+		login.setRole("ADMIN");
+		login.setActive(true);
+		loginRepository.save(login);
 
 		return "redirect:/test/add";
 	}

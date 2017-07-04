@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import webapp.database.Customer;
 import webapp.database.Location;
 import webapp.database.Login;
+import webapp.database.Organiser;
+
 import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.LocationRepository;
 import webapp.database.repositories.LoginRepository;
@@ -41,15 +43,60 @@ public class AdminService {
         return true;
     }
 
-    public boolean manageLocation(Location location,boolean accept){
+    public boolean manageLocation(Location location,boolean accept) {
         location.setCertificateChecked(true);
         location.setValidUntil(null);
-        if(accept==true){
+        if (accept == true) {
             location.setValidUntil(new Date());
-        }else {
+        } else {
             location.setValidUntil(null);
         }
         locationRepository.save(location);
+        return true;
+    }
+
+    public boolean blockOrganiser(String id){
+        Organiser organiser = organiserRepository.findOne(id);
+        if(organiser==null){
+            return false;
+        }
+
+        organiser.getLogin().setActive(false);
+
+        return true;
+
+    }
+
+    public boolean unblockOrganiser(String id){
+        Organiser organiser = organiserRepository.findOne(id);
+        if(organiser==null){
+            return false;
+        }
+
+        organiser.getLogin().setActive(true);
+
+        return true;
+    }
+
+    public  boolean blockParent(String id){
+        Customer costumer = customerRepository.findOne(id);
+        if(costumer==null){
+            return false;
+        }
+
+        costumer.getLogin().setActive(false);
+
+        return true;
+    }
+
+    public  boolean unblockParent(String id){
+        Customer costumer = customerRepository.findOne(id);
+        if(costumer==null){
+            return false;
+        }
+
+        costumer.getLogin().setActive(true);
+
         return true;
     }
 }
