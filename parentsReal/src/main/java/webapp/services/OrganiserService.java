@@ -157,10 +157,12 @@ public class OrganiserService {
         organiserPaymentHistory.setTimeStamp(new Date());
         organiserPaymentHistory.setOldBalcend(organiser.getPoints());
         organiserPaymentHistory.setOrganiser(organiser);
-        organiserPaymentHistory.setMoneyPayed(cost);
+        organiserPaymentHistory.setMoneyPayed(cost*100);
+        String message = organiser.getName() + " " + organiser.getSurname()
+                +" payed "+ cost + "€ to promote the event with id " + event.getIdEvents()+".";
         organiserPaymentHistoryRepository.save(organiserPaymentHistory);
 
-        organiser.setPoints(organiser.getPoints() - cost);
+        organiser.setPoints(organiser.getPoints() - 100*cost);
         organiserRepository.save(organiser);
 
         EventSearch eventSearch = eventSearchRepository.findOne(event.getIdEvents());
