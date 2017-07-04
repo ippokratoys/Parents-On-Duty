@@ -3,6 +3,7 @@ package webapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import sun.rmi.runtime.Log;
 import webapp.database.Customer;
 import webapp.database.Location;
 import webapp.database.Login;
@@ -99,4 +100,26 @@ public class AdminService {
 
         return true;
     }
+
+    public boolean unblockLogin(String id){
+        Login login = loginRepository.findOne(id);
+        if(login==null){
+            return false;
+        }
+        login.setActive(true);
+        loginRepository.save(login);
+        return true;
+    }
+
+    public boolean blockLogin(String id){
+        Login login = loginRepository.findOne(id);
+        if(login==null){
+            return false;
+        }
+        login.setActive(false);
+
+        loginRepository.save(login);
+        return true;
+    }
+
 }
