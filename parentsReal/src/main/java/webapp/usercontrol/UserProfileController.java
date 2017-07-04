@@ -1,6 +1,5 @@
 package webapp.usercontrol;
 
-import jdk.nashorn.internal.objects.NativeUint8Array;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,13 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import webapp.database.BookEvent;
 import webapp.database.Customer;
+import webapp.database.repositories.BookEventRepository;
 import webapp.database.repositories.CustomerRepository;
+import webapp.database.repositories.EventRepository;
 import webapp.services.CustomerService;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -30,6 +31,10 @@ public class UserProfileController {
     private CustomerRepository customerRepository;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private EventRepository eventRepository;
+    @Autowired
+    private BookEventRepository bookEventRepository;
 
     @RequestMapping(value="/user/profile",method= RequestMethod.GET)
     public String showProfile(
@@ -109,6 +114,21 @@ public class UserProfileController {
         System.out.println("id:" + bookID);
         customerService.cancelEvent(bookID);
         return "profile/parent/profile";
+    }
+
+    @RequestMapping(value = "/user/feedback",method = RequestMethod.POST)
+    public String newFeedback(@RequestParam("book_id")int bookID,
+                              @RequestParam("text")String text,
+                              @RequestParam("rating")int rating,
+                              @AuthenticationPrincipal final UserDetails userDetails//we add this so we know if is logged to show correct bar
+    ){
+        Customer curCustomer = customerRepository.findOne(userDetails.getUsername());
+
+        BookEvent bookEvent = bookEventRepository.findOne(bookID);
+
+        customerService.newFeedback(bookEvent,text,rating);
+
+        return "redirect:/user/history?feedback_done=true";
     }
 
 }

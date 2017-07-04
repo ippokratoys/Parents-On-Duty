@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import webapp.database.*;
 import webapp.database.repositories.*;
+import webapp.services.EventService;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -294,6 +296,26 @@ public class CsvInserts {
                 }
             }
 
+    }
+
+    public void bookSomeEvents(LoginRepository loginRepository,
+                               CustomerRepository customerRepository,
+                               EventRepository eventRepository,
+                               BookEventRepository bookEventRepository,
+                               EventService eventService
+    ){
+        Iterable<Customer> customerList = customerRepository.findAll();
+        for (Customer oneCustomer :
+                customerList){
+            for (int i = 0; i < 100; i++) {
+                Event event = eventRepository.findOne(i);
+                try {
+                    eventService.bookEvent(event,oneCustomer,1);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
     }
 
     public void locationCsvInsertions(LocationRepository locationRepository,
