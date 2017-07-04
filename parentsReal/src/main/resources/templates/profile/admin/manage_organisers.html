@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/admin_profile.js"></script>
-	
+
 </head>
 
 
@@ -33,7 +33,7 @@
             <h3>Άλλες Επιλογές</h3>
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/admin/profile">Σύνοψη</a></li>
-                <li class="active"><a href="/admin/manage_organisers">Διαχείριση Διοργανώτών</a></li>
+                <li class="active"><a href="/admin/manage_organisers">Διαχείριση Διοργανωτών</a></li>
                 <li><a href="/admin/manage_parents">Διαχείριση Γονέων</a></li>
                 <li><a href="/admin/accept_location">Αποδοχή Τοποθεσίας</a></li>
             </ul>
@@ -47,48 +47,46 @@
             <p class="visible-xs">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
             </p>
-                    <div class="well pre-scrollable" style="max-height:800px;">
+                    <div class="well pre-scrollable" style="max-height:700px;">
                         <div id="myplaces">
 							<div class="agenda">
-							<div class="table-responsive">
-								<table class="table table-condensed table-bordered">
-							  <!--  <h4><b>Οικοδεσπότες</b></h4>-->
-									<thead>
-										<tr>
-                                          <th>Όνομα</th>
-                                          <th>Επώνυμο</th>
-                                          <th>Υπόλοιπο(€)</th>
-										  <th>Μπλοκάρισμα Διοργανωτή</th>
-										</tr>
-									</thead>
-									<tbody>
-										
-										<th:block th:unless="${organisers== null || organisers.size() == 0}" th:each="organiser : ${organisers}">
-											<tr>
-												<!--p th:inline="text"> [[ ${organiser.name} ]] [[ ${organiser.surname} ]] [[ ${organiser.points/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p-->
-											  <td class="agenda-name" th:text="${organiser.name}">
-                                                  Kappas
-                                              </td>
-											  <td class="agenda-surname" th:text="${organiser.surname}">
-                                                  Keepos
-                                              </td>
-											  <td class="agenda-money" th:text="${organiser.points}/100+'€'">
-                                                  4,20 €
-                                              </td>
-											  <td class="agenda-button">
-												<button  id="" class="button1" >Block</button>
-											  </td>
-											</tr>
-										</th:block>
-										
-									</tbody>
-								</table>
-							</div>
+    							<div class="table-responsive">
+    								<table class="table table-condensed table-bordered">
+    							  <!--  <h4><b>Οικοδεσπότες</b></h4>-->
+    									<thead>
+    										<tr>
+                                              <th>Όνομα</th>
+                                              <th>Επώνυμο</th>
+                                              <th>Υπόλοιπο(€)</th>
+    										  <th>Μπλοκάρισμα Διοργανωτή</th>
+    										</tr>
+    									</thead>
+    									<tbody>
+
+    										<th:block th:unless="${organisers== null || organisers.size() == 0}" th:each="organiser : ${organisers}">
+    											<tr>
+    												<!--p th:inline="text"> [[ ${organiser.name} ]] [[ ${organiser.surname} ]] [[ ${organiser.points/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p-->
+    											  <td class="agenda-name" th:text="${organiser.name}">
+                                                      Kappas
+                                                  </td>
+    											  <td class="agenda-surname" th:text="${organiser.surname}">
+                                                      Keepos
+                                                  </td>
+    											  <td class="agenda-money" th:text="${organiser.points}/100+'€'">
+                                                      4,20 €
+                                                  </td>
+    											  <td class="agenda-button">
+    												<button  id="" class="button1" >Block</button>
+    											  </td>
+    											</tr>
+    										</th:block>
+
+    									</tbody>
+    								</table>
+    							</div>
 							</div>
 						</div>
 					</div>
-            <div class="row">
-            </div>
         </div>
     </div>
 </div><!--/row-offcanvas -->
