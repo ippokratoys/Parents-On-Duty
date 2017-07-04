@@ -125,7 +125,7 @@
 					<div class="input-group">
 					  <input type="text" class="form-control" name="free_text" id="Address_Search" placeholder="Καλοκαίρι με Πινκγ Πονγκ" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
                         <input  style="display:none;" readonly="true" type="text" required="true" value="" name="Dates" />
-                        <input  style="display:none;" readonly="true" type="text" required="true" value="0" name="Price" />
+                        <input  style="display:none;" readonly="true" type="text" required="true" value="1" name="Price" />
                         <input  style="display:none;" readonly="true" type="text" required="true" value="" name="Age" />
                         <input  style="display:none;" readonly="true" type="text" required="true" value="" name="distance" />
                         <input  style="display:none;" readonly="true" type="text" required="true" value="" name="lat" id="lat"/>
@@ -162,7 +162,7 @@
 
 
                     <hr/>
-                    <th:block th:each="i,oneFeedback:${allFeedbacks}">
+                    <th:block th:each="oneFeedback,i:${allFeedbacks}">
                         <div class="row" th:with="eventStats=${oneFeedback.rating}">
                             <div class="col-sm-6">
                                 <span th:each="i : ${#numbers.sequence( 1, eventStats,1)}" class="glyphicon glyphicon-star"></span>
@@ -170,8 +170,8 @@
                                     <span th:each="i : ${#numbers.sequence( 4, eventStats,-1)}" class="glyphicon glyphicon-star-empty"></span>
                                 </th:block>
                                 Anonymous
-                                <span class="pull-right" th:text="${oneFeedback.date}">10 days ago</span>
-                                <p th:inline="text" th:text="oneFeedback.content"></p>
+                                <span class="pull-right" th:text="${#dates.format(oneFeedback.date,'dd/MM/yyyy')}">10 days ago</span>
+                                <p th:inline="text" th:text="${oneFeedback.content}"></p>
                             </div>
                         </div>
                         <hr/>

@@ -91,10 +91,16 @@ public class CustomerService {
         cancelEvent(bookEvent);
     }
 
-    public void newFeedback(Customer customer, Event event, String text, int rating) {
-        System.out.println("customer = [" + customer + "], event = [" + event + "], text = [" + text + "], rating = [" + rating + "]");
-        //maybe check the date
-        EventFeedback eventFeedback = new EventFeedback(text,rating,new Date,event,customer);
-        EventFeedbackRepositorie
+    public void newFeedback(BookEvent bookEvent,String text, int rating){
+        Date date = new Date();
+        EventFeedback eventFeedback = new EventFeedback(text, rating, date, bookEvent.getEvent(), bookEvent.getCustomer());
+
+        bookEvent.setHasComment(true);
+
+
+        bookEventRepository.save(bookEvent);
+        eventFeedbackRepositorie.save(eventFeedback);
+
+
     }
 }

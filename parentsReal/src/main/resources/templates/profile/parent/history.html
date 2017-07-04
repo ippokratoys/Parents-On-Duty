@@ -16,8 +16,8 @@
 	<body>
 
         <script>
-            function enterIdInModal(eventId) {
-                document.getElementById("event_id").value=eventId.toString();
+            function enterIdInModal(bookId) {
+                document.getElementById("book_id").value=bookId.toString();
             }
         </script>
 
@@ -84,7 +84,12 @@
                                                   4,20 €
                                               </td>
                                               <td class="agenda-button">
-                                                  <button type="button" class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#myModal" th:onclick="'enterIdInModal('+${oneBook.event.idEvents}+')'">Αξιολόγηση</button>
+                                                  <th:block th:if="${oneBook.hasComment}==false">
+                                                      <button type="button" class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#myModal" th:onclick="'enterIdInModal('+${oneBook.bookId}+')'">Αξιολόγηση</button>
+                                                  </th:block>
+                                                  <th:block th:unless="${oneBook.hasComment}==false">
+                                                      <button type="button" disabled="true" class="btn btn-primary btn-md btn-block">Αξιολόγηση</button>
+                                                  </th:block>
                                               </td>
                                           </tr>
                                       </th:block>
@@ -108,7 +113,7 @@
                                             <textarea class="form-control custom-control" required="true" id="feedback_text" name="text" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι στο ακαν8υς με τα πιτσιρακια μας :)  " rows="3" style="resize:none"></textarea>
                                             <h3>Βαθμολογία</h3>
                                             <input type="number" class="rating" id="stars" name="rating" data-min="1" data-max="5" value="0"/>
-                                            <input type="number" id="event_id" name="event_id" value=""/>
+                                            <input type="number" id="book_id" name="book_id" value=""/>
                                         </div>
                                     <div class="modal-footer">
                                         <div class="text-center">
