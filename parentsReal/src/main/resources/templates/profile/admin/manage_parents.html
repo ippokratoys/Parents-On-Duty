@@ -44,9 +44,8 @@
             <p class="visible-xs">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
             </p>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="well pre-scrollable">
+
+                    <div class="well pre-scrollable" style="max-height:800px;" >
                         <div id="myplaces">
                             <h4><b>Γονείς</b></h4>
                             <!--th:block th:if="${ organiser.locations != null}" th:each="oneLocation : ${organiser.locations}" >
@@ -55,15 +54,45 @@
                                 <p th:text="'Έγκυρο μέχρι τις :' + ${oneLocation.validUntil}"></p>
                                 <hr/>
                             </th:block-->
-                            <th:block th:unless="${parents== null || parents.size() == 0}" th:each="parent : ${parents}">
+                            <!--th:block th:unless="${parents== null || parents.size() == 0}" th:each="parent : ${parents}">
                                 <p th:inline="text"> [[ ${parent.login_email} ]] [[ ${parent.wallet/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p>
-                            </th:block>
+                            </th:block-->
 
-
+							<div class="agenda">
+							<div class="table-responsive">
+								<table class="table table-condensed table-bordered">
+							  <!--  <h4><b>Οικοδεσπότες</b></h4>-->
+									<thead>
+										<tr>
+                                          <th>E-mail</th>
+                                          <th>Υπόλοιπο(€)</th>
+										  <th>Μπλοκάρισμα Γονέα</th>
+										</tr>
+									</thead>
+									<tbody>
+										
+										<th:block th:unless="${parents== null || parents.size() == 0}" th:each="parent : ${parents}">
+											<tr>
+											  <!--p th:inline="text"> [[ ${organiser.name} ]] [[ ${organiser.surname} ]] [[ ${organiser.points/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p-->
+											  <td class="agenda-email" th:text="${parent.login_email}">
+                                                  Kappas
+                                              </td>
+											  <td class="agenda-money" th:text="${parent.wallet}/100+'€'">
+                                                  4,20 €
+                                              </td>
+											  <td class="agenda-button">
+												<button  id="" class="button1" >Block</button>
+											  </td>
+											</tr>
+										</th:block>
+										
+									</tbody>
+								</table>
+							</div>
+							</div>
                         </div>
                     </div>
-                </div>
-            </div>
+
             <div class="row">
             </div>
         </div>

@@ -47,30 +47,30 @@ public class DatabaseInserts {
 
     @RequestMapping("/init/login")
 	public String initLogin(){
-		myCsvHandler.loginCsvInsertions(loginRepository,customerRepository,"../stp_back_end/parents.csv");
+		myCsvHandler.loginCsvInsertions(loginRepository,customerRepository,"csv/parents.csv");
 		return "redirect:/";
 	}
 
 	@RequestMapping("/init/organiser")
 	public String initOrganiser(){
-		myCsvHandler.organiserCsvInsertions(loginRepository,organiserRepository,"../stp_back_end/organiser.csv");
+		myCsvHandler.organiserCsvInsertions(loginRepository,organiserRepository,"csv/organiser.csv");
 		return "redirect:/";
 	}
 	@RequestMapping("/init/locations")
 	public String initLocations(){
-		myCsvHandler.locationCsvInsertions(locationRepository,"../stp_back_end/locations10.csv",organiserRepository);
+		myCsvHandler.locationCsvInsertions(locationRepository,"csv/locations10.csv",organiserRepository);
 		return "redirect:/";
 	}
 
 	@RequestMapping("/init/eventsgroup")
 	public String initEventsgroup(){
-		myCsvHandler.eventsgroupCsvInsertions(eventsgroupHandler,"../stp_back_end/events_group.csv",organiserRepository);
+		myCsvHandler.eventsgroupCsvInsertions(eventsgroupHandler,"csv/events_group.csv",organiserRepository);
 		return "redirect:/";
 	}
 
 	@RequestMapping("/init/events")
 	public String initEvents(){
-		myCsvHandler.eventsCsvInsertions(eventHandler,"../stp_back_end/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
+		myCsvHandler.eventsCsvInsertions(eventHandler,"csv/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
 		return "redirect:/";
 	}
 
@@ -100,11 +100,11 @@ public class DatabaseInserts {
 	@RequestMapping("init/all")
 	public String initAll(){
 
-		myCsvHandler.loginCsvInsertions(loginRepository,customerRepository,"../stp_back_end/parents.csv");
-		myCsvHandler.organiserCsvInsertions(loginRepository,organiserRepository,"../stp_back_end/organiser.csv");
-		myCsvHandler.locationCsvInsertions(locationRepository,"../stp_back_end/locations10.csv",organiserRepository);
-		myCsvHandler.eventsgroupCsvInsertions(eventsgroupHandler,"../stp_back_end/events_group.csv",organiserRepository);
-		myCsvHandler.eventsCsvInsertions(eventHandler,"../stp_back_end/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
+		myCsvHandler.loginCsvInsertions(loginRepository,customerRepository,"csv/parents.csv");
+		myCsvHandler.organiserCsvInsertions(loginRepository,organiserRepository,"csv/organiser.csv");
+		myCsvHandler.locationCsvInsertions(locationRepository,"csv/locations10.csv",organiserRepository);
+		myCsvHandler.eventsgroupCsvInsertions(eventsgroupHandler,"csv/events_group.csv",organiserRepository);
+		myCsvHandler.eventsCsvInsertions(eventHandler,"csv/events.csv",organiserRepository,eventsgroupHandler,locationRepository);
 
 		return "redirect:/test/add";
 	}

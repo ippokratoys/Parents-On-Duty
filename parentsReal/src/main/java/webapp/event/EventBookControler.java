@@ -15,6 +15,7 @@ import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.EventRepository;
 import webapp.services.EventService;
 
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -44,6 +45,11 @@ public class EventBookControler {
 				//not enough money to book at this event
 				//maybe redirect to profile page
 				return "redirect:/user/wallet?error=Not_enough_points";
+			}
+
+			Date date = new Date();
+			if(date.compareTo(curEvent.getDay())>0){
+				return "redirect:/event?id="+eventId+"&"+"Event_Expired"+"=True";
 			}
 
 			int availableSits=eventService.getAvailableSpots(curEvent);

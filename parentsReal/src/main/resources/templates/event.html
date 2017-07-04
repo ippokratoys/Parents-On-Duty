@@ -98,6 +98,8 @@
     <div class="container" style="opacity:100%">
         <br/>
         <h1>Σελίδα Εκδήλωσης</h1>
+        <h1 th:if="${param.Event_Expired}" class="important" th:text="'Η συγκεγκριμένη εκδήλωση έχει ήδη διεξαχθεί.'"> </h1>
+
         <hr/>
         <script>
         function show_search(){
@@ -122,7 +124,15 @@
 
 					<div class="input-group">
 					  <input type="text" class="form-control" name="free_text" id="Address_Search" placeholder="Καλοκαίρι με Πινκγ Πονγκ" aria-describedby="helpQuery" th:value=" ${allParams!=null} ? ${allParams.get('free_text')} :'' "/>
-					  <span class="input-group-btn">
+                        <input  style="display:none;" readonly="true" type="text" required="true" value="" name="Dates" />
+                        <input  style="display:none;" readonly="true" type="text" required="true" value="0" name="Price" />
+                        <input  style="display:none;" readonly="true" type="text" required="true" value="" name="Age" />
+                        <input  style="display:none;" readonly="true" type="text" required="true" value="" name="distance" />
+                        <input  style="display:none;" readonly="true" type="text" required="true" value="" name="lat" id="lat"/>
+                        <input  style="display:none;" readonly="true" type="text" required="true" value="" name="lon" id="lot"/>
+
+
+                        <span class="input-group-btn">
 						<button type="submit" class="btn  btn-primary" form="AboutSearches" >Αναζήτηση</button>
 					  </span>
 					</div>
