@@ -4,17 +4,25 @@
     <meta charset="UTF-8"/>
     <title>Block Users</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/css/admin_profile.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/css/admin_profile.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/admin_profile.js"></script>
-	
+
 </head>
 
 
 
 <body>
+    <script>
+        function give_their_money(login_email,amount){
+            document.getElementById("give_money").value=login_email.toString();
+            document.getElementById("amount_money").max=amount;
+            document.getElementById("header_amount").innerHTML="Ποσό"+amount;
+        }
+    </script>
 
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
@@ -33,7 +41,7 @@
             <h3>Άλλες Επιλογές</h3>
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/admin/profile">Σύνοψη</a></li>
-                <li class="active"><a href="/admin/manage_organisers">Διαχείριση Διοργανώτών</a></li>
+                <li class="active"><a href="/admin/manage_organisers">Διαχείριση Διοργανωτών</a></li>
                 <li><a href="/admin/manage_parents">Διαχείριση Γονέων</a></li>
                 <li><a href="/admin/accept_location">Αποδοχή Τοποθεσίας</a></li>
             </ul>
@@ -47,74 +55,99 @@
             <p class="visible-xs">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
             </p>
-                    <div class="well pre-scrollable" style="max-height:800px;">
+                    <div class="well pre-scrollable" style="max-height:700px;">
                         <div id="myplaces">
 							<div class="agenda">
-							<div class="table-responsive">
-								<table class="table table-condensed table-bordered">
-							  <!--  <h4><b>Οικοδεσπότες</b></h4>-->
-									<thead>
-										<tr>
-                                          <th>Όνομα</th>
-                                          <th>Επώνυμο</th>
-                                          <th>Ε-mail</th>
-                                          <th>Α.Φ.Μ</th>
-                                          <th>Υπόλοιπο(€)</th>
-										  <th>Μπλοκάρισμα Διοργανωτή</th>
-										  <th>Επαναφορά Κωδικού</th>
-										  <th>Πληρωμή</th>
-										</tr>
-									</thead>
-									<tbody>
-										
-										<th:block th:unless="${organisers== null || organisers.size() == 0}" th:each="organiser : ${organisers}">
-											<tr>
-												<!--p th:inline="text"> [[ ${organiser.name} ]] [[ ${organiser.surname} ]] [[ ${organiser.points/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p-->
-											  <td class="agenda-name" th:text="${organiser.name}">
-                                                  george
-                                              </td>
-											  <td class="agenda-surname" th:text="${organiser.surname}">
-                                                  pappas
-                                              </td>
-											  <td class="agenda-surname" th:text="${organiser.login_email}">
-                                                  pappas@hotmail.com
-                                              </td>
-											  <td class="agenda-surname" th:text="${organiser.taxpayerId}">
-                                                  afm
-                                              </td>
-											  <td class="agenda-money" th:text="${organiser.points}/100+'€'">
-                                                  4,20 €
-                                              </td>
-											  <td class="agenda-button">
-                                                  <form th:action="@{/admin/login/block}" name="block_unblock" th:id="'block_unblock'" method="post">
-                                                      <input type="hidden" name="login_email" th:value="${organiser.login_email}"/>
-                                                      <th:block th:if="${organiser.login.active==true}">
-                                                          <input type="hidden" name="action" value="block"/>
-                                                          <button th:type="submit" class="button1">Μπλοκάρισμα</button>
-                                                      </th:block>
-                                                      <th:block th:unless="${organiser.login.active==true}">
-                                                          <input type="hidden" name="action" value="unblock"/>
-                                                          <button th:type="submit" class="button1">Ξε-Μπλοκάρισμα</button>
-                                                      </th:block>
-                                                  </form>
-											  </td>
-											  <td class="agenda-button">
-                                                  <button>reset password</button>
-											  </td>
-											  <td class="agenda-button">
-                                                  <button>plhromh</button>
-											  </td>
-											</tr>
-										</th:block>
-										
-									</tbody>
-								</table>
-							</div>
+    							<div class="table-responsive">
+    								<table class="table table-condensed table-bordered">
+    							  <!--  <h4><b>Οικοδεσπότες</b></h4>-->
+    									<thead>
+    										<tr>
+                                              <th>Όνομα</th>
+                                              <th>Επώνυμο</th>
+                                              <th>Ε-mail</th>
+                                              <th>Α.Φ.Μ</th>
+                                              <th>Υπόλοιπο(€)</th>
+                                              <th>Πληρωμή</th>
+    										  <th>Μπλοκάρισμα Διοργανωτή</th>
+    										  <th>Επαναφορά Κωδικού</th>
+    										</tr>
+    									</thead>
+    									<tbody>
+
+    										<th:block th:unless="${organisers== null || organisers.size() == 0}" th:each="organiser : ${organisers}">
+    											<tr>
+    												<!--p th:inline="text"> [[ ${organiser.name} ]] [[ ${organiser.surname} ]] [[ ${organiser.points/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p-->
+    											  <td class="agenda-name" th:text="${organiser.name}">
+                                                      george
+                                                  </td>
+    											  <td class="agenda-surname" th:text="${organiser.surname}">
+                                                      pappas
+                                                  </td>
+    											  <td class="agenda-surname" th:text="${organiser.login_email}">
+                                                      pappas@hotmail.com
+                                                  </td>
+    											  <td class="agenda-surname" th:text="${organiser.taxpayerId}">
+                                                      afm
+                                                  </td>
+    											  <td class="agenda-money" th:text="${organiser.points}/100+'€'">
+                                                      4,20 €
+                                                  </td>
+                                                  <td class="agenda-button">
+                                                      <button type="button" data-toggle="modal" data-target="#myModal_payment" class="button1" th:onclick="'give_their_money('+${organiser.login_email}+','+${organiser.points}+')'">Πληρωμή</button>
+                                                  </td>
+    											  <td class="agenda-button">
+                                                      <form th:action="@{/admin/login/block}" name="block_unblock" th:id="'block_unblock'" method="post">
+                                                          <input type="hidden" name="login_email" th:value="${organiser.login_email}"/>
+                                                          <th:block th:if="${organiser.login.active==true}">
+                                                              <input type="hidden" name="action" value="block"/>
+                                                              <button th:type="submit" class="button1">Μπλοκάρισμα</button>
+                                                          </th:block>
+                                                          <th:block th:unless="${organiser.login.active==true}">
+                                                              <input type="hidden" name="action" value="unblock"/>
+                                                              <button th:type="submit" class="button1">Ξε-Μπλοκάρισμα</button>
+                                                          </th:block>
+                                                      </form>
+    											  </td>
+    											  <td class="agenda-button">
+                                                      <button>reset password</button>
+    											  </td>
+    											</tr>
+    										</th:block>
+
+    									</tbody>
+    								</table>
+    							</div>
 							</div>
 						</div>
 					</div>
-            <div class="row">
-            </div>
+                    <!-- Modal -->
+    				  <div class="modal fade" id="myModal_payment" role="dialog">
+    				    <div class="modal-dialog">
+
+    				      <!-- Modal content-->
+                          <form th:action="@{/admin/login/give_money}" name="give_money"  method="get">
+        				      <div class="modal-content">
+        				        <div class="modal-header">
+        				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        				          <h4 class="modal-title">Παραχώρησε Τα Χρήματα Στον Διοργανωτή</h4>
+        				        </div>
+        				        <div class="modal-body">
+                                    <div class="text-center">
+                                        <h3 id="header_amount"></h3>
+                                        <input type="text" name="login_email" value="" id="give_money"/>
+                                        <input  type="number" name="amount" required="true" id="amount_money"/>
+                                    </div>
+        				        </div>
+        				        <div class="modal-footer">
+                                    <div class="text-center">
+                                        <button form="give_money" type="submit" class="btn btn-primary">Παραχώρηση Ποσού</button>
+                                    </div>
+        				        </div>
+        				      </div>
+                        </form>
+    				    </div>
+    				  </div>
         </div>
     </div>
 </div><!--/row-offcanvas -->

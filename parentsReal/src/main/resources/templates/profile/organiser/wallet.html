@@ -45,9 +45,9 @@
 				<hr/>
 				<br/>
 				<!---->
-				<h4 th:text="'Εισπράξεις: ' + ${curUser.points}/100 +'€'"> </h4>
+				<h4 th:text="'Τρέχον Ισοζύγιο: ' + ${curUser.points}/100 +'€'"> </h4>
 				<br/>
-				<button class="btn btn-lg btn-primary" type="button" data-toggle="modal" data-target="#myModal">Ανάληψη!</button>
+				<button class="btn btn-lg btn-primary" type="button" data-toggle="modal" data-target="#myModal">Προσθήκη Περισσότερων</button>
 				<!-- Modal -->
 				  <div class="modal fade" id="myModal" role="dialog">
 				    <div class="modal-dialog">
@@ -59,19 +59,23 @@
 				          <h4 class="modal-title">Συμπλήρωσε Στοιχεία Πιστωτικής</h4>
 				        </div>
 				        <div class="modal-body">
+							<h3>Ονοματεπώνυμο</h3>
+							<input type="text" name="name" placeholder="Φώτιος Πλάκ" aria-describedby="helpQuery" value=""/>
+							<h3>Αριθμός Κάρτας</h3>
+							<input type="text" name="card_number" maxlength="16" size="16" placeholder="123456789012" aria-describedby="helpQuery" value=""/>
+							<h3>Κωδικός Ασφάλειας</h3>
+							<input type="text" name="card_code" maxlength="6" placeholder="321" aria-describedby="helpQuery" value=""/>
+							<h3>Ποσό €</h3>
 						    <div class="form-group">
-								<h3>Γράψτε Την Αξιολογησή Σας</h3>
-								<textarea class="form-control custom-control" required="true" name="desc" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι εμείς και τα παιδιά σας.... " rows="3" style="resize:none"></textarea>
+						  		<input type="number" name="amount" min="1" max="1000" class="form-control"  aria-describedby="helpQuery" value=""/>
 					  	    </div>
 				        </div>
 				        <div class="modal-footer">
-				          <button type="submit" class="btn btn-default" data-dismiss="modal">Ανάληψη</button>
+				          <button form="add_money" type="submit" class="btn btn-default">Προσθήκη</button>
 				        </div>
 				      </div>
-
 				    </div>
 				  </div>
-
 			</form><!-- /form -->
 		</div><!-- /card-container -->
 	</div><!-- /container -->

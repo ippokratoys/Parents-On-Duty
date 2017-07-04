@@ -30,7 +30,7 @@
             <h3>Άλλες Επιλογές</h3>
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/admin/profile">Σύνοψη</a></li>
-                <li><a href="/admin/manage_organisers">Διαχείριση Διοργανώτών</a></li>
+                <li><a href="/admin/manage_organisers">Διαχείριση Διοργανωτών</a></li>
                 <li><a href="/admin/manage_parents">Διαχείριση Γονέων</a></li>
                 <li class="active"><a href="/admin/accept_location">Αποδοχή Τοποθεσίας</a></li>
             </ul>
@@ -47,24 +47,33 @@
 
             <div class="row">
 
-                <div class="col-md-4">
-                    <div class="well pre-scrollable">
+                <div class="col-md-4 col-sm-8">
+                    <div class="well pre-scrollable" style="max-height:700px;">
                         <div id="myevents">
                             <h4><b>Χρειάζονται αποδοχή:</b></h4>
+                            <hr/>
                             <th:block th:unless="${locations== null || locations.size() == 0}" th:each="location : ${locations}">
-                                <p th:inline="text">Τοποθεσία: [[ ${location.name} ]]</p>
-                                <p th:inline="text">Διεύθυνση: [[ ${location.address} ]]</p>
-                                <p>
-                                <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="accept" method="POST" id="accept_form">
-                                    <button type="submit" form="accept_form" class="button1" >Αποδοχή</button>&nbsp;
-                                    <input type="hidden" name="accept" value="yes"/>
-                                </form>
-                                <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="decline" method="POST" id="decline_form">
-                                    <button form="decline_form" type="submit" class="button1" >Απόρριψη</button>
-                                    <input type="hidden" name="accept" value="no"/>
-                                </form>
-                                    <a th:href="${location.certificatePath}" ><img  src="/js/datepicker/downloadarrow.png" /></a>
-                                </p>
+                                    <p th:inline="text">Τοποθεσία: [[ ${location.name} ]]</p>
+                                    <p th:inline="text">Διεύθυνση: [[ ${location.address} ]]</p>
+                                <div class="row">
+                                    <p>
+                                        <div class="col-md-2 col-sm-4 col-xs-4">
+                                            <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="accept" method="POST" id="accept_form">
+                                                <button type="submit" form="accept_form" class="button1" >Αποδοχή</button>&nbsp;
+                                                <input type="hidden" name="accept" value="yes"/>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-2 col-sm-4 col-xs-4">
+                                            <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="decline" method="POST" id="decline_form">
+                                                <button form="decline_form" type="submit" class="button1" >Απόρριψη</button>
+                                                <input type="hidden" name="accept" value="no"/>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-2 col-sm-4 col-xs-4">
+                                            <a th:href="${location.certificatePath}" ><img  src="/js/datepicker/downloadarrow.png" /></a>
+                                        </div>
+                                    </p>
+                                </div>
                             </th:block>
                         </div>
                     </div>
