@@ -55,8 +55,14 @@
                                 <p th:inline="text">Τοποθεσία: [[ ${location.name} ]]</p>
                                 <p th:inline="text">Διεύθυνση: [[ ${location.address} ]]</p>
                                 <p>
-                                    <button class="button1" >Αποδοχή</button>&nbsp;
-                                    <button class="button1" >Απόρριψη</button>
+                                <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="accept" method="POST" id="accept_form">
+                                    <button type="submit" form="accept_form" class="button1" >Αποδοχή</button>&nbsp;
+                                    <input type="hidden" name="accept" value="yes"/>
+                                </form>
+                                <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="decline" method="POST" id="decline_form">
+                                    <button form="decline_form" type="submit" class="button1" >Απόρριψη</button>
+                                    <input type="hidden" name="accept" value="no"/>
+                                </form>
                                     <a th:href="${location.certificatePath}" ><img  src="/js/datepicker/downloadarrow.png" /></a>
                                 </p>
                             </th:block>

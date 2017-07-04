@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface LocationRepository extends CrudRepository<Location, Integer>{
     List<Location> findAllByCertificateChecked(boolean certificateChecked);
+
+    List<Location> findAllByValidUntilNotNull();
+
 }

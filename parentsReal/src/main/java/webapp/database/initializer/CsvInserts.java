@@ -330,9 +330,11 @@ public class CsvInserts {
 				newLoc.setLat( new BigDecimal(arr_in[4]) );
 				newLoc.setLon( new BigDecimal(arr_in[5]) );
 				if( i==8 ){
-    				newLoc.setCertificateChecked(true);
+                    newLoc.setValidUntil(null);
+    				newLoc.setCertificateChecked(false);
                 }else{
-    				newLoc.setCertificateChecked(true);
+                    newLoc.setValidUntil(new Date());
+                    newLoc.setCertificateChecked(true);
                 }
 				locationRepository.save(newLoc);
             }
