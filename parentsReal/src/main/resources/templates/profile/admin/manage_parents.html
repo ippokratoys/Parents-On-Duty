@@ -4,15 +4,20 @@
     <meta charset="UTF-8"/>
     <title>Block Users</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
-	<link href="/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/css/admin_profile.css" rel="stylesheet"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <link href="/css/admin_profile.css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/admin_profile.js"></script>
 </head>
 
 <body>
-
+    <script>
+        function reset_pwd(login_email){
+            document.getElementById("login_reset").value=login_email.toString();
+        }
+    </script>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <a style="color:white" class="navbar-brand" href="/">
@@ -94,6 +99,9 @@
                                                           </th:block>
                                                       </form>
     											  </td>
+                                                  <td>
+                                                      <button type="button" data-toggle="modal" data-target="#myModal_reset" class="button1" th:onclick="'reset_pwd(\''+${parent.login_email}+'\')'">Επαναφορά Κωδικού</button>
+                                                  </td>
     											</tr>
     										</th:block>
 
@@ -103,9 +111,34 @@
 							</div>
                         </div>
                     </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal_reset" role="dialog">
+                      <div class="modal-dialog">
 
-            <div class="row">
-            </div>
+                        <!-- Modal content-->
+                          <form th:action="@{/admin/login/reset}" name="reset"  method="post">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Επαναφορά Κωδικού Γονέα</h4>
+                              </div>
+                              <div class="modal-body">
+                                    <div class="text-center">
+                                        <h3 id="header_amount"></h3>
+                                        <input type="hidden" name="login_email" value="" id="login_reset"/>
+                                        <h3>Νέος Κωδικός</h3>
+                                        <input type="text" required="true" name="new_pwd" />
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Επαναφορά Κωδικού</button>
+                                    </div>
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
         </div>
     </div>
 </div><!--/row-offcanvas -->
