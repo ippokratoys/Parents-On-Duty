@@ -176,10 +176,11 @@ public class ResultService {
 
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(finalQuery)
-                .withSort(SortBuilders.fieldSort("importance").order(SortOrder.DESC))
+                .withSort(SortBuilders.fieldSort("importance").order(SortOrder.DESC).ignoreUnmapped(true))
                 .build();
 
         recommended = elasticsearchTemplate.queryForList(searchQuery, EventSearch.class);
+        System.out.println(recommended.toString());
         System.out.println(recommended.toString());
         for (EventSearch aResult :
                 recommended) {

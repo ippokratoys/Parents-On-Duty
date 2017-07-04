@@ -40,7 +40,8 @@ public class LocationService {
         BigDecimal longtitude = new BigDecimal(lon);
         newLocation.setLon(longtitude);
 
-        Date date = DateUtils.addDays(new Date(), -1);
+//        Date date = DateUtils.addDays(new Date(), -1);
+        Date date = null;
         newLocation.setValidUntil(date);
 
 
@@ -74,4 +75,5 @@ public class LocationService {
 
         return true;
     }
+
 }

@@ -18,6 +18,7 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * Created by thanasis on 23/6/2017.
@@ -41,8 +42,12 @@ public class OrganiserService {
 
     @Autowired
     private EventSearchRepository eventSearchRepository;
+    private Predicate<Location> locationPredicate;
 
+    //returns only the accepted locations
     public List<Location> getLocations(Organiser organiser){
+        //if valid until is null it means that it's not valid
+        organiser.getLocations().removeIf(location -> location.getValidUntil()==null);
         return organiser.getLocations();
     }
 
