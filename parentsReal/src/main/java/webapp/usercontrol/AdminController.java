@@ -66,9 +66,9 @@ public class AdminController {
         return "profile/admin/manage_parents";
     }
 
-    @RequestMapping(value = "/admin/login/reset/{login_email}",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/login/reset/",method = RequestMethod.POST)
     public String resetPassword(Model model,
-                                @PathVariable("login_email")String loginEmail,
+                                @RequestParam("login_email")String loginEmail,
                                 @RequestParam("new_pwd")String newPwd
     ){
         Login login = loginRepository.findOne(loginEmail);

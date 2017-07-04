@@ -57,9 +57,12 @@
 										<tr>
                                           <th>Όνομα</th>
                                           <th>Επώνυμο</th>
+                                          <th>Ε-mail</th>
+                                          <th>Α.Φ.Μ</th>
                                           <th>Υπόλοιπο(€)</th>
 										  <th>Μπλοκάρισμα Διοργανωτή</th>
 										  <th>Επαναφορά Κωδικού</th>
+										  <th>Πληρωμή</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -68,16 +71,22 @@
 											<tr>
 												<!--p th:inline="text"> [[ ${organiser.name} ]] [[ ${organiser.surname} ]] [[ ${organiser.points/100} ]] € &nbsp;<button  id="" class="button1" >Block</button></p-->
 											  <td class="agenda-name" th:text="${organiser.name}">
-                                                  Kappas
+                                                  george
                                               </td>
 											  <td class="agenda-surname" th:text="${organiser.surname}">
-                                                  Keepos
+                                                  pappas
+                                              </td>
+											  <td class="agenda-surname" th:text="${organiser.login_email}">
+                                                  pappas@hotmail.com
+                                              </td>
+											  <td class="agenda-surname" th:text="${organiser.taxpayerId}">
+                                                  afm
                                               </td>
 											  <td class="agenda-money" th:text="${organiser.points}/100+'€'">
                                                   4,20 €
                                               </td>
 											  <td class="agenda-button">
-                                                  <form th:action="@{/admin/login/block}" name="block_unblock" id="block_unblock" method="post">
+                                                  <form th:action="@{/admin/login/block}" name="block_unblock" th:id="'block_unblock'" method="post">
                                                       <input type="hidden" name="login_email" th:value="${organiser.login_email}"/>
                                                       <th:block th:if="${organiser.login.active==true}">
                                                           <input type="hidden" name="action" value="block"/>
@@ -88,6 +97,12 @@
                                                           <button th:type="submit" class="button1">Ξε-Μπλοκάρισμα</button>
                                                       </th:block>
                                                   </form>
+											  </td>
+											  <td class="agenda-button">
+                                                  <button>reset password</button>
+											  </td>
+											  <td class="agenda-button">
+                                                  <button>plhromh</button>
 											  </td>
 											</tr>
 										</th:block>
