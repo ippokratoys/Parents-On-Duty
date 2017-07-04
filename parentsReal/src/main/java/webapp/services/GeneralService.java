@@ -19,26 +19,26 @@ public class GeneralService {
 
         String day ="";
         switch (dayOfWeek){
-            case 0:
+            case 1:
                 day="Κυριακή";
                 break;
-            case 1:
+            case 2:
                 day="Δευτέρα";
                 break;
-            case 2:
+            case 3:
                 day="Τρίτη";
                 break;
-            case 3:
+            case 4:
                 day = "Τετάρτη";
                 break;
-            case 4:
+            case 5:
                 day = "Πέμπτη";
                 break;
-            case 5:
+            case 6:
                 day = "Παρασκευή";
                 break;
-            case 6:
-                day = "Κυριακή";
+            case 7:
+                day = "Σάββατο";
                 break;
         }
 
@@ -47,6 +47,7 @@ public class GeneralService {
 
     public int dayOfMonth(Date date){
         Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
         int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
 
         return dayOfMonth;

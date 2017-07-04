@@ -14,7 +14,14 @@
   </head>
 
 	<body>
-		<div class="navbar navbar-default navbar-fixed-top">
+
+        <script>
+            function enterIdInModal(eventId) {
+                document.getElementById("cancel").action="/user/cancel/"+eventId.toString();
+            }
+        </script>
+
+        <div class="navbar navbar-default navbar-fixed-top">
 		    <div class="navbar-header">
 		    	<a style="color:white" class="navbar-brand" href="/">
 					<div style="font-family:Comic Sans MS,cursive,sans-serif">
@@ -95,7 +102,7 @@
         				          <h4 class="modal-title">Αξιολόγηση</h4>
         				        </div>
         				        <div class="modal-body">
-                                    <form th:action=".." method="post">
+                                    <form th:action="@{/}" method="post">
                                         <div class="form-group">
                                             <h3>Γράψτε Την Αξιολογησή Σας</h3>
                                             <textarea class="form-control custom-control" required="true" name="desc" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι στο ακαν8υς με τα πιτσιρακια μας :)  " rows="3" style="resize:none"></textarea>

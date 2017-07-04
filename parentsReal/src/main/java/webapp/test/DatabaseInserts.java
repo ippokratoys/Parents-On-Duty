@@ -8,6 +8,7 @@ import webapp.database.AdminTable;
 import webapp.database.Login;
 import webapp.database.initializer.CsvInserts;
 import webapp.database.repositories.*;
+import webapp.services.EventService;
 
 /**
  * Created by thanasis on 23/6/2017.
@@ -41,7 +42,13 @@ public class DatabaseInserts {
     @Autowired
     CsvInserts myCsvHandler;
 
-    @RequestMapping("/init/login")
+    @Autowired
+	private EventService eventService;
+
+    @Autowired
+	private BookEventRepository bookEventRepository;
+
+	@RequestMapping("/init/login")
 	public String initLogin(){
 		myCsvHandler.loginCsvInsertions(loginRepository,customerRepository,"csv/parents.csv");
 		return "redirect:/";
@@ -81,6 +88,11 @@ public class DatabaseInserts {
 		return "redirect:/";
 	}
 
+	@RequestMapping("/init/books")
+	public String bookEvents(){
+		myCsvHandler.bookSomeEvents(loginRepository,customerRepository,eventHandler,bookEventRepository,eventService);
+		return "redirect:/";
+	}
 	@RequestMapping("/init/admin/user")
 	public String initAdminUser(){
 		Login login = new Login();
@@ -92,6 +104,7 @@ public class DatabaseInserts {
 		loginRepository.save(login);
 		return "redirect:/";
 	}
+
 
 	@RequestMapping("init/all")
 	public String initAll(){
