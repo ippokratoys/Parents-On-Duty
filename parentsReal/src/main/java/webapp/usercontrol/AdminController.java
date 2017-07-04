@@ -1,5 +1,6 @@
 package webapp.usercontrol;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import webapp.database.repositories.*;
 import webapp.services.AdminService;
 
 import javax.jws.WebParam;
+import javax.print.DocFlavor;
 import java.util.List;
 
 /**
@@ -135,5 +137,14 @@ public class AdminController {
 
     }
 
-
+    @RequestMapping(value = "/admin/give_money",method = RequestMethod.POST)
+    public String giveMoney(Model model,
+                            @RequestParam("login_email")String loginEmail,
+                            @RequestParam("amount")int amount
+    ){
+        if(adminService.payOrganiser(loginEmail,amount*100)==false){
+            return "redirect:/admin/manage_organisers?problem=true";
+        }
+        return "redirect:/admin/manage_organisers";
+    }
 }

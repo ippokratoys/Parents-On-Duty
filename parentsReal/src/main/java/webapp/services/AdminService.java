@@ -98,6 +98,7 @@ public class AdminService {
 
         organiser.setPoints(organiser.getPoints()-money);
         organiserRepository.save(organiser);
+
         return true;
     }
 

@@ -93,7 +93,6 @@
                                     <th:block th:unless="${oneEvent.importance > 1}">
                                         <button type="button" style="color:#202f80" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'"></button>
                                     </th:block>
-                                    <button type="button" style="color:#202f80" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'"></button>
 
                                     <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
                                     <p th:text=" 'Ημερομηνία : '+ ${#dates.format(oneEvent.day,'dd/MM/yyyy')} "></p>

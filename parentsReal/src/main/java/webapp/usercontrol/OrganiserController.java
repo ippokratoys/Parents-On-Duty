@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import webapp.database.Event;
 import webapp.database.Location;
 import webapp.database.Organiser;
@@ -90,4 +91,15 @@ public class OrganiserController{
         return "profile/organiser/profile?event_canceled=True";
     }
 
+    @RequestMapping(value = "/organiser/add_money", method = RequestMethod.POST)
+    public String addMoney(Model model,
+                           @RequestParam("amount") int amount,
+                           @AuthenticationPrincipal final UserDetails userDetails
+    ){
+        Organiser organiser = organiserRepository.findOne(userDetails.getUsername());
+        if(amount>0){
+            organiserService.organiserAddMoney(organiser,amount*100);
+        }
+        return "redirect:/organiser/profile";
+    }
 }

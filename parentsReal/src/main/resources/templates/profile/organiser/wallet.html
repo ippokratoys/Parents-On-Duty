@@ -40,7 +40,7 @@
 	<h1 class="welcome text-center">Πορτοφολί<br/></h1>
 		<div class="card card-container">
 		<h2 class='login_title text-center'><b>Διαχείρηση Πορτοφολιού</b></h2>
-			<form th:action="@{/wallet}" class="form-signin" method="post">
+			<form th:action="@{/organiser/add_money}" class="form-signin" method="post">
 				<span id="reauth-email" class="reauth-email"></span>
 				<hr/>
 				<br/>
@@ -71,7 +71,7 @@
 					  	    </div>
 				        </div>
 				        <div class="modal-footer">
-				          <button form="add_money" type="submit" class="btn btn-default">Προσθήκη</button>
+				          <button type="submit" class="btn btn-default">Προσθήκη</button>
 				        </div>
 				      </div>
 				    </div>
