@@ -67,7 +67,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="well pre-scrollable">
+                    <div class="well pre-scrollable" style="max-height:550px;">
                         <div id="myplaces">
                             <h4><b>Τα Μέρη μου:</b></h4>
                             <th:block th:if="${ organiser.locations != null}" th:each="oneLocation : ${organiser.locations}" >
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="well pre-scrollable">
+                    <div class="well pre-scrollable" style="max-height:550px;">
                         <div id="myevents">
                             <h4><b>Οι Εκδηλώσεις μου:</b></h4>
                             <th:block th:if="${ organiser.events != null}" th:each="oneEvent : ${organiser.events}">
@@ -104,14 +104,12 @@
                                         <strong> <p style="color:#8b4513" th:text="'Προωθούμενη (Bronze)'"></p> </strong>
                                     </th:block>
                                     <th:block th:unless="${oneEvent.importance > 1}">
-                                        <div class="row">
-                                            <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'" th:onclick="'sent_eventId('+${oneEvent.idEvents}+')'"></button>
-                                            <button type="button" class="btn btn-md btn-danger" data-toggle="modal" data-target="#myModal_cancel" th:text="'Ακύρωσε την εκδήλωση'" th:onclick="'cancel_eventId('+${oneEvent.idEvents}+')'"></button>
-                                        </div>
                                     </th:block>
                                     <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
                                     <p th:text=" 'Ημερομηνία : '+ ${#dates.format(oneEvent.day,'dd/MM/yyyy')} "></p>
                                     <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>
+                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'" th:onclick="'sent_eventId('+${oneEvent.idEvents}+')'"></button>
+                                    <button type="button" class="btn btn-md btn-danger" data-toggle="modal" data-target="#myModal_cancel" th:text="'Ακύρωσε την εκδήλωση'" th:onclick="'cancel_eventId('+${oneEvent.idEvents}+')'"></button>
                                     <hr/>
                                 </th:block>
                             </th:block>
