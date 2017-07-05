@@ -148,7 +148,7 @@
             <div th:with="allFeedbacks=${@eventService.allFeedbacks(theEvent)}"  class="col-xs-12 col-md-6 col-sm-12">
                 <img class="img-responsive" th:src="${theEvent.eventsgroup.imagePath}" src="images.png" alt=""/>
                 <hr/>
-                <div class="well">
+                <div class="well pre-scrollable" style="max-height:350px;">
                     <div class="row">
                         <div class=" col-md-12 col-sm-12 ratings" th:inline="text" th:with="eventStats=${@eventService.getRating(theEvent)}">
                             <p  th:if="${eventStats>0}">
