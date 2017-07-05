@@ -71,8 +71,8 @@
                                                   420
                                               </td>
                                               <td class="agenda-button">
-                                                  <form action="'/organiser/ticket'" target="_blank" method="post">
-                                                      <input type="hidden" name="id" th:value="${oneTrans.transactionId}" />
+                                                  <form th:action="@{/user/ticket}" target="_blank" method="post">
+                                                      <input type="hidden" name="id" th:value="${onePayment.transactionID}" />
                                                       <button type="submit" class="btn btn-primary" >Απόδειξη</button>
                                                   </form>
                                               </td>
