@@ -31,6 +31,22 @@
 
 <!---->
 <body>
+	<script>
+		function change_bonus(){
+			var amount_of_money= document.getElementById("money").value;
+			if(amount_of_money>=100){
+				document.getElementById("bonus").innerHTML ="8";
+			}else if(amount_of_money>=80){
+				document.getElementById("bonus").innerHTML ="5";
+			}else if(amount_of_money>=50){
+				document.getElementById("bonus").innerHTML ="3";
+			}else if(amount_of_money>=30){
+				document.getElementById("bonus").innerHTML ="1";
+			}else{
+				document.getElementById("bonus").innerHTML ="0";
+			}
+		}
+	</script>
 	<div class="row">
 		<div class="col-sm-2" >
 			<button  onclick="location.href='/user/profile'" type="button" class="btn btn-primary">Προφίλ</button>
@@ -70,8 +86,16 @@
 							<input type="text" name="card_code" maxlength="6" placeholder="321" aria-describedby="helpQuery" value=""/>
 							<h3>Ποσό €</h3>
 						    <div class="form-group">
-						  		<input type="number" name="amount" min="1" max="1000" class="form-control"  aria-describedby="helpQuery" value=""/>
+						  		<input type="number" id="money" name="amount" min="1" max="1000" class="form-control"  aria-describedby="helpQuery" value="" onchange="change_bonus()"/>
 					  	    </div>
+							<div class="row">
+								<div class="col-md-5 col-sm-6 col-xs-9">
+									<h3>Μπόνους Ποσό :</h3>
+								</div>
+								<div class="col-md-5 col-sm-6 col-xs-3">
+									<h3 id="bonus">0</h3>
+								</div>
+							</div>
 				        </div>
 				        <div class="modal-footer">
 				          <button form="add_money" type="submit" class="btn btn-default">Προσθήκη</button>
