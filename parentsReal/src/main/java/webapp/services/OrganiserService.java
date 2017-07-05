@@ -158,6 +158,7 @@ public class OrganiserService {
         organiserPaymentHistory.setMoneyPayed(cost*100);
         String message = organiser.getName() + " " + organiser.getSurname()
                 +" payed "+ cost + "€ to promote the event with id " + event.getIdEvents()+".";
+        organiserPaymentHistory.setMessage(message);
         organiserPaymentHistoryRepository.save(organiserPaymentHistory);
 
         organiser.setPoints(organiser.getPoints() - 100*cost);

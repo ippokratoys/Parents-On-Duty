@@ -2,6 +2,7 @@ package webapp.usercontrol;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import webapp.database.*;
 import webapp.database.repositories.*;
 import webapp.services.AdminService;
+import webapp.services.RegisterService;
 
 import javax.jws.WebParam;
 import javax.print.DocFlavor;
@@ -25,18 +27,62 @@ public class AdminController {
     @Autowired
     EventRepository eventRepository;
     @Autowired
-    LocationRepository locationRepository;
+    AdminService adminService;
     @Autowired
-    OrganiserRepository organiserRepository;
+    LocationRepository locationRepository;
     @Autowired
     CustomerRepository customerRepository;
     @Autowired
+    OrganiserRepository organiserRepository;
+    @Autowired
     LoginRepository loginRepository;
     @Autowired
-    AdminService adminService;
+    RegisterService registerService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    OrganiserPaymentHistoryRepository organiserPaymentHistoryRepository;
+    @Autowired
+    CustomerPaymentHistoryRepository customerPaymentHistoryRepository;
 
     @RequestMapping(value="/admin/profile")
     public String profilePage(Model model){
+        if(customerRepository.customerMoneyIn()!=null){
+            model.addAttribute("customersMoneyIn",customerRepository.customerMoneyIn()/100d);
+        }else{
+            model.addAttribute("customersMoneyIn",0.0);
+        }
+
+        if(customerPaymentHistoryRepository.customersMoneyPayed()!=null){
+            model.addAttribute("customerMoney",customerRepository.customerMoneyIn());
+        }else{
+            model.addAttribute("customerMoney",0.0);
+        }
+
+        if(customerPaymentHistoryRepository.customerFromBonus()!=null){
+            model.addAttribute("customerBonusMoney",customerPaymentHistoryRepository.customerFromBonus()/100d);
+        }else{
+            model.addAttribute("customerBonusMoney",0.0);
+        }
+
+        if(organiserPaymentHistoryRepository.organisersMoneyGiven()!=null){
+            model.addAttribute("moneyToOrganisers",organiserPaymentHistoryRepository.organisersMoneyGiven()/100d);
+        }else{
+            model.addAttribute("moneyToOrganisers",0.0);
+        }
+
+        if(organiserRepository.organisersMoney()!=null){
+            model.addAttribute("organisersMoneyIn",organiserRepository.organisersMoney()/100d);
+        }else{
+            model.addAttribute("organisersMoneyIn",0.0);
+        }
+
+        if(organiserPaymentHistoryRepository.organisersMoneyIn()!=null){
+            model.addAttribute("organiserMoneyFromAdverts",organiserPaymentHistoryRepository.organisersMoneyIn()/100d);
+        }else{
+            model.addAttribute("organiserMoneyFromAdverts",0.0);
+        }
+
         return "profile/admin/profile";
     }
 
