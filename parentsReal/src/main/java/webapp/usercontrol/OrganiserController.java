@@ -150,5 +150,13 @@ public class OrganiserController{
         return "redirect:/organiser/profile?event_boosted=true";
     }
 
+    @RequestMapping(value = "/organiser/cancel_event", method = RequestMethod.POST)
+    public String cancelEvent(@AuthenticationPrincipal final UserDetails userDetails,
+                              @RequestParam("cancelation_id") int id
+    ){
+        Event event = eventRepository.findOne(id);
+        organiserService.cancelEvent(event);
+        return "redirect:/organiser/profile?event_canceled=true";
+    }
 
 }
