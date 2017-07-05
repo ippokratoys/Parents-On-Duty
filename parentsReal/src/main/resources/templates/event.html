@@ -189,6 +189,7 @@
 	            	<div class="thumbnail">
 	                    <div class="caption-full">
 	                    	<h2 th:text=" ${theEvent.eventsgroup.name}" > </h2>
+                            <h3 th:inline="text">Ηλικίες: [[${theEvent.eventsgroup.ageFrom}]]-[[${theEvent.eventsgroup.ageTo}]] </h3>
 	                    	<h4 th:inline="text">Ημερομηνία: [[${#dates.format(theEvent.day,'dd/MM/yyyy')}]] [[${theEvent.time}]]</h4>
 	                        <p th:inline="text">[[${theEvent.eventsgroup.description}]]</p>
 	                        <hr/>
@@ -200,7 +201,7 @@
 		                	</div>
 	                        <hr/>
 							<a class="btn btn-primary pull-right" th:href="@{ /event/book?id={id}(id=${theEvent.idEvents}) }" role="button">Κάνε Κράτηση!</a>
-							<h4 th:inline="text">Τιμή: [[${theEvent.price}/100]]</h4>
+                            <h4 th:inline="text">Τιμή: [[${theEvent.price}/100]] €</h4>
 	                    </div>
 	                </div>
 	            </div>

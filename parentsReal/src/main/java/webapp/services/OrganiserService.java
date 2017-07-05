@@ -200,6 +200,9 @@ public class OrganiserService {
             bookEventRepository.delete(book);
         }
 
+        EventSearch eventSearch = eventSearchRepository.findOne(event.getIdEvents());
+
+        eventSearchRepository.delete(eventSearch);
         eventRepository.delete(event);
 
         return moneyReturned;
