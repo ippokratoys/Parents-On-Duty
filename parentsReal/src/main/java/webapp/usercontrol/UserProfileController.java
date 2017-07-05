@@ -20,6 +20,7 @@ import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.EventRepository;
 import webapp.services.CustomerService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -148,5 +149,23 @@ public class UserProfileController {
 
         model.addAttribute("trans", customerPaymentHistory);
         return "/profile/parent/receipt";
+    }
+
+    @RequestMapping(value = "/user/update_location", method = RequestMethod.POST)
+    public String updateLocation(@AuthenticationPrincipal final UserDetails userDetails,
+                                 @RequestParam(name="lat") String lat,
+                                 @RequestParam(name="lon") String lon
+    ){
+        if ((lat == "") && (lon == "")) {
+            return "redirect:/user/profile?not_address_given=true";
+        }
+
+        Customer customer = customerRepository.findOne(userDetails.getUsername());
+        BigDecimal latd = new BigDecimal(lat);
+        BigDecimal lond = new BigDecimal(lon);
+
+        customerService.updateLocation(customer, latd, lond);
+
+        return "redirect:/user/profile?location_updated=true";
     }
 }
