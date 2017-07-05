@@ -156,14 +156,16 @@
                                 <span id="helpQuery" class="help-block hidden">Σε τι βοηθαει αυτο;</span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="config-demo">Ημερομηνία Εκδήλωσης</label>
                                 <input type="text" id="config-demo" name="Dates" class="form-control" value=""/>
                                 <!--<input type="text" id="config-demo" name="Dates" class="form-control" value="" th:value="${allParams!=null} ? ${allParams.get('Dates')} : ''"/>-->
                             </div>
                         </div>
-                        <div class=" col-md-2 ">
+                    </div>
+                    <div class="row">
+                        <div class=" col-md-3 ">
                             <div class="form-group">
                                 <label for="Prices">Εύρος Τιμών</label>
                                 <select name="Price" id="Prices"  class="form-control" th:selected="${allParams!=null} ? ${allParams.get('Price')} : 1 ">
@@ -176,9 +178,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class=" col-md-2 col-md-offset-3">
+                        <div class=" col-md-2">
                             <div class="form-group">
                                 <label for="Age">Ηλικία</label>
                                 <input type="number" id="Age" class="form-control" name="Age" min="1" max="15" value="2" th:value="${allParams!=null} ? ${allParams.get('Age')} : ''"/>
@@ -190,7 +190,7 @@
                                 <input type="number" class="form-control" id="distance" name="distance" min="1" max="30" th:value="${allParams!=null} ? ${allParams.get('distance')} : ''"/>
                             </div>
                         </div>
-                        <div  id="locationField" class="form-group col-md-4">
+                        <div  id="locationField" class="form-group col-md-5">
                             <label for="config-demo">Διεύθυνση Αναζήτησης</label>
                             <input id="autocomplete" placeholder="Π.χ. Συγγρού 15"  onFocus="geolocate()" type="text"/>
                         </div>
