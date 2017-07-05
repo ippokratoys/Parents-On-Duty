@@ -60,7 +60,7 @@ public class AdminController {
         }
 
         if(customerPaymentHistoryRepository.customerFromBonus()!=null){
-            model.addAttribute("customerBonusMoney",customerPaymentHistoryRepository.customerFromBonus()/100d);
+            model.addAttribute("customerBonusMoney",-customerPaymentHistoryRepository.customerFromBonus()/100d);
         }else{
             model.addAttribute("customerBonusMoney",0.0);
         }
