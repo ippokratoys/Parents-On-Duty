@@ -45,6 +45,7 @@
                                           <th>Έλαβα</th>
                                           <th>Τρόπος πληρωμής</th>
 										  <th>Αναγνωριστικό Συναλλαγής</th>
+                                          <th>Απόδειξη</th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -68,6 +69,12 @@
                                               </td>
 											  <td class="agenda-transid" th:text="${onePayment.transactionID}">
                                                   420
+                                              </td>
+                                              <td class="agenda-button">
+                                                  <form action="'/organiser/ticket'" target="_blank" method="post">
+                                                      <input type="hidden" name="id" th:value="${oneTrans.transactionId}" />
+                                                      <button type="submit" class="btn btn-primary" >Απόδειξη</button>
+                                                  </form>
                                               </td>
                                           </tr>
                                       </th:block>
