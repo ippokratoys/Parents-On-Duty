@@ -57,7 +57,7 @@ public class AdminController {
         }
 
         if (customerPaymentHistoryRepository.customersMoneyPayed() != null) {
-            model.addAttribute("customerMoney", customerRepository.customerMoneyIn());
+            model.addAttribute("customerMoney", customerRepository.customerMoneyIn()/100d);
         } else {
             model.addAttribute("customerMoney", 0.0);
         }
