@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import webapp.database.Event;
-import webapp.database.EventFeedback;
-import webapp.database.Location;
-import webapp.database.Organiser;
+import webapp.database.*;
 import webapp.database.repositories.EventRepository;
+import webapp.database.repositories.OrganiserPaymentHistoryRepository;
 import webapp.database.repositories.OrganiserRepository;
 import webapp.services.EventService;
 import webapp.services.OrganiserService;
@@ -34,6 +32,9 @@ public class OrganiserController{
 
     @Autowired
     OrganiserService organiserService;
+
+    @Autowired
+    OrganiserPaymentHistoryRepository organiserPaymentHistoryRepository;
 //    @Autowired
 //    LocationownerRepository locationownerRepository;
 
@@ -155,8 +156,24 @@ public class OrganiserController{
                               @RequestParam("cancelation_id") int id
     ){
         Event event = eventRepository.findOne(id);
+        if(event.getOrganiser().getLogin().equals(userDetails.getUsername())==false){
+           return "redirect:/organiser/profile?access_denied=true";
+        }
         organiserService.cancelEvent(event);
         return "redirect:/organiser/profile?event_canceled=true";
     }
 
+    @RequestMapping(value = "/organiser/ticket", method = RequestMethod.POST)
+    public String organiserTicket(Model model,
+                                @AuthenticationPrincipal final UserDetails userDetails,
+                                @RequestParam("id") int id
+    ){
+        OrganiserPaymentHistory organiserPaymentHistory = organiserPaymentHistoryRepository.findOne(id);
+        if(organiserPaymentHistory.getOrganiser().getLogin().getEmail().equals(userDetails.getUsername())==false){
+            return "redirect:/organiser/ticket?access_denied=true";
+        }
+
+        model.addAttribute("trans", organiserPaymentHistory);
+        return "/profile/organiser/receipt";
+    }
 }

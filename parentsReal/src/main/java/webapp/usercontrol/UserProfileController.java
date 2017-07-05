@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import webapp.database.BookEvent;
 import webapp.database.Customer;
+import webapp.database.CustomerPaymentHistory;
+import webapp.database.OrganiserPaymentHistory;
 import webapp.database.repositories.BookEventRepository;
+import webapp.database.repositories.CustomerPaymentHistoryRepository;
 import webapp.database.repositories.CustomerRepository;
 import webapp.database.repositories.EventRepository;
 import webapp.services.CustomerService;
@@ -35,6 +38,8 @@ public class UserProfileController {
     private EventRepository eventRepository;
     @Autowired
     private BookEventRepository bookEventRepository;
+    @Autowired
+    private CustomerPaymentHistoryRepository customerPaymentHistoryRepository;
 
     @RequestMapping(value="/user/profile",method= RequestMethod.GET)
     public String showProfile(
@@ -131,4 +136,17 @@ public class UserProfileController {
         return "redirect:/user/history?feedback_done=true";
     }
 
+    @RequestMapping(value = "/user/ticket", method = RequestMethod.POST)
+    public String organiserTicket(Model model,
+                                  @AuthenticationPrincipal final UserDetails userDetails,
+                                  @RequestParam("id") int id
+    ){
+        CustomerPaymentHistory customerPaymentHistory = customerPaymentHistoryRepository.findOne(id);
+        if(customerPaymentHistory.getCustomer().getLogin().getEmail().equals(userDetails.getUsername())==false){
+            return "redirect:/user/profile?access_denied=true";
+        }
+
+        model.addAttribute("trans", customerPaymentHistory);
+        return "/profile/parent/receipt";
+    }
 }
