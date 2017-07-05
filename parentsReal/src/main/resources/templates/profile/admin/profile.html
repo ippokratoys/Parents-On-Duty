@@ -51,7 +51,7 @@
 				<input type="text" id="hid4" hidden="true"  th:value="${organisersMoneyIn}"/>
 				<input type="text" id="hid5" hidden="true"  th:value="${moneyToOrganisers}"/>
 				<input type="text" id="hid6" hidden="true"  th:value="${organiserMoneyFromAdverts}"/>
-				
+
 				
 				<div id="piechartadmin" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
                 <!--<h3 th:text="${'Λεφτα που δωσαμε στους γονεις : '+customerBonusMoney}"></h3>-->
@@ -68,12 +68,12 @@
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-		var x = document.getElementById('hid1').value;
-		var y = document.getElementById('hid2').value;
-		var z = document.getElementById('hid3').value;
-		var q = document.getElementById('hid4').value;
-		var w = document.getElementById('hid5').value;
-		var e = document.getElementById('hid6').value;
+		var x = parseInt(document.getElementById('hid1').value);
+		var y = parseInt(document.getElementById('hid2').value);
+		var z = parseInt(document.getElementById('hid3').value);
+		var q = parseInt(document.getElementById('hid4').value);
+		var w = parseInt(document.getElementById('hid5').value);
+		var e = parseInt(document.getElementById('hid6').value);
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
           ['Πήραμε από τους γονείς',x],
