@@ -155,7 +155,7 @@ public class OrganiserService {
         organiserPaymentHistory.setTimeStamp(new Date());
         organiserPaymentHistory.setOldBalcend(organiser.getPoints());
         organiserPaymentHistory.setOrganiser(organiser);
-        organiserPaymentHistory.setMoneyPayed(cost*100);
+        organiserPaymentHistory.setMoneyPayed(-cost*100);
         String message = organiser.getName() + " " + organiser.getSurname()
                 +" payed "+ cost + "€ to promote the event with id " + event.getIdEvents()+".";
         organiserPaymentHistory.setMessage(message);

@@ -142,7 +142,7 @@ public class UserProfileController {
                                   @RequestParam("id") int id
     ){
         CustomerPaymentHistory customerPaymentHistory = customerPaymentHistoryRepository.findOne(id);
-        if(userDetails.getAuthorities().contains("ADMIN") || customerPaymentHistory.getCustomer().getLogin().getEmail().equals(userDetails.getUsername())==false){
+        if(userDetails.getAuthorities().toString().contains("ADMIN")==false && customerPaymentHistory.getCustomer().getLogin().getEmail().equals(userDetails.getUsername())==false){
             return "redirect:/user/profile?access_denied=true";
         }
 
