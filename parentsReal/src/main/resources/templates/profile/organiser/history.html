@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"	xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <title>History</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
@@ -12,99 +12,113 @@
     <script type="text/javascript" src="/js/host_profile.js"></script>
     <script type="text/javascript" src="/js/rating.js"></script>
     <div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
-  </head>
+</head>
 
-	<body>
-		<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
-		<div class="row-offcanvas row-offcanvas-left">
-		  <div id="sidebar" class="sidebar-offcanvas">
-		      <div class="col-md-12">
-		        <h3>Άλλες Επιλογές</h3>
-		        <ul class="nav nav-pills nav-stacked">
+<body>
+
+<script>
+    function enterIdInModal(bookId) {
+        document.getElementById("book_id").value=bookId.toString();
+    }
+</script>
+
+<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
+<div class="row-offcanvas row-offcanvas-left">
+    <div id="sidebar" class="sidebar-offcanvas">
+        <div class="col-md-12">
+            <h3>Άλλες Επιλογές</h3>
+            <ul class="nav nav-pills nav-stacked">
                 <li><a href="/organiser/profile">Προφίλ</a></li>
                 <li><a href="/organiser/add_place">Προσθήκη Μέρους</a></li>
                 <li><a href="/organiser/add_event">Προσθήκη Εκδήλωσης</a></li>
-				<li class="active"><a href="/organiser/history">Ιστορικό</a></li>
+                <li class="active"><a href="/organiser/history">Ιστορικό Εκδηλώσεων</a></li>
+                <li><a href="/organiser/historytrans">Ιστορικό Συναλλαγών</a></li>
                 <li><a href="/organiser/wallet">Πορτοφόλι</a></li>
-		        </ul>
-		      </div>
-		  </div>
-		  <div id="main">
-		      <div class="col-md-12">
-		      	  <p class="visible-xs">
-		            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
-		          </p>
-		          <h2>Το Ιστορικό Μου</h2>
-                  <hr />
-                  <br/>
-                    <div class="agenda">
-                          <div class="table-responsive">
-                              <h3>Συναλλαγές</h3>
-                              <table class="table table-condensed table-bordered">
-                                  <thead>
-                                      <tr>
-                                          <th>Ημερομηνία</th>
-                                          <th>Πλήρωσα</th>
-                                          <th>Παλαιό Υπόλοιπο</th>
-										  <th>Αναγνωριστικό Συναλλαγής</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <th:block th:each="oneTrans : ${curUser.OrganiserPaymentHistories()}">
-                                          <tr>
-                                              <td class="agenda-date active" rowspan="1">
-                                                  <div class="dayofmonth" th:text="${@generalService.dayOfMonth(oneTrans.timeStamp)}"></div>
-                                                  <div class="dayofweek" th:text="${@generalService.dayOfWeek(oneTrans.timeStamp)}">Σάββατο</div>
-                                                  <div class="shortdate text-muted" th:text="${@generalService.shortDate(oneTrans.timeStamp)}">Ιουλιος,2014</div>
-                                              </td>
-                                              <td class="agenda-paid" th:text="${oneTrans.moneyPayed}/100">
-                                                  100 €
-                                              </td>
-                                              <td class="agenda-payment">
-                                                  <div class="agenda-event" th:text="${oneTrans.oldBalcend}">
-                                                      50 €
-                                                  </div>
-                                              </td>
-											  <td class="agenda-transid" th:text="${oneTrans.transactionId}">
-                                                  420
-                                              </td>
-                                          </tr>
-                                      </th:block>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                      <!-- Modal -->
-                      <div class="modal fade" id="myModal" role="dialog">
-                          <div class="modal-dialog">
-                              <!-- Modal content-->
-                              <div class="modal-content">
-        				        <div class="modal-header">
-        				          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        				          <h4 class="modal-title">Αξιολόγηση</h4>
-        				        </div>
-        				        <div class="modal-body">
-                                    <form th:action=".." method="post">
-                                        <div class="form-group">
-                                            <h3>Γράψτε Την Αξιολογησή Σας</h3>
-                                            <textarea class="form-control custom-control" required="true" name="desc" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι στο ακαν8υς με τα πιτσιρακια μας :)  " rows="3" style="resize:none"></textarea>
-                                            <h3>Βαθμολογία</h3>
-                                            <input type="number" class="rating" id="stars" name="stars" data-min="1" data-max="5" value="0"/>
-                                        </div>
-                                    <div class="modal-footer">
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary" data-dismiss="modal">Πρόσθεσε</button>
-                                        </div>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <div class="col-md-12">
+            <p class="visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
+            </p>
+            <h2>Το Ιστορικό Μου</h2>
+            <hr />
+            <br/>
+            <div class="agenda">
+                <div class="table-responsive">
+                    <h3>Παρελθοντικές Εκδηλώσεις</h3>
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Ημερομηνία</th>
+                            <th>Ώρα</th>
+                            <th>Εκδήλωση</th>
+                            <th>Τιμή</th>
+                            <th>Θέσεις</th>
+                            <th>Κέρδος</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="event : ${curUser.events}" th:if="${ localDate >= event.day }">
+                            <tr th:with="availSpots=${@eventService.getAvailableSpots(event)}">
+                                <td class="agenda-date active" rowspan="1">
+                                    <div class="dayofmonth" th:text="${@generalService.dayOfMonth(event.day)}"></div>
+                                    <div class="dayofweek" th:text="${@generalService.dayOfWeek(event.day)}">Σάββατο</div>
+                                    <div class="shortdate text-muted" th:text="${@generalService.shortDate(event.day)}">Ιουλιος,2014</div>
+                                </td>
+                                <td class="agenda-time" th:text="${#numbers.formatInteger(event.time.hours,2)}+':'+${#numbers.formatInteger(event.time.minutes,2)}">
+                                </td>
+                                <td class="agenda-events">
+                                    <div class="agenda-event" th:text="${event.eventsgroup.name}">
+                                        Ποδοσφαιρο
                                     </div>
-                                    </form>
+                                </td>
+                                <td class="agenda-time" th:text="${event.price}/100+'€'">
+                                    4,20 €
+                                </td>
+                                <td class="agenda-time" th:text="${event.spots - availSpots}+'/'+${event.spots}">
+                                </td>
+                                <td class="agenda-time" th:text="${#numbers.formatDecimal((event.spots - availSpots) *0.009*event.price, 0, 'DEFAULT', 2, 'DEFAULT')}+'€'">
+                                </td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Αξιολόγηση</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form th:action="@{/user/feedback}" method="post">
+                                <div class="form-group">
+                                    <h3>Γράψτε Την Αξιολογησή Σας</h3>
+                                    <textarea class="form-control custom-control" required="true" id="feedback_text" name="text" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι στο ακαν8υς με τα πιτσιρακια μας :)  " rows="3" style="resize:none"></textarea>
+                                    <h3>Βαθμολογία</h3>
+                                    <input type="number" class="rating" id="stars" name="rating" data-min="1" data-max="5" value="0"/>
+                                    <input type="number" id="book_id" name="book_id" value=""/>
                                 </div>
-        				      </div>
-                          </div>
-                      </div>
-		      </div>
-		  </div>
-		</div><!--/row-offcanvas -->
+                                <div class="modal-footer">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Πρόσθεσε</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--/row-offcanvas -->
 
 
-	</body>
+</body>
 </html>
