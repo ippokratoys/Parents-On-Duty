@@ -148,34 +148,40 @@
             <div th:with="allFeedbacks=${@eventService.allFeedbacks(theEvent)}"  class="col-xs-12 col-md-6 col-sm-12">
                 <img class="img-responsive" th:src="${theEvent.eventsgroup.imagePath}" src="images.png" alt=""/>
                 <hr/>
-                <div class="well">
-                    <div class="ratings" th:with="eventStats=${@eventService.getRating(theEvent)}">
-                        <p class="pull-right" th:text="${allFeedbacks.size()}+' Αξιολογήσεις από γονέα'"> 0 </p>
-                        <p th:if="${eventStats>0}">
-                            <!--<th:block th:each="str,iterStat : strings">-->
-                            <span th:each="i : ${#numbers.sequence( 1, eventStats,1)}" class="glyphicon glyphicon-star"></span>
-                        </p>
-                        <th:block th:if="${5>eventStats}">
-                            <span th:each="i : ${#numbers.sequence( 4, eventStats,-1)}" class="glyphicon glyphicon-star-empty"></span>
-                        </th:block>
-                    </div>
-
-
-                    <hr/>
-                    <th:block th:each="oneFeedback,i:${allFeedbacks}">
-                        <div class="row" th:with="eventStats=${oneFeedback.rating}">
-                            <div class="col-sm-6">
+                <div class="well pre-scrollable" style="max-height:350px;">
+                    <div class="row">
+                        <div class=" col-md-12 col-sm-12 ratings" th:inline="text" th:with="eventStats=${@eventService.getRating(theEvent)}">
+                            <p  th:if="${eventStats>0}">
+                                [[${allFeedbacks.size()}]] Αξιολογήσεις από γονέα: &nbsp;
                                 <span th:each="i : ${#numbers.sequence( 1, eventStats,1)}" class="glyphicon glyphicon-star"></span>
                                 <th:block th:if="${5>eventStats}">
                                     <span th:each="i : ${#numbers.sequence( 4, eventStats,-1)}" class="glyphicon glyphicon-star-empty"></span>
                                 </th:block>
-                                Anonymous
-                                <span class="pull-right" th:text="${#dates.format(oneFeedback.date,'dd/MM/yyyy')}">10 days ago</span>
-                                <p th:inline="text" th:text="${oneFeedback.content}"></p>
-                            </div>
+                            </p>
                         </div>
-                        <hr/>
-                    </th:block>
+                    </div>
+                    <hr/>
+                        <th:block th:each="oneFeedback,i:${allFeedbacks}">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12" th:with="eventStats=${oneFeedback.rating}">
+                                    <p>
+                                        <span  th:text="${#dates.format(oneFeedback.date,'dd/MM/yyyy')}">10 days ago</span>
+                                        &nbsp;
+                                        <span th:each="i : ${#numbers.sequence( 1, eventStats,1)}" class="glyphicon glyphicon-star"></span>
+                                        <th:block th:if="${5>eventStats}">
+                                        <span th:each="i : ${#numbers.sequence( 4, eventStats,-1)}" class="glyphicon glyphicon-star-empty"></span>
+                                        </th:block>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div style="word-wrap: break-word;" class="col-md-12 col-sm-12">
+                                    <p>Anonymous</p>
+                                    <h5 th:text="${oneFeedback.content}"></h5>
+                                </div>
+                            </div>
+                            <hr/>
+                        </th:block>
                 </div>
             </div>
             <div class="col-xs-12 col-md-6 col-sm-12">

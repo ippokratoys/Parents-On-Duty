@@ -32,6 +32,9 @@
         function sent_eventId(eventid){
             document.getElementById("eventID").value=eventid.toString();
         }
+        function cancel_eventId(eventid){
+            document.getElementById("cancelation_id").value=eventid.toString();
+        }
     </script>
 <nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
 <div class="row-offcanvas row-offcanvas-left">
@@ -42,7 +45,8 @@
                 <li class="active"><a href="/organiser/profile">Προφίλ</a></li>
                 <li><a href="/organiser/add_place">Προσθήκη Μέρους</a></li>
                 <li><a href="/organiser/add_event">Προσθήκη Εκδήλωσης</a></li>
-                <li><a href="/organiser/history">Ιστορικό</a></li>
+                <li><a href="/organiser/history">Ιστορικό Εκδηλώσεων</a></li>
+                <li><a href="/organiser/historytrans">Ιστορικό Συναλλαγών</a></li>
 				<li><a href="/organiser/wallet">Πορτοφόλι</a></li>
             </ul>
         </div>
@@ -63,7 +67,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="well pre-scrollable">
+                    <div class="well pre-scrollable" style="max-height:550px;">
                         <div id="myplaces">
                             <h4><b>Τα Μέρη μου:</b></h4>
                             <th:block th:if="${ organiser.locations != null}" th:each="oneLocation : ${organiser.locations}" >
@@ -81,12 +85,16 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="well pre-scrollable">
+                    <div class="well pre-scrollable" style="max-height:550px;">
                         <div id="myevents">
                             <h4><b>Οι Εκδηλώσεις μου:</b></h4>
                             <th:block th:if="${ organiser.events != null}" th:each="oneEvent : ${organiser.events}">
                                 <th:block th:if="${oneEvent.day.compareTo(date)>0}" >
                                     <h5 th:text=" 'Όνομα : '+${oneEvent.eventsgroup.name}"></h5>
+                                    <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
+                                    <p th:text=" 'Ημερομηνία : '+ ${#dates.format(oneEvent.day,'dd/MM/yyyy')} "></p>
+                                    <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>
+
                                     <th:block th:if="${oneEvent.importance > 4}">
                                         <strong> <p style="color:#006400" th:text="'Προωθούμενη (Premium)'"></p> </strong>
                                     </th:block>
@@ -100,11 +108,11 @@
                                         <strong> <p style="color:#8b4513" th:text="'Προωθούμενη (Bronze)'"></p> </strong>
                                     </th:block>
                                     <th:block th:unless="${oneEvent.importance > 1}">
-                                        <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'" th:onclick="'sent_eventId('+${oneEvent.idEvents}+')'"></button>
                                     </th:block>
-                                    <p th:text=" 'Θέσεις : '+${oneEvent.spots - @eventService.getAvailableSpots(oneEvent)}+'/'+${oneEvent.spots}"></p>
-                                    <p th:text=" 'Ημερομηνία : '+ ${#dates.format(oneEvent.day,'dd/MM/yyyy')} "></p>
-                                    <p th:text=" 'Τοποθεσία :'+${oneEvent.location.name}"></p>
+                                    <th:block th:if="${oneEvent.importance ==1}">
+                                    <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'" th:onclick="'sent_eventId('+${oneEvent.idEvents}+')'"></button>
+                                    </th:block>
+                                    <button type="button" class="btn btn-md btn-danger" data-toggle="modal" data-target="#myModal_cancel" th:text="'Ακύρωσε την εκδήλωση'" th:onclick="'cancel_eventId('+${oneEvent.idEvents}+')'"></button>
                                     <hr/>
                                 </th:block>
                             </th:block>
@@ -131,8 +139,8 @@
                           <h3 id="ex-btn">Επέλεξε Τρόπο Πληρωμής</h3>
                           <div class="row">
                               <div id="ex-btn2">
-                                  <button type="button"  style="width:36%;"  class="btn btn-primary btn-lg" onclick="existing_money()">Υπάρχον Χρήματα</button>
-                                  <button type="button" style="width:36%;"  class="btn btn-primary btn-lg" onclick="location.href='/organiser/wallet';">Πρόσθεσε</button>
+                                  <button type="button"  style="width:auto;"  class="btn btn-primary btn-lg" onclick="existing_money()">Υπάρχον Χρήματα</button>
+                                  <button type="button" style="width:auto;"  class="btn btn-primary btn-lg" onclick="location.href='/organiser/wallet';">Πρόσθεσε</button>
                               </div>
                               <h3 style="display:none;" id="boost2">Επέλεξε Κατηγορία Προώθησης</h3>
                               <style>
@@ -158,6 +166,33 @@
                   </div>
               </form>
             </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal_cancel" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">Ακύρωση Εκδήλωσης</h2>
+                </div>
+                <div class="modal-body text-center" >
+                    <h3>Είστε σίγουρος ότι θέλετε να ακυρώσετε την εκδήλωση;</h3>
+                </div>
+                <form th:action="'/organiser/cancel_event'" method="post" id="cancel">
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <input type="hidden" name="cancelation_id" id="cancelation_id"/>
+                            <button type="submit" class="btn btn-lg btn-primary" form="cancel" value="Submit">Ναί</button>
+                            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Όχι</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div><!--/row-offcanvas -->

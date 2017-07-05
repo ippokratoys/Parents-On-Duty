@@ -64,7 +64,7 @@
                                                   <div class="dayofweek" th:text="${@generalService.dayOfWeek(oneBook.event.day)}">Σάββατο</div>
                                                   <div class="shortdate text-muted" th:text="${@generalService.shortDate(oneBook.event.day)}">Ιουλιος,2014</div>
                                               </td>
-                                              <td class="agenda-time" th:text="${oneBook.event.time.hours}+':'+${oneBook.event.time.minutes}">
+                                              <td class="agenda-time" th:text="${#numbers.formatInteger(oneBook.event.time.hours,2)}+':'+${#numbers.formatInteger(oneBook.event.time.minutes,2)}">
                                                   5:30 AM
                                               </td>
                                               <td class="agenda-events">

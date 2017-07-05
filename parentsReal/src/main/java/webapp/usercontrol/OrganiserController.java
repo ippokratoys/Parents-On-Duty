@@ -104,6 +104,28 @@ public class OrganiserController{
         return "redirect:/organiser/profile";
     }
 
+
+    @RequestMapping(value = "/organiser/history", method = RequestMethod.GET)
+    public String historyOfEvents(Model model,
+                                        @AuthenticationPrincipal final  UserDetails userDetails
+    ){
+
+        Organiser organiser = organiserRepository.findOne(userDetails.getUsername());
+        model.addAttribute("curUser", organiser);
+        model.addAttribute("localDate", new Date());
+        return "profile/organiser/history";
+    }
+
+    @RequestMapping(value = "/organiser/historytrans", method = RequestMethod.GET)
+    public String historyOfTransactions(Model model,
+                                        @AuthenticationPrincipal final  UserDetails userDetails
+    ){
+
+        Organiser organiser = organiserRepository.findOne(userDetails.getUsername());
+        model.addAttribute("curUser", organiser);
+        return "profile/organiser/historytrans";
+    }
+
     @RequestMapping(value = "/organiser/promote_event", method = RequestMethod.POST)
     public String promoteEvent(@AuthenticationPrincipal final UserDetails userDetails,
                                @RequestParam("boost_cat")String promotionClass,
@@ -126,6 +148,15 @@ public class OrganiserController{
             }
         }
         return "redirect:/organiser/profile?event_boosted=true";
+    }
+
+    @RequestMapping(value = "/organiser/cancel_event", method = RequestMethod.POST)
+    public String cancelEvent(@AuthenticationPrincipal final UserDetails userDetails,
+                              @RequestParam("cancelation_id") int id
+    ){
+        Event event = eventRepository.findOne(id);
+        organiserService.cancelEvent(event);
+        return "redirect:/organiser/profile?event_canceled=true";
     }
 
 }
