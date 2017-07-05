@@ -190,7 +190,6 @@ public class ResultService {
     }
 
     public List<EventSearch> getResultsByUser(String searchTerm, String fromDate, String toDate, int price, int age, int dist, double lat, double lon){
-
         QueryBuilder myQuery= QueryBuilders.multiMatchQuery(searchTerm)
                 .field("name^3")
                 .field("description^1")

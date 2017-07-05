@@ -90,7 +90,11 @@ public class ResultController {
 		else {
 			if (userDetails != null && userDetails.getAuthorities().toString().contains("PARENT")) {
 				Customer myUser = customerRepository.findOne(userDetails.getUsername());
-				results = resultService.getResultsByUser(freeText, dates[0], dates[1], price, ageArg, distanceArg, myUser.getLat().doubleValue(), myUser.getLon().doubleValue());
+				if(myUser.getLon()!=null && myUser.getLon()!=null){
+					results = resultService.getResultsByUser(freeText, dates[0], dates[1], price, ageArg, distanceArg, myUser.getLat().doubleValue(), myUser.getLon().doubleValue());
+				}else {
+					results = resultService.getResults(freeText, dates[0], dates[1], price, ageArg, distanceArg);
+				}
 			} else {
 				results = resultService.getResults(freeText, dates[0], dates[1], price, ageArg, distanceArg);
 			}
