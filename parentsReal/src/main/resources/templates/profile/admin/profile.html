@@ -45,12 +45,12 @@
                 <h3 th:text="${' Λεφτά που βάλανε οι πάροχοι για διαφήμιση : '+organiserMoneyFromAdverts}" ></h3>
 				
 				
-				<input type="text" id="hid1" hidden=true  th:value="${customerMoney}"/>
-				<input type="text" id="hid2" hidden=true  th:value="${customerBonusMoney}"/>
-				<input type="text" id="hid3" hidden=true  th:value="${customersMoneyIn}"/>
-				<input type="text" id="hid4" hidden=true  th:value="${organisersMoneyIn}"/>
-				<input type="text" id="hid5" hidden=true  th:value="${moneyToOrganisers}"/>
-				<input type="text" id="hid6" hidden=true  th:value="${organiserMoneyFromAdverts}"/>
+				<input type="text" id="hid1" hidden="true"  th:value="${customerMoney}"/>
+				<input type="text" id="hid2" hidden="true"  th:value="${customerBonusMoney}"/>
+				<input type="text" id="hid3" hidden="true"  th:value="${customersMoneyIn}"/>
+				<input type="text" id="hid4" hidden="true"  th:value="${organisersMoneyIn}"/>
+				<input type="text" id="hid5" hidden="true"  th:value="${moneyToOrganisers}"/>
+				<input type="text" id="hid6" hidden="true"  th:value="${organiserMoneyFromAdverts}"/>
 				
 				
 				<div id="piechartadmin" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
@@ -80,7 +80,7 @@
 		  ['Δώσαμε στους γονείς',y],
 		  ['Eχουν οι γονείς τώρα μέσα',z],
 		  ['Πάροχοι',q],
-		  ['Δώσαμε στους παρόχους',w],
+		  ['Δώσαμε στους παρόχους',-w],
 		  ['Βάλανε οι πάροχοι για διαφήμιση',e]
         ]);
 

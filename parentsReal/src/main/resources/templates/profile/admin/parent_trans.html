@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"	xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>History</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/history.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/host_profile.js"></script>
+    <div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
+  </head>
+
+	<body>
+		<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
+		<div class="row-offcanvas row-offcanvas-left">
+		  <div id="main">
+		      <div class="col-md-12">
+		      	  <p class="visible-xs">
+		            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Μενού</button>
+		          </p>
+                  <h2 th:text="${'Το Ιστορικό του '+curUser.login_email}"></h2>
+                  <hr />
+                  <br/>
+                    <div class="agenda">
+                          <div class="table-responsive">
+                              <h3>Παρελθοντικές Εκδηλώσεις</h3>
+                              <table class="table table-condensed table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>Ημερομηνία</th>
+                                          <th>Πλήρωσα</th>
+                                          <th>Έλαβα</th>
+                                          <th>Τρόπος πληρωμής</th>
+										  <th>Αναγνωριστικό Συναλλαγής</th>
+                                          <!--<th>Απόδειξη</th>-->
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <th:block th:each="onePayment : ${curUser.paymentHistories}">
+                                          <tr>
+                                              <td class="agenda-date active" rowspan="1">
+                                                  <div class="dayofmonth" th:text="${@generalService.dayOfMonth(onePayment.timeStamp)}"></div>
+                                                  <div class="dayofweek" th:text="${@generalService.dayOfWeek(onePayment.timeStamp)}">Σάββατο</div>
+                                                  <div class="shortdate text-muted" th:text="${@generalService.shortDate(onePayment.timeStamp)}">Ιουλιος,2014</div>
+                                              </td>
+                                              <td class="agenda-paid" th:text="${onePayment.moneyPayed}/100">
+                                                  100 €
+                                              </td>
+                                              <td class="agenda-received" th:text="${onePayment.moneyGot}/100">
+                                                  69 €
+                                              </td>
+                                              <td class="agenda-payment">
+                                                  <div class="agenda-event" th:text="${onePayment.paymentMethod}">
+                                                      paypall
+                                                  </div>
+                                              </td>
+											  <td class="agenda-transid" th:text="${onePayment.transactionID}">
+                                                  420
+                                              </td>
+                                              <!--<td class="agenda-button">-->
+                                                  <!--<form th:action="@{/user/ticket}" target="_blank" method="post">-->
+                                                      <!--<input type="hidden" name="id" th:value="${onePayment.transactionID}" />-->
+                                                      <!--<button type="submit" class="btn btn-primary" >Απόδειξη</button>-->
+                                                  <!--</form>-->
+                                              <!--</td>-->
+                                          </tr>
+                                      </th:block>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+		      </div>
+		  </div>
+		</div><!--/row-offcanvas -->
+
+
+	</body>
+</html>
