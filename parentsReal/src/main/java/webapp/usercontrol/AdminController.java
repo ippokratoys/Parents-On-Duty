@@ -1,6 +1,6 @@
 package webapp.usercontrol;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,10 +14,6 @@ import webapp.database.repositories.*;
 import webapp.services.AdminService;
 import webapp.services.RegisterService;
 
-import javax.jws.WebParam;
-import javax.print.DocFlavor;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -57,7 +53,7 @@ public class AdminController {
         }
 
         if (customerPaymentHistoryRepository.customersMoneyPayed() != null) {
-            model.addAttribute("customerMoney", customerRepository.customerMoneyIn());
+            model.addAttribute("customerMoney", customerRepository.customerMoneyIn()/100d);
         } else {
             model.addAttribute("customerMoney", 0.0);
         }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import webapp.database.*;
 import webapp.database.repositories.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -104,5 +105,11 @@ public class CustomerService {
         eventFeedbackRepositorie.save(eventFeedback);
 
 
+    }
+
+    public void updateLocation(Customer customer, BigDecimal lat, BigDecimal lon ){
+
+        customer.setLat(lat);
+        customer.setLon(lon);
     }
 }

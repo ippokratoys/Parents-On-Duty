@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configure(HttpSecurity httpSecurity) throws Exception{
 		httpSecurity.authorizeRequests()
 				.antMatchers("/event/book").hasAuthority("PARENT")
-				.antMatchers("/organiser/ticket").hasAnyAuthority("PARENT","ADMIN")
+				.antMatchers("/organiser/ticket").hasAnyAuthority("ORGANISER","ADMIN")
 				.antMatchers("/user/ticket").hasAnyAuthority("PARENT","ADMIN")
 				.antMatchers("/organiser/**").hasAuthority("ORGANISER")
 				.antMatchers("/user/**").hasAuthority("PARENT")

@@ -1,7 +1,10 @@
 package webapp.services;
 
+import jdk.nashorn.internal.parser.DateParser;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -105,5 +108,31 @@ public class GeneralService {
         return shortDate;
     }
 
+    public String transformDateRange(String badRange){
+        SimpleDateFormat greekDateParser = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat otherDateParser = new SimpleDateFormat("MM/dd/yyyy");
+        System.out.println("badRange = [" + badRange + "]");
 
+        if(badRange==null || badRange.trim().equals("") || badRange.equals(" ")){
+            return "";
+        }
+
+        String[] dates = badRange.split("-");
+        Date from=null;
+        Date to=null;
+        try {
+            from = greekDateParser.parse(dates[0]);
+            if(dates.length>1){
+                to = greekDateParser.parse(dates[1]);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+        if(to==null){
+            return otherDateParser.format(from);
+        }
+        System.out.println(otherDateParser.format(from) + " - " + otherDateParser.format(to));
+        return otherDateParser.format(from) + " - " + otherDateParser.format(to);
+    }
 }
