@@ -36,7 +36,9 @@ public class CustomerService {
             return realMoney + 8;
         } else if (realMoney >= 80) {
             return realMoney + 5;
-        } else if (realMoney >= 30) {
+        } else if(realMoney>=50){
+            return realMoney + 3;
+        }else if (realMoney >= 30) {
             return realMoney + 1;
         } else {
             return realMoney;
