@@ -127,6 +127,7 @@ public class EventService {
 
 
     public List<EventFeedback> allFeedbacks(Event event){
+
         List<EventFeedback> allFeedbacks = eventFeedbackRepositorie.findOrganiserFeedbacks(event.getOrganiser());
         System.out.println(allFeedbacks);
 
@@ -134,8 +135,8 @@ public class EventService {
         for (EventFeedback aFeeback :
                 allFeedbacks) {
             if (aFeeback.getEvent().getEventsgroup() == event.getEventsgroup()) {
-                allFeedbacks.remove(aFeeback);
-                allFeedbacks.add(0,aFeeback);
+//                allFeedbacks.remove(aFeeback);
+//                allFeedbacks.add(0,aFeeback);
             }
          }
          return allFeedbacks;
