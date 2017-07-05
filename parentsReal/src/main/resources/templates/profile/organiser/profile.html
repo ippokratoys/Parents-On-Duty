@@ -58,7 +58,7 @@
                     <h4 th:inline="text"><b>Όνομα: [[${organiser.name}]]</b></h4>
                     <h4 th:inline="text"><b>Επίθετο: [[${organiser.surname}]]</b></h4>
                     <h4 th:inline="text"><b>E-mail: [[${organiser.login_email}]]</b></h4>
-                    <h4 th:inline="text"><b>Γενέθλια: [[${organiser.birthdate}]]</b></h4>
+                    <h4 th:inline="text"><b>Γενέθλια: [[${#dates.format(organiser.birthdate,'dd/MM/yyyy')}]]</b></h4>
                 </div></div>
             </div>
             <div class="row">
@@ -87,8 +87,17 @@
                             <th:block th:if="${ organiser.events != null}" th:each="oneEvent : ${organiser.events}">
                                 <th:block th:if="${oneEvent.day.compareTo(date)>0}" >
                                     <h5 th:text=" 'Όνομα : '+${oneEvent.eventsgroup.name}"></h5>
-                                    <th:block th:if="${oneEvent.importance > 1}">
-                                        <p style="color:green" th:text="'Προωθούμενη'"></p>
+                                    <th:block th:if="${oneEvent.importance > 4}">
+                                        <strong> <p style="color:#006400" th:text="'Προωθούμενη (Premium)'"></p> </strong>
+                                    </th:block>
+                                    <th:block th:if="${oneEvent.importance == 4}">
+                                        <strong> <p style="color:#b8860b" th:text="'Προωθούμενη (Gold)'"></p> </strong>
+                                    </th:block>
+                                    <th:block th:if="${oneEvent.importance == 3}">
+                                        <strong> <p style="color:#c0c0c0" th:text="'Προωθούμενη (Silver)'"></p> </strong>
+                                    </th:block>
+                                    <th:block th:if="${oneEvent.importance == 2}">
+                                        <strong> <p style="color:#8b4513" th:text="'Προωθούμενη (Bronze)'"></p> </strong>
                                     </th:block>
                                     <th:block th:unless="${oneEvent.importance > 1}">
                                         <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal" th:text="'Προωθήστε την εκδήλωση'" th:onclick="'sent_eventId('+${oneEvent.idEvents}+')'"></button>
@@ -116,7 +125,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h2 class="modal-title">Προώθηση</h2>
               </div>
-              <form th:action="'/organiser/promote_event'" method="get">
+              <form th:action="'/organiser/promote_event'" method="post">
                   <div class="modal-body">
                       <div class="text-center">
                           <h3 id="ex-btn">Επέλεξε Τρόπο Πληρωμής</h3>
