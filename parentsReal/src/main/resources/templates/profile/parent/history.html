@@ -102,10 +102,10 @@
                                     <form th:action="@{/user/feedback}" method="post">
                                         <div class="form-group">
                                             <h3>Γράψτε Την Αξιολογησή Σας</h3>
-                                            <textarea class="form-control custom-control" required="true" id="feedback_text" name="text" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι στο ακαν8υς με τα πιτσιρακια μας :)  " rows="3" style="resize:none"></textarea>
+                                            <textarea class="form-control custom-control" max="250" required="true" id="feedback_text" name="text" placeholder="Π.χ. Ένα όμορφο Σάββατο πάλι στο ακαν8υς με τα πιτσιρακια μας :)  " rows="3" style="resize:none"></textarea>
                                             <h3>Βαθμολογία</h3>
-                                            <input type="number" class="rating" id="stars" name="rating" data-min="1" data-max="5" value="0"/>
-                                            <input type="number" id="book_id" name="book_id" value=""/>
+                                            <input type="number" class="rating" id="stars" name="rating" data-min="1" min="1" data-max="5" value="1"/>
+                                            <input type="hidden" id="book_id" name="book_id" value=""/>
                                         </div>
                                     <div class="modal-footer">
                                         <div class="text-center">

@@ -69,11 +69,13 @@
 <body>
     <script th:inline="javascript">
     var map;
+    var bounds;
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat:37.97945,lng:23.71622},
-            zoom: 6
+            center: {lat:37.9833333 ,lng:23.7333333 },
+            zoom: 12
         });
+        bounds = new google.maps.LatLngBounds();
         var autocomplete =     autocomplete = new google.maps.places.Autocomplete(
                 /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
                 {types: ['geocode']});
@@ -95,16 +97,25 @@
                      var a=1;
                   }
               });
-            });
-        }
-        function addMarker(latArg,lngArg,tilteArg){
-            var latlng={lat:latArg,lng:lngArg}
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map ,
-                title : tilteArg
-            });
-        }
+        });
+    }
+    function addMarker(latArg,lngArg,tilteArg){
+        var myPlace = new google.maps.LatLng(latArg, lngArg);
+
+
+        var latlng={lat:latArg,lng:lngArg}
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map ,
+            title : tilteArg
+        });
+
+        bounds.extend(myPlace);
+
+    }
+    function endOfPageLoad() {
+        map.fitBounds(bounds);
+    }
     </script>
     <!-- Navigation -->
     <nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
@@ -246,7 +257,11 @@
              +]*/
         </script>
     </th:block>
-
+    <th:block th:unless="${searchResults== null || searchResults.size() == 0}" th:each="oneEvent : ${searchResults}">
+        <script type="text/javascript">
+            map.fitBounds(bounds);
+        </script>
+    </th:block>
     <!-- /.container -->
 
     <!-- jQuery -->
@@ -254,6 +269,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+
         $(function() {
 
           $('input[name="Dates"]').daterangepicker({

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import webapp.database.Event;
+import webapp.database.EventFeedback;
 import webapp.database.Location;
 import webapp.database.Organiser;
 import webapp.database.repositories.EventRepository;
@@ -103,6 +104,7 @@ public class OrganiserController{
         return "redirect:/organiser/profile";
     }
 
+
     @RequestMapping(value = "/organiser/history", method = RequestMethod.GET)
     public String historyOfEvents(Model model,
                                         @AuthenticationPrincipal final  UserDetails userDetails
@@ -123,4 +125,30 @@ public class OrganiserController{
         model.addAttribute("curUser", organiser);
         return "profile/organiser/historytrans";
     }
+
+    @RequestMapping(value = "/organiser/promote_event", method = RequestMethod.POST)
+    public String promoteEvent(@AuthenticationPrincipal final UserDetails userDetails,
+                               @RequestParam("boost_cat")String promotionClass,
+                               @RequestParam("eventID")int eventID
+    ){
+        Event event = eventRepository.findOne(eventID);
+        Date curDate = new Date();
+        if(curDate.after(event.getDay())){
+            return "redirect:/organiser/profile?old_event=true";
+        }
+        try {
+            organiserService.boostEvent(event,promotionClass);
+        } catch (Exception e) {
+            if(e.getMessage()=="Not Valid Option"){
+                return "redirect:/organiser/profile?unknown_option=true";
+            }else if(e.getMessage()=="Not enough money"){
+                return "redirect:/organiser/wallet?"+"not_enough_money=true";
+            }else{
+                return "redirect:/organiser/profile?unknown_error=true";
+            }
+        }
+        return "redirect:/organiser/profile?event_boosted=true";
+    }
+
+
 }

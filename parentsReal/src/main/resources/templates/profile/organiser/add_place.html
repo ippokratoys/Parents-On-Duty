@@ -5,11 +5,11 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-    <script type="text/javascript" src="/js/host_profile.js"></script>
     <script type="text/javascript" src="/js/autocomplete_search.js"></script>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/jasny-bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/host_profile.js"></script>
     <link href="/css/add_place.css" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/>
     <div th:replace="top_bar_only_login :: 'head-top-bar'"></div>
@@ -63,28 +63,23 @@
   		          <br/>
                   <div class="row">
                       <div class="col-md-2 col-sm-6 col-xs-12">
-                          <h4>Όδος</h4>
-                          <input readonly="true" type="text" required="true" value="" name="route" id="route"/>
-                      </div>
-                      <div class="col-md-2 col-sm-6 col-xs-12">
-                          <h4>Αριθμός</h4>
+                          <h3>Αριθμός Οδού</h3>
                           <input type="number" value="" name="number" id="street_number"/>
                       </div>
                       <div class="col-md-2 col-sm-6 col-xs-12">
-                          <h4>Πόλη</h4>
-                          <input readonly="true" type="text" required="true" value="" name="town" id="locality"/>
+                          <input readonly="true" type="hidden" required="true" value="" name="route" id="route"/>
                       </div>
                       <div class="col-md-2 col-sm-6 col-xs-12">
-                          <h4>Ταχυδρομικός Κώδικας</h4>
-                          <input readonly="true" type="text" value="" name="zip" id="postal_code"/>
+                          <input readonly="true" type="hidden" required="true" value="" name="town" id="locality"/>
+                      </div>
+                      <div class="col-md-2 col-sm-6 col-xs-12">
+                          <input readonly="true" type="hidden" value="" name="zip" id="postal_code"/>
                       </div>
                       <div class="col-md-4 col-sm-6 col-xs-12">
-
-                          <input style="display:none;" readonly="true" type="text" required="true" value="" name="lat" id="lat"/>
+                          <input  readonly="true" type="hidden" required="true" value="" name="lat" id="lat"/>
                       </div>
                       <div class="col-md-4 col-sm-6 col-xs-12">
-
-                          <input style="display:none;" readonly="true" type="text" required="true" value="" name="lon" id="lng"/>
+                          <input  readonly="true" type="hidden" required="true" value="" name="lon" id="lng"/>
                       </div>
                   </div>
                   <br/>
