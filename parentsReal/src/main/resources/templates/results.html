@@ -243,11 +243,11 @@
 				</th:block>
             	<h2 th:if="${searchResults== null || searchResults.size() == 0}">Δε βρέθηκε κάποιο αποτέλεσμα</h2>
            	</div>
+                <br/>
 	            <div class="col-xs-12 col-md-6 col-sm-12" id="right">
-	                    <div class="iframe-container">
-	            			<div id="map" style="background:yellow"></div>
+	            		<div class="mymap" id="map" style="background:yellow"></div>
                         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0LB9wygyf715poPbZLtVZe5roaQjOkM&amp;libraries=places&amp;callback=initMap"></script>
-						</div>
+
 	            </div>
     </div>
     <th:block th:unless="${searchResults== null || searchResults.size() == 0}" th:each="oneEvent : ${searchResults}">

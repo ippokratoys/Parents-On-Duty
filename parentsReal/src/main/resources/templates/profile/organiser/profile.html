@@ -63,7 +63,7 @@
                     <h4 th:inline="text"><b>Επίθετο: [[${organiser.surname}]]</b></h4>
                     <h4 th:inline="text"><b>E-mail: [[${organiser.login_email}]]</b></h4>
                     <h4 th:inline="text"><b>Γενέθλια: [[${#dates.format(organiser.birthdate,'dd/MM/yyyy')}]]</b></h4>
-                    <h4 th:inline="text"><b>Ισοζύγιο: [[${#numbers.formatDecimal(organiser.points/100, 0, 'DEFAULT', 2, 'DEFAULT')}]]€</b></h4>
+                    <h4 th:inline="text"><b>Υπόλοιπο: [[${#numbers.formatDecimal(organiser.points/100, 0, 'DEFAULT', 2, 'DEFAULT')}]]€</b></h4>
                 </div></div>
             </div>
             <div class="row">

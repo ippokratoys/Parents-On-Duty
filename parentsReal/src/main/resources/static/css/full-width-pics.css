@@ -63,7 +63,29 @@ footer {
     }
 }
 
+.item{
+    color: black;
+    font-size: medium;
+    font-weight: bold;
+}
 
+.title_carousel{
+    text-align:center;
+    color:black;
+    font-size: x-large;
+}
+
+@media (min-width: 500px) {
+    .slide{
+        width: 40% ;
+        height: 30% ;
+        text-align:center;
+        margin:0 auto;
+        color:black;
+        min-width: 150 px;
+        min-height: 100 px:
+    }
+}
 /*.navbar-default {*/
   /*background-color: dodgerblue;*/
   /*border-color: black;*/
