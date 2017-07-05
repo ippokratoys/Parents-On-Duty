@@ -164,7 +164,7 @@
                           </div>
                       </div>
                       <div id="oldevent">
-                        <div class="well pre-scrollable" >
+                        <div class="well pre-scrollable" style="max-height:800px;">
                             <th:block th:if="${ organiser.eventsgroups != null}" th:each="oneEventgroup : ${organiser.eventsgroups}">
                                 <p th:text=" 'Όνομα : '+${oneEventgroup.name}"></p>
                                 <button class="btn btn-primary btn-md " value="Submit" th:onclick="'exist_form(\''+ ${oneEventgroup.idEventsGroup}+'\',\''+${oneEventgroup.name} + '\' )'" onclick="exist_form()">Επέλεξε</button>
