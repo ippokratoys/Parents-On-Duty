@@ -316,6 +316,7 @@ public class CsvInserts {
                 }
             }
         }
+
     }
 
     public void locationCsvInsertions(LocationRepository locationRepository,

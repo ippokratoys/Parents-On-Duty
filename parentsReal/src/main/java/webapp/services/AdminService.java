@@ -12,6 +12,7 @@ import webapp.database.*;
 import webapp.database.repositories.*;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ilias on 4/7/2017.
@@ -33,6 +34,10 @@ public class AdminService {
     PasswordEncoder passwordEncoder;
     @Autowired
     OrganiserPaymentHistoryRepository organiserPaymentHistoryRepository;
+    @Autowired
+    CustomerPaymentHistoryRepository customerPaymentHistoryRepository;
+    @Autowired
+    private CustomerPaymentHistoryRepository customerPaymentHistory;
 
     public boolean resetLoginPassword(Login login,String newPwd){
         String newHashedPwd = registerService.hashPassword(newPwd);
