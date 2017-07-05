@@ -102,4 +102,25 @@ public class OrganiserController{
         }
         return "redirect:/organiser/profile";
     }
+
+    @RequestMapping(value = "/organiser/history", method = RequestMethod.GET)
+    public String historyOfEvents(Model model,
+                                        @AuthenticationPrincipal final  UserDetails userDetails
+    ){
+
+        Organiser organiser = organiserRepository.findOne(userDetails.getUsername());
+        model.addAttribute("curUser", organiser);
+        model.addAttribute("localDate", new Date());
+        return "profile/organiser/history";
+    }
+
+    @RequestMapping(value = "/organiser/historytrans", method = RequestMethod.GET)
+    public String historyOfTransactions(Model model,
+                                        @AuthenticationPrincipal final  UserDetails userDetails
+    ){
+
+        Organiser organiser = organiserRepository.findOne(userDetails.getUsername());
+        model.addAttribute("curUser", organiser);
+        return "profile/organiser/historytrans";
+    }
 }
