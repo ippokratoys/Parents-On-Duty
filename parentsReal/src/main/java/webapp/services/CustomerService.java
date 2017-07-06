@@ -33,14 +33,14 @@ public class CustomerService {
     CustomerPaymentHistoryRepository customerPaymentHistoryRepository;
 
     public int realMoneyToPoints(int realMoney) {
-        if (realMoney >= 100) {
-            return realMoney + 8;
-        } else if (realMoney >= 80) {
-            return realMoney + 5;
-        } else if(realMoney>=50){
-            return realMoney + 3;
-        }else if (realMoney >= 30) {
-            return realMoney + 1;
+        if (realMoney >= 100*100){
+            return (int) Math.round(realMoney*1.07);
+        } else if (realMoney >= 80*100){
+            return (int) Math.round(realMoney*1.06);
+        } else if(realMoney>=50*100){
+            return (int) Math.round(realMoney*1.04);
+        }else if (realMoney >= 30*100) {
+            return (int) Math.round(realMoney*1.03);
         } else {
             return realMoney;
         }
@@ -55,12 +55,12 @@ public class CustomerService {
 
         customerPaymentHistory.setCustomer(customer);
         customerPaymentHistory.setMoneyPayed(dbAmount);
-        customerPaymentHistory.setMoneyGot(realMoneyToPoints(amount) * 100);
+        customerPaymentHistory.setMoneyGot(realMoneyToPoints(amount*100));
         customerPaymentHistory.setPaymentMethod("Card");
         customerPaymentHistory.setTimeStamp(dateNow);
         customerPaymentHistory.setMessage("Normal form page | old money=" + customer.getPoints());
 
-        customer.setPoints(customer.getPoints() + realMoneyToPoints(amount) * 100);
+        customer.setPoints(customer.getPoints() + realMoneyToPoints(amount*100));
 
         customerRepository.save(customer);
         customerPaymentHistoryRepository.save(customerPaymentHistory);
