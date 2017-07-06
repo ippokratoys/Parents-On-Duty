@@ -36,13 +36,13 @@
             <hr/>
             <br/>
             <div class="row">
-                <h3 th:text="${' Λεφτά που πήραμε από τους γονείς : '+customerMoney}" ></h3>
-                <h3 th:text="${' Λεφτά που δώσαμε στους γονείς : '+customerBonusMoney}" ></h3>
-                <h3 th:text="${' Λεφτά που έχουν οι γονείς τώρα μέσα: '+customersMoneyIn}" ></h3>
+                <h3 th:text="${' Πήραμε από τους γονείς : '+customerMoney}+' €'" ></h3>
+                <h3 th:text="${' Δώσαμε στους γονείς : '+customerBonusMoney}+' €'" ></h3>
+                <h3 th:text="${' Χρήματα στους λογαριασμούς των γονέων: '+customersMoneyIn}+' €'" ></h3>
                 <hr/>
-                <h3 th:text="${' Λεφτά αυτήν την στιγμή των παρόχων : '+organisersMoneyIn}"></h3>
-                <h3 th:text="${' Λεφτά που δώσαμε στους παρόχους : '+moneyToOrganisers}" ></h3>
-                <h3 th:text="${' Λεφτά που βάλανε οι πάροχοι για διαφήμιση : '+organiserMoneyFromAdverts}" ></h3>
+                <h3 th:text="${' Χρήματα στους λογαριασμούς των παρόχων : '+organisersMoneyIn}+' €'"></h3>
+                <h3 th:text="${' Δώσαμε στους παρόχους : '+moneyToOrganisers}+' €'" ></h3>
+                <h3 th:text="${' Βάλανε οι πάροχοι για διαφήμιση : '+organiserMoneyFromAdverts}+' €'" ></h3>
 				
 				
 				<input type="text" id="hid1" hidden="true"  th:value="${customerMoney}"/>
@@ -80,7 +80,7 @@
 		  ['Δώσαμε στους γονείς',y],
 		  ['Eχουν οι γονείς τώρα μέσα',z],
 		  ['Πάροχοι',q],
-		  ['Δώσαμε στους παρόχους',-w],
+		  ['Δώσαμε στους παρόχους',w],
 		  ['Βάλανε οι πάροχοι για διαφήμιση',e]
         ]);
 

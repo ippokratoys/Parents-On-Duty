@@ -92,7 +92,7 @@ public class EventBookControler {
 		model.addAttribute("theEvent",curEvent);
 		model.addAttribute("customer",curUser);
 
-		return "redirect:/user/profile?error=book_done";
+		return "redirect:/user/profile?book_done=true";
 	}
 
 }
