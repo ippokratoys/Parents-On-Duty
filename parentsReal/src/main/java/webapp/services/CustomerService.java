@@ -111,5 +111,6 @@ public class CustomerService {
 
         customer.setLat(lat);
         customer.setLon(lon);
+        customerRepository.save(customer);
     }
 }
