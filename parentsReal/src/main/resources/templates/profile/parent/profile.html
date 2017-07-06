@@ -17,6 +17,12 @@
 				function enterIdInModal(eventId) {
 					document.getElementById("cancel").action="/user/cancel/"+eventId.toString();
 				}
+                function show_auto(){
+                    	document.getElementById("auto").style.display="block";
+                }
+                function hide_auto(){
+                    document.getElementById("auto").style.display="none";
+                }
 			</script>
             <script th:inline="javascript">
                 /*[+
@@ -46,15 +52,12 @@
                    autocomplete = new google.maps.places.Autocomplete(
                        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
                        {types: ['geocode']});
-                    alert("BB");
                    var input = document.getElementById('autocomplete');
-                   alert("BBsss");
                    google.maps.event.addDomListener(input, 'keydown', function(event) {
                        if(event.keyCode === 13) {
                            event.preventDefault();
                        }
                    });
-                   alert("BBs");
                    // When the user selects an address from the dropdown, populate the address
                    // fields in the form.
                    autocomplete.addListener('place_changed', geocodeAddress);
@@ -64,30 +67,13 @@
                    var geocoder2 = new google.maps.Geocoder();
                     geocoder2.geocode({'address': address}, function(results, status) {
                         if (status === 'OK') {
-                           document.getElementById("lng").value =results[0].geometry.location.lng();
+                           document.getElementById("lon").value =results[0].geometry.location.lng();
                            document.getElementById("lat").value =results[0].geometry.location.lat();
-
                         } else {
                             var a=1;
                          }
                      });
                  }
-                 function geolocate() {
-                  if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                      var geolocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                      };
-                      var circle = new google.maps.Circle({
-                        center: geolocation,
-                        radius: position.coords.accuracy
-                      });
-                      autocomplete.setBounds(circle.getBounds());
-                    });
-                  }
-                }
-
             </script>
 
 		<nav th:replace=" top_bar_only_login :: 'nav-bar-only-login' ">	</nav>
@@ -117,8 +103,22 @@
                       <div class="col-md-8">
                           <h3>Τα Στοιχεία Μου</h3>
                           <div class="well">
-                            <button type="button" data-toggle="modal" data-target="#myModal_address" class="btn btn-link btn-xs" >Αλλαγή Διεύθυσης</button>
+                            <button type="button"  class="btn btn-link btn-xs" onclick="show_auto()">Αλλαγή Διεύθυσης</button>
                             <p style="font-size: large;" id="adrress"></p>
+                            <div class="auto" id="auto" style="display:none;">
+                                <h3>Αλλαγή Διεύθυνσης</h3>
+                                <form th:action="@{/user/update_location}"  method="post">
+                                    <div id="locationField">
+                                        <input id="autocomplete" placeholder="Ιπποκρατους" type="text"></input>
+                                    </div>
+                                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR7e_1Er6gEoMB_i69MOiljeHJepWdVKA&amp;libraries=places&amp;callback=initMap"
+                                    async="async" defer="defer"></script>
+                                    <input type="hidden" required="true"  name="lat" id="lat" />
+                                    <input type="hidden" required="true"  name="lon" id="lon" />
+                                    <button type="submit" class="btn btn-primary" onclick="hide_auto()">Προσθήκη Διεύθυνσης</button>
+                                </form>
+                                <br/>
+                            </div>
     		              	<p style="font-size: large;" th:inline="text">E-mail: [[${curUser.login_email}]]</p>
 		                  </div>
                     </div>
@@ -189,39 +189,6 @@
                           </div>
 
                       </div>
-                  </div>
-                  <!-- Modal -->
-                  <div class="modal fade" id="myModal_address" role="dialog">
-                    <div class="modal-dialog">
-
-                      <!-- Modal content-->
-                        <form th:action="@{/user/update_location}"  method="post">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title">Αλλαγή Διεύθυνσης</h4>
-                            </div>
-                            <div class="modal-body">
-                                  <div class="text-center">
-                                      <h3>Διεύθυνση</h3>
-                                      <div id="locationField">
-                                          <input id="autocomplete" placeholder="Ιπποκρατους"
-                                                 onFocus="geolocate()" type="text"></input>
-                                        </div>
-                                      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVWCxYYWoULY4qelXnJdPbW553Oyp-26o&amp;callback=initMap"></script>
-                                      <h3>Νέος Κωδικός</h3>
-                                      <input type="text" required="true"  name="lat" id="lat" />
-                                      <input type="text" required="true"  name="lon" id="lon" />
-                                  </div>
-                            </div>
-                            <div class="modal-footer">
-                                  <div class="text-center">
-                                      <button type="submit" class="btn btn-primary">Προσθήκη Διεύθυνσης</button>
-                                  </div>
-                            </div>
-                          </div>
-                      </form>
-                    </div>
                   </div>
 		          <div class="row">
 		              <div class="col-md-4">

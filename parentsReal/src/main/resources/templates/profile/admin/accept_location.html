@@ -39,32 +39,30 @@
 
             <div class="row">
 
-                <div class="col-md-4 col-sm-8">
-                    <div class="well pre-scrollable" style="max-height:700px;">
-                        <div id="myevents">
-                            <h4><b>Χρειάζονται αποδοχή:</b></h4>
-                            <hr/>
-                            <th:block th:unless="${locations== null || locations.size() == 0}" th:each="location : ${locations}">
-                                    <p th:inline="text">Τοποθεσία: [[ ${location.name} ]]</p>
-                                    <p th:inline="text">Διεύθυνση: [[ ${location.address} ]]</p>
+                    <div class="col-md-4 col-sm-8 col-md-offset-4 col-sm-offset-4" >
+                        <div class="well pre-scrollable" style="max-height:100%;">
+                            <div id="myevents">
+                                <h4><b>Χρειάζονται αποδοχή:</b></h4>
+                                <hr/>
+                                <th:block th:unless="${locations== null || locations.size() == 0}" th:each="location : ${locations}">
+                                <p th:inline="text">Τοποθεσία: [[ ${location.name} ]]</p>
+                                <p th:inline="text">Διεύθυνση: [[ ${location.address} ]]</p>
                                 <div class="row">
-                                    <p>
-                                        <div class="col-md-2 col-sm-4 col-xs-4">
-                                            <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="accept" method="POST" id="accept_form">
-                                                <button type="submit" form="accept_form" class="button1" >Αποδοχή</button>&nbsp;
-                                                <input type="hidden" name="accept" value="yes"/>
-                                            </form>
-                                        </div>
-                                        <div class="col-md-2 col-sm-4 col-xs-4">
-                                            <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="decline" method="POST" id="decline_form">
-                                                <button form="decline_form" type="submit" class="button1" >Απόρριψη</button>
-                                                <input type="hidden" name="accept" value="no"/>
-                                            </form>
-                                        </div>
-                                        <div class="col-md-2 col-sm-4 col-xs-4">
-                                            <a th:href="'/'+${location.certificatePath}" ><img  src="/js/datepicker/downloadarrow.png" /></a>
-                                        </div>
-                                    </p>
+                                    <div class="col-md-3 col-sm-4 ">
+                                        <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="accept" method="POST" id="accept_form">
+                                            <button type="submit" form="accept_form" class="btn btn-primary btn-md" >Αποδοχή</button>&nbsp;
+                                            <input type="hidden" name="accept" value="yes"/>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4">
+                                        <form th:action="@{/admin/accept_location/{id}(id=${location.id}) }" name="decline" method="POST" id="decline_form">
+                                            <button form="decline_form" type="submit" class="btn btn-primary btn-md" >Απόρριψη</button>
+                                            <input type="hidden" name="accept" value="no"/>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4">
+                                        <a th:href="'/'+${location.certificatePath}" ><img  src="/js/datepicker/downloadarrow.png" /></a>
+                                    </div>
                                 </div>
                             </th:block>
                         </div>
