@@ -138,7 +138,7 @@
 
                                                                       <div class="form-group col-md-2 col-sm-10 col-sm-offset-1">
                                                                           <label for="distance">Αποσταση</label>
-                                                                          <input type="number" class="form-control" id="distance" name="distance" min="1" max="30" value=""/>
+                                                                          <input type="number" class="form-control" id="distance" name="distance" min="1" max="1000" value=""/>
                                                                       </div>
 
                                                                       <div class="age-chd"></div>
@@ -184,9 +184,9 @@
                             <div class="item active">
                                 <a th:href="'/event?id='+${recommendedEvents.get(0).id}">
                                     <img th:src="${recommendedEvents.get(0).imagePath}" class="img-responsive " />
-                                    <div style="color:white;text-align:left;" th:text="'Όνομα:'+${recommendedEvents.get(0).name}">Όνομα:Καππα</div>
-                                    <div style="color:white;text-align:left;" th:text="'Ημερομηνία:'+${#dates.format(recommendedEvents.get(0).day,'dd/MM/yyyy')}" >Ημερομηνία:11/11/11</div>
-                                    <div style="color:white;text-align:left;" th:text="'Διεύθυνση:'+${recommendedEvents.get(0).address}">Διεύθυνση:Καππαδοκία 69</div>
+                                    <div style="color:black;text-align:left;" th:text="'Όνομα:'+${recommendedEvents.get(0).name}">Όνομα:Καππα</div>
+                                    <div style="color:black;text-align:left;" th:text="'Ημερομηνία:'+${#dates.format(recommendedEvents.get(0).day,'dd/MM/yyyy')}" >Ημερομηνία:11/11/11</div>
+                                    <div style="color:black;text-align:left;" th:text="'Διεύθυνση:'+${recommendedEvents.get(0).address}">Διεύθυνση:Καππαδοκία 69</div>
                                 </a>
                             </div>
                             <th:block th:unless="${recommendedEvents== null || recommendedEvents.size() == 0}"
