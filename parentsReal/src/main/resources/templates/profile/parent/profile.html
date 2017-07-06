@@ -19,9 +19,13 @@
 				}
                 function show_auto(){
                     	document.getElementById("auto").style.display="block";
+                        document.getElementById("change").style.display="block";
+                        document.getElementById("nochange").style.display="none";
                 }
                 function hide_auto(){
                     document.getElementById("auto").style.display="none";
+                    document.getElementById("change").style.display="none";
+                    document.getElementById("nochange").style.display="block";
                 }
 			</script>
             <script th:inline="javascript">
@@ -103,7 +107,8 @@
                       <div class="col-md-8">
                           <h3>Τα Στοιχεία Μου</h3>
                           <div class="well">
-                            <button type="button"  class="btn btn-link btn-xs" onclick="show_auto()">Αλλαγή Διεύθυσης</button>
+                            <button type="button"  class="btn btn-link btn-xs" id="nochange" onclick="show_auto()">Αλλαγή Διεύθυσης</button>
+                            <button type="button"  class="btn btn-link btn-xs" id="change"  style="display:none" onclick="hide_auto()">Κλείσιμο</button>
                             <p style="font-size: large;" id="adrress"></p>
                             <div class="auto" id="auto" style="display:none;">
                                 <h3>Αλλαγή Διεύθυνσης</h3>
@@ -115,6 +120,7 @@
                                     async="async" defer="defer"></script>
                                     <input type="hidden" required="true"  name="lat" id="lat" />
                                     <input type="hidden" required="true"  name="lon" id="lon" />
+                                    <br/>
                                     <button type="submit" class="btn btn-primary" onclick="hide_auto()">Προσθήκη Διεύθυνσης</button>
                                 </form>
                                 <br/>
