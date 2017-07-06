@@ -68,9 +68,11 @@
                                                   5:30 AM
                                               </td>
                                               <td class="agenda-events">
-                                                  <div class="agenda-event" th:text="${oneBook.event.eventsgroup.name}">
-                                                      Ποδοσφαιρο
-                                                  </div>
+                                                  <a th:href="'/event?id='+${oneBook.event.idEvents}">
+                                                      <div class="agenda-event" th:text="${oneBook.event.eventsgroup.name}">
+                                                          Ποδοσφαιρο
+                                                      </div>
+                                                  </a>
                                               </td>
                                               <td class="agenda-time" th:text="${oneBook.event.price}/100+'€'">
                                                   4,20 €
