@@ -8,6 +8,7 @@ import webapp.database.*;
 import webapp.database.elasticsearch.EventSearch;
 import webapp.database.repositories.*;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class EventService {
         return event.getSpots()-event.getBookEvents().size();
     }
 
+    @Transactional
     public boolean bookEvent(Event event,Customer customer,int numberOfSpots) throws Exception{
         if(event==null){
             throw new Exception("Event is null");

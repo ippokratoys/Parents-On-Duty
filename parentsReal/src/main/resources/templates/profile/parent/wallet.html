@@ -35,15 +35,15 @@
 		function change_bonus(){
 			var amount_of_money= document.getElementById("money").value;
 			if(amount_of_money>=100){
-				document.getElementById("bonus").innerHTML ="8";
+				document.getElementById("bonus").innerHTML = Math.round(amount_of_money*0.07*100)/100;
 			}else if(amount_of_money>=80){
-				document.getElementById("bonus").innerHTML ="5";
+				document.getElementById("bonus").innerHTML =Math.round(amount_of_money*0.06*100)/100;
 			}else if(amount_of_money>=50){
-				document.getElementById("bonus").innerHTML ="3";
+				document.getElementById("bonus").innerHTML =Math.round(amount_of_money*0.04*100)/100;
 			}else if(amount_of_money>=30){
-				document.getElementById("bonus").innerHTML ="1";
+				document.getElementById("bonus").innerHTML =Math.round(amount_of_money*0.03*100)/100;
 			}else{
-				document.getElementById("bonus").innerHTML ="0";
+				document.getElementById("bonus").innerHTML ="0 <br/>(απο 30+ οσο πιο πολλα βαζεις, τoσο πιο πολλα περνεις) ";
 			}
 		}
 	</script>

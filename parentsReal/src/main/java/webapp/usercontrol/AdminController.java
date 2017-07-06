@@ -65,7 +65,7 @@ public class AdminController {
         }
 
         if (organiserPaymentHistoryRepository.organisersMoneyGiven() != null) {
-            model.addAttribute("moneyToOrganisers", organiserPaymentHistoryRepository.organisersMoneyGiven() / 100d);
+            model.addAttribute("moneyToOrganisers", -organiserPaymentHistoryRepository.organisersMoneyGiven() / 100d);
         } else {
             model.addAttribute("moneyToOrganisers", 0.0);
         }
