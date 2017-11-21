@@ -3,6 +3,7 @@ Project for Software Technology (Texnologies Logismikou 2017)
 ( Spring boot framework )
 
 A web apllication written on Java.
+
 	- Database Language MySql
 	- Elastic search for searching and Distance Queries
 	- Backend Languge Java with Spirng ( Spring Boot, Spring Security)
