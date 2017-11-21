@@ -1,6 +1,16 @@
 # Parents-On-Duty
-Project for Texnologies Logismikou
+Project for Software Technology (Texnologies Logismikou 2017)
 ( Spring boot framework )
+
+A web apllication written on Java.
+	- Database Language MySql
+	- Elastic search for searching and Distance Queries
+	- Backend Languge Java with Spirng ( Spring Boot, Spring Security)
+	- Template Engine Thymeleaf
+	- Front End used HTML5, Bootstrap, JQuery
+		-Google Map API
+		-Google Map Autocomplete
+	- Building With Gradle
 
 Status : Full Functional
 Basic configuration (sql,port,https...) on application.properties file
